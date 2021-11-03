@@ -31,6 +31,7 @@ const Home: NextPage<Props> = ({ events }) => {
                         <h2>{event.title}</h2>
                     </div>
                     <p>{event.description}</p>
+                    
                     <Link href={event.slug}><a>Read More</a></Link>
                 </div>
             ))}
