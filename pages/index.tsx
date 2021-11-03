@@ -2,21 +2,16 @@ import type {GetServerSideProps, NextPage} from 'next'
 import styles from '../styles/Home.module.css'
 import { Chrono } from 'react-chrono'
 import {Post} from "../types";
-import {postToTimelineItemModel} from "../utils";
-import {useRouter} from "next/router";
+import Link from "next/link";
 
 interface Props {
     posts: Post[]
 }
 
 const Home: NextPage<Props> = ({ posts }) => {
-    const router = useRouter()
-    const items = posts?.map(postToTimelineItemModel)
-
   return (
     <div className={styles.container}>
         <Chrono
-            items={items}
             mode='VERTICAL_ALTERNATING'
             hideControls
             theme={{
@@ -26,7 +21,15 @@ const Home: NextPage<Props> = ({ posts }) => {
             }}
             cardWidth={500}
             onItemSelected={x => console.log(x)}
-        />
+        >
+            {posts.map(post => (
+                <Link href={post.Slug ?? '/'} passHref={true} key={post.id}>
+                    <div>
+                        {post.Title}
+                    </div>
+                </Link>
+            ))}
+        </Chrono>
     </div>
   )
 }
