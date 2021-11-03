@@ -53,6 +53,14 @@ a {
   border-left: 4px solid var(--gold);
 }
 
+.vertical-line:hover {
+  height: 65px;
+}
+
+.vertical-line-long:hover {
+  height: 140px;
+}
+
 .vertical-line-long {
   margin: 0.2rem 0.2rem;
   width: 0px;
