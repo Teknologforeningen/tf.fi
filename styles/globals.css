@@ -41,24 +41,36 @@ a {
 }
 
 .logo {
-    display: flex;
-    justify-content: center;
-    margin-top: 5rem;
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
 }
 
 .vertical-line {
-    margin: 1rem 1rem;
-    width: 53px;
-    height: 0px;
-    border: 3px solid var(--gold);
-    transform: rotate(90deg);
+  margin: 0.3rem 0.3rem;
+  width: 0px;
+  height: 53px;
+  border-left: 4px solid var(--gold);
+}
+
+.vertical-line-long {
+  margin: 0.2rem 0.2rem;
+  width: 0px;
+  height: 127px;
+
+  /* Jubbevit */
+
+  border-left: 4px solid var(--creamwhite);
 }
 
 .row {
-    display: flex;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .column {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }

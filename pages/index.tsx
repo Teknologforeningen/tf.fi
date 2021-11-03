@@ -1,7 +1,8 @@
 import type {GetServerSideProps, NextPage} from 'next'
 import TF150Logo from "../components/TF150Logo";
-import VerticalLine from "../components/VerticalLine";
-import Row from "../components/Row";
+import VerticalLine from "../components/verticalLine";
+import VerticalLineLong from '../components/verticalLineLong';
+import Row from "../components/row";
 
 const Home: NextPage = () => {
   return (
@@ -10,8 +11,9 @@ const Home: NextPage = () => {
             <TF150Logo />
         </div>
           <Row>
-              <VerticalLine />
-              <VerticalLine />
+
+              {[...Array(15)].map((x, i) => (<VerticalLine key={i}/>))}
+              <VerticalLineLong/>
           </Row>
       </>
 
