@@ -45,3 +45,20 @@ a {
     justify-content: center;
     margin-top: 5rem;
 }
+
+.vertical-line {
+    margin: 1rem 1rem;
+    width: 53px;
+    height: 0px;
+    border: 3px solid var(--gold);
+    transform: rotate(90deg);
+}
+
+.row {
+    display: flex;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}

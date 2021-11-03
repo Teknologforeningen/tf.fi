@@ -1,11 +1,20 @@
 import type {GetServerSideProps, NextPage} from 'next'
 import TF150Logo from "../components/TF150Logo";
+import VerticalLine from "../components/VerticalLine";
+import Row from "../components/Row";
 
 const Home: NextPage = () => {
   return (
-    <div className={"logo"}>
-        <TF150Logo />
-    </div>
+      <>
+        <div className={"logo"}>
+            <TF150Logo />
+        </div>
+          <Row>
+              <VerticalLine />
+              <VerticalLine />
+          </Row>
+      </>
+
   )
 }
 
