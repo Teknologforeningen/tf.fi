@@ -14,7 +14,7 @@ interface Props {
 const Timeline: NextPage<Props> = ({ events }) => {
     
     const grouped: Record<string, Event[]> = {}
-
+    // Group Events by Date
     events.forEach((event) => {
         const cmp: string = new Date(event.date).toDateString()
         if (grouped[cmp]) {
@@ -28,10 +28,10 @@ const Timeline: NextPage<Props> = ({ events }) => {
         {Object.values(grouped).map((e, i) => {
             // Group events by date and pass to eventLine as props
             return (
-                <div key={i}>
-                    {[...Array(5)].map((i) => (<VerticalLine key={i}/>))}
+                <Row key={i}>
+                    {[...Array(8)].map((i) => (<VerticalLine key={i}/>))}
                     <EventLine events={e}/>
-                </div>
+                </Row>
             )
             
         })}
