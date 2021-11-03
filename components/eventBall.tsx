@@ -1,20 +1,15 @@
 import { NextPage } from 'next'
-import { useImperativeHandle } from 'react'
 import { Event } from '../types'
 
 interface Props {
-    event: Event;
-    setEventToShow: (event: Event) => void
+    event: Event
+    eventToShow: Event | null
+    setEventToShow: (event: Event | null) => void
 }
 
-const EventBall: NextPage<Props> = (props) => {
-
-    const thisEvent: Event = props.event
-
-    return (
-        <div onClick={() => { props.setEventToShow(thisEvent)}} className={"dot"} />
-    )
-}
+const EventBall: NextPage<Props> = ({ event, eventToShow, setEventToShow }) => (
+        <div onClick={() => { setEventToShow(event === eventToShow ? null : event)}} className={"dot"} />
+)
 
 
 export default EventBall;
