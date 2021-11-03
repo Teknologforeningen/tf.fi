@@ -1,17 +1,20 @@
 import type {GetServerSideProps, NextPage} from 'next'
-import styles from '../styles/Home.module.css'
 import { Chrono } from 'react-chrono'
-import {Post} from "../types";
+import {Event} from "../types";
 import Link from "next/link";
 
 interface Props {
-    posts: Post[]
+    events: Event[]
 }
 
-const Home: NextPage<Props> = ({ posts }) => {
+const Home: NextPage<Props> = ({ events }) => {
+    const items = events.map(event => ({
+        title: (new Date(event.date)).toLocaleString()
+    }))
   return (
-    <div className={styles.container}>
+    <div>
         <Chrono
+            items={items}
             mode='VERTICAL_ALTERNATING'
             hideControls
             theme={{
@@ -20,14 +23,16 @@ const Home: NextPage<Props> = ({ posts }) => {
                 titleColor: 'red'
             }}
             cardWidth={500}
-            onItemSelected={x => console.log(x)}
+            enableOutline={true}
         >
-            {posts.map(post => (
-                <Link href={post.Slug ?? '/'} passHref={true} key={post.id}>
+            {events.map(event => (
+                <div key={event.id}>
                     <div>
-                        {post.Title}
+                        <h2>{event.title}</h2>
                     </div>
-                </Link>
+                    <p>{event.description}</p>
+                    <Link href={event.slug}><a>Read More</a></Link>
+                </div>
             ))}
         </Chrono>
     </div>
@@ -36,10 +41,10 @@ const Home: NextPage<Props> = ({ posts }) => {
 
 export const getServerSideProps: GetServerSideProps = async () => {
     // get posts from api
-    const res = await fetch(`${process.env.BACKEND_URL}/posts`)
-    const posts = await res.json()
+    const res = await fetch(`${process.env.BACKEND_URL}/events`)
+    const events = await res.json()
     return {
-        props: { posts }
+        props: { events }
     }
 }
 

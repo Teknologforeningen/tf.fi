@@ -1,27 +1,27 @@
 import {GetStaticPaths, GetStaticProps, NextPage} from "next";
-import {Post} from "../types";
+import {Event} from "../types";
 import Link from "next/link";
 
 interface Props {
-    post: Post
+    event: Event
 }
 
-const PostPage: NextPage<Props> = ({ post }) => {
+const EventPage: NextPage<Props> = ({ event }) => {
     return (
         <div>
             <Link href={'/'}><a>Go Back</a></Link>
-            <h2>{post.Title}</h2>
-            <p>{post.Content}</p>
+            <h2>{event.title}</h2>
+            <p>{event.content}</p>
         </div>
     );
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const res = await fetch(`${process.env.BACKEND_URL}/posts`)
-    const posts: Post[] = await res.json()
+    const res = await fetch(`${process.env.BACKEND_URL}/events`)
+    const events: Event[] = await res.json()
 
-    const paths = posts.map(post => ({
-        params: { slug: post.Slug }
+    const paths = events.map(event => ({
+        params: { slug: event.slug }
     }))
 
     return {
@@ -31,13 +31,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-    const res = await fetch(`${process.env.BACKEND_URL}/posts?Slug=${params?.slug}`)
+    const res = await fetch(`${process.env.BACKEND_URL}/events?slug=${params?.slug}`)
     const data = await res.json()
-    const post = data[0]
+    const event = data[0]
 
     return {
-        props: { post }
+        props: { event }
     }
 }
 
-export default PostPage;
+export default EventPage;
