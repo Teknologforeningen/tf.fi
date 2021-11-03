@@ -7,6 +7,15 @@
     url("/fonts/raleway/Raleway-VariableFont_wght.ttf") format("woff2");
 }
 
+@font-face {
+  font-family: "Raleway_Italic";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("Raleway_Italic"),
+    url("/fonts/raleway/Raleway-Italic-VariableFont_wght.ttf") format("woff2");
+}
+
 :root {
   --gold: #f1e792;
   --darkblue: #001627;
