@@ -1,9 +1,25 @@
+@font-face {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("Raleway"),
+    url("/fonts/raleway/Raleway-VariableFont_wght.ttf") format("woff2");
+}
+
+:root {
+  --gold: #f1e792;
+  --darkblue: #001627;
+  --creamwhite: #ffffe8;
+  --teknologröd: #b20738;
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: Raleway;
+  background-color: var(--gold);
 }
 
 a {
