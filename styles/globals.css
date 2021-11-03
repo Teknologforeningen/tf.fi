@@ -74,3 +74,16 @@ a {
   display: flex;
   flex-direction: column;
 }
+
+.event-box {
+  width: 5rem;
+  height: 5rem;
+}
+
+.dot {
+  height: 25px;
+  width: 25px;
+  background-color: var(--creamwhite);
+  border-radius: 50%;
+  display: inline-block;
+}

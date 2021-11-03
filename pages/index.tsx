@@ -1,20 +1,23 @@
 import type {GetServerSideProps, NextPage} from 'next'
 import TF150Logo from "../components/TF150Logo";
-import VerticalLine from "../components/verticalLine";
-import VerticalLineLong from '../components/verticalLineLong';
-import Row from "../components/row";
+import Timeline from '../components/timeline';
+import timeline from '../components/timeline'
+import Column from '../components/column'
+import { Event} from '../types'
 
-const Home: NextPage = () => {
+interface Props {
+    events: Event[]
+}
+
+
+const Home: NextPage<Props> = ({ events }) => {
   return (
       <>
         <div className={"logo"}>
             <TF150Logo />
+            
         </div>
-          <Row>
-
-              {[...Array(15)].map((x, i) => (<VerticalLine key={i}/>))}
-              <VerticalLineLong/>
-          </Row>
+        <Timeline events={events}/>
       </>
 
   )
