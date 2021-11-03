@@ -25,12 +25,14 @@ const Timeline: NextPage<Props> = ({ events }) => {
     })
     return (
     <Row>
-        {Object.values(grouped).map((e) => {
+        {Object.values(grouped).map((e, i) => {
             // Group events by date and pass to eventLine as props
-            <div>
-                {[...Array(5)].map((i) => (<VerticalLine key={i}/>))}
-                <EventLine events={e}/>
-            </div>
+            return (
+                <div key={i}>
+                    {[...Array(5)].map((i) => (<VerticalLine key={i}/>))}
+                    <EventLine events={e}/>
+                </div>
+            )
             
         })}
         

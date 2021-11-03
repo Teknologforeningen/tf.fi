@@ -13,15 +13,15 @@ const EventLine: NextPage<Props> = ({ events }) => {
     return (
         <Column>
             <VerticalLineLong/>
-            {events.map((event) => {
+            {events.map((event) => (
                 <EventBall key={event.id} />
-            })}
-            {events.map((event) => {
-                <EventBox event={event} />
-            })}
+            ))}
+            {events.map((event) => (
+                <EventBox key={event.id} event={event} />
+            ))}
 
         </Column>
     )
     };
 
-export default EventBox;
+export default EventLine;
