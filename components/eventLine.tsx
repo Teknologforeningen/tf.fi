@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { NextPage } from 'next';
 import { Event } from '../types'
 import VerticalLineLong from './verticalLineLong'
@@ -10,15 +11,16 @@ interface Props {
 }
 
 const EventLine: NextPage<Props> = ({ events }) => {
+
+    const [eventToShow, setEventToShow] = useState(events[0])
+
     return (
         <Column>
             <VerticalLineLong/>
             {events.map((event) => (
-                <EventBall key={event.id} />
+                <EventBall setEventToShow={setEventToShow} event={event} key={event.id} />
             ))}
-            {events.map((event) => (
-                <EventBox key={event.id} event={event} />
-            ))}
+            <EventBox event={eventToShow} />
 
         </Column>
     )
