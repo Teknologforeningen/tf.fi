@@ -1,25 +1,17 @@
-import type { NextPage } from 'next'
+import type {GetServerSideProps, NextPage} from 'next'
 import styles from '../styles/Home.module.css'
 import { Chrono } from 'react-chrono'
+import {Post} from "../types";
+import {postToTimelineItemModel} from "../utils";
+import {useRouter} from "next/router";
 
-const Home: NextPage = () => {
-    const items = [
-        {
-            title: 'Januari 2022',
-            cardTitle: 'Jubileumsåret startar',
-            cardSubtitle: 'Någon text. En länk.',
-        },
-        {
-            title: 'Februari 2022',
-            cardTitle: 'En sitz',
-            cardSubtitle: 'En rolig text. En länk.',
-        },
-        {
-            title: 'Mars 2022',
-            cardTitle: 'Roligt evenemang',
-            cardSubtitle: 'En rolig text. En länk.',
-        }
-    ];
+interface Props {
+    posts: Post[]
+}
+
+const Home: NextPage<Props> = ({ posts }) => {
+    const router = useRouter()
+    const items = posts?.map(postToTimelineItemModel)
 
   return (
     <div className={styles.container}>
@@ -34,18 +26,18 @@ const Home: NextPage = () => {
             }}
             cardWidth={500}
             onItemSelected={x => console.log(x)}
-        >
-            <div>
-                TEXT
-            </div>
-            <div>
-                <div>Annan text</div>
-                <div><a href="sits-lank">Länk till sitzen</a></div>
-            </div>
-        </Chrono>
-
+        />
     </div>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+    // get posts from api
+    const res = await fetch(`${process.env.BACKEND_URL}/posts`)
+    const posts = await res.json()
+    return {
+        props: { posts }
+    }
 }
 
 export default Home
