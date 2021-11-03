@@ -1,0 +1,26 @@
+---
+# Documentation:
+# - https://strapi.io/documentation/developer-docs/latest/setup-deployment-guides/installation/docker.html#creating-a-strapi-project
+version: '3'
+services:
+  strapi:
+    image: strapi/strapi
+    environment:
+      DATABASE_CLIENT: "${STRAPI_DATABASE_CLIENT:-postgres}"
+      DATABASE_NAME: "${STRAPI_DATABASE_NAME:-strapi}"
+      DATABASE_HOST: "${STRAPI_DATABASE_HOST:-postgres}"
+      DATABASE_PORT: "${STRAPI_DATABASE_PORT:-5432}"
+      DATABASE_USERNAME: "${STRAPI_DATABASE_USERNAME:-strapi}"
+      DATABASE_PASSWORD: "${STRAPI_DATABASE_PASSWORD:-strapi}"
+    volumes:
+      - "./app:${STRAPI_VOLUME_DIR:-/srv/app}"
+    ports: "1337:${STRAPI_PORT:-1337}"
+    restart: unless-stopped
+
+  web:
+    build: .
+    depends_on: strapi
+    environment:
+      ENV: "${ENV:-production}"
+    ports: "3000:${WEB_PORT:-3000}"
+    restart: unless-stopped
