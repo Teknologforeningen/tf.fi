@@ -63,7 +63,7 @@ a {
 }
 
 .vertical-line-long {
-    margin: 0.2rem 0.2rem;
+  margin: 0.2rem 0.2rem;
   width: 0px;
   height: 127px;
 
@@ -85,24 +85,79 @@ a {
   align-items: center;
 }
 
-.event-box {
-  width: 5rem;
-  height: 5rem;
-}
-
 .dot {
   height: 25px;
   width: 25px;
   background-color: var(--creamwhite);
   border-radius: 50%;
   display: inline-block;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 .card-title {
-    color: var(--creamwhite);
+  color: var(--creamwhite);
+}
+
+.event-box {
+  width: 224px;
+  height: 217px;
+  background: var(--creamwhite);
+}
+
+.event-box-title {
+  width: 189px;
+  height: 28px;
+
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 24px;
+  margin-top: 9px;
+  margin-bottom: 9px;
+
+  text-align: center;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+
+  /* Jubbeblå */
+
+  color: var(--darkblue);
+}
+
+.event-box-horizontal-line {
+  width: 224px;
+  margin: 0px;
+  border: 1px solid var(--darkblue);
+}
+
+.event-box-text {
+  width: 189px;
+  height: 115px;
+
+  /* Brödtext */
+  margin-top: 18px;
+  margin-bottom: 0px;
+  font-size: 14px;
+
+  line-height: 18px;
+  letter-spacing: 0.02em;
+  color: #000000;
+}
+
+.event-box-link {
+  width: 189px;
+  height: 11px;
+  margin: 0px;
+
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+
+  text-align: center;
+  letter-spacing: 0.02em;
+
+  color: #000000;
 }
