@@ -7,11 +7,12 @@ interface Props {
     [key: string]: any
 }
 
+/** Box where a short description and title of an event can be displayed */
 const EventBox: NextPage<Props> = ({ event, ...props }) => {
     return (
         <div className="event-box" {...props}>
             <Column>
-                <div><h2 className={"card-title"}>{event.title}</h2></div>
+                <h2 className={"card-title"}>{event.title}</h2>
                 <div>{event.description}</div>
             </Column>
         </div>

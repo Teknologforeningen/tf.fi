@@ -4,25 +4,19 @@ import { NextPage } from 'next';
 import EventLine from './eventLine'
 import { Event } from '../types'
 import {useState} from "react";
+import {groupEventsByDate} from "../utils";
 
 // receives events as props
 interface Props {
     events: Event[]
 }
 
+/** A timeline of all events. Days which contain events have a longer line with EventBall(s) under it */
 const Timeline: NextPage<Props> = ({ events }) => {
     const [eventToShow, setEventToShow] = useState<Event | null>(null)
 
-    const grouped: Record<string, Event[]> = {}
-    // Group Events by Date
-    events.forEach((event) => {
-        const cmp: string = new Date(event.date).toDateString()
-        if (grouped[cmp]) {
-            grouped[cmp].push(event)
-        } else {
-            grouped[cmp] = new Array(event)
-        }
-    })
+    const grouped = groupEventsByDate(events)
+
     return (
     <Row>
             {Object.values(grouped).map((e, i) => {

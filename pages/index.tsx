@@ -15,12 +15,11 @@ const Home: NextPage<Props> = ({ events }) => {
         </div>
         <Timeline events={events}/>
       </>
-
   )
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-    // get posts from api
+    // Get posts from API
     const res = await fetch(`${process.env.BACKEND_URL}/events`)
     const events = await res.json()
     return {

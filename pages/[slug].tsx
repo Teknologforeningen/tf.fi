@@ -6,6 +6,7 @@ interface Props {
     event: Event
 }
 
+/** Page for a single event */
 const EventPage: NextPage<Props> = ({ event }) => {
     return (
         <div>
@@ -17,9 +18,11 @@ const EventPage: NextPage<Props> = ({ event }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
+    // Get all events
     const res = await fetch(`${process.env.BACKEND_URL}/events`)
     const events: Event[] = await res.json()
 
+    // Create a path for each event
     const paths = events.map(event => ({
         params: { slug: event.slug }
     }))
@@ -31,8 +34,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+    // Get a specific event
     const res = await fetch(`${process.env.BACKEND_URL}/events?slug=${params?.slug}`)
     const data = await res.json()
+    // slug is unique field, thus only one can be found
     const event = data[0]
 
     return {
