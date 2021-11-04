@@ -14,13 +14,17 @@ services:
       DATABASE_PASSWORD: "${STRAPI_DATABASE_PASSWORD:-strapi}"
     volumes:
       - "./app:${STRAPI_VOLUME_DIR:-/srv/app}"
-    ports: "1337:${STRAPI_PORT:-1337}"
+    ports:
+      - "1337:${STRAPI_PORT:-1337}"
     restart: unless-stopped
 
   web:
     build: .
-    depends_on: strapi
+    depends_on:
+      - strapi
     environment:
       ENV: "${ENV:-production}"
-    ports: "3000:${WEB_PORT:-3000}"
+      BACKEND_URL: "${BACKEND_URL:-localhost:1337}"
+    ports:
+      - "3000:${WEB_PORT:-3000}"
     restart: unless-stopped

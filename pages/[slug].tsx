@@ -10,8 +10,8 @@ const EventPage: NextPage<Props> = ({ event }) => {
     return (
         <div>
             <Link href={'/'}><a>Go Back</a></Link>
-            <h2>{event.title}</h2>
-            <p>{event.content}</p>
+            <h2>{event?.title}</h2>
+            <p>{event?.content}</p>
         </div>
     );
 };
