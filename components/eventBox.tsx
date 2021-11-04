@@ -1,4 +1,5 @@
 import { NextPage } from 'next';
+import Link from "next/link";
 import { Event } from '../types'
 import Column from "./column";
 
@@ -13,14 +14,16 @@ const EventBox: NextPage<Props> = ({ event, ...props }) => {
     
     
     return (
-        <div className="event-box" {...props}>
-            <Column>
-                <p className="event-box-title">{event.title}</p>
-                <div className="event-box-horizontal-line"></div>
-                <p className="event-box-text">{event.description}</p>
-                <p className="event-box-link">LÄS MERA</p>
-        </Column>
-        </div>
+        <Link href={event.slug} passHref>
+            <div className="event-box" {...props}>
+                <Column>
+                    <p className="event-box-title">{event.title}</p>
+                    <div className="event-box-horizontal-line"></div>
+                    <p className="event-box-text">{event.description}</p>
+                <p className="event-box-link" >Läs mera</p>
+            </Column>
+            </div>
+        </Link>
     )
     };
 

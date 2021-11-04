@@ -161,3 +161,7 @@ a {
 
   color: #000000;
 }
+.event-box-link:hover {
+  font-weight: 600;
+  font-size: 15px;
+}
