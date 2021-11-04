@@ -2,7 +2,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Developing
 
-First, run the development server:
+First, create a .env.local file with correct backend URL (see .env)
+
+Second, run the development server:
 
 ```bash
 yarn dev
