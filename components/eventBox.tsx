@@ -12,7 +12,7 @@ interface Props {
 /** Box where a short description and title of an event can be displayed */
 const EventBox: NextPage<Props> = ({event, ...props}) => (
     <div className="event-box" {...props}>
-        <Column>
+        <Column center>
             <p className="event-box-title">{event.title}</p>
             <div className="event-box-horizontal-line"/>
             <p className="event-box-text">{event.description}</p>
