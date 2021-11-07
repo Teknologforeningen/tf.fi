@@ -1,21 +1,22 @@
 import {GetStaticPaths, GetStaticProps, NextPage} from "next";
 import {Event} from "../types";
 import Link from "next/link";
+import * as marked from 'marked'
 
 interface Props {
     event: Event
 }
 
 /** Page for a single event */
-const EventPage: NextPage<Props> = ({ event }) => {
-    return (
-        <div>
-            <Link href={'/'}><a>Go Back</a></Link>
-            <h2>{event?.title}</h2>
-            <p>{event?.content}</p>
-        </div>
-    );
-};
+const EventPage: NextPage<Props> = ({event}) => (
+    <div className={'event-page-background'}>
+    <Link href={'/'}><a className={'homepage-link'}>TILL HEMSIDAN</a></Link>
+    <h2 className={'event-page-title'}>{event?.title}</h2>
+    <div className={'event-page-content'}>
+        <div dangerouslySetInnerHTML={{__html: marked.parse(event.content ? event.content : '')}}/>
+    </div>
+    </div>
+)
 
 export const getStaticPaths: GetStaticPaths = async () => {
     // Get all events
@@ -24,7 +25,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
     // Create a path for each event
     const paths = events.map(event => ({
-        params: { slug: event.slug }
+        params: {slug: event.slug}
     }))
 
     return {
@@ -33,7 +34,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     }
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({params}) => {
     // Get a specific event
     const res = await fetch(`${process.env.BACKEND_URL}/events?slug=${params?.slug}`)
     const data = await res.json()
@@ -41,7 +42,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     const event = data[0]
 
     return {
-        props: { event }
+        props: {event}
     }
 }
 
