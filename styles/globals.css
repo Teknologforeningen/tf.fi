@@ -27,7 +27,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: Raleway;
+  font-family: Raleway, serif;
   background-color: var(--darkblue);
 }
 
@@ -46,25 +46,23 @@ a {
   margin-top: 5rem;
 }
 
+/* TODO: Change these px values to something relative */
 .vertical-line {
   top: 5px;
-  margin: 0.3rem 0.3rem;
-  width: 0px;
+  margin: 5rem .3rem;
+  width: 0;
   height: 53px;
   border-left: 4px solid var(--gold);
 }
 
+/* TODO: Change these px values to something relative */
 .vertical-line:hover {
   height: 65px;
 }
 
-.vertical-line-long:hover {
-  height: 140px;
-}
-
 .vertical-line-long {
-  margin: 0.2rem 0.2rem;
-  width: 0px;
+  margin: 0.2rem;
+  width: 0;
   height: 127px;
 
   /* Jubbevit */
@@ -76,7 +74,6 @@ a {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
 }
 
 .column {
@@ -85,6 +82,7 @@ a {
   align-items: center;
 }
 
+/* TODO: Change these px values to something relative */
 .dot {
   height: 25px;
   width: 25px;
@@ -92,6 +90,7 @@ a {
   border-radius: 50%;
   display: inline-block;
   margin-top: 0.5rem;
+  position: relative;
 }
 
 .hidden {
@@ -102,15 +101,23 @@ a {
   color: var(--creamwhite);
 }
 
+.event-box-parent {
+    position: relative;
+}
+
+/* TODO: Change these px values to something relative */
 .event-box {
   width: 224px;
   height: 217px;
   background: var(--creamwhite);
+  margin-top: 1rem;
+  position: absolute;
+  left: -112px;
 }
 
+/* TODO: Change these px values to something relative */
 .event-box-title {
   width: 189px;
-  height: 28px;
 
   font-weight: 800;
   font-size: 20px;
@@ -127,32 +134,36 @@ a {
   color: var(--darkblue);
 }
 
+/* TODO: Change these px values to something relative */
 .event-box-horizontal-line {
   width: 224px;
-  margin: 0px;
+  margin: 0;
   border: 1px solid var(--darkblue);
 }
 
+/* TODO: Change these px values to something relative */
 .event-box-text {
   width: 189px;
   height: 115px;
 
   /* Brödtext */
   margin-top: 18px;
-  margin-bottom: 0px;
+  margin-bottom: 0;
   font-size: 14px;
+  font-weight: 400;
 
   line-height: 18px;
   letter-spacing: 0.02em;
   color: #000000;
 }
 
+/* TODO: Change these px values to something relative */
 .event-box-link {
   width: 189px;
   height: 11px;
-  margin: 0px;
+  margin: 0;
 
-  font-weight: 400;
+  font-weight: 800;
   font-size: 14px;
   line-height: 18px;
 
@@ -161,6 +172,8 @@ a {
 
   color: #000000;
 }
+
+/* TODO: Change these px values to something relative */
 .event-box-link:hover {
   font-weight: 600;
   font-size: 15px;

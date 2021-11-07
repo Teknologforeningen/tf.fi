@@ -16,6 +16,7 @@ interface Props {
  * */
 const EventLine: NextPage<Props> = ({ events, eventToShow, setEventToShow }) => (
     <Column>
+        <div>ABCDE</div>
         <VerticalLineLong/>
         {events.map((event) => (
             <EventBall setEventToShow={setEventToShow} event={event} eventToShow={eventToShow} key={event.id} />
@@ -24,9 +25,11 @@ const EventLine: NextPage<Props> = ({ events, eventToShow, setEventToShow }) => 
             Hide EventBox by default
             only show eventBox if selected event is in current line's events
          */}
-        {eventToShow !== null && events.indexOf(eventToShow) >= 0 &&
-        <EventBox event={eventToShow}/>
-        }
+        <div className={'event-box-parent'}>
+            {eventToShow !== null && events.indexOf(eventToShow) >= 0 &&
+            <EventBox event={eventToShow}/>
+            }
+        </div>
     </Column>
 )
 
