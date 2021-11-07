@@ -15,8 +15,7 @@ interface Props {
  *  Events are grouped by date
  * */
 const EventLine: NextPage<Props> = ({ events, eventToShow, setEventToShow }) => (
-    <Column>
-        <div>ABCDE</div>
+    <Column center>
         <VerticalLineLong/>
         {events.map((event) => (
             <EventBall setEventToShow={setEventToShow} event={event} eventToShow={eventToShow} key={event.id} />

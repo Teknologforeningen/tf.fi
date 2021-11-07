@@ -43,13 +43,11 @@ a {
 .row {
   display: flex;
   flex-direction: row;
-  justify-content: center;
 }
 
 .column {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 /* TODO: Change these px values to something relative */

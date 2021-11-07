@@ -18,7 +18,7 @@ const Timeline: NextPage<Props> = ({ events }) => {
     const grouped = groupEventsByDate(events)
 
     return (
-    <Row>
+    <Row center>
             {Object.values(grouped).map((e, i) => {
                 return (
                     <Row key={i}>
