@@ -5,8 +5,14 @@
     margin-top: 10rem;
 }
 
+
+/* This works as expected for x-axis, but y-axis is messed up */
 .timeline {
     margin-top: 5rem;
+    overflow-x: scroll;
+    overflow-y: visible;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
 }
 
 /* TODO: Change these px values to something relative */
