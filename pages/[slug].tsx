@@ -4,7 +4,7 @@ import Link from 'next/link'
 import * as marked from 'marked'
 
 interface Props {
-  event: Event
+  event?: Event
 }
 
 /** Page for a single event */
@@ -17,7 +17,7 @@ const EventPage: NextPage<Props> = ({ event }) => (
     <div className={'event-page-content'}>
       <div
         dangerouslySetInnerHTML={{
-          __html: marked.parse(event.content ? event.content : ''),
+          __html: marked.parse(event?.content ?? ''),
         }}
       />
     </div>
