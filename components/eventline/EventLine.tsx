@@ -1,9 +1,9 @@
 import { NextPage } from 'next';
-import { Event } from '../types'
-import VerticalLineLong from './verticalLineLong'
-import Column from './column'
-import EventBall from './eventBall'
-import EventBox from './eventBox';
+import { Event } from '../../types'
+import VerticalLineLong from './VerticalLineLong'
+import Column from '../Column'
+import EventBall from './EventBall'
+import EventBox from './EventBox';
 
 interface Props {
     events: Event[]

@@ -1,5 +1,5 @@
 import { NextPage } from 'next'
-import { Event } from '../types'
+import { Event } from '../../types'
 
 interface Props {
     event: Event
