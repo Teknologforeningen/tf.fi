@@ -5,6 +5,8 @@
     margin-top: 10rem;
 }
 
+
+/* This works as expected for x-axis, but y-axis is messed up */
 .timeline {
     margin-top: 5rem;
 }
@@ -14,20 +16,20 @@
     top: 5px;
     margin: 3rem .3rem;
     width: 0;
-    height: 53px;
-    border-left: 4px solid var(--gold);
+    height: 33px;
+    border-left: 1.5px solid var(--gold);
 }
 
 /* TODO: Change these px values to something relative */
 .vertical-line:hover {
-    height: 65px;
+    transform: scaleY(1.5);
 }
 
 .vertical-line-long {
     margin: 0.2rem;
     width: 0;
     height: 127px;
-    border-left: 4px solid var(--creamwhite);
+    border-left: 2px solid var(--creamwhite);
 }
 
 .card-title {
