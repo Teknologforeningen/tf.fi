@@ -2,6 +2,7 @@ import type { GetServerSideProps, NextPage } from 'next'
 import TF150Logo from '../components/TF150Logo'
 import Timeline from '../components/eventline/Timeline'
 import { Event } from '../types'
+import Navbar from '../components/navbar/Navbar'
 
 interface Props {
   events: Event[]
@@ -10,6 +11,7 @@ interface Props {
 const Home: NextPage<Props> = ({ events }) => {
   return (
     <>
+      <Navbar />
       <div className={'logo'}>
         <TF150Logo />
       </div>
