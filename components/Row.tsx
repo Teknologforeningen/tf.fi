@@ -8,7 +8,7 @@ interface Props {
 /** Component for flexbox row */
 const Row: NextPage<Props> = (props) => (
   <div
-    className={'row'}
+    className={`row ${props.className}`}
     style={{ justifyContent: props.center ? 'center' : 'start' }}
   >
     {props.children}

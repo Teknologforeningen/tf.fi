@@ -1,0 +1,18 @@
+@font-face {
+    font-family: "Montserrat";
+    font-style: auto;
+    font-weight: 800;
+    font-display: swap;
+    src: local("Montserrat"),
+    url("/fonts/montserrat/Montserrat-Bold.ttf") format("woff2");
+}
+
+.navbar {
+    align-items: center;
+}
+
+.navbar > * {
+    color: #FFF;
+    font-family: "Montserrat", sans-serif;
+    margin: 1rem;
+}
