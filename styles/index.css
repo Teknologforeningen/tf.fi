@@ -14,7 +14,7 @@
 /* TODO: Change these px values to something relative */
 .vertical-line {
     top: 5px;
-    margin: 3rem 3px;
+    margin: 3rem 5px;
     width: 0;
     height: 33px;
     border-left: 1.5px solid var(--gold);
@@ -26,7 +26,7 @@
 }
 
 .vertical-line-long {
-    margin: .2rem 3px;
+    margin: 0.2rem 5px;
     width: 0;
     height: 127px;
     border-left: 2px solid var(--creamwhite);
