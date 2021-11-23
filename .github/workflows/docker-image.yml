@@ -15,4 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --env BACKEND_HOST=https://test.150.tf.fi/api --tag tf150:$(date +%s)
+      run: docker build . --tag tf150:$(date +%s)
+
+env:
+ BACKEND_HOST: https://test.150.tf.fi/api
