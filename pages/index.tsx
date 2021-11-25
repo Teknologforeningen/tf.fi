@@ -13,12 +13,14 @@ interface Props {
 const Home: NextPage<Props> = ({ events, isHomePage }) => {
   return (
     <>
-      {isHomePage && <Navbar />}
-      <div className={'logo'}>
-        <TF150Logo />
+      <div className={'main-body'}>
+        {isHomePage && <Navbar />}
+        <div className={'logo'}>
+          <TF150Logo />
+        </div>
+        <Timeline events={events} />
+        {isHomePage && <Info />}
       </div>
-      <Timeline events={events} />
-      {isHomePage && <Info />}
     </>
   )
 }
