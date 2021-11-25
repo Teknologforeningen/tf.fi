@@ -3,6 +3,7 @@ import TF150Logo from '../components/TF150Logo'
 import Timeline from '../components/eventline/Timeline'
 import { Event } from '../types'
 import Navbar from '../components/navbar/Navbar'
+import Info from '../components/bottom/Info'
 
 interface Props {
   events: Event[]
@@ -16,6 +17,7 @@ const Home: NextPage<Props> = ({ events }) => {
         <TF150Logo />
       </div>
       <Timeline events={events} />
+      <Info />
     </>
   )
 }
