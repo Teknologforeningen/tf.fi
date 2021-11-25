@@ -7,7 +7,7 @@ import Info from '../components/bottom/Info'
 
 interface Props {
   events: Event[]
-  isHomePage: Boolean
+  isHomePage: boolean
 }
 
 const Home: NextPage<Props> = ({ events, isHomePage }) => {
