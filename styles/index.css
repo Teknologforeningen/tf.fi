@@ -1,115 +1,122 @@
-
-.logo {
-    display: flex;
-    justify-content: center;
-    margin-top: 3rem;
+.main-body {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 200px rgba(0, 0, 0, 0.9) inset;
 }
 
+.logo {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
 
 /* This works as expected for x-axis, but y-axis is messed up */
 .timeline {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }
 
 /* TODO: Change these px values to something relative */
 .vertical-line {
-    top: 5px;
-    margin: 3rem 5px;
-    width: 0;
-    height: 33px;
-    border-left: 1.5px solid var(--gold);
+  top: 5px;
+  margin: 3rem 5px;
+  width: 0;
+  height: 33px;
+  border-left: 1.5px solid var(--gold);
 }
 
 /* TODO: Change these px values to something relative */
 .vertical-line:hover {
-    transform: scaleY(1.5);
+  transform: scaleY(1.5);
 }
 
 .vertical-line-long {
-    margin: 0.2rem 5px;
-    width: 0;
-    height: 127px;
-    border-left: 2px solid var(--creamwhite);
+  margin: 0.2rem 5px;
+  width: 0;
+  height: 127px;
+  border-left: 2px solid var(--creamwhite);
 }
 
 .card-title {
-    color: var(--creamwhite);
+  color: var(--creamwhite);
 }
 
 .event-box-parent {
-    position: relative;
+  position: relative;
 }
 
 /* TODO: Change these px values to something relative */
 .event-box {
-    width: 224px;
-    height: 217px;
-    background: var(--creamwhite);
-    margin-top: 1rem;
-    position: absolute;
-    left: -112px;
+  width: 224px;
+  height: 217px;
+  background: var(--creamwhite);
+  margin-top: 1rem;
+  position: absolute;
+  left: -112px;
 }
 
 /* TODO: Change these px values to something relative */
 .event-box-title {
-    width: 189px;
+  width: 189px;
 
-    font-weight: 800;
-    font-size: 20px;
-    line-height: 24px;
-    margin-top: 9px;
-    margin-bottom: 9px;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 24px;
+  margin-top: 9px;
+  margin-bottom: 9px;
 
-    text-align: center;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 
-    /* Jubbeblå */
+  /* Jubbeblå */
 
-    color: var(--darkblue);
+  color: var(--darkblue);
 }
 
 /* TODO: Change these px values to something relative */
 .event-box-horizontal-line {
-    width: 224px;
-    margin: 0;
-    border: 1px solid var(--darkblue);
+  width: 224px;
+  margin: 0;
+  border: 1px solid var(--darkblue);
 }
 
 /* TODO: Change these px values to something relative */
 .event-box-text {
-    width: 189px;
-    height: 115px;
+  width: 189px;
+  height: 115px;
 
-    /* Brödtext */
-    margin-top: 18px;
-    margin-bottom: 0;
-    font-size: 14px;
-    font-weight: 400;
+  /* Brödtext */
+  margin-top: 18px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
 
-    line-height: 18px;
-    letter-spacing: 0.02em;
-    color: #000000;
+  line-height: 18px;
+  letter-spacing: 0.02em;
+  color: #000000;
 }
 
 /* TODO: Change these px values to something relative */
 .event-box-link {
-    width: 189px;
-    height: 11px;
-    margin: 0;
+  width: 189px;
+  height: 11px;
+  margin: 0;
 
-    font-weight: 800;
-    font-size: 14px;
-    line-height: 18px;
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 18px;
 
-    text-align: center;
-    letter-spacing: 0.02em;
+  text-align: center;
+  letter-spacing: 0.02em;
 
-    color: #000000;
+  color: #000000;
 }
 
 /* TODO: Change these px values to something relative */
 .event-box-link:hover {
-    font-weight: 600;
-    font-size: 15px;
+  font-weight: 600;
+  font-size: 15px;
 }
