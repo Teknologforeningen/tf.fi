@@ -7,17 +7,18 @@ import Info from '../components/bottom/Info'
 
 interface Props {
   events: Event[]
+  isHomePage: boolean
 }
 
-const Home: NextPage<Props> = ({ events }) => {
+const Home: NextPage<Props> = ({ events, isHomePage }) => {
   return (
     <>
-      <Navbar />
+      {isHomePage && <Navbar />}
       <div className={'logo'}>
         <TF150Logo />
       </div>
       <Timeline events={events} />
-      <Info />
+      {isHomePage && <Info />}
     </>
   )
 }
@@ -27,7 +28,10 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const res = await fetch(`${process.env.BACKEND_URL}/events`)
   const events = await res.json()
   return {
-    props: { events },
+    props: {
+      events: events,
+      isHomePage: process.env.ISHOMEPAGE === 'true',
+    },
   }
 }
 

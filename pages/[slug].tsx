@@ -1,6 +1,10 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import { Event } from '../types'
 import Link from 'next/link'
+import LeftAngle from '../components/bottom/eventpage/LeftAngle'
+import RightAngle from '../components/bottom/eventpage/RightAngle'
+import Row from '../components/Row'
+import Column from '../components/Column'
 import * as marked from 'marked'
 
 interface Props {
@@ -13,14 +17,21 @@ const EventPage: NextPage<Props> = ({ event }) => (
     <Link href={'/'}>
       <a className={'homepage-link'}>TILL HEMSIDAN</a>
     </Link>
-    <h2 className={'event-page-title'}>{event?.title}</h2>
-    <div className={'event-page-content'}>
-      <div
-        dangerouslySetInnerHTML={{
-          __html: marked.parse(event?.content ?? ''),
-        }}
-      />
-    </div>
+    <Column center>
+      <Row className={'event-page-global'}>
+        <LeftAngle />
+        <h2 className={'event-page-title'}>{event?.title}</h2>
+        <RightAngle />
+      </Row>
+
+      <div className={'event-page-content'}>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: marked.parse(event?.content ?? ''),
+          }}
+        />
+      </div>
+    </Column>
   </div>
 )
 

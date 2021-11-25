@@ -1,36 +1,35 @@
 .event-page-background {
-    background: #FFFFE8;
-    position: absolute;
-    width: 75%;
-    height: 85%;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 15px;
+  background: #ffffe8;
+  position: absolute;
+  top: 4%;
+  height: 92%;
+  left: 24%;
+  right: 24%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 15px;
 }
 
 /* TODO: Change these px values to something relative */
 .event-page-title {
-    font-weight: 800;
-    text-transform: uppercase;
-    font-size: 35px;
-    line-height: 28px;
-    letter-spacing: .02em;
-    color: var(--darkblue);
-    text-align: center;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 35px;
+  line-height: 28px;
+  letter-spacing: 0.02em;
+  color: var(--darkblue);
+  text-align: center;
 }
 
 .event-page-content {
-    margin-top: 3rem;
-    font-size: 18px;
-    letter-spacing: .02em;
-    line-height: 26px;
-    padding-left: 15%;
+  margin-top: 3rem;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+  line-height: 26px;
 }
 
 .homepage-link {
-    align-self: start;
+  align-self: start;
 }
 
 /* TODO: Add styling for img */
