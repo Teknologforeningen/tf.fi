@@ -43,8 +43,12 @@ const Navbar: NextPage = () => (
         <span>FÖR FÖRETAG</span>
       </a>
     </Link>
-    <TaffaABLogo />
-    <DagsenLogo />
+    <div>
+      <TaffaABLogo />
+    </div>
+    <div>
+      <DagsenLogo />
+    </div>
   </Row>
 )
 

@@ -9,7 +9,7 @@
 
 .navbar {
   align-items: center;
-  margin: auto;
+  justify-content: space-evenly !important;
 }
 
 .link {
@@ -37,7 +37,6 @@
 .link-text {
   color: #fff;
   font-family: 'Montserrat', sans-serif;
-  margin: 1rem;
 }
 
 .link-text::before {
