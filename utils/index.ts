@@ -97,3 +97,5 @@ export function numberOfLines(
 ): number {
   return Math.floor(screenWidth / (2 * lineGap + lineWidth)) - 1 // Remove 1 just to be safe
 }
+
+export const makeArray = (length: number) => Array.from(Array(length))

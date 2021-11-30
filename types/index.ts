@@ -11,3 +11,10 @@ export interface Event {
 }
 
 export type GroupedEvent = Record<string, Event[]>
+
+type PlainLine = {
+  id: number
+  date: string
+}
+
+export type Line = Event | PlainLine
