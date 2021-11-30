@@ -14,16 +14,16 @@ interface Props {
 const Home: NextPage<Props> = ({ events, isHomePage }) => {
   return (
     <div style={{ display: 'flex' }}>
-      <Column className={'main-body'} style={{ height: '100%' }}>
+      <div className={'main-body'} style={{ height: '100%' }}>
         {isHomePage && <Navbar />}
-        <Column style={{ height: '100%' }}>
+        <Column>
           <div className={'logo'}>
             <TF150Logo />
           </div>
           <Timeline events={events} />
         </Column>
         {isHomePage && <Info />}
-      </Column>
+      </div>
     </div>
   )
 }

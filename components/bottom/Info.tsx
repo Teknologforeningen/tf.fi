@@ -9,7 +9,7 @@ const Info: NextPage = () => {
       <Column className={'cont'}>
         <Row className={'info-text'}>
           <Link href={'https://abi.teknologforeningen.fi/index.php/'} passHref>
-            <a className="link link-text">
+            <a className="link link-text" style={{ marginRight: '2em' }}>
               <span>SUOMEKSI</span>
             </a>
           </Link>
