@@ -20,7 +20,7 @@ const Timeline: NextPage<Props> = ({ events }) => {
   // How many lines can fit on page, or if width is not defined then 2*numberOfWeeksInYear
   const numOfLines = width ? numberOfLines(width, 1.5, 5) : 104
   const [lineHeights, setLineHeights] = useState<number[]>(
-    Array.from(Array(numOfLines)).map(() => 1)
+    Array.from(Array(numOfLines * 10)).map(() => 1)
   )
 
   const grouped = groupEventsByDate(events, numOfLines)
@@ -30,14 +30,12 @@ const Timeline: NextPage<Props> = ({ events }) => {
   )
 
   const onHover = (n: number) => {
-    if (n < numOfLines) {
-      const transformMap = Object.fromEntries(
-        [1.05, 1.1, 1.2, 1.3, 1.4, 1.8, 2.5, 1.8, 1.4, 1.3, 1.2, 1.1, 1.05].map(
-          (scale, i) => [n + i - 6, scale]
-        )
+    const transformMap = Object.fromEntries(
+      [1.05, 1.1, 1.2, 1.3, 1.4, 1.8, 2.5, 1.8, 1.4, 1.3, 1.2, 1.1, 1.05].map(
+        (scale, i) => [n + i - 6, scale]
       )
-      setLineHeights(lineHeights.map((l, i) => transformMap[i] ?? 1))
-    }
+    )
+    setLineHeights(lineHeights.map((l, i) => transformMap[i] ?? 1))
   }
 
   const lines: Line[] = Object.values(grouped)
