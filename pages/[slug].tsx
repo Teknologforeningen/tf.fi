@@ -17,7 +17,7 @@ const EventPage: NextPage<Props> = ({ event }) => (
     <Link href={'/'}>
       <a className={'homepage-link'}>TILL HEMSIDAN</a>
     </Link>
-    <Column center>
+    <Column>
       <Row className={'event-page-global'}>
         <LeftAngle />
         <h2 className={'event-page-title'}>{event?.title}</h2>

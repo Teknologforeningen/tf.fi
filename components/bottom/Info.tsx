@@ -6,8 +6,8 @@ import Link from 'next/link'
 const Info: NextPage = () => {
   return (
     <div className={'info-parent'}>
-      <Column center className={'cont'}>
-        <Row center className={'info-text'}>
+      <Column className={'cont'}>
+        <Row className={'info-text'}>
           <Link href={'https://abi.teknologforeningen.fi/index.php/'} passHref>
             <a className="link link-text">
               <span>SUOMEKSI</span>
@@ -19,7 +19,7 @@ const Info: NextPage = () => {
             </a>
           </Link>
         </Row>
-        <Row center className={'info-text'}>
+        <Row className={'info-text'}>
           <div>TEKNOLOGFÖRENINGENS NATIONSFÖRETAG</div>
         </Row>
       </Column>

@@ -4,6 +4,7 @@ import Timeline from '../components/eventline/Timeline'
 import { Event } from '../types'
 import Navbar from '../components/navbar/Navbar'
 import Info from '../components/bottom/Info'
+import Column from '../components/Column'
 
 interface Props {
   events: Event[]
@@ -12,16 +13,18 @@ interface Props {
 
 const Home: NextPage<Props> = ({ events, isHomePage }) => {
   return (
-    <>
-      <div className={'main-body'}>
+    <div style={{ display: 'flex' }}>
+      <Column className={'main-body'} style={{ height: '100%' }}>
         {isHomePage && <Navbar />}
-        <div className={'logo'}>
-          <TF150Logo />
-        </div>
-        <Timeline events={events} />
+        <Column style={{ height: '100%' }}>
+          <div className={'logo'}>
+            <TF150Logo />
+          </div>
+          <Timeline events={events} />
+        </Column>
         {isHomePage && <Info />}
-      </div>
-    </>
+      </Column>
+    </div>
   )
 }
 

@@ -1,19 +1,21 @@
 import { NextPage } from 'next'
+import { CSSProperties } from 'react'
 
 interface Props {
-  center?: boolean
   className?: string
+  style?: CSSProperties
 }
 
 /** Component for flexbox column */
-const Column: NextPage<Props> = (props) => (
+const Column: NextPage<Props> = ({ className, style, children }) => (
   <div
-    className={`column ${props.className}`}
+    className={`column ${className}`}
     style={{
-      alignItems: props.center ? 'center' : 'start',
+      alignItems: 'center',
+      ...style,
     }}
   >
-    {props.children}
+    {children}
   </div>
 )
 

@@ -50,7 +50,7 @@ const Timeline: NextPage<Props> = ({ events }) => {
     )
 
   return (
-    <Row center className={'timeline'}>
+    <Row className={'timeline'}>
       {lines.map((line, i) => {
         return (
           <Row key={i}>
