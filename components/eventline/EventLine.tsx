@@ -7,8 +7,8 @@ import EventBox from './EventBox'
 
 interface Props {
   events: Event[]
-  eventToShow: Event | null
-  setEventToShow: (event: Event | null) => void
+  eventsToShow: Event[] | null
+  setEventsToShow: (events: Event[] | null) => void
 }
 
 /** An EventLine consists of 1 VerticalLineLong and arbitary number of EventBalls.
@@ -16,16 +16,16 @@ interface Props {
  * */
 const EventLine: NextPage<Props> = ({
   events,
-  eventToShow,
-  setEventToShow,
+  eventsToShow,
+  setEventsToShow,
 }) => (
   <Column>
     <VerticalLineLong />
     {events.map((event) => (
       <EventBall
-        setEventToShow={setEventToShow}
+        setEventsToShow={setEventsToShow}
         event={event}
-        eventToShow={eventToShow}
+        eventsToShow={eventsToShow}
         key={event.id}
       />
     ))}
@@ -34,8 +34,9 @@ const EventLine: NextPage<Props> = ({
       only show eventBox if selected event is in current line's events
     */}
     <div className={'event-box-parent'}>
-      {eventToShow !== null && events.indexOf(eventToShow) >= 0 && (
-        <EventBox event={eventToShow} />
+      {eventsToShow?.map(
+        (event) =>
+          events.includes(event) && <EventBox key={event.id} event={event} />
       )}
     </div>
   </Column>

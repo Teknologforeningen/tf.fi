@@ -36,9 +36,19 @@
 }
 
 /* TODO: Change these px values to something relative */
-.dot {
-  height: 10px;
-  width: 10px;
+.dot-false {
+  height: 0.95rem;
+  width: 0.95rem;
+  background-color: var(--gold);
+  border-radius: 50%;
+  display: inline-block;
+  margin-top: 0.5rem;
+  position: relative;
+  left: -5px;
+}
+.dot-true {
+  height: 1.2rem;
+  width: 1.2rem;
   background-color: var(--creamwhite);
   border-radius: 50%;
   display: inline-block;

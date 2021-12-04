@@ -15,7 +15,7 @@ interface Props {
 const EventPage: NextPage<Props> = ({ event }) => (
   <div className={'event-page-background'}>
     <Link href={'/'}>
-      <a className={'homepage-link'}>TILL HEMSIDAN</a>
+      <a className={'home-link home-link-text'}>TILL HEMSIDAN</a>
     </Link>
     <Column>
       <Row className={'event-page-global'}>
