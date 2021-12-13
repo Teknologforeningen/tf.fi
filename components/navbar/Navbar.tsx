@@ -6,22 +6,18 @@ import {
   Box,
   List,
   ListItem,
-  ListItemIcon,
-  ListItemText,
   Divider,
   SwipeableDrawer,
   Button,
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
-import InboxIcon from '@mui/icons-material/MoveToInbox'
-import MailIcon from '@mui/icons-material/Mail'
 import Row from '../Row'
 import TFLogoSmall from './TFLogoSmall'
 import TaffaABLogo from './TaffaABLogo'
 import DagsenLogo from './DagsenLogo'
 
 interface Props {
-  isMobile: Boolean
+  isMobile: Boolean | undefined
 }
 
 const menuValues: Array<{ title: string; link: string }> = [
@@ -48,6 +44,7 @@ const menuValues: Array<{ title: string; link: string }> = [
 ]
 
 const Navbar: NextPage<Props> = ({ isMobile }) => {
+  console.log(isMobile)
   const [drawer, setDrawer] = useState(false)
 
   const toggleDrawer =
@@ -65,7 +62,7 @@ const Navbar: NextPage<Props> = ({ isMobile }) => {
 
   const list = () => (
     <Box
-      sx={{ width: '75%' }}
+      className={'main-body'}
       role="presentation"
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
@@ -98,15 +95,15 @@ const Navbar: NextPage<Props> = ({ isMobile }) => {
 
   return (
     <>
-      <Row center className={'navbar'}>
-        {isMobile ? (
-          <>
+      {isMobile ? (
+        <>
+          <Row center className={'navbar-mobile'}>
             <IconButton
               size="large"
               edge="start"
               style={{ color: 'white' }}
               aria-label="menu"
-              sx={{ mr: 2 }}
+              sx={{ mr: 2, ml: 2 }}
               onClick={toggleDrawer(true)}
             >
               <MenuIcon />
@@ -118,65 +115,30 @@ const Navbar: NextPage<Props> = ({ isMobile }) => {
             >
               {list()}
             </SwipeableDrawer>
-          </>
-        ) : (
-          <>
+          </Row>
+        </>
+      ) : (
+        <>
+          <Row center className={'navbar'}>
             <div>
               <TFLogoSmall />
             </div>
-            <Link
-              href={'https://about.teknologforeningen.fi/index.php/'}
-              passHref
-            >
-              <a className="link link-text">
-                <span>OM TEKNOLOGFÖRENINGEN</span>
-              </a>
-            </Link>
-            <Link
-              href={
-                'https://medlem.teknologforeningen.fi/index.php/login-menu-hidden'
-              }
-              passHref
-            >
-              <a className="link link-text">
-                <span>MEDLEMSPORTAL</span>
-              </a>
-            </Link>
-            <Link
-              href={'https://abi.teknologforeningen.fi/index.php/'}
-              passHref
-            >
-              <a className="link link-text">
-                <span>ABITURIENTER</span>
-              </a>
-            </Link>
-            <Link
-              href={'https://stalm.teknologforeningen.fi/index.php/'}
-              passHref
-            >
-              <a className="link link-text">
-                <span>STÄLMAR</span>
-              </a>
-            </Link>
-            <Link
-              href={
-                'https://about.teknologforeningen.fi/index.php/?option=com_content&view=article&id=615'
-              }
-              passHref
-            >
-              <a className="link link-text">
-                <span>FÖR FÖRETAG</span>
-              </a>
-            </Link>
+            {menuValues.map(({ title, link }) => (
+              <Link href={link} passHref>
+                <a className="link link-text">
+                  <span>{title}</span>
+                </a>
+              </Link>
+            ))}
             <div>
               <TaffaABLogo />
             </div>
             <div>
               <DagsenLogo />
             </div>
-          </>
-        )}
-      </Row>
+          </Row>
+        </>
+      )}
     </>
   )
 }

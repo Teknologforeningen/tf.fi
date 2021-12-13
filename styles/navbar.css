@@ -12,6 +12,11 @@
   justify-content: space-evenly !important;
 }
 
+.navbar-mobile {
+  align-items: center;
+  justify-content: start !important;
+}
+
 .link {
   cursor: pointer;
   font-size: 18px;

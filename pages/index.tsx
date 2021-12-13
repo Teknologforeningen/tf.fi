@@ -6,6 +6,7 @@ import { Event } from '../types'
 import Navbar from '../components/navbar/Navbar'
 import Info from '../components/bottom/Info'
 import Column from '../components/Column'
+import useWindowSize from '../hooks/useWindowSize'
 
 interface Props {
   events: Event[]
@@ -13,21 +14,7 @@ interface Props {
 }
 
 const Home: NextPage<Props> = ({ events, isHomePage }) => {
-  const [isMobile, setIsMobile] = useState(false) // if device is mobile
-
-  //choose the screen size based on width
-  const handleResize = () => {
-    if (window.innerWidth < 900) {
-      setIsMobile(true)
-    } else {
-      setIsMobile(false)
-    }
-  }
-
-  // create an event listener
-  useEffect(() => {
-    window.addEventListener('resize', handleResize)
-  })
+  const { width, isMobile } = useWindowSize()
 
   return (
     <div style={{ display: 'flex' }}>

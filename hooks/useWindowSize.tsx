@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 interface Size {
   width: number | undefined
   height: number | undefined
+  isMobile: boolean | undefined
 }
 
 function useWindowSize(): Size {
@@ -11,6 +12,7 @@ function useWindowSize(): Size {
   const [windowSize, setWindowSize] = useState<Size>({
     width: undefined,
     height: undefined,
+    isMobile: undefined,
   })
 
   useEffect(() => {
@@ -20,6 +22,7 @@ function useWindowSize(): Size {
       setWindowSize({
         width: window.innerWidth,
         height: window.innerHeight,
+        isMobile: window.innerWidth < 900,
       })
     }
 
