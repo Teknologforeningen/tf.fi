@@ -72,21 +72,26 @@ const Navbar: NextPage<Props> = ({ isMobile }) => {
     >
       <List>
         {menuValues.map(({ title, link }) => (
-          <ListItem button key={title}>
-            <ListItemText primary={title} />
+          <ListItem key={title}>
+            <Link href={link} passHref>
+              <a className="link link-text">
+                <span>{title}</span>
+              </a>
+            </Link>
           </ListItem>
         ))}
       </List>
       <Divider />
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        <ListItem button>
+          <TFLogoSmall />
+        </ListItem>
+        <ListItem button>
+          <TaffaABLogo />
+        </ListItem>
+        <ListItem button>
+          <DagsenLogo />
+        </ListItem>
       </List>
     </Box>
   )
