@@ -44,7 +44,6 @@ const menuValues: Array<{ title: string; link: string }> = [
 ]
 
 const Navbar: NextPage<Props> = ({ isMobile }) => {
-  console.log(isMobile)
   const [drawer, setDrawer] = useState(false)
 
   const toggleDrawer =
