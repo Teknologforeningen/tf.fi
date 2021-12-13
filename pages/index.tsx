@@ -1,4 +1,5 @@
 import type { GetServerSideProps, NextPage } from 'next'
+import { useState, useEffect } from 'react'
 import TF150Logo from '../components/TF150Logo'
 import Timeline from '../components/eventline/Timeline'
 import { Event } from '../types'
@@ -12,10 +13,26 @@ interface Props {
 }
 
 const Home: NextPage<Props> = ({ events, isHomePage }) => {
+  const [isMobile, setIsMobile] = useState(false) // if device is mobile
+
+  //choose the screen size based on width
+  const handleResize = () => {
+    if (window.innerWidth < 900) {
+      setIsMobile(true)
+    } else {
+      setIsMobile(false)
+    }
+  }
+
+  // create an event listener
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+  })
+
   return (
     <div style={{ display: 'flex' }}>
       <div className={'main-body'} style={{ height: '100%' }}>
-        {isHomePage && <Navbar />}
+        {isHomePage && <Navbar isMobile={isMobile} />}
         <Column>
           <div className={'logo'}>
             <TF150Logo />
