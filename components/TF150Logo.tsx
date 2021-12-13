@@ -1,11 +1,12 @@
 import { NextPage } from 'next'
 
 type Props = {
-  size?: number
+  width: number | undefined
+  isMobile: boolean | undefined
 }
 
-const TF150Logo: NextPage<Props> = (props) => {
-  const size = props.size ?? 300
+const TF150Logo: NextPage<Props> = ({ width, isMobile }) => {
+  const size = width ? (isMobile ? width / 2 : width / 4) : 300
   return (
     <div style={{ padding: '1em' }}>
       <svg

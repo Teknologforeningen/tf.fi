@@ -97,7 +97,7 @@ const Navbar: NextPage<Props> = ({ isMobile }) => {
     <>
       {isMobile ? (
         <>
-          <Row center className={'navbar-mobile'}>
+          <Row className={'navbar-mobile'}>
             <IconButton
               size="large"
               edge="start"
@@ -119,7 +119,7 @@ const Navbar: NextPage<Props> = ({ isMobile }) => {
         </>
       ) : (
         <>
-          <Row center className={'navbar'}>
+          <Row className={'navbar'}>
             <div>
               <TFLogoSmall />
             </div>

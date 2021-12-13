@@ -14,7 +14,7 @@ interface Props {
 }
 
 const Home: NextPage<Props> = ({ events, isHomePage }) => {
-  const { width, isMobile } = useWindowSize()
+  const { width, height, isMobile } = useWindowSize()
 
   return (
     <div style={{ display: 'flex' }}>
@@ -22,7 +22,7 @@ const Home: NextPage<Props> = ({ events, isHomePage }) => {
         {isHomePage && <Navbar isMobile={isMobile} />}
         <Column>
           <div className={'logo'}>
-            <TF150Logo />
+            <TF150Logo width={width} isMobile={isMobile} />
           </div>
           <Timeline events={events} />
         </Column>

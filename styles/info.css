@@ -16,7 +16,7 @@
 .info-parent {
   position: absolute;
   left: 50%;
-  bottom: 0px;
+  margin-top: 10em;
 }
 .cont {
   position: relative;
