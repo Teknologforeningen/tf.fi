@@ -138,3 +138,11 @@
   font-weight: 600;
   font-size: 15px;
 }
+
+.eventline-dates {
+  color: var(--creamwhite);
+  text-align: center;
+  position: relative;
+  left: -5px;
+  bottom: 0.5rem;
+}

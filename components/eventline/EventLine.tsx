@@ -1,4 +1,5 @@
 import { NextPage } from 'next'
+import moment from 'moment'
 import { Event } from '../../types'
 import VerticalLineLong from './VerticalLineLong'
 import Column from '../Column'
@@ -20,6 +21,9 @@ const EventLine: NextPage<Props> = ({
   setEventsToShow,
 }) => (
   <Column>
+    <div className={'eventline-dates'}>
+      {moment(events[0].date).format('DD.MM')}
+    </div>
     <VerticalLineLong />
     {events.map((event) => (
       <EventBall
