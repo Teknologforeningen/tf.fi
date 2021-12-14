@@ -1,5 +1,5 @@
 import type { GetServerSideProps, NextPage } from 'next'
-import { useState, useEffect } from 'react'
+
 import TF150Logo from '../components/TF150Logo'
 import Timeline from '../components/eventline/Timeline'
 import { Event } from '../types'
@@ -14,7 +14,7 @@ interface Props {
 }
 
 const Home: NextPage<Props> = ({ events, isHomePage }) => {
-  const { width, height, isMobile } = useWindowSize()
+  const { width, isMobile } = useWindowSize()
 
   return (
     <div style={{ display: 'flex' }}>
@@ -25,8 +25,8 @@ const Home: NextPage<Props> = ({ events, isHomePage }) => {
             <TF150Logo width={width} isMobile={isMobile} />
           </div>
           <Timeline events={events} />
+          {isHomePage && <Info isMobile={isMobile} />}
         </Column>
-        {isHomePage && <Info />}
       </div>
     </div>
   )

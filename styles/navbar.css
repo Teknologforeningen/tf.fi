@@ -85,3 +85,9 @@
 .link-text:hover span {
   transform: translate3d(0, -2px, 0);
 }
+
+.logos-mobile {
+  width: 50%;
+  align-items: center;
+  justify-content: space-around !important;
+}

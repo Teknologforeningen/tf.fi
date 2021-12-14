@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import {
   IconButton,
   Box,
@@ -8,7 +8,6 @@ import {
   ListItem,
   Divider,
   SwipeableDrawer,
-  Button,
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import Row from '../Row'
@@ -17,7 +16,7 @@ import TaffaABLogo from './TaffaABLogo'
 import DagsenLogo from './DagsenLogo'
 
 interface Props {
-  isMobile: Boolean | undefined
+  isMobile: boolean | undefined
 }
 
 const menuValues: Array<{ title: string; link: string }> = [
@@ -59,6 +58,7 @@ const Navbar: NextPage<Props> = ({ isMobile }) => {
       setDrawer(open)
     }
 
+  // Geberate drawer
   const list = () => (
     <Box
       className={'main-body'}
@@ -78,15 +78,26 @@ const Navbar: NextPage<Props> = ({ isMobile }) => {
         ))}
       </List>
       <Divider />
+      <Row className={'logos-mobile'}>
+        <TFLogoSmall />
+        <TaffaABLogo />
+        <DagsenLogo />
+      </Row>
+      <Divider />
       <List>
-        <ListItem button>
-          <TFLogoSmall />
+        <ListItem>
+          <Link href={'https://abi.teknologforeningen.fi/index.php/'} passHref>
+            <a className="link link-text" style={{ marginRight: '2em' }}>
+              <span>SUOMEKSI</span>
+            </a>
+          </Link>
         </ListItem>
-        <ListItem button>
-          <TaffaABLogo />
-        </ListItem>
-        <ListItem button>
-          <DagsenLogo />
+        <ListItem>
+          <Link href={'https://abi.teknologforeningen.fi/index.php/'} passHref>
+            <a className="link link-text">
+              <span>IN ENGLISH</span>
+            </a>
+          </Link>
         </ListItem>
       </List>
     </Box>
@@ -123,7 +134,7 @@ const Navbar: NextPage<Props> = ({ isMobile }) => {
               <TFLogoSmall />
             </div>
             {menuValues.map(({ title, link }) => (
-              <Link href={link} passHref>
+              <Link href={link} passHref key={title}>
                 <a className="link link-text">
                   <span>{title}</span>
                 </a>
