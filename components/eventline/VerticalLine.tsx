@@ -1,5 +1,5 @@
-import { NextPage } from 'next';
-import React from 'react';
+import { NextPage } from 'next'
+import React from 'react'
 
 interface Props {
   i: number
@@ -9,9 +9,11 @@ interface Props {
 
 const VerticalLine: NextPage<Props> = ({ i, onHover, verticalSize }) => (
   <div onMouseOver={() => onHover(i)} onMouseOut={() => onHover(-10)}>
-    <div className={"vertical-line"} style={{transform: `scaleY(${verticalSize})`}} />
+    <div
+      className={'vertical-line'}
+      style={{ transform: `scaleY(${verticalSize})` }}
+    />
   </div>
-   
-);
+)
 
-export default VerticalLine;
+export default VerticalLine
