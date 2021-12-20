@@ -9,7 +9,7 @@ import Info from '../components/bottom/Info'
 import Column from '../components/Column'
 import useWindowSize from '../hooks/useWindowSize'
 import { useState } from 'react'
-import languages from '../lang/languages'
+import { languages, getKeyValue } from '../lang/languages'
 
 interface Props {
   events: TimelineEvent[]
@@ -48,7 +48,13 @@ const Home: NextPage<Props> = ({ events, isHomePage }) => {
             events={events}
             setHorizontalPosition={setHorizontalPositition}
           />
-          {isHomePage && <Info isMobile={isMobile} />}
+          {isHomePage && (
+            <Info
+              isMobile={isMobile}
+              language={language}
+              setLanguage={setLanguage}
+            />
+          )}
         </Column>
       </div>
     </div>

@@ -19,7 +19,7 @@ export const useHorizontalScroll = () => {
           event.preventDefault()
         }
         element.scrollTo({
-          left: element.scrollLeft + event.deltaY * 2,
+          left: element.scrollLeft + event.deltaY * 6,
           behavior: 'smooth',
         })
       }

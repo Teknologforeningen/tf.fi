@@ -22,18 +22,16 @@ const Timeline: NextPage<Props> = ({ events, setHorizontalPosition }) => {
   const { width } = useWindowSize()
 
   // How many lines can fit on page, or if width is not defined then 2*numberOfWeeksInYear
-<<<<<<< HEAD
-  const numOfLines = width ? numberOfLines(width, 1.5, 5) * 4 : 104
-=======
-  const numOfLines = width ? numberOfLines(width, 1.5, 5) + 40 : 104
->>>>>>> beec29f112417d18cd8deb888f1aa41d2378397f
+  const numOfLines = width ? numberOfLines(width, 1.5, 5) * 2 : 104
   const [lineHeights, setLineHeights] = useState<number[]>(
     Array.from(Array(numOfLines * 10)).map(() => 1)
   )
 
   const grouped = groupEventsByDate(events)
   const numOfEventLines = Object.keys(grouped).length
-  const verticalLinesBetween = 30 //Math.round((numOfLines - numOfEventLines) / (numOfEventLines + 1))
+  const verticalLinesBetween = Math.round(
+    (numOfLines - numOfEventLines) / (numOfEventLines + 1)
+  )
 
   const onHover = (n: number) => {
     // const transformMap = Object.fromEntries(

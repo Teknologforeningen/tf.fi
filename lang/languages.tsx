@@ -1,4 +1,4 @@
-const languages = {
+export const languages: Record<string, Record<string, string>> = {
   swedish: {
     title: 'på svenska',
     'om-teknologföreningen': 'om teknologföreningen',
@@ -11,18 +11,20 @@ const languages = {
     title: 'suomeksi',
     'om-teknologföreningen': 'TEKNOLOGFÖRENINGENISTÄ',
     medlemsportal: 'jäsenille',
-    abiturienter: 'abiturientelle',
+    abiturienter: 'abiturienteille',
     stämlar: 'stämlar',
     'för-företag': 'yrityksille',
   },
   english: {
     title: 'in english',
     'om-teknologföreningen': 'about teknologföreningen',
-    medlemsportal: 'memberportal',
-    abiturienter: 'for abiturienter',
+    medlemsportal: 'for members',
+    abiturienter: 'for abis',
     stämlar: 'stämlar',
     'för-företag': 'for companies',
   },
 }
-
-export default languages
+export const getKeyValue =
+  <T extends object, U extends keyof T>(obj: T) =>
+  (key: U) =>
+    obj[key]

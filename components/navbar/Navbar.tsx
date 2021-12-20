@@ -14,7 +14,7 @@ import Row from '../Row'
 import TFLogoSmall from './TFLogoSmall'
 import TaffaABLogo from './TaffaABLogo'
 import DagsenLogo from './DagsenLogo'
-import languages from '../../lang/languages'
+import { getKeyValue, languages } from '../../lang/languages'
 
 interface Props {
   isMobile: boolean | undefined
@@ -139,7 +139,9 @@ const Navbar: NextPage<Props> = ({ isMobile, language, setLanguage }) => {
             {menuValues.map(({ title, link }) => (
               <Link href={link} passHref key={title}>
                 <a className="link link-text">
-                  <span>{title}</span>
+                  <span>
+                    {getKeyValue(getKeyValue(languages)(language))(title)}
+                  </span>
                 </a>
               </Link>
             ))}

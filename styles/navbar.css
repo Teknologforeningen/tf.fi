@@ -42,6 +42,7 @@
 .link-text {
   color: #fff;
   font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
 }
 
 .link-text::before {

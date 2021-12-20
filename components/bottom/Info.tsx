@@ -1,10 +1,12 @@
 import { NextPage } from 'next'
 import Row from '../Row'
 import Column from '../Column'
-import Link from 'next/link'
+import { languages, getKeyValue } from '../../lang/languages'
 
 interface Props {
   isMobile: boolean | undefined
+  language: string
+  setLanguage: (language: string) => void
 }
 
 /*  
@@ -12,28 +14,31 @@ interface Props {
   - add nationsföretag logos
   - add info about fundraising
 */
-const Info: NextPage<Props> = ({ isMobile }) => {
+const Info: NextPage<Props> = ({ isMobile, language, setLanguage }) => {
+  const presentLanguages = [...Object.keys(languages)]
+  const index = presentLanguages.indexOf(language)
+  if (index > -1) {
+    presentLanguages.splice(index, 1)
+  }
   return (
     <div className={'info-parent'}>
       <Column className={'cont'}>
         {!isMobile && (
           <Row className={'info-text'}>
-            <Link
-              href={'https://abi.teknologforeningen.fi/index.php/'}
-              passHref
-            >
-              <a className="link link-text" style={{ marginRight: '2em' }}>
-                <span>SUOMEKSI</span>
-              </a>
-            </Link>
-            <Link
-              href={'https://abi.teknologforeningen.fi/index.php/'}
-              passHref
-            >
-              <a className="link link-text">
-                <span>IN ENGLISH</span>
-              </a>
-            </Link>
+            {presentLanguages.map((lang) => (
+              <div
+                className="link link-text"
+                style={{ marginRight: '2em' }}
+                key={lang}
+                onClick={() => {
+                  setLanguage(lang)
+                }}
+              >
+                <span>
+                  {getKeyValue(getKeyValue(languages)(lang))('title')}
+                </span>
+              </div>
+            ))}
           </Row>
         )}
         <Row className={'info-text'}>
