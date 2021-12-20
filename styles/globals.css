@@ -1,28 +1,28 @@
 @font-face {
-  font-family: "Raleway";
+  font-family: 'Raleway';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: local("Raleway"),
-    url("/fonts/raleway/Raleway-VariableFont_wght.ttf") format("woff2");
+  src: local('Raleway'),
+    url('/fonts/raleway/Raleway-VariableFont_wght.ttf') format('woff2');
 }
 
 @font-face {
-  font-family: "Raleway_Italic";
+  font-family: 'Raleway_Italic';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: local("Raleway_Italic"),
-    url("/fonts/raleway/Raleway-Italic-VariableFont_wght.ttf") format("woff2");
+  src: local('Raleway_Italic'),
+    url('/fonts/raleway/Raleway-Italic-VariableFont_wght.ttf') format('woff2');
 }
-
-
 
 :root {
   --gold: #f1e792;
   --darkblue: #001627;
   --creamwhite: #ffffe8;
   --teknologröd: #b20738;
+  --eventblue: #9ad7d7;
+  --blogpink: #d79ad1;
 }
 
 html,
@@ -56,4 +56,3 @@ a {
 .hidden {
   display: none;
 }
-

@@ -59,7 +59,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const data = await res.json()
   // slug is unique field, thus only one can be found
   const event = data[0]
-
   return {
     props: { event },
   }
