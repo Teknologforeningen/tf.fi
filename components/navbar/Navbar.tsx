@@ -140,12 +140,22 @@ const Navbar: NextPage<Props> = ({ isMobile }) => {
                 </a>
               </Link>
             ))}
-            <div>
-              <TaffaABLogo />
-            </div>
-            <div>
-              <DagsenLogo />
-            </div>
+
+            <Link href={'https://www.taffa.fi/home'} passHref>
+              <div>
+                <TaffaABLogo />
+              </div>
+            </Link>
+            <Link
+              href={
+                'https://about.teknologforeningen.fi/index.php/dagsrestaurangen'
+              }
+              passHref
+            >
+              <div>
+                <DagsenLogo />
+              </div>
+            </Link>
           </Row>
         </>
       )}
