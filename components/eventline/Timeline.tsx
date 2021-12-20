@@ -53,27 +53,6 @@ const Timeline: NextPage<Props> = ({ events, setHorizontalPosition }) => {
       {lines.map((line, i) => {
         return (
           <Row key={i}>
-            {'title' in line ? (
-              <EventLine
-                key={i}
-                events={[line]}
-                eventsToShow={eventsToShow}
-                setEventsToShow={setEventsToShow}
-              />
-            ) : (
-              <VerticalLine
-                key={i}
-                onHover={onHover}
-                i={i}
-                verticalSize={lineHeights[i]}
-              />
-            )}
-          </Row>
-        )
-      })}
-      {lines.map((line, i) => {
-        return (
-          <Row key={i}>
             {line instanceof Array ? (
               <EventLine
                 key={i}
