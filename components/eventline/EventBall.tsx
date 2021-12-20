@@ -23,11 +23,11 @@ const EventBall: NextPage<Props> = ({
         if (eventsToShow !== null) {
           if (eventsToShow.includes(event)) {
             const i = eventsToShow.indexOf(event)
-            const copy = eventsToShow
+            const copy = [...eventsToShow]
             copy.splice(i, 1)
             setEventsToShow(copy ? copy : null)
           } else {
-            let copy = eventsToShow
+            let copy = [...eventsToShow]
             copy ? copy.push(event) : (copy = [event])
             setEventsToShow(copy)
           }
