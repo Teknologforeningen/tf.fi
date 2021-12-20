@@ -1,4 +1,4 @@
-import { Event, GroupedEvent } from '../types'
+import { Event, GroupedEvent, Line } from '../types'
 
 function groupByGivenCmp(
   events: Event[],
@@ -78,15 +78,16 @@ export function groupEventsByDate(
   events: Event[],
   numberOfLines: number
 ): GroupedEvent {
-  if (numberOfLines >= 365) {
-    return groupEventsByDay(events)
-  } else if (numberOfLines >= 104) {
-    return groupEventsByWorkdayAndWeekend(events)
-  } else if (numberOfLines >= 52) {
-    return groupEventsByWeek(events)
-  } else {
-    return groupEventsByMonth(events)
-  }
+  // if (numberOfLines >= 365) {
+  //   return groupEventsByDay(events)
+  // } else if (numberOfLines >= 104) {
+  //   return groupEventsByWorkdayAndWeekend(events)
+  // } else if (numberOfLines >= 52) {
+  //   return groupEventsByWeek(events)
+  // } else {
+  //   return groupEventsByMonth(events)
+  // }
+  return groupEventsByDay(events)
 }
 
 /** Calculate how many lines fit on the screen */
@@ -99,3 +100,18 @@ export function numberOfLines(
 }
 
 export const makeArray = (length: number) => Array.from(Array(length))
+
+
+export const mkLines: Line[] = (grouped: Object, numOfLinesBetween: number) => {
+  const re: Line[] = makeArray(numOfLinesBetween).map((_, i) => ({
+    id: i,
+    date: '',
+  }))
+  Object.values(grouped).map((x) => {
+    re.push(x)
+    Array.from(Array(numOfLinesBetween).keys()).map((i) =>
+      re.push({ id: i, date: '' })
+    )
+  })
+  return re
+}

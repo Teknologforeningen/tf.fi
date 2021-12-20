@@ -17,4 +17,4 @@ type PlainLine = {
   date: string
 }
 
-export type Line = Event | PlainLine
+export type Line = Event[] | PlainLine
