@@ -20,6 +20,7 @@
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
   scrollbar-width: none; /* for Firefox */
   overflow-x: scroll;
+  overflow-y: hidden;
 }
 
 /* TODO: Change these px values to something relative */
@@ -44,7 +45,6 @@
 .dot-false {
   height: 0.95rem;
   width: 0.95rem;
-  background-color: var(--gold);
   border-radius: 50%;
   display: inline-block;
   margin-top: 0.5rem;
@@ -54,7 +54,6 @@
 .dot-true {
   height: 1.2rem;
   width: 1.2rem;
-  background-color: var(--creamwhite);
   border-radius: 50%;
   display: inline-block;
   margin-top: 0.5rem;
@@ -62,106 +61,16 @@
   left: -5px;
 }
 
-.card-title {
-  color: var(--creamwhite);
-}
-
-.event-box-parent {
-  position: relative;
-}
-
-/* TODO: Change these px values to something relative */
-.event-box {
-  width: 224px;
-  height: 217px;
-  background: var(--creamwhite);
-  margin-top: 1rem;
-  position: absolute;
-  left: -112px;
-}
-
-/* TODO: Change these px values to something relative */
-.event-box-title-blogpost {
-  width: 189px;
-
-  font-weight: 800;
-  font-size: 20px;
-  line-height: 24px;
-  margin-top: 9px;
-  margin-bottom: 9px;
-
-  text-align: center;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-
-  /* Jubbeblå */
-
-  color: var(--darkblue);
+.blogpost {
   background-color: var(--blogpink);
 }
 
-.event-box-title-event {
-  width: 189px;
-
-  font-weight: 800;
-  font-size: 20px;
-  line-height: 24px;
-  margin-top: 9px;
-  margin-bottom: 9px;
-
-  text-align: center;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-
-  /* Jubbeblå */
-
-  color: var(--darkblue);
+.event {
   background-color: var(--eventblue);
 }
 
-/* TODO: Change these px values to something relative */
-.event-box-horizontal-line {
-  width: 224px;
-  margin: 0;
-  border: 1px solid var(--darkblue);
-}
-
-/* TODO: Change these px values to something relative */
-.event-box-text {
-  width: 189px;
-  height: 115px;
-
-  /* Brödtext */
-  margin-top: 18px;
-  margin-bottom: 0;
-  font-size: 14px;
-  font-weight: 400;
-
-  line-height: 18px;
-  letter-spacing: 0.02em;
-  color: #000000;
-}
-
-/* TODO: Change these px values to something relative */
-.event-box-link {
-  width: 189px;
-  height: 11px;
-  margin: 0;
-
-  font-weight: 800;
-  font-size: 14px;
-  line-height: 18px;
-
-  text-align: center;
-  letter-spacing: 0.02em;
-
-  color: #000000;
-}
-
-/* TODO: Change these px values to something relative */
-.event-box-link:hover {
-  font-weight: 600;
-  font-size: 15px;
+.card-title {
+  color: var(--creamwhite);
 }
 
 .eventline-dates {

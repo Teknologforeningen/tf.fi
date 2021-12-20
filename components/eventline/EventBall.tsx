@@ -35,7 +35,9 @@ const EventBall: NextPage<Props> = ({
           setEventsToShow([event])
         }
       }}
-      className={`dot-${eventsToShow !== null && eventsToShow.includes(event)}`}
+      className={`dot-${
+        eventsToShow !== null && eventsToShow.includes(event)
+      } ${event.type}`}
     />
   )
 }

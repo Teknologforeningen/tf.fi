@@ -33,18 +33,18 @@ const Timeline: NextPage<Props> = ({ events, setHorizontalPosition }) => {
   )
 
   const onHover = (n: number) => {
-    const transformMap = Object.fromEntries(
-      [1.05, 1.1, 1.2, 1.3, 1.4, 1.8, 2.5, 1.8, 1.4, 1.3, 1.2, 1.1, 1.05].map(
-        (scale, i) => [n + i - 6, scale]
-      )
-    )
-    setLineHeights(lineHeights.map((l, i) => transformMap[i] ?? 1))
+    // const transformMap = Object.fromEntries(
+    //   [1.05, 1.1, 1.2, 1.3, 1.4, 1.8, 2.5, 1.8, 1.4, 1.3, 1.2, 1.1, 1.05].map(
+    //     (scale, i) => [n + i - 6, scale]
+    //   )
+    // )
+    // setLineHeights(lineHeights.map((l, i) => transformMap[i] ?? 1))
   }
 
   const lines: Line[] = mkLines(grouped, verticalLinesBetween)
 
   const onScroll: UIEventHandler = (event) => {
-    console.log(event.currentTarget.scrollBy)
+    event.preventDefault()
     setHorizontalPosition(event.currentTarget.scrollLeft)
   }
 

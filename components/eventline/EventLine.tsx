@@ -3,6 +3,7 @@ import moment from 'moment'
 import { Event } from '../../types'
 import VerticalLineLong from './VerticalLineLong'
 import Column from '../Column'
+import Row from '../Row'
 import EventBall from './EventBall'
 import EventBox from './EventBox'
 
@@ -25,23 +26,36 @@ const EventLine: NextPage<Props> = ({
       {moment(events[0].date).format('DD.MM')}
     </div>
     <VerticalLineLong />
-    {events.map((event) => (
-      <EventBall
-        setEventsToShow={setEventsToShow}
-        event={event}
-        eventsToShow={eventsToShow}
-        key={event.id}
-      />
-    ))}
+    <Row>
+      {' '}
+      {events.map((event) => (
+        <EventBall
+          setEventsToShow={setEventsToShow}
+          event={event}
+          eventsToShow={eventsToShow}
+          key={event.id}
+        />
+      ))}
+    </Row>
+
     {/*
       Hide EventBox by default
       only show eventBox if selected event is in current line's events
     */}
     <div className={'event-box-parent'}>
-      {eventsToShow?.map(
-        (event) =>
-          events.includes(event) && <EventBox key={event.id} event={event} />
-      )}
+      <Column>
+        {' '}
+        {eventsToShow?.map(
+          (event) =>
+            events.includes(event) && (
+              <EventBox
+                key={event.id}
+                event={event}
+                onlyTitle={events.length > 1}
+              />
+            )
+        )}
+      </Column>
     </div>
   </Column>
 )
