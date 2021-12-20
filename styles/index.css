@@ -76,7 +76,7 @@
 }
 
 /* TODO: Change these px values to something relative */
-.event-box-title {
+.event-box-title-blogpost {
   width: 189px;
 
   font-weight: 800;
@@ -92,6 +92,26 @@
   /* Jubbeblå */
 
   color: var(--darkblue);
+  background-color: var(--blogpink);
+}
+
+.event-box-title-event {
+  width: 189px;
+
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 24px;
+  margin-top: 9px;
+  margin-bottom: 9px;
+
+  text-align: center;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+
+  /* Jubbeblå */
+
+  color: var(--darkblue);
+  background-color: var(--eventblue);
 }
 
 /* TODO: Change these px values to something relative */

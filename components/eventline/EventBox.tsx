@@ -12,7 +12,7 @@ interface Props {
 const EventBox: NextPage<Props> = ({ event, ...props }) => (
   <div className="event-box" {...props}>
     <Column>
-      <p className="event-box-title">{event.title}</p>
+      <p className={`event-box-title-${event.type}`}>{event.title}</p>
       <div className="event-box-horizontal-line" />
       <p className="event-box-text">{event.description}</p>
       <Link href={event.slug} passHref>

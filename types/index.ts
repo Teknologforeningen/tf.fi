@@ -8,6 +8,7 @@ export interface Event {
   published_at: string
   created_at: string
   updated_at: string
+  type: string
 }
 
 export type GroupedEvent = Record<string, Event[]>
