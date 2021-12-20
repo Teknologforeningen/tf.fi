@@ -4,12 +4,7 @@ import { NextPage } from 'next'
 import EventLine from './EventLine'
 import { Event, Line } from '../../types'
 import { useState } from 'react'
-import {
-  groupEventsByDate,
-  makeArray,
-  numberOfLines,
-  mkLines,
-} from '../../utils'
+import { groupEventsByDate, numberOfLines, mkLines } from '../../utils'
 import useWindowSize from '../../hooks/useWindowSize'
 
 // receives events as props
@@ -28,7 +23,7 @@ const Timeline: NextPage<Props> = ({ events }) => {
     Array.from(Array(numOfLines * 10)).map(() => 1)
   )
 
-  const grouped = groupEventsByDate(events, numOfLines)
+  const grouped = groupEventsByDate(events)
   const numOfEventLines = Object.keys(grouped).length
   const verticalLinesBetween = Math.round(
     (numOfLines - numOfEventLines) / (numOfEventLines + 1)
@@ -43,7 +38,6 @@ const Timeline: NextPage<Props> = ({ events }) => {
     setLineHeights(lineHeights.map((l, i) => transformMap[i] ?? 1))
   }
 
-  console.log(mkLines(grouped, verticalLinesBetween))
   // const lines: Line[] = Object.values(grouped)
   //   .flatMap((event) => [
   //     ...makeArray(verticalLinesBetween).map((_, i) => ({ id: i, date: '' })),
@@ -52,16 +46,17 @@ const Timeline: NextPage<Props> = ({ events }) => {
   //   .concat(
   //     makeArray(verticalLinesBetween).map((_, i) => ({ id: i, date: '' }))
   //   )
+
   const lines: Line[] = mkLines(grouped, verticalLinesBetween)
   return (
     <Row className={'timeline'}>
       {lines.map((line, i) => {
         return (
           <Row key={i}>
-            {'title' in line ? (
+            {line instanceof Array ? (
               <EventLine
                 key={i}
-                events={[line]}
+                events={line}
                 eventsToShow={eventsToShow}
                 setEventsToShow={setEventsToShow}
               />

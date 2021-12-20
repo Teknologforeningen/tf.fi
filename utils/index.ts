@@ -1,5 +1,6 @@
 import { Event, GroupedEvent, Line } from '../types'
 
+
 function groupByGivenCmp(
   events: Event[],
   cmpFn: (e: Event) => string | number
@@ -74,10 +75,7 @@ function groupEventsByMonth(events: Event[]): GroupedEvent {
 }
 
 /** Group events depending on numberOfLines */
-export function groupEventsByDate(
-  events: Event[],
-  numberOfLines: number
-): GroupedEvent {
+export function groupEventsByDate(events: Event[]): GroupedEvent {
   // if (numberOfLines >= 365) {
   //   return groupEventsByDay(events)
   // } else if (numberOfLines >= 104) {
@@ -101,14 +99,20 @@ export function numberOfLines(
 
 export const makeArray = (length: number) => Array.from(Array(length))
 
+export function mkLines(
+  groupedInput: GroupedEvent,
+  numOfLinesBetween: number
+): Line[] {
+  const sorted_ = Object.keys(groupedInput).sort(function (a, b) {
+    return new Date(a).getTime() - new Date(b).getTime()
+  })
 
-export const mkLines: Line[] = (grouped: Object, numOfLinesBetween: number) => {
   const re: Line[] = makeArray(numOfLinesBetween).map((_, i) => ({
     id: i,
     date: '',
   }))
-  Object.values(grouped).map((x) => {
-    re.push(x)
+  sorted_.map((date) => {
+    re.push(groupedInput[date])
     Array.from(Array(numOfLinesBetween).keys()).map((i) =>
       re.push({ id: i, date: '' })
     )
