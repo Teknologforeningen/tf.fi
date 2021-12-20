@@ -2,6 +2,7 @@
   top: 0;
   left: 0;
   width: 100%;
+  min-height: 100vh;
   box-shadow: 0 0 200px rgba(0, 0, 0, 0.9) inset;
 }
 
@@ -13,8 +14,7 @@
 
 /* This works as expected for x-axis, but y-axis is messed up */
 .timeline {
-  height: 1000px;
-  width: 100%;
+  width: 100vw;
   margin-top: 1rem;
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
   scrollbar-width: none; /* for Firefox */
@@ -80,4 +80,13 @@
   bottom: 0.5rem;
   font-family: Raleway, serif;
   font-weight: 800;
+}
+
+.hide-scrollbars {
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+}
+
+.hide-scrollbars::-webkit-scrollbar {
+  display: none;
 }
