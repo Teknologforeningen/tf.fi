@@ -29,9 +29,7 @@ const Timeline: NextPage<Props> = ({ events, setHorizontalPosition }) => {
 
   const grouped = groupEventsByDate(events)
   const numOfEventLines = Object.keys(grouped).length
-  const verticalLinesBetween = Math.round(
-    (numOfLines - numOfEventLines) / (numOfEventLines + 1)
-  )
+  const verticalLinesBetween = 30 //Math.round((numOfLines - numOfEventLines) / (numOfEventLines + 1))
 
   const onHover = (n: number) => {
     // const transformMap = Object.fromEntries(
