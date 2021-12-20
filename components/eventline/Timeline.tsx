@@ -52,7 +52,7 @@ const Timeline: NextPage<Props> = ({ events, setHorizontalPosition }) => {
   const scrollRef = useHorizontalScroll()
 
   return (
-    <div className={'timeline'}>
+    <div className={'timeline'} style={{ display: 'block', height: '500px' }}>
       <div
         className={'hide-scrollbars'}
         ref={scrollRef}
@@ -62,6 +62,7 @@ const Timeline: NextPage<Props> = ({ events, setHorizontalPosition }) => {
           flexDirection: 'row',
           overflowX: 'scroll',
           overflowY: 'visible',
+          height: '100%',
         }}
       >
         {lines.map((line, i) => {
