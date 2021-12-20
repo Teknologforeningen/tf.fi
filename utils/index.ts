@@ -1,6 +1,5 @@
 import { Event, GroupedEvent, Line } from '../types'
 
-
 function groupByGivenCmp(
   events: Event[],
   cmpFn: (e: Event) => string | number

@@ -6,15 +6,18 @@ import { Event, Line } from '../../types'
 import { useState } from 'react'
 import { groupEventsByDate, numberOfLines, mkLines } from '../../utils'
 import useWindowSize from '../../hooks/useWindowSize'
+import { UIEventHandler } from 'react-transition-group/node_modules/@types/react'
 
 // receives events as props
 interface Props {
   events: Event[]
+  setHorizontalPosition: (n: number) => void
 }
 
 /** A timeline of all events. Days which contain events have a longer line with EventBall(s) under it */
-const Timeline: NextPage<Props> = ({ events }) => {
+const Timeline: NextPage<Props> = ({ events, setHorizontalPosition }) => {
   const [eventsToShow, setEventsToShow] = useState<Event[] | null>([...events])
+
   const { width } = useWindowSize()
 
   // How many lines can fit on page, or if width is not defined then 2*numberOfWeeksInYear
@@ -40,8 +43,13 @@ const Timeline: NextPage<Props> = ({ events }) => {
 
   const lines: Line[] = mkLines(grouped, verticalLinesBetween)
 
+  const onScroll: UIEventHandler = (event) => {
+    console.log(event.currentTarget.scrollBy)
+    setHorizontalPosition(event.currentTarget.scrollLeft)
+  }
+
   return (
-    <Row className={'timeline'}>
+    <Row onScroll={onScroll} className={'timeline'}>
       {lines.map((line, i) => {
         return (
           <Row key={i}>
