@@ -32,6 +32,12 @@ body {
   font-family: Raleway, serif;
   background-color: var(--darkblue);
   height: 100%;
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 a {

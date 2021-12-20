@@ -21,7 +21,7 @@ const Home: NextPage<Props> = ({ events, isHomePage }) => {
 
   return (
     <div style={{ display: 'flex' }}>
-      <div className={'main-body'} style={{ height: '100%' }}>
+      <div className={'main-body'}>
         {isHomePage && <Navbar isMobile={isMobile} />}
         <Column>
           <div className={'logo'} style={{ position: 'relative' }}>

@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { groupEventsByDate, numberOfLines, mkLines } from '../../utils'
 import useWindowSize from '../../hooks/useWindowSize'
 import { UIEventHandler } from 'react-transition-group/node_modules/@types/react'
+import { useHorizontalScroll } from '../../hooks/useHorizontalScroll'
 
 // receives events as props
 interface Props {
@@ -48,30 +49,44 @@ const Timeline: NextPage<Props> = ({ events, setHorizontalPosition }) => {
     setHorizontalPosition(event.currentTarget.scrollLeft)
   }
 
+  const scrollRef = useHorizontalScroll()
+
   return (
-    <Row onScroll={onScroll} className={'timeline'}>
-      {lines.map((line, i) => {
-        return (
-          <Row key={i}>
-            {line instanceof Array ? (
-              <EventLine
-                key={i}
-                events={line}
-                eventsToShow={eventsToShow}
-                setEventsToShow={setEventsToShow}
-              />
-            ) : (
-              <VerticalLine
-                key={i}
-                onHover={onHover}
-                i={i}
-                verticalSize={lineHeights[i]}
-              />
-            )}
-          </Row>
-        )
-      })}
-    </Row>
+    <div className={'timeline'}>
+      <div
+        className={'hide-scrollbars'}
+        ref={scrollRef}
+        onScroll={onScroll}
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          overflowX: 'scroll',
+          overflowY: 'visible',
+        }}
+      >
+        {lines.map((line, i) => {
+          return (
+            <Row key={i}>
+              {line instanceof Array ? (
+                <EventLine
+                  key={i}
+                  events={line}
+                  eventsToShow={eventsToShow}
+                  setEventsToShow={setEventsToShow}
+                />
+              ) : (
+                <VerticalLine
+                  key={i}
+                  onHover={onHover}
+                  i={i}
+                  verticalSize={lineHeights[i]}
+                />
+              )}
+            </Row>
+          )
+        })}
+      </div>
+    </div>
   )
 }
 
