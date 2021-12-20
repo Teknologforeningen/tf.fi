@@ -38,16 +38,8 @@ const Timeline: NextPage<Props> = ({ events }) => {
     setLineHeights(lineHeights.map((l, i) => transformMap[i] ?? 1))
   }
 
-  // const lines: Line[] = Object.values(grouped)
-  //   .flatMap((event) => [
-  //     ...makeArray(verticalLinesBetween).map((_, i) => ({ id: i, date: '' })),
-  //     ...event,
-  //   ])
-  //   .concat(
-  //     makeArray(verticalLinesBetween).map((_, i) => ({ id: i, date: '' }))
-  //   )
-
   const lines: Line[] = mkLines(grouped, verticalLinesBetween)
+
   return (
     <Row className={'timeline'}>
       {lines.map((line, i) => {
