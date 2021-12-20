@@ -14,35 +14,38 @@ import Row from '../Row'
 import TFLogoSmall from './TFLogoSmall'
 import TaffaABLogo from './TaffaABLogo'
 import DagsenLogo from './DagsenLogo'
+import languages from '../../lang/languages'
 
 interface Props {
   isMobile: boolean | undefined
+  language: string
+  setLanguage: (language: string) => void
 }
 
 const menuValues: Array<{ title: string; link: string }> = [
   {
-    title: 'OM TEKNOLOGFÖRENINGEN',
+    title: 'om-teknologföreningen',
     link: 'https://about.teknologforeningen.fi/index.php/',
   },
   {
-    title: 'MEDLEMSPORTAL',
+    title: 'medlemsportal',
     link: 'https://medlem.teknologforeningen.fi/index.php/login-menu-hidden',
   },
   {
-    title: 'ABITURIENTER',
+    title: 'abiturienter',
     link: 'https://abi.teknologforeningen.fi/index.php/',
   },
   {
-    title: 'STÄLMAR',
+    title: 'stämlar',
     link: 'https://stalm.teknologforeningen.fi/index.php/',
   },
   {
-    title: 'FÖR FÖRETAG',
+    title: 'för-företag',
     link: 'https://about.teknologforeningen.fi/index.php/?option=com_content&view=article&id=615',
   },
 ]
 
-const Navbar: NextPage<Props> = ({ isMobile }) => {
+const Navbar: NextPage<Props> = ({ isMobile, language, setLanguage }) => {
   const [drawer, setDrawer] = useState(false)
 
   const toggleDrawer =
@@ -58,7 +61,7 @@ const Navbar: NextPage<Props> = ({ isMobile }) => {
       setDrawer(open)
     }
 
-  // Geberate drawer
+  // Generate drawer
   const list = () => (
     <Box
       className={'main-body'}

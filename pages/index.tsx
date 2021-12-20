@@ -9,6 +9,7 @@ import Info from '../components/bottom/Info'
 import Column from '../components/Column'
 import useWindowSize from '../hooks/useWindowSize'
 import { useState } from 'react'
+import languages from '../lang/languages'
 
 interface Props {
   events: TimelineEvent[]
@@ -18,11 +19,18 @@ interface Props {
 const Home: NextPage<Props> = ({ events, isHomePage }) => {
   const { width, isMobile } = useWindowSize()
   const [horizontalPosition, setHorizontalPositition] = useState(0)
+  const [language, setLanguage] = useState('swedish')
 
   return (
     <div style={{ display: 'flex' }}>
       <div className={'main-body'}>
-        {isHomePage && <Navbar isMobile={isMobile} />}
+        {isHomePage && (
+          <Navbar
+            isMobile={isMobile}
+            language={language}
+            setLanguage={setLanguage}
+          />
+        )}
         <Column>
           <div className={'logo'} style={{ position: 'relative' }}>
             <TF150Logo
