@@ -22,7 +22,7 @@ const Timeline: NextPage<Props> = ({ events, setHorizontalPosition }) => {
   const { width } = useWindowSize()
 
   // How many lines can fit on page, or if width is not defined then 2*numberOfWeeksInYear
-  const numOfLines = width ? numberOfLines(width, 1.5, 5) : 104
+  const numOfLines = width ? numberOfLines(width, 1.5, 5) + 40 : 104
   const [lineHeights, setLineHeights] = useState<number[]>(
     Array.from(Array(numOfLines * 10)).map(() => 1)
   )
