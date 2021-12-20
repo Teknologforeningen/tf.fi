@@ -14,7 +14,12 @@
 
 /* This works as expected for x-axis, but y-axis is messed up */
 .timeline {
+  height: 1000px;
+  width: 100%;
   margin-top: 1rem;
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-x: scroll;
 }
 
 /* TODO: Change these px values to something relative */
