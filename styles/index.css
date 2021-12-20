@@ -16,10 +16,6 @@
 .timeline {
   width: 100vw;
   margin-top: 1rem;
-  -ms-overflow-style: none; /* for Internet Explorer, Edge */
-  scrollbar-width: none; /* for Firefox */
-  overflow-x: scroll;
-  overflow-y: hidden;
 }
 
 /* TODO: Change these px values to something relative */
