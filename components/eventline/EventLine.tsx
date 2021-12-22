@@ -26,7 +26,7 @@ const EventLine: NextPage<Props> = ({
       {moment(events[0].date).format('DD.MM')}
     </div>
     <VerticalLineLong />
-    <Row>
+    <Row className={'ball-row'}>
       {' '}
       {events.map((event) => (
         <EventBall

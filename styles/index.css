@@ -87,3 +87,8 @@
 .hide-scrollbars::-webkit-scrollbar {
   display: none;
 }
+
+.ball-row {
+  justify-content: space-evenly !important;
+  width: 5rem;
+}

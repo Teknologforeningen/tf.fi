@@ -9,7 +9,6 @@ import Info from '../components/bottom/Info'
 import Column from '../components/Column'
 import useWindowSize from '../hooks/useWindowSize'
 import { useState } from 'react'
-import { languages, getKeyValue } from '../lang/languages'
 
 interface Props {
   events: TimelineEvent[]
