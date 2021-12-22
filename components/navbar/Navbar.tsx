@@ -15,6 +15,7 @@ import TFLogoSmall from './TFLogoSmall'
 import TaffaABLogo from './TaffaABLogo'
 import DagsenLogo from './DagsenLogo'
 import { getKeyValue, languages } from '../../lang/languages'
+import LanguageOptions from '../languageOptions'
 
 interface Props {
   isMobile: boolean | undefined
@@ -74,7 +75,9 @@ const Navbar: NextPage<Props> = ({ isMobile, language, setLanguage }) => {
           <ListItem key={title}>
             <Link href={link} passHref>
               <a className="link link-text">
-                <span>{title}</span>
+                <span>
+                  {getKeyValue(getKeyValue(languages)(language))(title)}
+                </span>
               </a>
             </Link>
           </ListItem>
@@ -82,25 +85,26 @@ const Navbar: NextPage<Props> = ({ isMobile, language, setLanguage }) => {
       </List>
       <Divider />
       <Row className={'logos-mobile'}>
-        <TFLogoSmall />
-        <TaffaABLogo />
-        <DagsenLogo />
+        <Link href={'https://www.taffa.fi/home'} passHref>
+          <div>
+            <TaffaABLogo />
+          </div>
+        </Link>
+        <Link
+          href={
+            'https://about.teknologforeningen.fi/index.php/dagsrestaurangen'
+          }
+          passHref
+        >
+          <div>
+            <DagsenLogo />
+          </div>
+        </Link>
       </Row>
       <Divider />
       <List>
         <ListItem>
-          <Link href={'https://abi.teknologforeningen.fi/index.php/'} passHref>
-            <a className="link link-text" style={{ marginRight: '2em' }}>
-              <span>SUOMEKSI</span>
-            </a>
-          </Link>
-        </ListItem>
-        <ListItem>
-          <Link href={'https://abi.teknologforeningen.fi/index.php/'} passHref>
-            <a className="link link-text">
-              <span>IN ENGLISH</span>
-            </a>
-          </Link>
+          <LanguageOptions language={language} setLanguage={setLanguage} />
         </ListItem>
       </List>
     </Box>
