@@ -9,7 +9,7 @@ interface Props {
 /** Component for flexbox column */
 const Column: NextPage<Props> = ({ className, style, children }) => (
   <div
-    className={`column ${className}`}
+    className={`column ${className ?? ''}`}
     style={{
       alignItems: 'center',
       ...style,
