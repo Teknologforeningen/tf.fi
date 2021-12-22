@@ -1,6 +1,8 @@
 .event-box-parent {
   position: relative;
   height: 100%;
+
+  cursor: pointer;
 }
 
 /* TODO: Change these px values to something relative */

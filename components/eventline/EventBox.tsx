@@ -12,17 +12,19 @@ interface Props {
 /** Box where a short description and title of an event can be displayed */
 const EventBox: NextPage<Props> = ({ event, onlyTitle, ...props }) =>
   onlyTitle ? (
-    <Link href={event.slug} passHref>
-      <Column
-        className={`event-box-small ${event.type}-title top-margin`}
-        {...props}
-      >
-        <p className={`event-box-sub-title`}>
+    <Column
+      className={`event-box-small ${event.type}-title top-margin`}
+      {...props}
+    >
+      <Link href={event.slug} passHref>
+        <a className={`event-box-sub-title`}>
           {event.type === 'event' ? 'EVENEMANG' : 'BLOGINLÄGG'}
-        </p>
-        <p className={`event-box-title`}>{event.title}</p>
-      </Column>
-    </Link>
+        </a>
+      </Link>
+      <Link href={event.slug} passHref>
+        <a className={`event-box-title`}>{event.title}</a>
+      </Link>
+    </Column>
   ) : (
     <div className="event-box" {...props}>
       <Column>
