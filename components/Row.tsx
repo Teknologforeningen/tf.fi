@@ -11,7 +11,7 @@ interface Props {
 /** Component for flexbox row */
 const Row: NextPage<Props> = ({ className, style, children, onScroll }) => (
   <div
-    className={`row ${className}`}
+    className={`row ${className ?? ''}`}
     style={{ justifyContent: 'center', ...style }}
     onScroll={onScroll}
   >
