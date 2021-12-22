@@ -1,5 +1,6 @@
 .event-box-parent {
   position: relative;
+  height: 100%;
 }
 
 /* TODO: Change these px values to something relative */
@@ -11,15 +12,15 @@
   position: absolute;
   left: -112px;
 }
-
+.top-margin {
+  margin-top: 1rem;
+}
 .event-box-small {
   width: 224px;
-  height: 67px;
+  height: 61px;
   background: var(--creamwhite);
-  margin-top: 1rem;
-  position: absolute;
-  left: -112px;
-
+  position: relative;
+  padding: 7px;
   font-weight: 800;
   font-size: 20px;
   line-height: 24px;

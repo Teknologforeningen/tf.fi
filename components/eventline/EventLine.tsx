@@ -39,24 +39,22 @@ const EventLine: NextPage<Props> = ({
     </Row>
 
     {/*
-      Hide EventBox by default
-      only show eventBox if selected event is in current line's events
+      Show EventBox by default
+      only hide eventBox if selected event is in current line's events
     */}
-    <div className={'event-box-parent'}>
-      <Column>
-        {' '}
-        {eventsToShow?.map(
-          (event) =>
-            events.includes(event) && (
-              <EventBox
-                key={event.id}
-                event={event}
-                onlyTitle={events.length > 1}
-              />
-            )
-        )}
-      </Column>
-    </div>
+
+    <Column className={'event-box-parent'}>
+      {eventsToShow?.map(
+        (event) =>
+          events.includes(event) && (
+            <EventBox
+              key={event.id}
+              event={event}
+              onlyTitle={events.length > 1}
+            />
+          )
+      )}
+    </Column>
   </Column>
 )
 

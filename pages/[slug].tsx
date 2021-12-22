@@ -1,8 +1,8 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import { Event } from '../types'
 import Link from 'next/link'
-import LeftAngle from '../components/bottom/eventpage/LeftAngle'
-import RightAngle from '../components/bottom/eventpage/RightAngle'
+import LeftAngle from '../components/eventpage/LeftAngle'
+import RightAngle from '../components/eventpage/RightAngle'
 import Row from '../components/Row'
 import Column from '../components/Column'
 import * as marked from 'marked'
@@ -40,7 +40,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const res = await fetch(`${process.env.BACKEND_URL}/events`)
   const events: Event[] = await res.json()
 
-  // Create a path for each event
+  // Create a path for each event background-color: ;
   const paths = events.map((event) => ({
     params: { slug: event.slug },
   }))
