@@ -13,7 +13,9 @@
   margin-top: 1rem;
   position: absolute;
   left: -112px;
+  overflow-y: hidden;
 }
+
 .top-margin {
   margin-top: 1rem;
 }
@@ -74,6 +76,19 @@
   letter-spacing: 0.02em;
   color: #000000;
 }
+.event-box-text:after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: linear-gradient(transparent 150px, var(--creamwhite));
+}
+
+.event-box-special {
+  z-index: 10;
+}
 
 /* TODO: Change these px values to something relative */
 .event-box-link {
@@ -88,7 +103,7 @@
   text-align: center;
   letter-spacing: 0.02em;
 
-  color: #000000;
+  color: #000000 !important;
 }
 
 /* TODO: Change these px values to something relative */

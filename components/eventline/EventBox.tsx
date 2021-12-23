@@ -36,9 +36,11 @@ const EventBox: NextPage<Props> = ({ event, onlyTitle, ...props }) =>
         </Column>
         <div className="event-box-horizontal-line" />
         <p className="event-box-text">{event.description}</p>
-        <Link href={event.slug} passHref>
-          <a className="event-box-link">LÄS MERA</a>
-        </Link>
+        <div className="event-box-special">
+          <Link href={event.slug} passHref>
+            <a className="event-box-link">LÄS MERA</a>
+          </Link>
+        </div>
       </Column>
     </div>
   )
