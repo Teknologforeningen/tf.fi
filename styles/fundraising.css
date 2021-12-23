@@ -1,0 +1,25 @@
+@font-face {
+  font-family: 'Montserrat';
+  font-style: auto;
+  font-weight: 800;
+  font-display: swap;
+  src: local('Montserrat'),
+    url('/fonts/montserrat/Montserrat-Bold.ttf') format('woff2');
+}
+
+.fundraising-parent {
+  left: 50%;
+  margin-bottom: 5rem;
+  margin-top: 3rem;
+}
+
+.fundraising-text {
+  align-items: center;
+  color: #fff;
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+  margin: 1rem;
+}
+.fundraising-text-row {
+  font-size: 12px;
+}

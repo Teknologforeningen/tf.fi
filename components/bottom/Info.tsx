@@ -2,7 +2,7 @@ import { NextPage } from 'next'
 import Row from '../Row'
 import Column from '../Column'
 import LanguageOptions from '../languageOptions'
-import Fundraising from './fundraising'
+import Fundraising from './Fundraising'
 
 interface Props {
   isMobile: boolean | undefined
