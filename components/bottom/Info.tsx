@@ -2,6 +2,7 @@ import { NextPage } from 'next'
 import Row from '../Row'
 import Column from '../Column'
 import LanguageOptions from '../languageOptions'
+import Fundraising from './fundraising'
 
 interface Props {
   isMobile: boolean | undefined
@@ -18,6 +19,9 @@ const Info: NextPage<Props> = ({ isMobile, language, setLanguage }) => {
   return (
     <div className={'info-parent'}>
       <Column className={'cont'}>
+        <Column>
+          <Fundraising language={language} />
+        </Column>
         {!isMobile && (
           <>
             <LanguageOptions language={language} setLanguage={setLanguage} />
