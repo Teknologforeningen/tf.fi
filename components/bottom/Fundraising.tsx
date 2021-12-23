@@ -7,33 +7,59 @@ import texts from '../../utils/languages.json'
 import links from '../../utils/links.json'
 
 interface Props {
+  isMobile: boolean | undefined
   language: string
 }
 
-const Fundraising: NextPage<Props> = ({ language }) => {
+const Fundraising: NextPage<Props> = ({ language, isMobile }) => {
   return (
-    <div className={'fundraising-parent'}>
-      <TFFundraising size={400} />
-      <Column className={'fundraising-text'}>
-        <p>{texts[language]['fundraising1']}</p>
-        <p>{texts[language]['fundraising2']}</p>
-        <Row className={'fundraising-text-row'}>
-          {' '}
-          <p>{texts[language]['fundraising3']}</p>
-          <Link href={links.links.fundraising.donera} passHref>
-            <a className="link link-text link-fundraising">
-              <span>donera.tf.fi</span>
-            </a>
-          </Link>
-          <p>{texts[language]['fundraising4']}</p>
-          <Link href={links.links.fundraising.info} passHref>
-            <a className="link link-text link-fundraising">
-              <span>vision.tf.fi</span>
-            </a>
-          </Link>
-        </Row>
-      </Column>
-    </div>
+    <>
+      {isMobile ? (
+        <div className={'fundraising-parent'}>
+          <TFFundraising size={400} />
+          <Column className={'fundraising-text'}>
+            <p>{texts[language]['fundraising1']}</p>
+            <p>{texts[language]['fundraising2']}</p>
+
+            <p>{texts[language]['fundraising3']}:</p>
+            <Link href={links.links.fundraising.donera} passHref>
+              <a className="link link-text link-fundraising link-mobile">
+                <span>donera.tf.fi</span>
+              </a>
+            </Link>
+            <p>{texts[language]['fundraising4']}:</p>
+            <Link href={links.links.fundraising.info} passHref>
+              <a className="link link-text link-fundraising link-mobile">
+                <span>vision.tf.fi</span>
+              </a>
+            </Link>
+          </Column>
+        </div>
+      ) : (
+        <div className={'fundraising-parent'}>
+          <TFFundraising size={400} />
+          <Column className={'fundraising-text'}>
+            <p>{texts[language]['fundraising1']}</p>
+            <p>{texts[language]['fundraising2']}</p>
+            <Row className={'fundraising-text-row'}>
+              {' '}
+              <p>{texts[language]['fundraising3']}</p>
+              <Link href={links.links.fundraising.donera} passHref>
+                <a className="link link-text link-fundraising">
+                  <span>donera.tf.fi</span>
+                </a>
+              </Link>
+              <p>{texts[language]['fundraising4']}</p>
+              <Link href={links.links.fundraising.info} passHref>
+                <a className="link link-text link-fundraising">
+                  <span>vision.tf.fi</span>
+                </a>
+              </Link>
+            </Row>
+          </Column>
+        </div>
+      )}
+    </>
   )
 }
 

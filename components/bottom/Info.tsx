@@ -19,9 +19,7 @@ const Info: NextPage<Props> = ({ isMobile, language, setLanguage }) => {
   return (
     <div className={'info-parent'}>
       <Column className={'cont'}>
-        <Column>
-          <Fundraising language={language} />
-        </Column>
+        <Fundraising language={language} isMobile={isMobile} />
         {!isMobile && (
           <>
             <LanguageOptions language={language} setLanguage={setLanguage} />
