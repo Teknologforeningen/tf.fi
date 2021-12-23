@@ -92,3 +92,11 @@
   justify-content: space-evenly !important;
   width: 5rem;
 }
+
+.logo-row {
+  flex-wrap: wrap;
+  width: 80%;
+  justify-content: space-evenly !important;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}

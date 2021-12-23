@@ -7,6 +7,14 @@
         "för-företag": "https://about.teknologforeningen.fi/index.php/?option=com_content&view=article&id=615",
         "täffäab": "https://www.taffa.fi/home",
         "lunch": "https://lunch.tf.fi/",
+        "nations": {
+            "thinkCell": "https://www.teknologforeningen.fi/think-cell/",
+            "visma": "https://www.visma.fi/",
+            "accenture": "https://www.accenture.com/",
+            "trimble": "https://www.trimble.com/",
+            "futurice": "https://www.futurice.com/",
+            "acedemicWork": "https://www.academicwork.fi/"
+        },
         "fundraising": {
             "donera": "http://donera.tf.fi/",
             "info": "http://vision.tf.fi/"
