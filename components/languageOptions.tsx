@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 import Row from './Row'
-import { languages, getKeyValue } from '../lang/languages'
+import { languages, getKeyValue } from '../utils/lang/languages'
 interface Props {
   language: string
   setLanguage: (language: string) => void

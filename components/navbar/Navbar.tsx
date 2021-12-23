@@ -14,8 +14,9 @@ import Row from '../Row'
 import TFLogoSmall from './TFLogoSmall'
 import TaffaABLogo from './TaffaABLogo'
 import DagsenLogo from './DagsenLogo'
-import { getKeyValue, languages } from '../../lang/languages'
+import { getKeyValue, languages } from '../../utils/lang/languages'
 import LanguageOptions from '../languageOptions'
+import linksJSON from '../../utils/links.json'
 
 interface Props {
   isMobile: boolean | undefined
@@ -26,29 +27,28 @@ interface Props {
 const menuValues: Array<{ title: string; link: string }> = [
   {
     title: 'om-teknologföreningen',
-    link: 'https://about.teknologforeningen.fi/index.php/',
+    link: linksJSON.links['om-teknologföreningen'],
   },
   {
     title: 'medlemsportal',
-    link: 'https://medlem.teknologforeningen.fi/index.php/login-menu-hidden',
+    link: linksJSON.links.medlemsportal,
   },
   {
     title: 'abiturienter',
-    link: 'https://abi.teknologforeningen.fi/index.php/',
+    link: linksJSON.links.abiturienter,
   },
   {
     title: 'stämlar',
-    link: 'https://stalm.teknologforeningen.fi/index.php/',
+    link: linksJSON.links.stämlar,
   },
   {
     title: 'för-företag',
-    link: 'https://about.teknologforeningen.fi/index.php/?option=com_content&view=article&id=615',
+    link: linksJSON.links['för-företag'],
   },
 ]
 
 const Navbar: NextPage<Props> = ({ isMobile, language, setLanguage }) => {
   const [drawer, setDrawer] = useState(false)
-
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
       if (
@@ -85,17 +85,12 @@ const Navbar: NextPage<Props> = ({ isMobile, language, setLanguage }) => {
       </List>
       <Divider />
       <Row className={'logos-mobile'}>
-        <Link href={'https://www.taffa.fi/home'} passHref>
+        <Link href={linksJSON.links.täffäab} passHref>
           <div>
             <TaffaABLogo />
           </div>
         </Link>
-        <Link
-          href={
-            'https://about.teknologforeningen.fi/index.php/dagsrestaurangen'
-          }
-          passHref
-        >
+        <Link href={linksJSON.links.lunch} passHref>
           <div>
             <DagsenLogo />
           </div>
@@ -150,17 +145,12 @@ const Navbar: NextPage<Props> = ({ isMobile, language, setLanguage }) => {
               </Link>
             ))}
 
-            <Link href={'https://www.taffa.fi/home'} passHref>
+            <Link href={linksJSON.links.täffäab} passHref>
               <div>
                 <TaffaABLogo />
               </div>
             </Link>
-            <Link
-              href={
-                'https://about.teknologforeningen.fi/index.php/dagsrestaurangen'
-              }
-              passHref
-            >
+            <Link href={linksJSON.links.lunch} passHref>
               <div>
                 <DagsenLogo />
               </div>
