@@ -21,7 +21,7 @@ const TFFundraising: NextPage<Props> = ({ size }) => {
       >
         <style type="text/css">
           {
-            '\n\t.st0{fill:#ffffe8;}\n\t.st1{clip-path:url(#SVGID_2_);fill:#ffffe8;}\n'
+            '\n\t.st0{fill:#ffffff;}\n\t.st1{clip-path:url(#SVGID_2_);fill:#ffffff;}\n'
           }
         </style>
         <g id="Layer_2" />
