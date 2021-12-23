@@ -2,6 +2,7 @@ import { NextPage } from 'next'
 import Link from 'next/link'
 import Column from '../Column'
 import Row from '../Row'
+import TFFundraising from './TFFundraising'
 import texts from '../../utils/languages.json'
 import links from '../../utils/links.json'
 
@@ -12,6 +13,7 @@ interface Props {
 const Fundraising: NextPage<Props> = ({ language }) => {
   return (
     <div className={'fundraising-parent'}>
+      <TFFundraising size={400} />
       <Column className={'fundraising-text'}>
         <p>{texts[language]['fundraising1']}</p>
         <p>{texts[language]['fundraising2']}</p>
