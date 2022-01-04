@@ -4,15 +4,16 @@ import Column from '../Column'
 import LanguageOptions from '../languageOptions'
 import Fundraising from './Fundraising'
 import NationsLogoRow from './Logos'
+import { AvailableLanguages } from '../../utils/languages'
 
 interface Props {
   isMobile: boolean | undefined
-  language: string
-  setLanguage: (language: string) => void
+  language: AvailableLanguages
+  setLanguage: (language: AvailableLanguages) => void
 }
 
-/*  
- TODO: 
+/*
+ TODO:
   - add nationsföretag logos
   - add info about fundraising
 */

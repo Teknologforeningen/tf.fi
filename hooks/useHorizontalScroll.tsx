@@ -1,7 +1,7 @@
-import { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 
 export const useHorizontalScroll = () => {
-  const elementRef = useRef<Element>()
+  const elementRef = React.createRef<HTMLDivElement>()
   useEffect(() => {
     const element = elementRef.current
     if (element) {

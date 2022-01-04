@@ -1,3 +1,4 @@
+import React from 'react'
 import { NextPage } from 'next'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -15,35 +16,35 @@ import TFLogoSmall from './TFLogoSmall'
 import TaffaABLogo from './TaffaABLogo'
 import DagsenLogo from './DagsenLogo'
 import LanguageOptions from '../languageOptions'
-import linksJSON from '../../utils/links.json'
-import texts from '../../utils/languages.json'
+import links from '../../utils/links'
+import texts, { Language, AvailableLanguages } from '../../utils/languages'
 
 interface Props {
   isMobile: boolean | undefined
-  language: string
-  setLanguage: (language: string) => void
+  language: AvailableLanguages
+  setLanguage: (language: AvailableLanguages) => void
 }
 
-const menuValues: Array<{ title: string; link: string }> = [
+const menuValues: Array<{ title: keyof Language; link: string }> = [
   {
     title: 'om-teknologföreningen',
-    link: linksJSON.links['om-teknologföreningen'],
+    link: links['om-teknologföreningen'],
   },
   {
     title: 'medlemsportal',
-    link: linksJSON.links.medlemsportal,
+    link: links.medlemsportal,
   },
   {
     title: 'abiturienter',
-    link: linksJSON.links.abiturienter,
+    link: links.abiturienter,
   },
   {
-    title: 'stämlar',
-    link: linksJSON.links.stämlar,
+    title: 'stälmar',
+    link: links.stälmar,
   },
   {
     title: 'för-företag',
-    link: linksJSON.links['för-företag'],
+    link: links['för-företag'],
   },
 ]
 
@@ -83,12 +84,12 @@ const Navbar: NextPage<Props> = ({ isMobile, language, setLanguage }) => {
       </List>
       <Divider />
       <Row className={'logos-mobile'}>
-        <Link href={linksJSON.links.täffäab} passHref>
+        <Link href={links.täffäab} passHref>
           <div>
             <TaffaABLogo />
           </div>
         </Link>
-        <Link href={linksJSON.links.lunch} passHref>
+        <Link href={links.lunch} passHref>
           <div>
             <DagsenLogo />
           </div>
@@ -141,12 +142,12 @@ const Navbar: NextPage<Props> = ({ isMobile, language, setLanguage }) => {
               </Link>
             ))}
 
-            <Link href={linksJSON.links.täffäab} passHref>
+            <Link href={links.täffäab} passHref>
               <div>
                 <TaffaABLogo />
               </div>
             </Link>
-            <Link href={linksJSON.links.lunch} passHref>
+            <Link href={links.lunch} passHref>
               <div>
                 <DagsenLogo />
               </div>

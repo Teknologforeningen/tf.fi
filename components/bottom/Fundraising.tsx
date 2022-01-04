@@ -3,12 +3,12 @@ import Link from 'next/link'
 import Column from '../Column'
 import Row from '../Row'
 import TFFundraising from './TFFundraising'
-import texts from '../../utils/languages.json'
-import links from '../../utils/links.json'
+import texts, { AvailableLanguages } from '../../utils/languages'
+import links from '../../utils/links'
 
 interface Props {
   isMobile: boolean | undefined
-  language: string
+  language: AvailableLanguages
 }
 
 const Fundraising: NextPage<Props> = ({ language, isMobile }) => {
@@ -22,13 +22,13 @@ const Fundraising: NextPage<Props> = ({ language, isMobile }) => {
             <p>{texts[language]['fundraising2']}</p>
 
             <p>{texts[language]['fundraising3']}:</p>
-            <Link href={links.links.fundraising.donera} passHref>
+            <Link href={links.fundraising.donera} passHref>
               <a className="link link-text link-fundraising link-mobile">
                 <span>donera.tf.fi</span>
               </a>
             </Link>
             <p>{texts[language]['fundraising4']}:</p>
-            <Link href={links.links.fundraising.info} passHref>
+            <Link href={links.fundraising.info} passHref>
               <a className="link link-text link-fundraising link-mobile">
                 <span>vision.tf.fi</span>
               </a>
@@ -44,13 +44,13 @@ const Fundraising: NextPage<Props> = ({ language, isMobile }) => {
             <Row className={'fundraising-text-row'}>
               {' '}
               <p>{texts[language]['fundraising3']}</p>
-              <Link href={links.links.fundraising.donera} passHref>
+              <Link href={links.fundraising.donera} passHref>
                 <a className="link link-text link-fundraising">
                   <span>donera.tf.fi</span>
                 </a>
               </Link>
               <p>{texts[language]['fundraising4']}</p>
-              <Link href={links.links.fundraising.info} passHref>
+              <Link href={links.fundraising.info} passHref>
                 <a className="link link-text link-fundraising">
                   <span>vision.tf.fi</span>
                 </a>

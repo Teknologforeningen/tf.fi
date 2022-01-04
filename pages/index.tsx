@@ -9,6 +9,7 @@ import Info from '../components/bottom/Info'
 import Column from '../components/Column'
 import useWindowSize from '../hooks/useWindowSize'
 import { useState } from 'react'
+import { AvailableLanguages } from '../utils/languages'
 
 interface Props {
   events: TimelineEvent[]
@@ -18,7 +19,7 @@ interface Props {
 const Home: NextPage<Props> = ({ events, isHomePage }) => {
   const { width, isMobile } = useWindowSize()
   const [horizontalPosition, setHorizontalPositition] = useState(0)
-  const [language, setLanguage] = useState('swedish')
+  const [language, setLanguage] = useState<AvailableLanguages>('swedish')
 
   return (
     <div style={{ display: 'flex' }}>

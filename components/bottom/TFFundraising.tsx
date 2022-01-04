@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 type Props = {
-  size: number | undefined
+  size: number
 }
 
 const TFFundraising: NextPage<Props> = ({ size }) => {
@@ -14,9 +14,6 @@ const TFFundraising: NextPage<Props> = ({ size }) => {
         x="0px"
         y="0px"
         viewBox="0 0 355.22 92.25"
-        style={{
-          enableBackground: 'new 0 0 355.22 92.25',
-        }}
         xmlSpace="preserve"
       >
         <style type="text/css">

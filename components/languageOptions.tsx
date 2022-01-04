@@ -1,13 +1,13 @@
 import { NextPage } from 'next'
 import Row from './Row'
-import texts from '../utils/languages.json'
+import texts, { AvailableLanguages } from '../utils/languages'
 interface Props {
-  language: string
-  setLanguage: (language: string) => void
+  language: AvailableLanguages
+  setLanguage: (language: AvailableLanguages) => void
 }
 
 const LanguageOptions: NextPage<Props> = ({ language, setLanguage }) => {
-  const presentLanguages = [...Object.keys(texts)]
+  const presentLanguages = Object.keys(texts) as AvailableLanguages[]
   const index = presentLanguages.indexOf(language)
   if (index > -1) {
     presentLanguages.splice(index, 1)

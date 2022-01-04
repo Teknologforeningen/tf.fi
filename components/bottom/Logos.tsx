@@ -2,12 +2,12 @@ import { NextPage } from 'next'
 import Row from '../Row'
 import Image from 'next/image'
 import Link from 'next/link'
-import links from '../../utils/links.json'
+import links from '../../utils/links'
 
 const NationsLogoRow: NextPage = () => {
   return (
     <Row className={'logo-row'}>
-      <Link href={links.links.nations.thinkCell} passHref>
+      <Link href={links.nations.thinkCell} passHref>
         <Image
           alt="Think cell"
           src="https://www.teknologforeningen.fi/assets/think-cell-logo_white.png"
@@ -15,7 +15,7 @@ const NationsLogoRow: NextPage = () => {
           height={23}
         />
       </Link>
-      <Link href={links.links.nations.visma} passHref>
+      <Link href={links.nations.visma} passHref>
         <Image
           alt="Visma"
           src="https://www.teknologforeningen.fi/assets/visma.png"
@@ -23,7 +23,7 @@ const NationsLogoRow: NextPage = () => {
           height={35}
         />
       </Link>
-      <Link href={links.links.nations.accenture} passHref>
+      <Link href={links.nations.accenture} passHref>
         <Image
           alt="Accenture"
           src="https://www.teknologforeningen.fi/assets/accenture.png"
@@ -31,7 +31,7 @@ const NationsLogoRow: NextPage = () => {
           height={34}
         />
       </Link>
-      <Link href={links.links.nations.trimble} passHref>
+      <Link href={links.nations.trimble} passHref>
         <Image
           alt="trimble"
           src="https://www.teknologforeningen.fi/assets/trimble.png"
@@ -39,7 +39,7 @@ const NationsLogoRow: NextPage = () => {
           height={23}
         />
       </Link>
-      <Link href={links.links.nations.futurice} passHref>
+      <Link href={links.nations.futurice} passHref>
         <Image
           alt="futurice"
           src="https://www.teknologforeningen.fi/assets/futurice.png"
@@ -47,7 +47,7 @@ const NationsLogoRow: NextPage = () => {
           height={49}
         />
       </Link>
-      <Link href={links.links.nations.acedemicWork} passHref>
+      <Link href={links.nations.acedemicWork} passHref>
         <Image
           alt="Academic work"
           src="https://www.teknologforeningen.fi/assets/academicwork.png"
