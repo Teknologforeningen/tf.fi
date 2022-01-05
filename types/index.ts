@@ -19,3 +19,8 @@ type PlainLine = {
 }
 
 export type Line = Event[] | PlainLine
+
+export interface Flag {
+  title: string
+  onoff: boolean
+}

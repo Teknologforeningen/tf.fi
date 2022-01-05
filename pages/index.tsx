@@ -10,6 +10,8 @@ import Column from '../components/Column'
 import useWindowSize from '../hooks/useWindowSize'
 import { useState } from 'react'
 import { AvailableLanguages } from '../utils/languages'
+import { fetchEvents } from '../services/eventService'
+import { fetchFlags } from '../services/flagService'
 
 interface Props {
   events: TimelineEvent[]
@@ -62,13 +64,15 @@ const Home: NextPage<Props> = ({ events, isHomePage }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  // Get posts from API
-  const res = await fetch(`${process.env.BACKEND_URL}/events`)
-  const events = await res.json()
+  const events = await fetchEvents()
+  const flags = await fetchFlags()
+  const isHomePage = flags.some(
+    (flag) => flag.title === 'isHomePage' && flag.onoff
+  )
   return {
     props: {
       events: events,
-      isHomePage: process.env.ISHOMEPAGE === 'true',
+      isHomePage,
     },
   }
 }
