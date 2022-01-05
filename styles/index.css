@@ -100,3 +100,9 @@
   margin-bottom: 1rem;
   margin-top: 1rem;
 }
+
+.logo-container, .logo-container:hover {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
