@@ -26,30 +26,36 @@ const Home: NextPage<Props> = ({ events, isHomePage }) => {
   return (
     <div style={{ display: 'flex' }}>
       <div className={'main-body'}>
-        {isHomePage && (
-          <Navbar
-            isMobile={isMobile}
-            language={language}
-            setLanguage={setLanguage}
-          />
-        )}
-        <Column>
-          <div className={'logo'} style={{ position: 'relative' }}>
-            <TF150Logo
-              width={width}
+        <header>
+          {isHomePage && (
+            <Navbar
               isMobile={isMobile}
-              degrees={horizontalPosition / 10}
+              language={language}
+              setLanguage={setLanguage}
             />
-            <TF150LogoText
-              width={width}
-              isMobile={isMobile}
-              style={{ position: 'absolute', top: '39%', left: '24%' }}
-            />
-          </div>
-          <Timeline
-            events={events}
-            setHorizontalPosition={setHorizontalPositition}
-          />
+          )}
+          <Column>
+            <div className={'logo'} style={{ position: 'relative' }}>
+              <TF150Logo
+                width={width}
+                isMobile={isMobile}
+                degrees={horizontalPosition / 10}
+              />
+              <TF150LogoText
+                width={width}
+                isMobile={isMobile}
+                style={{ position: 'absolute', top: '39%', left: '24%' }}
+              />
+            </div>
+          </Column>
+        </header>
+
+        <Timeline
+          events={events}
+          setHorizontalPosition={setHorizontalPositition}
+        />
+
+        <footer>
           {isHomePage && (
             <Info
               isMobile={isMobile}
@@ -57,7 +63,7 @@ const Home: NextPage<Props> = ({ events, isHomePage }) => {
               setLanguage={setLanguage}
             />
           )}
-        </Column>
+        </footer>
       </div>
     </div>
   )
