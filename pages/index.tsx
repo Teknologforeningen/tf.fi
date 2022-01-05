@@ -1,17 +1,14 @@
 import type { GetServerSideProps, NextPage } from 'next'
 
-import TF150Logo from '../components/TF150LogoUtanText'
-import TF150LogoText from '../components/TF150LogoBaraText'
 import Timeline from '../components/eventline/Timeline'
 import { Event as TimelineEvent } from '../types'
-import Navbar from '../components/navbar/Navbar'
-import Info from '../components/bottom/Info'
-import Column from '../components/Column'
 import useWindowSize from '../hooks/useWindowSize'
 import { useState } from 'react'
 import { AvailableLanguages } from '../utils/languages'
 import { fetchEvents } from '../services/eventService'
 import { fetchFlags } from '../services/flagService'
+import Header from '../components/header/Header'
+import Footer from '../components/footer/Footer'
 
 interface Props {
   events: TimelineEvent[]
@@ -26,44 +23,26 @@ const Home: NextPage<Props> = ({ events, isHomePage }) => {
   return (
     <div style={{ display: 'flex' }}>
       <div className={'main-body'}>
-        <header>
-          {isHomePage && (
-            <Navbar
-              isMobile={isMobile}
-              language={language}
-              setLanguage={setLanguage}
-            />
-          )}
-          <Column>
-            <div className={'logo'} style={{ position: 'relative' }}>
-              <TF150Logo
-                width={width}
-                isMobile={isMobile}
-                degrees={horizontalPosition / 10}
-              />
-              <TF150LogoText
-                width={width}
-                isMobile={isMobile}
-                style={{ position: 'absolute', top: '39%', left: '24%' }}
-              />
-            </div>
-          </Column>
-        </header>
+        <Header
+          isHomePage={isHomePage}
+          width={width}
+          isMobile={isMobile}
+          language={language}
+          setLanguage={setLanguage}
+          horizontalPosition={horizontalPosition}
+        />
 
         <Timeline
           events={events}
           setHorizontalPosition={setHorizontalPositition}
         />
 
-        <footer>
-          {isHomePage && (
-            <Info
-              isMobile={isMobile}
-              language={language}
-              setLanguage={setLanguage}
-            />
-          )}
-        </footer>
+        <Footer
+          isHomePage={isHomePage}
+          isMobile={isMobile}
+          language={language}
+          setLanguage={setLanguage}
+        />
       </div>
     </div>
   )

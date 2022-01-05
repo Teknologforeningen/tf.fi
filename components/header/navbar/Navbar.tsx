@@ -11,13 +11,13 @@ import {
   SwipeableDrawer,
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
-import Row from '../Row'
+import Row from '../../Row'
 import TFLogoSmall from './TFLogoSmall'
 import TaffaABLogo from './TaffaABLogo'
 import DagsenLogo from './DagsenLogo'
-import LanguageOptions from '../languageOptions'
-import links from '../../utils/links'
-import texts, { Language, AvailableLanguages } from '../../utils/languages'
+import LanguageOptions from '../../languageOptions'
+import links from '../../../utils/links'
+import texts, { Language, AvailableLanguages } from '../../../utils/languages'
 
 interface Props {
   isMobile: boolean | undefined
