@@ -2,7 +2,7 @@
   background: #ffffe8;
   position: absolute;
   top: 4%;
-  height: 92%;
+  min-height: 92%;
   left: 24%;
   right: 24%;
   margin-left: auto;
