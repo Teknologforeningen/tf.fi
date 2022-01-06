@@ -26,6 +26,7 @@
   font-size: 18px;
   letter-spacing: 0.02em;
   line-height: 26px;
+  width: 75%;
 }
 
 .home-link {
@@ -93,4 +94,6 @@
   transform: translate3d(0, -2px, 0);
 }
 
-/* TODO: Add styling for img */
+.event-page-image {
+    max-width: 100%;
+}

@@ -11,6 +11,14 @@ interface Props {
   event?: Event
 }
 
+const renderer: marked.RendererObject = {
+  image(href: string | null): string {
+    return `<img class='event-page-image' src=${href} alt='bild' />`
+  },
+}
+
+marked.use({ renderer })
+
 /** Page for a single event */
 const EventPage: NextPage<Props> = ({ event }) => (
   <div className={'event-page-background'}>
