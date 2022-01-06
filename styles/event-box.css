@@ -21,7 +21,7 @@
 }
 .event-box-small {
   width: 224px;
-  height: 61px;
+  height: fit-content;
   background: var(--creamwhite);
   position: relative;
   padding: 7px;
@@ -36,27 +36,30 @@
 }
 
 .event-box-sub-title {
-  margin: 0px;
+  margin: 0;
   font-weight: 900;
   font-size: 10px;
   line-height: 18px;
 }
 
 .event-box-title {
-  margin: 0px;
+  margin: 0;
 }
 
-.event-title {
+.box-title-container {
+  height: fit-content;
+}
+
+.event-title-container {
   background-color: var(--eventblue);
 }
 
-.blogpost-title {
+.blogpost-title-container {
   background-color: var(--blogpink);
 }
 
-/* TODO: Change these px values to something relative */
 .event-box-horizontal-line {
-  width: 224px;
+  width: 100%;
   margin: 0;
   border: 1px solid var(--darkblue);
 }
@@ -86,8 +89,14 @@
   background: linear-gradient(transparent 150px, var(--creamwhite));
 }
 
+.event-box-container {
+  position: relative;
+  height: 100%;
+}
+
 .event-box-special {
-  z-index: 10;
+  position: absolute;
+  bottom: 5px;
 }
 
 /* TODO: Change these px values to something relative */
