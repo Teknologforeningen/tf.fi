@@ -5,7 +5,7 @@ import VerticalLineLong from './VerticalLineLong'
 import Column from '../Column'
 import Row from '../Row'
 import EventBall from './EventBall'
-import EventBox from './EventBox'
+import EventBox from './eventbox/EventBox'
 
 interface Props {
   events: Event[]
