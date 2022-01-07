@@ -12,7 +12,6 @@
   background: var(--creamwhite);
   margin-top: 1rem;
   position: absolute;
-  left: -112px;
   overflow-y: hidden;
 }
 
@@ -119,4 +118,8 @@
 .event-box-link:hover {
   font-weight: 600;
   font-size: 15px;
+}
+
+.event-box-title-container {
+  position: absolute;
 }
