@@ -27,7 +27,6 @@ const EventLine: NextPage<Props> = ({
     </div>
     <VerticalLineLong />
     <Row className={'ball-row'}>
-      {' '}
       {events.map((event) => (
         <EventBall
           setEventsToShow={setEventsToShow}
