@@ -23,7 +23,7 @@ export const useHorizontalScroll = () => {
           behavior: 'smooth',
         })
       }
-      element.addEventListener('wheel', onWheel, { passive: true })
+      element.addEventListener('wheel', onWheel)
       return () => element.removeEventListener('wheel', onWheel)
     }
   }, [])
