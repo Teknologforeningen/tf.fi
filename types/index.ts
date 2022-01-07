@@ -1,3 +1,5 @@
+export type EventType = 'event' | 'blogpost'
+
 export interface Event {
   id: number
   title: string
@@ -8,10 +10,12 @@ export interface Event {
   published_at: string
   created_at: string
   updated_at: string
-  type: string
+  type: EventType
 }
 
 export type GroupedEvent = Record<string, Event[]>
+
+export type HideableEvent = Event & { hide: boolean }
 
 type PlainLine = {
   id: number

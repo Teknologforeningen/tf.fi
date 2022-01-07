@@ -17,8 +17,6 @@ interface Props {
 
 /** A timeline of all events. Days which contain events have a longer line with EventBall(s) under it */
 const Timeline: NextPage<Props> = ({ events, setHorizontalPosition }) => {
-  const [eventsToShow, setEventsToShow] = useState<Event[] | null>([...events])
-
   const { width } = useWindowSize()
 
   // How many lines can fit on page, or if width is not defined then 2*numberOfWeeksInYear
@@ -69,12 +67,7 @@ const Timeline: NextPage<Props> = ({ events, setHorizontalPosition }) => {
           return (
             <Row key={i}>
               {line instanceof Array ? (
-                <EventLine
-                  key={i}
-                  events={line}
-                  eventsToShow={eventsToShow}
-                  setEventsToShow={setEventsToShow}
-                />
+                <EventLine key={i} events={line} />
               ) : (
                 <VerticalLine
                   key={i}

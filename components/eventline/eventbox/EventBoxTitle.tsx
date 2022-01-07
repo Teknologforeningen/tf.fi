@@ -1,21 +1,22 @@
 import { NextPage } from 'next'
 import Column from '../../Column'
-import Link from 'next/link'
 import { EventBoxProps } from './EventBox'
 
-const EventBoxTitle: NextPage<EventBoxProps> = ({ event, ...props }) => (
+const EventBoxTitle: NextPage<EventBoxProps> = ({
+  event,
+  topMargin = false,
+  ...props
+}) => (
   <Column
-    className={`event-box-small ${event.type}-title-container top-margin`}
+    className={`event-box-small ${event.type}-title-container ${
+      topMargin ? 'top-margin' : ''
+    }`}
     {...props}
   >
-    <Link href={event.slug} passHref>
-      <a className={`event-box-sub-title`}>
-        {event.type === 'event' ? 'EVENEMANG' : 'BLOGINLÄGG'}
-      </a>
-    </Link>
-    <Link href={event.slug} passHref>
-      <a className={`event-box-title`}>{event.title}</a>
-    </Link>
+    <p className={`event-box-sub-title`}>
+      {event.type === 'event' ? 'EVENEMANG' : 'BLOGINLÄGG'}
+    </p>
+    <p className={`event-box-title`}>{event.title}</p>
   </Column>
 )
 

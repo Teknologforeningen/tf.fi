@@ -1,44 +1,42 @@
 import { NextPage } from 'next'
-import { Event } from '../../types'
+import { EventType, HideableEvent } from '../../types'
 
 interface Props {
-  event: Event
-  eventsToShow: Event[] | null
-  setEventsToShow: (event: Event[] | null) => void
+  eventId: number
+  eventType: EventType
+  eventsToShow: HideableEvent[]
+  setEventsToShow: (event: HideableEvent[]) => void
 }
 
 // TODO: Highlight selected eventBall
 
 /** Ball to be displayed under an verticalLineLong  */
 const EventBall: NextPage<Props> = ({
-  event,
+  eventId,
+  eventType,
   eventsToShow,
   setEventsToShow,
 }) => {
+  function handleClick() {
+    // If event already in list => remove, else => add
+    const event = eventsToShow.find((event) => event.id === eventId)
+    // Event should always be defined
+    if (event) {
+      setEventsToShow(
+        eventsToShow.map((e) =>
+          e.id !== event.id ? e : { ...e, hide: !event.hide }
+        )
+      )
+    }
+  }
+
+  function isHidden() {
+    const event = eventsToShow.find((event) => event.id === eventId)
+    return event?.hide
+  }
+
   return (
-    // Set eventToShow to null if same ball is pressed twice
-    <div
-      onClick={() => {
-        // If event already in list -> remove, else -> add
-        if (eventsToShow !== null) {
-          if (eventsToShow.includes(event)) {
-            const i = eventsToShow.indexOf(event)
-            const copy = [...eventsToShow]
-            copy.splice(i, 1)
-            setEventsToShow(copy ? copy : null)
-          } else {
-            let copy = [...eventsToShow]
-            copy ? copy.push(event) : (copy = [event])
-            setEventsToShow(copy)
-          }
-        } else {
-          setEventsToShow([event])
-        }
-      }}
-      className={`dot-${
-        eventsToShow !== null && eventsToShow.includes(event)
-      } ${event.type}`}
-    />
+    <div onClick={handleClick} className={`dot-${!isHidden()} ${eventType}`} />
   )
 }
 
