@@ -8,6 +8,7 @@ import { groupEventsByDate, numberOfLines, mkLines } from '../../utils'
 import useWindowSize from '../../hooks/useWindowSize'
 import { UIEventHandler } from 'react-transition-group/node_modules/@types/react'
 import { useHorizontalScroll } from '../../hooks/useHorizontalScroll'
+import usePreventBodyScroll from '../../hooks/usePreventBodyScroll'
 
 // receives events as props
 interface Props {
@@ -30,6 +31,8 @@ const Timeline: NextPage<Props> = ({ events, setHorizontalPosition }) => {
   const verticalLinesBetween = Math.round(
     (numOfLines - numOfEventLines) / (numOfEventLines + 1)
   )
+
+  const { disableScroll, enableScroll } = usePreventBodyScroll()
 
   const onHover = (n: number) => {
     const transformMap = Object.fromEntries(
