@@ -15,7 +15,7 @@
 
 /* This works as expected for x-axis, but y-axis is messed up */
 .timeline {
-  width: 100vw;
+  width: 100%;
   margin-top: 1rem;
 }
 
@@ -81,7 +81,7 @@
 
 .hide-scrollbars {
   -ms-overflow-style: none;
-  overflow: -moz-scrollbars-none;
+  scrollbar-width: none;
 }
 
 .hide-scrollbars::-webkit-scrollbar {
