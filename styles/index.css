@@ -17,6 +17,16 @@
 .timeline {
   width: 100%;
   margin-top: 1rem;
+  display: block;
+  height: 500px;
+}
+
+.timeline-container {
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  overflow-y: visible;
+  height: 100%;
 }
 
 /* TODO: Change these px values to something relative */

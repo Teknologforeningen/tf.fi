@@ -1,6 +1,6 @@
+import { NextPage } from 'next'
 import VerticalLine from './VerticalLine'
 import Row from '../Row'
-import { NextPage } from 'next'
 import EventLine from './EventLine'
 import { Event, Line } from '../../types'
 import { useState } from 'react'
@@ -50,35 +50,29 @@ const Timeline: NextPage<Props> = ({ events, setHorizontalPosition }) => {
   const scrollRef = useHorizontalScroll()
 
   return (
-    <div className={'timeline'} style={{ display: 'block', height: '500px' }}>
+    <div
+      className={'timeline'}
+      onMouseEnter={disableScroll}
+      onMouseLeave={enableScroll}
+    >
       <div
-        className={'hide-scrollbars'}
+        className={'hide-scrollbars timeline-container'}
         ref={scrollRef}
         onScroll={onScroll}
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          overflowX: 'scroll',
-          overflowY: 'visible',
-          height: '100%',
-        }}
       >
-        {lines.map((line, i) => {
-          return (
-            <Row key={i}>
-              {line instanceof Array ? (
-                <EventLine key={i} events={line} />
-              ) : (
-                <VerticalLine
-                  key={i}
-                  onHover={onHover}
-                  i={i}
-                  verticalSize={lineHeights[i]}
-                />
-              )}
-            </Row>
-          )
-        })}
+        {lines.map((line, i) => (
+          <Row key={i}>
+            {line instanceof Array ? (
+              <EventLine events={line} />
+            ) : (
+              <VerticalLine
+                onHover={onHover}
+                i={i}
+                verticalSize={lineHeights[i]}
+              />
+            )}
+          </Row>
+        ))}
       </div>
     </div>
   )
