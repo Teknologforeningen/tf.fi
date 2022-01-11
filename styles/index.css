@@ -89,15 +89,6 @@
   margin-top: 1rem;
 }
 
-.hide-scrollbars {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.hide-scrollbars::-webkit-scrollbar {
-  display: none;
-}
-
 .ball-row {
   justify-content: space-evenly !important;
   width: 5rem;
@@ -116,4 +107,15 @@
     position: relative;
     width: 100px;
     height: 100px;
+}
+
+@media screen and (max-width: 1224px){
+    .hide-scrollbars {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .hide-scrollbars::-webkit-scrollbar {
+        display: none;
+    }
 }

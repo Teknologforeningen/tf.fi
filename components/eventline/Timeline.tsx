@@ -1,8 +1,7 @@
 import { NextPage } from 'next'
 import { Event, Line } from '../../types'
 import { CSSProperties, useState } from 'react'
-import { groupEventsByDate, numberOfLines, mkLines } from '../../utils'
-import useWindowSize from '../../hooks/useWindowSize'
+import { groupEventsByDate, mkLines } from '../../utils'
 import { FixedSizeList as List } from 'react-window'
 import TimelineLine, { TimelineLineData } from './TimelineLine'
 
@@ -14,21 +13,20 @@ interface Props {
 
 /** A timeline of all events. Days which contain events have a longer line with EventBall(s) under it */
 const Timeline: NextPage<Props> = ({ events, setHorizontalPosition }) => {
-  const { width } = useWindowSize()
+  const eventsByDate = groupEventsByDate(events)
+  const numOfEventLines = Object.keys(eventsByDate).length
+  const verticalLinesBetween = 40
+  const itemSize = 10
 
-  // How many lines can fit on page, or if width is not defined then 2*numberOfWeeksInYear
-  const numOfLines = width ? numberOfLines(width, 1.5, 5) * 2 : 104
+  const lines: Line[] = mkLines(eventsByDate, verticalLinesBetween)
+
+  const timelineWidth = itemSize * numOfEventLines * verticalLinesBetween
+  const totalLines =
+    verticalLinesBetween + numOfEventLines * verticalLinesBetween
+
   const [lineHeights, setLineHeights] = useState<number[]>(
-    Array.from(Array(numOfLines * 10)).map(() => 1)
+    Array.from(Array(totalLines * 10)).map(() => 1)
   )
-
-  const grouped = groupEventsByDate(events)
-  const numOfEventLines = Object.keys(grouped).length
-  const verticalLinesBetween = Math.round(
-    (numOfLines - numOfEventLines) / (numOfEventLines + 1)
-  )
-
-  const lines: Line[] = mkLines(grouped, verticalLinesBetween)
 
   const timelineLineData: TimelineLineData = {
     lines,
@@ -46,21 +44,18 @@ const Timeline: NextPage<Props> = ({ events, setHorizontalPosition }) => {
     justifyContent: 'center',
   }
 
-  const itemSize = 10
-  const listWidth = itemSize * numOfLines
-
   return (
     <div className={'timeline'}>
-      <div className={'hide-scrollbars timeline-container'}>
+      <div className={'timeline-container'}>
         <List
-          height={500}
-          width={listWidth}
+          height={475}
+          width={timelineWidth}
           itemSize={itemSize}
-          itemCount={numOfLines}
+          itemCount={totalLines}
           itemData={timelineLineData}
           style={lineStyle}
-          layout={'horizontal'}
           className={'hide-scrollbars'}
+          layout={'horizontal'}
           onScroll={handleScroll}
         >
           {TimelineLine}
