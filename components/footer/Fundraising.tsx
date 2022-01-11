@@ -15,8 +15,8 @@ const Fundraising: NextPage<Props> = ({ language, isMobile }) => {
   return (
     <>
       {isMobile ? (
-        <div className={'fundraising-parent'}>
-          <TFFundraising size={400} />
+        <>
+          <TFFundraising />
           <Column className={'fundraising-text'}>
             <p>{texts[language]['fundraising1']}</p>
             <p>{texts[language]['fundraising2']}</p>
@@ -34,10 +34,10 @@ const Fundraising: NextPage<Props> = ({ language, isMobile }) => {
               </a>
             </Link>
           </Column>
-        </div>
+        </>
       ) : (
-        <div className={'fundraising-parent'}>
-          <TFFundraising size={400} />
+        <>
+          <TFFundraising />
           <Column className={'fundraising-text'}>
             <p>{texts[language]['fundraising1']}</p>
             <p>{texts[language]['fundraising2']}</p>
@@ -57,7 +57,7 @@ const Fundraising: NextPage<Props> = ({ language, isMobile }) => {
               </Link>
             </Row>
           </Column>
-        </div>
+        </>
       )}
     </>
   )

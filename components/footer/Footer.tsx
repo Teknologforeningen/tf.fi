@@ -1,7 +1,6 @@
 import { NextPage } from 'next'
 import { AvailableLanguages } from '../../utils/languages'
 import Info from './Info'
-import Column from '../Column'
 
 interface Props {
   isHomePage: boolean
@@ -17,15 +16,9 @@ const Footer: NextPage<Props> = ({
   setLanguage,
 }) => (
   <footer>
-    <Column>
-      {isHomePage && (
-        <Info
-          isMobile={isMobile}
-          language={language}
-          setLanguage={setLanguage}
-        />
-      )}
-    </Column>
+    {isHomePage && (
+      <Info isMobile={isMobile} language={language} setLanguage={setLanguage} />
+    )}
   </footer>
 )
 

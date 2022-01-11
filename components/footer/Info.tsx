@@ -19,22 +19,18 @@ interface Props {
 */
 const Info: NextPage<Props> = ({ isMobile, language, setLanguage }) => {
   return (
-    <>
-      <div className={'info-parent'}>
-        <Column className={'cont'}>
-          <Fundraising language={language} isMobile={isMobile} />
-          {!isMobile && (
-            <>
-              <LanguageOptions language={language} setLanguage={setLanguage} />
-            </>
-          )}
-          <Row className={'info-text'}>
-            <div>TEKNOLOGFÖRENINGENS NATIONSFÖRETAG</div>
-          </Row>
-        </Column>
-      </div>
+    <Column className={'fundraising-parent'}>
+      <Fundraising language={language} isMobile={isMobile} />
+      {!isMobile && (
+        <>
+          <LanguageOptions language={language} setLanguage={setLanguage} />
+        </>
+      )}
+      <Row className={'info-text'}>
+        <div>TEKNOLOGFÖRENINGENS NATIONSFÖRETAG</div>
+      </Row>
       <NationsLogoRow />
-    </>
+    </Column>
   )
 }
 

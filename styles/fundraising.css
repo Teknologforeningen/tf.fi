@@ -8,17 +8,20 @@
 }
 
 .fundraising-parent {
-  left: 50%;
   margin-top: 3rem;
 }
 
+.fundraising-logo {
+  max-width: 400px;
+}
+
 .fundraising-text {
-  align-items: center;
   color: #fff;
   font-size: 14px;
   font-family: 'Montserrat', sans-serif;
   margin: 1rem;
 }
+
 .fundraising-text-row {
   font-size: 12px;
 }
