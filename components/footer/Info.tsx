@@ -1,5 +1,4 @@
 import { NextPage } from 'next'
-import Row from '../Row'
 import Column from '../Column'
 import LanguageOptions from '../languageOptions'
 import Fundraising from './Fundraising'
@@ -17,18 +16,12 @@ interface Props {
   - add nationsföretag logos
   - add info about fundraising
 */
-const Info: NextPage<Props> = ({ isMobile, language, setLanguage }) => {
+const Info: NextPage<Props> = ({ language, setLanguage }) => {
   return (
     <Column className={'fundraising-parent'}>
-      <Fundraising language={language} isMobile={isMobile} />
-      {!isMobile && (
-        <>
-          <LanguageOptions language={language} setLanguage={setLanguage} />
-        </>
-      )}
-      <Row className={'info-text'}>
-        <div>TEKNOLOGFÖRENINGENS NATIONSFÖRETAG</div>
-      </Row>
+      <Fundraising language={language} />
+      <LanguageOptions language={language} setLanguage={setLanguage} />
+      <p className={'info-text'}>TEKNOLOGFÖRENINGENS NATIONSFÖRETAG</p>
       <NationsLogoRow />
     </Column>
   )

@@ -22,6 +22,14 @@
   margin: 1rem;
 }
 
-.fundraising-text-row {
-  font-size: 12px;
+.fundraising-link {
+    font-size: 14px !important;
+    color: var(--gold) !important;
 }
+
+@media screen and (max-width: 768px) {
+  .fundraising-links-parent {
+    flex-direction: column;
+  }
+}
+

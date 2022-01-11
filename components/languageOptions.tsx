@@ -1,6 +1,7 @@
 import { NextPage } from 'next'
 import Row from './Row'
 import texts, { AvailableLanguages } from '../utils/languages'
+
 interface Props {
   language: AvailableLanguages
   setLanguage: (language: AvailableLanguages) => void
@@ -13,18 +14,17 @@ const LanguageOptions: NextPage<Props> = ({ language, setLanguage }) => {
     presentLanguages.splice(index, 1)
   }
   return (
-    <Row className={'info-text'}>
+    <Row className={'language-options'}>
       {presentLanguages.map((lang) => (
-        <div
+        <p
           className="link link-text"
-          style={{ marginRight: '2em' }}
           key={lang}
           onClick={() => {
             setLanguage(lang)
           }}
         >
-          <span>{texts[lang]['title']}</span>
-        </div>
+          {texts[lang]['title']}
+        </p>
       ))}
     </Row>
   )

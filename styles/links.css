@@ -5,19 +5,6 @@
   white-space: nowrap;
 }
 
-.link-fundraising {
-  cursor: pointer;
-  font-size: 12px;
-  position: relative;
-  white-space: nowrap;
-  margin: 0.8rem 0.28rem 0rem 0.28rem;
-  color: var(--gold) !important;
-}
-
-.link-mobile {
-  margin: 0px;
-}
-
 .link::before,
 .link::after {
   position: absolute;

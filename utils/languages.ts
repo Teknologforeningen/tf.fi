@@ -27,8 +27,8 @@ const languages: Languages = {
     'för-företag': 'för företag',
     fundraising1: 'Träffpunkt Aalto - insamlingen är igång!',
     fundraising2: 'TF samlar medel för sitt nya nationshus',
-    fundraising3: 'Delta i insamlingen på',
-    fundraising4: ' och läs mera på ',
+    fundraising3: 'Delta i insamlingen på:',
+    fundraising4: 'och läs mera på:',
   },
   finnish: {
     title: 'suomeksi',
