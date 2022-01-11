@@ -12,7 +12,12 @@ const TF150Logo: NextPage<Props> = ({ width, isMobile, style, degrees }) => {
   const rotation = degrees ?? 0
   return (
     <div
-      style={{ padding: '1em', transform: `rotate(${rotation}deg)`, ...style }}
+      style={{
+        padding: '1em',
+        transform: `rotate(${rotation}deg)`,
+        transition: 'transform 0.1s',
+        ...style,
+      }}
     >
       <svg
         width={size}
