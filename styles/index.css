@@ -101,6 +101,7 @@
 .ball-row {
   justify-content: space-evenly !important;
   width: 5rem;
+  z-index: 1;
 }
 
 .logo-row {
