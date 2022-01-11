@@ -7,12 +7,6 @@
   box-shadow: 0 0 200px rgba(0, 0, 0, 0.9) inset;
 }
 
-.logo {
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-}
-
 /* This works as expected for x-axis, but y-axis is messed up */
 .timeline {
   width: 100%;

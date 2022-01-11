@@ -7,7 +7,6 @@ import { AvailableLanguages } from '../../utils/languages'
 
 interface Props {
   isHomePage: boolean
-  width: number | undefined
   isMobile: boolean | undefined
   language: AvailableLanguages
   setLanguage: (language: AvailableLanguages) => void
@@ -16,7 +15,6 @@ interface Props {
 
 const Header: NextPage<Props> = ({
   isHomePage,
-  width,
   isMobile,
   language,
   setLanguage,
@@ -30,18 +28,10 @@ const Header: NextPage<Props> = ({
         setLanguage={setLanguage}
       />
     )}
-    <Column>
-      <div className={'logo'} style={{ position: 'relative' }}>
-        <TF150Logo
-          width={width}
-          isMobile={isMobile}
-          degrees={horizontalPosition / 10}
-        />
-        <TF150LogoText
-          width={width}
-          isMobile={isMobile}
-          style={{ position: 'absolute', top: '39%', left: '24%' }}
-        />
+    <Column className="main-logo-container">
+      <div className={'main-logo'}>
+        <TF150Logo degrees={horizontalPosition / 10} />
+        <TF150LogoText />
       </div>
     </Column>
   </header>

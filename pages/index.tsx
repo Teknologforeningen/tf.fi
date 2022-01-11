@@ -16,7 +16,7 @@ interface Props {
 }
 
 const Home: NextPage<Props> = ({ events, isHomePage }) => {
-  const { width, isMobile } = useWindowSize()
+  const { isMobile } = useWindowSize()
   const [horizontalPosition, setHorizontalPositition] = useState(0)
   const [language, setLanguage] = useState<AvailableLanguages>('swedish')
 
@@ -25,7 +25,6 @@ const Home: NextPage<Props> = ({ events, isHomePage }) => {
       <div className={'main-body'}>
         <Header
           isHomePage={isHomePage}
-          width={width}
           isMobile={isMobile}
           language={language}
           setLanguage={setLanguage}
