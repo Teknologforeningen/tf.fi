@@ -4,21 +4,13 @@ import Info from './Info'
 
 interface Props {
   isHomePage: boolean
-  isMobile: boolean | undefined
   language: AvailableLanguages
   setLanguage: (language: AvailableLanguages) => void
 }
 
-const Footer: NextPage<Props> = ({
-  isHomePage,
-  isMobile,
-  language,
-  setLanguage,
-}) => (
+const Footer: NextPage<Props> = ({ isHomePage, language, setLanguage }) => (
   <footer>
-    {isHomePage && (
-      <Info isMobile={isMobile} language={language} setLanguage={setLanguage} />
-    )}
+    {isHomePage && <Info language={language} setLanguage={setLanguage} />}
   </footer>
 )
 

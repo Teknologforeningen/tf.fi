@@ -1,12 +1,10 @@
 import type { GetServerSideProps, NextPage } from 'next'
-
 import Timeline from '../components/eventline/Timeline'
 import { Event as TimelineEvent } from '../types'
-import useWindowSize from '../hooks/useWindowSize'
 import { useState } from 'react'
 import { AvailableLanguages } from '../utils/languages'
-import { fetchEvents } from '../api/eventApi'
-import { fetchFlags } from '../api/flagApi'
+import { fetchEvents } from '../lib/api/event'
+import { fetchFlags } from '../lib/api/flag'
 import Header from '../components/header/Header'
 import Footer from '../components/footer/Footer'
 
@@ -16,7 +14,6 @@ interface Props {
 }
 
 const Home: NextPage<Props> = ({ events, isHomePage }) => {
-  const { isMobile } = useWindowSize()
   const [horizontalPosition, setHorizontalPosition] = useState(0)
   const [language, setLanguage] = useState<AvailableLanguages>('swedish')
 
@@ -33,7 +30,6 @@ const Home: NextPage<Props> = ({ events, isHomePage }) => {
 
       <Footer
         isHomePage={isHomePage}
-        isMobile={isMobile}
         language={language}
         setLanguage={setLanguage}
       />

@@ -6,16 +6,10 @@ import NationsLogoRow from './Logos'
 import { AvailableLanguages } from '../../utils/languages'
 
 interface Props {
-  isMobile: boolean | undefined
   language: AvailableLanguages
   setLanguage: (language: AvailableLanguages) => void
 }
 
-/*
- TODO:
-  - add nationsföretag logos
-  - add info about fundraising
-*/
 const Info: NextPage<Props> = ({ language, setLanguage }) => {
   return (
     <Column className={'fundraising-parent'}>

@@ -1,7 +1,5 @@
-import React from 'react';
+import React from 'react'
 
-const VerticalLineLong = () => (
-    <div className={"vertical-line-long"} />
-);
+const VerticalLineLong = () => <div className={'vertical-line-long'} />
 
-export default VerticalLineLong;
+export default VerticalLineLong
