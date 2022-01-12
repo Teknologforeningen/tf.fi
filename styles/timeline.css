@@ -1,0 +1,74 @@
+.timeline-container {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.vertical-line {
+    margin: 3rem 0;
+    height: 33px;
+    border-left: 1.5px solid var(--gold);
+}
+
+.vertical-line-long {
+    margin: 0.2rem 0;
+    padding: 5px;
+    height: 127px;
+    border-left: 2px solid var(--creamwhite);
+}
+
+.dot {
+    border-radius: 50%;
+    display: inline-block;
+    margin-top: 0.5rem;
+    position: relative;
+    left: -5px;
+}
+
+.dot-false {
+    height: 0.95rem;
+    width: 0.95rem;
+}
+
+.dot-true {
+    height: 1.2rem;
+    width: 1.2rem;
+}
+
+.blogpost {
+    background-color: var(--blogpink);
+}
+
+.event {
+    background-color: var(--eventblue);
+}
+
+.card-title {
+    color: var(--creamwhite);
+}
+
+.eventline-dates {
+    color: var(--creamwhite);
+    position: relative;
+    left: -5px;
+    font-family: Raleway, serif;
+    font-weight: 800;
+    margin-top: 1rem;
+}
+
+.ball-row {
+    justify-content: space-evenly !important;
+    width: 5rem;
+    z-index: 1;
+}
+
+@media screen and (max-width: 1224px){
+    .hide-scrollbars {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .hide-scrollbars::-webkit-scrollbar {
+        display: none;
+    }
+}

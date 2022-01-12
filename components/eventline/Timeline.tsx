@@ -45,22 +45,20 @@ const Timeline: NextPage<Props> = ({ events, setHorizontalPosition }) => {
   }
 
   return (
-    <div className={'timeline'}>
-      <div className={'timeline-container'}>
-        <List
-          height={475}
-          width={timelineWidth}
-          itemSize={itemSize}
-          itemCount={totalLines}
-          itemData={timelineLineData}
-          style={lineStyle}
-          className={'hide-scrollbars'}
-          layout={'horizontal'}
-          onScroll={handleScroll}
-        >
-          {TimelineLine}
-        </List>
-      </div>
+    <div className={'timeline-container'}>
+      <List
+        height={475}
+        width={timelineWidth}
+        itemSize={itemSize}
+        itemCount={totalLines}
+        itemData={timelineLineData}
+        style={lineStyle}
+        className={'hide-scrollbars'}
+        layout={'horizontal'}
+        onScroll={handleScroll}
+      >
+        {TimelineLine}
+      </List>
     </div>
   )
 }

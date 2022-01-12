@@ -15,6 +15,7 @@ interface Props {
   data: TimelineLineData
 }
 
+/** Either an Eventline or VerticalLine depending on data received */
 const TimelineLine = ({ index, style, data }: Props): JSX.Element => {
   const onHover = (n: number) => {
     const transformMap = Object.fromEntries(

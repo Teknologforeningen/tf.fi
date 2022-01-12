@@ -1,37 +1,48 @@
 .event-box-parent {
-  position: relative;
-  height: 100%;
-
-  cursor: pointer;
+    z-index: 1;
+    width: 224px;
+    height: 217px;
 }
 
-/* TODO: Change these px values to something relative */
+.event-box-parent * {
+    width: 100%;
+}
+
 .event-box {
-  width: 224px;
-  height: 217px;
+  height: 100%;
   background: var(--creamwhite);
   margin-top: 1rem;
-  position: absolute;
   overflow-y: hidden;
+  position: relative;
 }
 
 .top-margin {
   margin-top: 1rem;
 }
+
 .event-box-small {
-  width: 224px;
-  height: fit-content;
   background: var(--creamwhite);
-  position: relative;
   padding: 7px;
   font-weight: 800;
   font-size: 20px;
   line-height: 24px;
-
   text-align: center;
   letter-spacing: 0.02em;
   text-transform: uppercase;
   color: var(--darkblue);
+  z-index: 3;
+}
+
+.event-box-small-event {
+    background-color: var(--eventblue);
+}
+
+.event-box-small-blogpost {
+    background-color: var(--blogpink);
+}
+
+.event-box-title {
+    margin: 0;
 }
 
 .event-box-sub-title {
@@ -41,43 +52,23 @@
   line-height: 18px;
 }
 
-.event-box-title {
-  margin: 0;
-}
-
-.box-title-container {
-  height: fit-content;
-}
-
-.event-title-container {
-  background-color: var(--eventblue);
-}
-
-.blogpost-title-container {
-  background-color: var(--blogpink);
-}
-
 .event-box-horizontal-line {
   width: 100%;
-  margin: 0;
   border: 1px solid var(--darkblue);
 }
 
-/* TODO: Change these px values to something relative */
 .event-box-text {
-  width: 189px;
-  height: 115px;
+  width: 85%;
+  height: 50%;
 
   /* Brödtext */
-  margin-top: 18px;
-  margin-bottom: 0;
   font-size: 14px;
   font-weight: 400;
-
   line-height: 18px;
   letter-spacing: 0.02em;
   color: #000000;
 }
+
 .event-box-text:after {
   content: '';
   width: 100%;
@@ -88,38 +79,18 @@
   background: linear-gradient(transparent 150px, var(--creamwhite));
 }
 
-.event-box-container {
-  position: relative;
-  height: 100%;
-}
-
-.event-box-special {
+.event-box-link {
   position: absolute;
   bottom: 5px;
-}
-
-/* TODO: Change these px values to something relative */
-.event-box-link {
-  width: 189px;
-  height: 11px;
-  margin: 0;
-
   font-weight: 800;
   font-size: 14px;
   line-height: 18px;
-
   text-align: center;
   letter-spacing: 0.02em;
-
   color: #000000 !important;
 }
 
-/* TODO: Change these px values to something relative */
 .event-box-link:hover {
   font-weight: 600;
   font-size: 15px;
-}
-
-.event-box-title-container {
-  position: absolute;
 }

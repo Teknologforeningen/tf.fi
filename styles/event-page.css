@@ -6,7 +6,6 @@
   padding: 15px;
 }
 
-/* TODO: Change these px values to something relative */
 .event-page-title {
   font-weight: 800;
   text-transform: uppercase;
@@ -46,7 +45,6 @@
 
 .home-link::before {
   content: '';
-  /* show by default */
 }
 
 .home-link-text::before {

@@ -8,8 +8,6 @@ interface Props {
   setEventsToShow: (event: HideableEvent[]) => void
 }
 
-// TODO: Highlight selected eventBall
-
 /** Ball to be displayed under an verticalLineLong  */
 const EventBall: NextPage<Props> = ({
   eventId,
@@ -36,7 +34,10 @@ const EventBall: NextPage<Props> = ({
   }
 
   return (
-    <div onClick={handleClick} className={`dot-${!isHidden()} ${eventType}`} />
+    <div
+      onClick={handleClick}
+      className={`dot dot-${!isHidden()} ${eventType}`}
+    />
   )
 }
 

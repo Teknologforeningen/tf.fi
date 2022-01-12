@@ -17,31 +17,26 @@ interface Props {
 
 const Home: NextPage<Props> = ({ events, isHomePage }) => {
   const { isMobile } = useWindowSize()
-  const [horizontalPosition, setHorizontalPositition] = useState(0)
+  const [horizontalPosition, setHorizontalPosition] = useState(0)
   const [language, setLanguage] = useState<AvailableLanguages>('swedish')
 
   return (
-    <div style={{ display: 'flex' }}>
-      <div className={'main-body'}>
-        <Header
-          isHomePage={isHomePage}
-          language={language}
-          setLanguage={setLanguage}
-          horizontalPosition={horizontalPosition}
-        />
+    <div className={'main-body'}>
+      <Header
+        isHomePage={isHomePage}
+        language={language}
+        setLanguage={setLanguage}
+        horizontalPosition={horizontalPosition}
+      />
 
-        <Timeline
-          events={events}
-          setHorizontalPosition={setHorizontalPositition}
-        />
+      <Timeline events={events} setHorizontalPosition={setHorizontalPosition} />
 
-        <Footer
-          isHomePage={isHomePage}
-          isMobile={isMobile}
-          language={language}
-          setLanguage={setLanguage}
-        />
-      </div>
+      <Footer
+        isHomePage={isHomePage}
+        isMobile={isMobile}
+        language={language}
+        setLanguage={setLanguage}
+      />
     </div>
   )
 }

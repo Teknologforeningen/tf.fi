@@ -1,0 +1,12 @@
+.logo-row {
+    flex-wrap: wrap;
+    width: 80%;
+    justify-content: space-evenly !important;
+    margin: 1rem 0;
+}
+
+.logo-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}

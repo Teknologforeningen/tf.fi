@@ -19,7 +19,7 @@ const EventBox: NextPage<Props> = ({ events }) =>
   events.length == 1 ? (
     <EventBoxBody event={events[0]} />
   ) : (
-    <div className={'event-box-title-container'}>
+    <>
       {events.map((event) => (
         <Link key={event.id} href={`/${event.slug}`}>
           <a>
@@ -27,7 +27,7 @@ const EventBox: NextPage<Props> = ({ events }) =>
           </a>
         </Link>
       ))}
-    </div>
+    </>
   )
 
 export default EventBox

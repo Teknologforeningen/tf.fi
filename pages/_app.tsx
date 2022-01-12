@@ -6,6 +6,9 @@ import '../styles/info.css'
 import '../styles/event-box.css'
 import '../styles/fundraising.css'
 import '../styles/links.css'
+import '../styles/timeline.css'
+import '../styles/footer.css'
+
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 
