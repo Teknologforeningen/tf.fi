@@ -1,12 +1,8 @@
 .event-page-background {
   background: #ffffe8;
-  position: absolute;
-  top: 4%;
-  min-height: 92%;
-  left: 24%;
-  right: 24%;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 1.5rem auto;
+  min-height: 92vh;
+  max-width: 65vw;
   padding: 15px;
 }
 
@@ -36,6 +32,7 @@
   position: relative;
   white-space: nowrap;
 }
+
 .home-link::before,
 .home-link::after {
   position: absolute;
@@ -96,4 +93,16 @@
 
 .event-page-image {
     max-width: 100%;
+}
+
+@media screen and (max-width: 992px) {
+    .event-page-background {
+        max-width: 80vw;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .event-page-background {
+        max-width: 95vw;
+    }
 }
