@@ -7,6 +7,58 @@
     url('/fonts/montserrat/Montserrat-Bold.ttf') format('woff2');
 }
 
+.menu-icon {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 100;
+    display: inline-block;
+}
+
+.menu-icon > div {
+    width: 35px;
+    height: 5px;
+    background-color: #FFF;
+    margin: 6px 0;
+    transition: 0.4s ease-in-out;
+}
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: fit-content;
+    min-height: 100vh;
+    z-index: 10;
+    background-color: var(--darkblue);
+    box-shadow: 0 0 200px rgba(0, 0, 0, 0.9) inset;
+    padding: 4rem 2rem;
+    transition: .4s;
+    overflow-x: hidden;
+}
+
+.side-menu * {
+    margin-bottom: .5rem;
+}
+
+.side-menu-icons {
+    justify-content: start;
+    height: 20px;
+}
+
+.side-menu-icons * {
+    margin-right: 2rem;
+}
+
+.side-menu-languages {
+    justify-content: start;
+    margin-top: 1rem;
+}
+
+.side-menu-languages * {
+    margin-right: 2rem;
+}
+
 .navbar {
   align-items: center;
   justify-content: space-evenly !important;
@@ -49,5 +101,25 @@
     .main-logo {
         width: 250px;
         height: 250px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .menu-icon {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .navbar {
+        display: none;
+    }
+
+    .navbar-side {
+        flex-direction: column;
+    }
+
+    #tf-logo-small {
+        display: none;
     }
 }

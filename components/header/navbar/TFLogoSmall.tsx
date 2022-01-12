@@ -2,6 +2,7 @@ import { NextPage } from 'next'
 
 const TFLogoSmall: NextPage = () => (
   <svg
+    id={'tf-logo-small'}
     width={26}
     height={26}
     viewBox="0 0 26 26"

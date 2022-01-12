@@ -25,7 +25,6 @@ const Home: NextPage<Props> = ({ events, isHomePage }) => {
       <div className={'main-body'}>
         <Header
           isHomePage={isHomePage}
-          isMobile={isMobile}
           language={language}
           setLanguage={setLanguage}
           horizontalPosition={horizontalPosition}

@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 import Column from '../Column'
-import LanguageOptions from '../languageOptions'
+import LanguageOptions from '../LanguageOptions'
 import Fundraising from './Fundraising'
 import NationsLogoRow from './Logos'
 import { AvailableLanguages } from '../../utils/languages'
