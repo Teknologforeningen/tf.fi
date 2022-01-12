@@ -1,5 +1,4 @@
 import { NextPage } from 'next'
-import Link from 'next/link'
 import { HideableEvent } from '../../../types'
 import EventBoxTitle from './EventBoxTitle'
 import EventBoxBody from './EventBoxBody'
@@ -20,14 +19,8 @@ const EventBox: NextPage<Props> = ({ events }) =>
     <EventBoxBody event={events[0]} />
   ) : (
     <>
-      {events.map((event) => (
-        <Link key={event.id} href={`/${event.slug}`}>
-          <a>
-            <span>
-              <EventBoxTitle event={event} topMargin />
-            </span>
-          </a>
-        </Link>
+      {events.map((event, i) => (
+        <EventBoxTitle key={i} event={event} topMargin />
       ))}
     </>
   )
