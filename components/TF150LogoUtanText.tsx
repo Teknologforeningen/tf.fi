@@ -14,7 +14,6 @@ const TF150Logo: NextPage<Props> = ({ degrees }) => {
       xmlns="http://www.w3.org/2000/svg"
       style={{
         transform: `rotate(${rotation}deg)`,
-        transition: 'transform 0.1s',
       }}
     >
       <path

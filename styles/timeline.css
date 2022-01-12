@@ -75,14 +75,3 @@
   position: absolute;
   top: 165px
 }
-
-@media screen and (max-width: 1224px) {
-  .hide-scrollbars {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  .hide-scrollbars::-webkit-scrollbar {
-    display: none;
-  }
-}
