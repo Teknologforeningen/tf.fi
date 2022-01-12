@@ -25,7 +25,7 @@ const EventLine: NextPage<Props> = ({ events }) => {
     useState<HideableEvent[]>(hidableEvents)
 
   return (
-    <Column>
+    <Column className={'event-line'}>
       <div className={'eventline-dates'}>
         {moment(events[0].date).format('DD.MM')}
       </div>

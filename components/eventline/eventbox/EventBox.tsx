@@ -23,7 +23,9 @@ const EventBox: NextPage<Props> = ({ events }) =>
       {events.map((event) => (
         <Link key={event.id} href={`/${event.slug}`}>
           <a>
-            <EventBoxTitle event={event} topMargin />
+            <span>
+              <EventBoxTitle event={event} topMargin />
+            </span>
           </a>
         </Link>
       ))}

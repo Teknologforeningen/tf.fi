@@ -1,11 +1,13 @@
 .event-box-parent {
-    z-index: 1;
-    width: 224px;
-    height: 217px;
+  z-index: 1;
+  width: 224px;
+  height: 217px;
+  position: absolute;
+  top: 200px
 }
 
 .event-box-parent * {
-    width: 100%;
+  width: 100%;
 }
 
 .event-box {
@@ -34,15 +36,15 @@
 }
 
 .event-box-small-event {
-    background-color: var(--eventblue);
+  background-color: var(--eventblue);
 }
 
 .event-box-small-blogpost {
-    background-color: var(--blogpink);
+  background-color: var(--blogpink);
 }
 
 .event-box-title {
-    margin: 0;
+  margin: 0;
 }
 
 .event-box-sub-title {
