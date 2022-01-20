@@ -18,33 +18,32 @@ const links = {
     {
       name: 'Think cell',
       url: 'https://www.teknologforeningen.fi/think-cell/',
-      imgUrl:
-        'https://www.teknologforeningen.fi/assets/think-cell-logo_white.png',
+      imgUrl: '/images/think-cell-logo_white.png',
     },
     {
       name: 'Visma',
       url: 'https://www.visma.fi/',
-      imgUrl: 'https://www.teknologforeningen.fi/assets/visma.png',
+      imgUrl: '/images/visma.png',
     },
     {
       name: 'EY',
       url: 'https://www.ey.com/fi_fi/',
-      imgUrl: 'https://www.teknologforeningen.fi/assets/ey-white.png',
+      imgUrl: '/images/ey-white.png',
     },
     {
       name: 'trimble',
       url: 'https://www.trimble.com/',
-      imgUrl: 'https://www.teknologforeningen.fi/assets/trimble.png',
+      imgUrl: '/images/trimble.png',
     },
     {
       name: 'futurice',
       url: 'https://www.futurice.com/',
-      imgUrl: 'https://www.teknologforeningen.fi/assets/futurice.png',
+      imgUrl: '/images/futurice.png',
     },
     {
       name: 'Academic work',
       url: 'https://www.academicwork.fi/',
-      imgUrl: 'https://www.teknologforeningen.fi/assets/academicwork.png',
+      imgUrl: '/images/academicwork.png',
     },
   ],
   fundraising: {
