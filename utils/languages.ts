@@ -37,10 +37,10 @@ const languages: Languages = {
     abiturienter: 'abiturienteille',
     stälmar: 'stälmar',
     'för-företag': 'yrityksille',
-    fundraising1: 'Träffpunkt Aalto - insamlingen är igång!',
-    fundraising2: 'TF samlar medel för sitt nya nationshus',
-    fundraising3: 'Delta i insamlingen på',
-    fundraising4: ' och läs mera på ',
+    fundraising1: 'Träffpunkt Aalto - varainkeruu on käynnissä!',
+    fundraising2: 'TF kerää rahaa uuteen osakuntataloon',
+    fundraising3: 'Osallistu keruuseen:',
+    fundraising4: ' ja lue lisää osoitteessa: ',
   },
   english: {
     title: 'in english',
@@ -51,8 +51,8 @@ const languages: Languages = {
     'för-företag': 'for companies',
     fundraising1: 'Träffpunkt Aalto - the fundraising has begun!',
     fundraising2: 'TF is raising funds for its new home',
-    fundraising3: 'Join the fundraising at',
-    fundraising4: ' and read more at ',
+    fundraising3: 'Join the fundraising at:',
+    fundraising4: ' and read more at: ',
   },
 }
 
