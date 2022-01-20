@@ -55,7 +55,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: true,
+    fallback: 'blocking',
   }
 }
 
@@ -65,10 +65,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     `${process.env.BACKEND_URL}/events?slug=${params?.slug}`
   )
   const data = await res.json()
-  // slug is unique field, thus only one can be found
+  // slug is a unique field, thus only one can be found
   const event = data[0]
   return {
     props: { event },
+    revalidate: 10,
   }
 }
 
