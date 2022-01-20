@@ -27,9 +27,9 @@ const links = {
       imgUrl: 'https://www.teknologforeningen.fi/assets/visma.png',
     },
     {
-      name: 'Accenture',
-      url: 'https://www.accenture.com/',
-      imgUrl: 'https://www.teknologforeningen.fi/assets/accenture.png',
+      name: 'EY',
+      url: 'https://www.ey.com/fi_fi/',
+      imgUrl: 'https://www.teknologforeningen.fi/assets/ey-white.png',
     },
     {
       name: 'trimble',

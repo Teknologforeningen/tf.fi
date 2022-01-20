@@ -13,8 +13,8 @@ const NationImage: NextPage<NationImageProps> = ({ nation }) => (
     <Link href={nation.url} passHref>
       <a>
         <Image
-          alt={nation.name}
           src={nation.imgUrl}
+          alt={nation.name}
           layout={'fill'}
           objectFit={'contain'}
         />
