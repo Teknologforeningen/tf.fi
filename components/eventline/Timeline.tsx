@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 import { Event, Line } from '../../types'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { groupEventsByDate, makeLines } from '../../utils'
 import EventLine from './EventLine'
 import VerticalLine from './VerticalLine'
@@ -21,6 +21,21 @@ const Timeline: NextPage<Props> = React.memo(
   ({ events, setHorizontalPosition }) => {
     const eventsByDate = groupEventsByDate(events)
     const numOfEventLines = Object.keys(eventsByDate).length
+
+    const scrollRef = React.createRef<OverlayScrollbarsComponent>()
+
+    // Scroll timeline to 50%
+    // TODO: Scroll to event closest to current date
+    useEffect(() => {
+      if (scrollRef) {
+        const osInstance = scrollRef.current?.osInstance()
+        if (osInstance) {
+          osInstance.scroll({
+            x: '50%',
+          })
+        }
+      }
+    }, [])
 
     /*
      * If there is only one event line, and we have 40 lines between we get a total of 80 lines.
@@ -57,6 +72,7 @@ const Timeline: NextPage<Props> = React.memo(
           scrollbars: { autoHide: 'move', autoHideDelay: 200 },
           callbacks: { onScroll },
         }}
+        ref={scrollRef}
         className={'timeline-container os-theme-round-light'}
       >
         <Row className={'timeline'}>
