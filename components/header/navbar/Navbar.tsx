@@ -58,12 +58,12 @@ const Navbar: NextPage<Props> = ({
       {className === 'navbar' ? (
         <>
           <Link href={links.täffäab} passHref>
-            <a>
+            <a className={'link link-text'}>
               <TaffaABLogo />
             </a>
           </Link>
           <Link href={links.lunch} passHref>
-            <a>
+            <a className={'link link-text'}>
               <DagsenLogo />
             </a>
           </Link>
@@ -72,16 +72,17 @@ const Navbar: NextPage<Props> = ({
         <>
           <Row className={'side-menu-icons'}>
             <Link href={links.täffäab} passHref>
-              <a>
+              <a className={'link link-text'}>
                 <TaffaABLogo />
               </a>
             </Link>
             <Link href={links.lunch} passHref>
-              <a>
+              <a className={'link link-text'}>
                 <DagsenLogo />
               </a>
             </Link>
           </Row>
+          <hr className={'separator'} />
           <LanguageOptions
             language={language}
             setLanguage={setLanguage}
