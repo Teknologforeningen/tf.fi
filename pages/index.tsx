@@ -1,4 +1,4 @@
-import type { GetServerSideProps, NextPage } from 'next'
+import type { GetStaticProps, NextPage } from 'next'
 import Timeline from '../components/eventline/Timeline'
 import { Event as TimelineEvent } from '../types'
 import { useState } from 'react'
@@ -37,7 +37,7 @@ const Home: NextPage<Props> = ({ events, isHomePage }) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const events = await fetchEvents()
   const flags = await fetchFlags()
   const isHomePage = flags.some(
@@ -48,6 +48,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
       events: events,
       isHomePage,
     },
+    revalidate: 60,
   }
 }
 
