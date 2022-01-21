@@ -19,6 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>Teknologföreningen</title>
+        <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
       <Component {...pageProps} />
     </>
