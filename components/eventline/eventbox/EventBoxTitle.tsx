@@ -17,7 +17,7 @@ const EventBoxTitle: NextPage<EventBoxProps> = ({
     <Link key={event.id} href={`/${event.slug}`}>
       <a>
         <p className={`event-box-sub-title`}>
-          {event.type === 'event' ? 'EVENEMANG' : 'BLOGINLÄGG'}
+          {event.type === 'event' ? 'EVENEMANG' : 'BLOGGINLÄGG'}
         </p>
         <p className={`event-box-title`}>{event.title}</p>
       </a>
