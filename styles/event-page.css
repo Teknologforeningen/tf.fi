@@ -6,6 +6,10 @@
   padding: 15px;
 }
 
+.event-page-global {
+  width: 100%;
+}
+
 .event-page-title {
   font-weight: 800;
   text-transform: uppercase;
@@ -102,5 +106,9 @@
 @media screen and (max-width: 768px) {
     .event-page-background {
         max-width: 95vw;
+    }
+
+    .event-page-title {
+      font-size: 25px;
     }
 }
