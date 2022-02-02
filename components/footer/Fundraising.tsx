@@ -19,17 +19,6 @@ const Fundraising: NextPage<Props> = ({ language }) => {
         <p>{texts[language]['fundraising2']}</p>
         <Row className={'fundraising-links-parent'}>
           <p>
-            {texts[language]['fundraising3']}
-            <span>
-              <Link href={links.fundraising.donera} passHref>
-                <a className="link link-text fundraising-link">
-                  &nbsp;donera.tf.fi&nbsp;
-                </a>
-              </Link>
-            </span>
-          </p>
-          <p>
-            {texts[language]['fundraising4']}
             <span>
               <Link href={links.fundraising.info} passHref>
                 <a className="link link-text fundraising-link">
