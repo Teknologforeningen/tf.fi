@@ -20,12 +20,6 @@
   color: var(--gold) !important;
 }
 
-@media screen and (max-width: 768px) {
-  .fundraising-links-parent {
-    flex-direction: column;
-  }
-}
-
 .fundraising-img-parent {
   display: grid;
   grid-template-columns: 100%;
@@ -42,7 +36,7 @@
   height: 400px;
   width: 100%;
   max-width: none;
-  margin-top: 5rem;
+  margin-top: 8rem;
   grid-column: 1;
   grid-row: 1;
 }
@@ -59,4 +53,10 @@
   font-size: 14px;
   font-family: 'Montserrat', sans-serif;
   margin: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .fundraising-links-parent {
+    flex-direction: column;
+  }
 }

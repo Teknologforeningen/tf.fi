@@ -20,7 +20,7 @@ const Fundraising: NextPage<Props> = ({ language }) => {
               src={'/images/fundraising_plain.png'}
               alt={'map-overlay'}
               layout={'fill'}
-              objectFit={'contain'}
+              objectFit={'cover'}
             />
           </a>
         </Link>
