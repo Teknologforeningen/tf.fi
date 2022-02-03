@@ -24,7 +24,7 @@
 }
 
 @media screen and (max-width: 768px) {
-    .language-options {
-        display: none;
-    }
+  .language-options {
+    display: none;
+  }
 }

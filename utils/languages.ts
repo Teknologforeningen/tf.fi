@@ -24,7 +24,7 @@ const languages: Languages = {
     stälmar: 'stälmar',
     'för-företag': 'för företag',
     fundraising1: 'TF samlar medel för sitt nya nationshus!',
-    fundraising2: 'Läs mera och delta i insamlingen på ',
+    fundraising2: 'Läs mera och delta i insamlingen på: ',
   },
   finnish: {
     title: 'suomeksi',

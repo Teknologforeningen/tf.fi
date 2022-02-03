@@ -15,16 +15,9 @@
   max-width: 400px;
 }
 
-.fundraising-text {
-  color: #fff;
-  font-size: 14px;
-  font-family: 'Montserrat', sans-serif;
-  margin: 1rem;
-}
-
 .fundraising-link {
-    font-size: 14px !important;
-    color: var(--gold) !important;
+  font-size: 14px !important;
+  color: var(--gold) !important;
 }
 
 @media screen and (max-width: 768px) {
@@ -33,3 +26,37 @@
   }
 }
 
+.fundraising-img-parent {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr;
+  width: 100%;
+  max-width: none;
+  place-items: center;
+  height: 400px;
+  margin-bottom: 5rem;
+}
+
+.fundraising-img {
+  position: absolute;
+  height: 400px;
+  width: 100%;
+  max-width: none;
+  margin-top: 5rem;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.fundraising-text {
+  grid-column: 1;
+  grid-row: 1;
+  z-index: 1;
+  position: relative;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+  margin: 1rem;
+}

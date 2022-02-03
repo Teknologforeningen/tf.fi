@@ -1,7 +1,7 @@
 import { NextPage } from 'next'
 import Link from 'next/link'
 import Column from '../Column'
-import TFFundraising from './TFFundraising'
+import Image from 'next/image'
 import texts, { AvailableLanguages } from '../../utils/languages'
 import links from '../../utils/links'
 import Row from '../Row'
@@ -12,12 +12,23 @@ interface Props {
 
 const Fundraising: NextPage<Props> = ({ language }) => {
   return (
-    <>
-      <TFFundraising />
+    <div className={'fundraising-img-parent'}>
+      <div className={'fundraising-img'}>
+        <Link href={links.fundraising.info} passHref>
+          <a>
+            <Image
+              src={'/images/fundraising_plain.png'}
+              alt={'map-overlay'}
+              layout={'fill'}
+              objectFit={'contain'}
+            />
+          </a>
+        </Link>
+      </div>
       <Column className={'fundraising-text'}>
         <p>{texts[language]['fundraising1']}</p>
-        <p>{texts[language]['fundraising2']}</p>
         <Row className={'fundraising-links-parent'}>
+          <p>{texts[language]['fundraising2']}</p>
           <p>
             <span>
               <Link href={links.fundraising.info} passHref>
@@ -29,7 +40,7 @@ const Fundraising: NextPage<Props> = ({ language }) => {
           </p>
         </Row>
       </Column>
-    </>
+    </div>
   )
 }
 
