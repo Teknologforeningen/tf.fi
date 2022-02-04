@@ -29,7 +29,11 @@ const Fundraising: NextPage<Props> = ({ language }) => {
         <p>{texts[language]['fundraising1']}</p>
         <Row className={'fundraising-links-parent'}>
           <p>{texts[language]['fundraising2']}</p>
-          <p>
+          <p
+            style={{
+              textAlign: 'center',
+            }}
+          >
             <span>
               <Link href={links.fundraising.info} passHref>
                 <a className="link link-text fundraising-link">
