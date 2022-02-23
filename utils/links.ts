@@ -16,11 +16,6 @@ const links = {
   lunch: 'https://lunch.tf.fi/',
   nations: [
     {
-      name: 'Think cell',
-      url: 'https://www.teknologforeningen.fi/think-cell/',
-      imgUrl: '/images/think-cell-logo_white.png',
-    },
-    {
       name: 'Visma',
       url: 'https://www.visma.fi/',
       imgUrl: '/images/visma.png',
