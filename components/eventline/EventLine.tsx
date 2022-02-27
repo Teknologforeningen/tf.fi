@@ -10,6 +10,7 @@ import { useState } from 'react'
 
 interface Props {
   events: Event[]
+  ref?: React.RefObject<typeof EventLine>
 }
 
 /** An EventLine consists of 1 VerticalLineLong and arbitary number of EventBalls.

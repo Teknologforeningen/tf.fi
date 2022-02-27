@@ -23,18 +23,15 @@ const Timeline: NextPage<Props> = React.memo(
     const numOfEventLines = Object.keys(eventsByDate).length
 
     const scrollRef = React.createRef<OverlayScrollbarsComponent>()
+    const scrollTargetRef = React.createRef<HTMLDivElement>()
 
-    // Scroll timeline to 50%
-    // TODO: Scroll to event closest to current date
     useEffect(() => {
-      if (scrollRef) {
-        const osInstance = scrollRef.current?.osInstance()
-        if (osInstance) {
-          osInstance.scroll({
-            x: '50%',
-          })
-        }
+      const osInstance = scrollRef.current?.osInstance()
+      const targetLine = scrollTargetRef.current
+      if (osInstance && targetLine) {
+        osInstance.scroll({ el: targetLine, margin: 200 })
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps -- Run only on initial render
     }, [])
 
     /*
@@ -52,6 +49,15 @@ const Timeline: NextPage<Props> = React.memo(
       Array.from(Array(totalLines * 10)).map(() => 1)
     )
 
+    const lastLineIndex = lines.length - 1
+
+    // Scroll to next event after current date or last element
+    const scrollTargetIndex = lines.findIndex((line, index) => {
+      const dateToCheck =
+        line instanceof Array ? new Date(line[0].date) : new Date(line.date)
+      return dateToCheck > new Date() || index === lastLineIndex
+    })
+
     const onScroll = (e: MouseEvent) => {
       const element = e.target as HTMLDivElement
       setHorizontalPosition(element.scrollLeft)
@@ -63,7 +69,7 @@ const Timeline: NextPage<Props> = React.memo(
           (scale, i) => [n + i - 6, scale]
         )
       )
-      setLineHeights(lineHeights.map((l, i) => transformMap[i] ?? 1))
+      setLineHeights(lineHeights.map((_, i) => transformMap[i] ?? 1))
     }
 
     return (
@@ -77,7 +83,11 @@ const Timeline: NextPage<Props> = React.memo(
       >
         <Row className={'timeline'}>
           {lines.map((line, index) => (
-            <div key={index}>
+            <div
+              key={index}
+              ref={index === scrollTargetIndex ? scrollTargetRef : undefined}
+              id={index.toString()}
+            >
               {line instanceof Array ? (
                 <EventLine events={line} />
               ) : (
