@@ -4,7 +4,7 @@
   font-weight: 800;
   font-display: swap;
   src: local('Montserrat'),
-    url('/fonts/montserrat/Montserrat-Bold.ttf') format('woff2');
+    url('/fonts/montserrat/Montserrat-Bold.woff2') format('woff2');
 }
 
 .fundraising-parent {

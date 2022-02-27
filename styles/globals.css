@@ -4,7 +4,7 @@
   font-weight: 400;
   font-display: swap;
   src: local('Raleway'),
-    url('/fonts/raleway/Raleway-VariableFont_wght.ttf') format('woff2');
+    url('/fonts/raleway/Raleway-VariableFont_wght.woff2') format('woff2');
 }
 
 @font-face {
@@ -13,7 +13,7 @@
   font-weight: 400;
   font-display: swap;
   src: local('Raleway_Italic'),
-    url('/fonts/raleway/Raleway-Italic-VariableFont_wght.ttf') format('woff2');
+    url('/fonts/raleway/Raleway-Italic-VariableFont_wght.woff2') format('woff2');
 }
 
 :root {
