@@ -2,19 +2,26 @@ import { NextPage } from 'next'
 import Row from '../Row'
 import Image from 'next/image'
 import Link from 'next/link'
-import links, { Nation } from '../../utils/links'
 
-interface NationImageProps {
-  nation: Nation
+export interface NationLogo {
+  name: string
+  url: string
+  image: {
+    url: string
+  }
 }
 
-const NationImage: NextPage<NationImageProps> = ({ nation }) => (
+interface NationImageProps {
+  logo: NationLogo
+}
+
+const NationImage: NextPage<NationImageProps> = ({ logo }) => (
   <div className={'logo-container'}>
-    <Link href={nation.url} passHref>
+    <Link href={logo.url} passHref>
       <a>
         <Image
-          src={nation.imgUrl}
-          alt={nation.name}
+          src={`${process.env.NEXT_PUBLIC_API_URL}${logo.image.url}`}
+          alt={logo.name}
           layout={'fill'}
           objectFit={'contain'}
         />
@@ -23,10 +30,14 @@ const NationImage: NextPage<NationImageProps> = ({ nation }) => (
   </div>
 )
 
-const NationsLogoRow: NextPage = () => (
+interface NationsLogoRowProps {
+  nationLogos: NationLogo[]
+}
+
+const NationsLogoRow: NextPage<NationsLogoRowProps> = ({ nationLogos }) => (
   <Row className={'logo-row'}>
-    {links.nations.map((nation, index) => (
-      <NationImage nation={nation} key={index} />
+    {nationLogos.map((logo, index) => (
+      <NationImage logo={logo} key={index} />
     ))}
   </Row>
 )

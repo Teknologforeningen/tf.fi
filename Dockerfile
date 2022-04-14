@@ -39,6 +39,6 @@ ENV PORT 3000
 # Uncomment the following line in case you want to disable telemetry.
 ENV NEXT_TELEMETRY_DISABLED 1
 
-ENV BACKEND_URL=https://test.150.tf.fi/api
+ENV NEXT_PUBLIC_API_URL=https://tf.fi/api
 
 CMD ["node_modules/.bin/next", "start"]

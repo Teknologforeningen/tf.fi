@@ -6,16 +6,16 @@ services:
   strapi:
     image: strapi/strapi
     environment:
-      DATABASE_CLIENT: "${STRAPI_DATABASE_CLIENT:-postgres}"
-      DATABASE_NAME: "${STRAPI_DATABASE_NAME:-strapi}"
-      DATABASE_HOST: "${STRAPI_DATABASE_HOST:-postgres}"
-      DATABASE_PORT: "${STRAPI_DATABASE_PORT:-5432}"
-      DATABASE_USERNAME: "${STRAPI_DATABASE_USERNAME:-strapi}"
-      DATABASE_PASSWORD: "${STRAPI_DATABASE_PASSWORD:-strapi}"
+      DATABASE_CLIENT: '${STRAPI_DATABASE_CLIENT:-postgres}'
+      DATABASE_NAME: '${STRAPI_DATABASE_NAME:-strapi}'
+      DATABASE_HOST: '${STRAPI_DATABASE_HOST:-postgres}'
+      DATABASE_PORT: '${STRAPI_DATABASE_PORT:-5432}'
+      DATABASE_USERNAME: '${STRAPI_DATABASE_USERNAME:-strapi}'
+      DATABASE_PASSWORD: '${STRAPI_DATABASE_PASSWORD:-strapi}'
     volumes:
-      - "./app:${STRAPI_VOLUME_DIR:-/srv/app}"
+      - './app:${STRAPI_VOLUME_DIR:-/srv/app}'
     ports:
-      - "1337:${STRAPI_PORT:-1337}"
+      - '1337:${STRAPI_PORT:-1337}'
     restart: unless-stopped
 
   web:
@@ -23,8 +23,8 @@ services:
     depends_on:
       - strapi
     environment:
-      ENV: "${ENV:-production}"
-      BACKEND_URL: "${BACKEND_URL:-localhost:1337}"
+      ENV: '${ENV:-production}'
+      NEXT_PUBLIC_API_URL: '${NEXT_PUBLIC_API_URL:-localhost:1337}'
     ports:
-      - "3000:${WEB_PORT:-3000}"
+      - '3000:${WEB_PORT:-3000}'
     restart: unless-stopped

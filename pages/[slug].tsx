@@ -45,7 +45,7 @@ const EventPage: NextPage<Props> = ({ event }) => (
 
 export const getStaticPaths: GetStaticPaths = async () => {
   // Get all events
-  const res = await fetch(`${process.env.BACKEND_URL}/events`)
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events`)
   const events: Event[] = await res.json()
 
   // Create a path for each event background-color: ;
@@ -62,7 +62,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   // Get a specific event
   const res = await fetch(
-    `${process.env.BACKEND_URL}/events?slug=${params?.slug}`
+    `${process.env.NEXT_PUBLIC_API_URL}/events?slug=${params?.slug}`
   )
   const data = await res.json()
   // slug is a unique field, thus only one can be found

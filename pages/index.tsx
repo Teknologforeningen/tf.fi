@@ -5,15 +5,26 @@ import { useState } from 'react'
 import { AvailableLanguages } from '../utils/languages'
 import { fetchEvents } from '../lib/api/event'
 import { fetchFlags } from '../lib/api/flag'
+import { fetchHomepage } from '../lib/api/homepage'
 import Header from '../components/header/Header'
-import Footer from '../components/footer/Footer'
+import Column from '../components/Column'
+import Fundraising from '../components/footer/Fundraising'
+import LanguageOptions from '../components/LanguageOptions'
+import NationsLogoRow, { NationLogo } from '../components/footer/Logos'
+
+export interface HomePage {
+  footer: {
+    nationlogos: NationLogo[]
+  }
+}
 
 interface Props {
   events: TimelineEvent[]
   isHomePage: boolean
+  logos: NationLogo[]
 }
 
-const Home: NextPage<Props> = ({ events, isHomePage }) => {
+const Home: NextPage<Props> = ({ events, isHomePage, logos }) => {
   const [horizontalPosition, setHorizontalPosition] = useState(0)
   const [language, setLanguage] = useState<AvailableLanguages>('swedish')
 
@@ -28,11 +39,16 @@ const Home: NextPage<Props> = ({ events, isHomePage }) => {
 
       <Timeline events={events} setHorizontalPosition={setHorizontalPosition} />
 
-      <Footer
-        isHomePage={isHomePage}
-        language={language}
-        setLanguage={setLanguage}
-      />
+      {isHomePage && (
+        <footer>
+          <Column className={'fundraising-parent'}>
+            <Fundraising language={language} />
+            <LanguageOptions language={language} setLanguage={setLanguage} />
+            <p className={'info-text'}>TEKNOLOGFÖRENINGENS NATIONSFÖRETAG</p>
+            <NationsLogoRow nationLogos={logos} />
+          </Column>
+        </footer>
+      )}
     </div>
   )
 }
@@ -40,14 +56,13 @@ const Home: NextPage<Props> = ({ events, isHomePage }) => {
 export const getStaticProps: GetStaticProps = async () => {
   const events = await fetchEvents()
   const flags = await fetchFlags()
+  const homepage = await fetchHomepage()
+  const logos = homepage.footer.nationlogos
   const isHomePage = flags.some(
     (flag) => flag.title === 'isHomePage' && flag.onoff
   )
   return {
-    props: {
-      events: events,
-      isHomePage,
-    },
+    props: { events, isHomePage, logos },
     revalidate: 60,
   }
 }
