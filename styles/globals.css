@@ -39,8 +39,11 @@
 }
 
 @layer base {
-  html {
+  html,
+  body {
     font-family: 'Raleway', sans-serif;
+    background-color: var(--darkblue);
+    height: 100vh;
   }
 }
 
