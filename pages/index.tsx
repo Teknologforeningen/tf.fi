@@ -29,7 +29,7 @@ const Home: NextPage<Props> = ({ events, isHomePage, logos }) => {
   const [language, setLanguage] = useState<AvailableLanguages>('swedish')
 
   return (
-    <div className={'main-body'}>
+    <div className="bg-darkblue shadow-[0_0_200px_rgba(0,0,0,0.9)_inset]">
       <Header
         isHomePage={isHomePage}
         language={language}
@@ -41,10 +41,12 @@ const Home: NextPage<Props> = ({ events, isHomePage, logos }) => {
 
       {isHomePage && (
         <footer>
-          <Column className={'fundraising-parent'}>
+          <Column className="mt-12">
             <Fundraising language={language} />
             <LanguageOptions language={language} setLanguage={setLanguage} />
-            <p className={'info-text'}>TEKNOLOGFÖRENINGENS NATIONSFÖRETAG</p>
+            <p className="m-4 text-center font-display text-white">
+              TEKNOLOGFÖRENINGENS NATIONSFÖRETAG
+            </p>
             <NationsLogoRow nationLogos={logos} />
           </Column>
         </footer>

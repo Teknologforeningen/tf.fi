@@ -36,13 +36,13 @@ const Header: NextPage<Props> = ({
             <Navbar
               language={language}
               setLanguage={setLanguage}
-              className={'navbar-side'}
+              position="side"
             />
           </SideMenu>
         </>
       )}
-      <Column className="main-logo-container">
-        <div className={'main-logo'}>
+      <Column>
+        <div className="relative mt-8 flex h-[250px] w-[250px] justify-center md:h-[450px] md:w-[450px]">
           <TF150Logo degrees={horizontalPosition / 10} />
           <TF150LogoText />
         </div>

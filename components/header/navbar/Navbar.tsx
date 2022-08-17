@@ -8,6 +8,7 @@ import DagsenLogo from './DagsenLogo'
 import links from '../../../utils/links'
 import texts, { Language, AvailableLanguages } from '../../../utils/languages'
 import LanguageOptions from '../../LanguageOptions'
+import classNames from 'classnames'
 
 const menuValues: Array<{ title: keyof Language; link: string }> = [
   {
@@ -35,16 +36,21 @@ const menuValues: Array<{ title: keyof Language; link: string }> = [
 interface Props {
   language: AvailableLanguages
   setLanguage: (language: AvailableLanguages) => void
-  className?: 'navbar' | 'navbar-side'
+  position?: 'top' | 'side'
 }
 
 const Navbar: NextPage<Props> = ({
   language,
   setLanguage,
-  className = 'navbar',
+  position = 'top',
 }) => (
   <nav>
-    <Row className={className}>
+    <Row
+      className={classNames(
+        'justify-evenly pt-2 xl:items-center',
+        position === 'side' ? 'flex flex-col xl:hidden' : 'hidden xl:flex'
+      )}
+    >
       <TFLogoSmall />
 
       {menuValues.map(({ title, link }) => (
@@ -55,7 +61,7 @@ const Navbar: NextPage<Props> = ({
         </Link>
       ))}
 
-      {className === 'navbar' ? (
+      {position === 'top' ? (
         <>
           <Link href={links.täffäab} passHref>
             <a className={'link link-text'}>
@@ -70,7 +76,7 @@ const Navbar: NextPage<Props> = ({
         </>
       ) : (
         <>
-          <Row className={'side-menu-icons'}>
+          <Row className="min-h-[20px] justify-around">
             <Link href={links.täffäab} passHref>
               <a className={'link link-text'}>
                 <TaffaABLogo />
@@ -82,11 +88,11 @@ const Navbar: NextPage<Props> = ({
               </a>
             </Link>
           </Row>
-          <hr className={'separator'} />
+          <hr className="my-0 mx-auto w-full text-white" />
           <LanguageOptions
             language={language}
             setLanguage={setLanguage}
-            className={'side-menu-languages'}
+            sideBarMode
           />
         </>
       )}

@@ -3,7 +3,7 @@ import { NextPage } from 'next'
 const TF150Logo: NextPage = () => {
   return (
     <svg
-      id="logo-bara-text"
+      className="absolute top-[43%] h-1/5 w-1/2"
       viewBox="0 0 358 141"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

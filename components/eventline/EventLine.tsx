@@ -26,12 +26,12 @@ const EventLine: NextPage<Props> = ({ events }) => {
     useState<HideableEvent[]>(hidableEvents)
 
   return (
-    <Column className={'event-line'}>
-      <div className={'eventline-dates'}>
+    <Column className="relative">
+      <div className="relative -left-[5px] mt-4 font-extrabold text-creamwhite">
         {moment(events[0].date).format('DD.MM')}
       </div>
       <VerticalLineLong />
-      <Row className={'ball-row'}>
+      <Row className="absolute top-44 z-10 w-20 justify-evenly">
         {events.map((event) => (
           <EventBall
             key={event.id}
@@ -48,7 +48,7 @@ const EventLine: NextPage<Props> = ({ events }) => {
       only hide eventBox if selected event is in current line's events
       */}
 
-      <Column className={'event-box-parent'}>
+      <Column className="absolute top-[200px] z-10 h-[217px] w-[224px] descendant:w-full">
         <EventBox events={eventsToShow.filter((event) => !event.hide)} />
       </Column>
     </Column>

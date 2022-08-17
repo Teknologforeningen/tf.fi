@@ -1,33 +1,3 @@
-.event-page-background {
-  background: #ffffe8;
-  margin: 1.5rem auto;
-  min-height: 92vh;
-  max-width: 55vw;
-  padding: 15px;
-}
-
-.event-page-global {
-  width: 100%;
-}
-
-.event-page-title {
-  font-weight: 800;
-  text-transform: uppercase;
-  font-size: 35px;
-  line-height: 28px;
-  letter-spacing: 0.02em;
-  color: var(--darkblue);
-  text-align: center;
-}
-
-.event-page-content {
-  margin-top: 3rem;
-  font-size: 18px;
-  letter-spacing: 0.02em;
-  line-height: 26px;
-  width: 75%;
-}
-
 .home-link {
   align-self: start;
   cursor: pointer;
@@ -94,21 +64,5 @@
 }
 
 .event-page-image {
-    max-width: 100%;
-}
-
-@media screen and (max-width: 992px) {
-    .event-page-background {
-        max-width: 80vw;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .event-page-background {
-        max-width: 95vw;
-    }
-
-    .event-page-title {
-      font-size: 25px;
-    }
+  max-width: 100%;
 }

@@ -21,18 +21,20 @@ marked.use({ renderer })
 
 /** Page for a single event */
 const EventPage: NextPage<Props> = ({ event }) => (
-  <div className={'event-page-background'}>
+  <div className="my-6 mx-auto min-h-[92vh] max-w-[95vw] bg-[#ffffe8] p-[15px] md:max-w-[55vw] lg:max-w-[80vw]">
     <Link href={'/'}>
       <a className={'home-link home-link-text'}>TILL HEMSIDAN</a>
     </Link>
     <Column>
-      <Row className={'event-page-global'}>
+      <Row className="w-full">
         <LeftAngle />
-        <h2 className={'event-page-title'}>{event?.title}</h2>
+        <h2 className="text-center text-2xl font-extrabold uppercase leading-7 tracking-wide text-darkblue md:text-4xl">
+          {event?.title}
+        </h2>
         <RightAngle />
       </Row>
 
-      <div className={'event-page-content'}>
+      <div className="mt-12 w-3/4 text-lg leading-7 tracking-wide">
         <div
           dangerouslySetInnerHTML={{
             __html: marked.parse(event?.content ?? ''),

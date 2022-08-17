@@ -1,7 +1,7 @@
 import { NextPage } from 'next'
 
 const EventBoxHorizontalLine: NextPage = () => (
-  <div className="event-box-horizontal-line" />
+  <div className="w-full border border-solid border-darkblue" />
 )
 
 export default EventBoxHorizontalLine

@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import { NextPage } from 'next'
 import { EventType, HideableEvent } from '../../types'
 
@@ -36,7 +37,11 @@ const EventBall: NextPage<Props> = ({
   return (
     <div
       onClick={handleClick}
-      className={`dot dot-${!isHidden()} ${eventType}`}
+      className={classNames(
+        'relative -left-[5px] mt-2 inline-block rounded-full',
+        eventType === 'event' ? 'bg-eventblue' : 'bg-blogpink',
+        isHidden() ? 'h-[.95rem] w-[.95rem]' : 'h-[1.2rem] w-[1.2rem]'
+      )}
     />
   )
 }
