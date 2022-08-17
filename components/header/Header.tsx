@@ -42,7 +42,7 @@ const Header: NextPage<Props> = ({
         </>
       )}
       <Column>
-        <div className="relative flex justify-center mt-8 w-[250px] h-[250px] md:w-[450px] md:h-[450px]">
+        <div className="relative mt-8 flex h-[250px] w-[250px] justify-center md:h-[450px] md:w-[450px]">
           <TF150Logo degrees={horizontalPosition / 10} />
           <TF150LogoText />
         </div>

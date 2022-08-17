@@ -38,7 +38,7 @@ const EventBall: NextPage<Props> = ({
     <div
       onClick={handleClick}
       className={classNames(
-        'rounded-full inline-block mt-2 relative -left-[5px]',
+        'relative -left-[5px] mt-2 inline-block rounded-full',
         eventType === 'event' ? 'bg-eventblue' : 'bg-blogpink',
         isHidden() ? 'h-[.95rem] w-[.95rem]' : 'h-[1.2rem] w-[1.2rem]'
       )}

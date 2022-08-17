@@ -7,16 +7,16 @@ import EventBoxHorizontalLine from './EventBoxHorizontalLine'
 
 const EventBoxBody: NextPage<EventBoxProps> = ({ event, ...props }) => (
   <Column
-    className="h-full bg-creamwhite mt-4 overflow-y-hidden relative"
+    className="relative mt-4 h-full overflow-y-hidden bg-creamwhite"
     {...props}
   >
     <EventBoxTitle event={event} />
     <EventBoxHorizontalLine />
-    <p className="event-box-text my-3 !w-[85%] h-1/2 leading-[18px] tracking-wide text-sm font-normal text-black">
+    <p className="event-box-text my-3 h-1/2 !w-[85%] text-sm font-normal leading-[18px] tracking-wide text-black">
       {event.description}
     </p>
     <Link href={`/${event.slug}`}>
-      <a className="absolute bottom-[5px] leading-[18px] tracking-wide font-extrabold text-sm text-center text-black hover:font-semibold hover:text-[15px]">
+      <a className="absolute bottom-[5px] text-center text-sm font-extrabold leading-[18px] tracking-wide text-black hover:text-[15px] hover:font-semibold">
         LÄS MERA
       </a>
     </Link>

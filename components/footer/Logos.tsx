@@ -36,7 +36,7 @@ interface NationsLogoRowProps {
 }
 
 const NationsLogoRow: NextPage<NationsLogoRowProps> = ({ nationLogos }) => (
-  <Row className="flex-wrap w-4/5 justify-around my-4 mx-0">
+  <Row className="my-4 mx-0 w-4/5 flex-wrap justify-around">
     {nationLogos.map((logo, index) => (
       <NationImage logo={logo} key={index} />
     ))}

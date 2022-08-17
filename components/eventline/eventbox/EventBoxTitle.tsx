@@ -12,7 +12,7 @@ const EventBoxTitle: NextPage<EventBoxProps> = ({
 }) => (
   <Column
     className={classNames(
-      'p-[7px] font-extrabold tracking-wide leading-6 text-xl text-center uppercase text-darkblue z-10',
+      'z-10 p-[7px] text-center text-xl font-extrabold uppercase leading-6 tracking-wide text-darkblue',
       event.type === 'event' ? 'bg-eventblue' : 'bg-blogpink',
       topMargin ? 'mt-4' : ''
     )}
@@ -20,7 +20,7 @@ const EventBoxTitle: NextPage<EventBoxProps> = ({
   >
     <Link key={event.id} href={`/${event.slug}`}>
       <a>
-        <p className="m-0 font-black leading-[18px] text-[10px]">
+        <p className="m-0 text-[10px] font-black leading-[18px]">
           {event.type === 'event' ? 'EVENEMANG' : 'BLOGGINLÄGG'}
         </p>
         <Textfit mode="multi" max={20} className="m-0">

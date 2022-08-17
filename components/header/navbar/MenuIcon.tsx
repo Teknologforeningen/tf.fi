@@ -9,7 +9,7 @@ type MenuBarProps = {
 const MenuBar = ({ transform, opacity = 1 }: MenuBarProps) => {
   return (
     <div
-      className='w-[35px] h-[5px] bg-white my-[6px] mx-0 transition duration-[.4s] ease-in-out"'
+      className='ease-in-out" my-[6px] mx-0 h-[5px] w-[35px] bg-white transition duration-[.4s]'
       style={{
         opacity,
         transform,

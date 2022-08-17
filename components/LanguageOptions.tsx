@@ -25,7 +25,7 @@ const LanguageOptions: NextPage<Props> = ({
         'justify-around',
         sideBarMode
           ? 'mt-4'
-          : 'justify-around align-center text-white font-display m-4 w-[300px] hidden md:flex'
+          : 'align-center m-4 hidden w-[300px] justify-around font-display text-white md:flex'
       )}
     >
       {presentLanguages.map((lang) => (

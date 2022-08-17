@@ -47,7 +47,7 @@ const Navbar: NextPage<Props> = ({
   <nav>
     <Row
       className={classNames(
-        'pt-2 xl:items-center justify-evenly',
+        'justify-evenly pt-2 xl:items-center',
         position === 'side' ? 'flex flex-col xl:hidden' : 'hidden xl:flex'
       )}
     >
@@ -88,7 +88,7 @@ const Navbar: NextPage<Props> = ({
               </a>
             </Link>
           </Row>
-          <hr className="text-white w-full my-0 mx-auto" />
+          <hr className="my-0 mx-auto w-full text-white" />
           <LanguageOptions
             language={language}
             setLanguage={setLanguage}
