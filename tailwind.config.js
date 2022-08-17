@@ -23,6 +23,7 @@ module.exports = {
   plugins: [
     ({ addVariant }) => {
       addVariant('descendant', '& *')
+      addVariant('child', '& > *')
     },
   ],
 }
