@@ -41,7 +41,7 @@ const Home: NextPage<Props> = ({ events, isHomePage, logos }) => {
 
       {isHomePage && (
         <footer>
-          <Column className={'fundraising-parent'}>
+          <Column className="mt-12">
             <Fundraising language={language} />
             <LanguageOptions language={language} setLanguage={setLanguage} />
             <p className="text-white font-display m-4 text-center">

@@ -12,8 +12,8 @@ interface Props {
 
 const Fundraising: NextPage<Props> = ({ language }) => {
   return (
-    <div className={'fundraising-img-parent'}>
-      <div className={'fundraising-img'}>
+    <div className="grid grid-cols-1 grid-rows-1 w-full max-w-none place-items-center h-[400px] mb-20">
+      <div className="absolute h-[400px] w-full max-w-none mt-32 col-span-1 row-span-1">
         <Link href={links.fundraising.info} passHref>
           <a>
             <Image
@@ -25,9 +25,9 @@ const Fundraising: NextPage<Props> = ({ language }) => {
           </a>
         </Link>
       </div>
-      <Column className={'fundraising-text'}>
+      <Column className="col-span-1 row-span-1 z-10 relative font-semibold leading-5 text-base font-display m-4">
         <p>{texts[language]['fundraising1']}</p>
-        <Row className={'fundraising-links-parent'}>
+        <Column className="md:flex-row">
           <p>{texts[language]['fundraising2']}</p>
           <p
             style={{
@@ -36,13 +36,13 @@ const Fundraising: NextPage<Props> = ({ language }) => {
           >
             <span>
               <Link href={links.fundraising.info} passHref>
-                <a className="link link-text fundraising-link">
+                <a className="link link-text !text-sm !text-gold">
                   &nbsp;vision.tf.fi
                 </a>
               </Link>
             </span>
           </p>
-        </Row>
+        </Column>
       </Column>
     </div>
   )
