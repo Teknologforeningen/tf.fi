@@ -1,21 +1,3 @@
-.side-menu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 90vw;
-  min-height: 100vh;
-  z-index: 10;
-  background-color: var(--darkblue);
-  box-shadow: 0 0 200px rgba(0, 0, 0, 0.9) inset;
-  padding: 4rem 2rem;
-  transition: 0.4s;
-  overflow-x: hidden;
-}
-
-.side-menu * {
-  margin-bottom: 0.5rem;
-}
-
 .side-menu-icons {
   min-height: 20px;
   justify-content: space-around;
