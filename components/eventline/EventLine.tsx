@@ -48,7 +48,7 @@ const EventLine: NextPage<Props> = ({ events }) => {
       only hide eventBox if selected event is in current line's events
       */}
 
-      <Column className={'event-box-parent'}>
+      <Column className="z-10 w-[224px] h-[217px] absolute top-[200px] descendant:w-full">
         <EventBox events={eventsToShow.filter((event) => !event.hide)} />
       </Column>
     </Column>
