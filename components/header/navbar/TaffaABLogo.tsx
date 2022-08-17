@@ -6,7 +6,7 @@ const TaffaABLogo: NextPage = () => (
     <svg
       width={32}
       height={32}
-      className={'navbar-logo'}
+      className="mb-[5px]"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       x="0px"

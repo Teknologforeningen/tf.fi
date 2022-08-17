@@ -36,7 +36,7 @@ const Header: NextPage<Props> = ({
             <Navbar
               language={language}
               setLanguage={setLanguage}
-              className={'navbar-side'}
+              position="side"
             />
           </SideMenu>
         </>

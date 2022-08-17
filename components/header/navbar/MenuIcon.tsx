@@ -25,7 +25,7 @@ interface Props {
 
 const MenuIcon: NextPage<Props> = ({ open, onClick }) => (
   <div
-    className="fixed top-[10px] left-[10px] z-50 inline-block"
+    className="fixed top-[10px] left-[10px] z-50 inline-block xl:hidden"
     onClick={onClick}
   >
     <MenuBar

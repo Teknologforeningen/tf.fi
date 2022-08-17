@@ -8,6 +8,7 @@ import DagsenLogo from './DagsenLogo'
 import links from '../../../utils/links'
 import texts, { Language, AvailableLanguages } from '../../../utils/languages'
 import LanguageOptions from '../../LanguageOptions'
+import classNames from 'classnames'
 
 const menuValues: Array<{ title: keyof Language; link: string }> = [
   {
@@ -35,16 +36,21 @@ const menuValues: Array<{ title: keyof Language; link: string }> = [
 interface Props {
   language: AvailableLanguages
   setLanguage: (language: AvailableLanguages) => void
-  className?: 'navbar' | 'navbar-side'
+  position?: 'top' | 'side'
 }
 
 const Navbar: NextPage<Props> = ({
   language,
   setLanguage,
-  className = 'navbar',
+  position = 'top',
 }) => (
   <nav>
-    <Row className={className}>
+    <Row
+      className={classNames(
+        'pt-2 xl:items-center justify-evenly',
+        position === 'side' ? 'flex flex-col xl:hidden' : 'hidden xl:flex'
+      )}
+    >
       <TFLogoSmall />
 
       {menuValues.map(({ title, link }) => (
@@ -55,7 +61,7 @@ const Navbar: NextPage<Props> = ({
         </Link>
       ))}
 
-      {className === 'navbar' ? (
+      {position === 'top' ? (
         <>
           <Link href={links.täffäab} passHref>
             <a className={'link link-text'}>
