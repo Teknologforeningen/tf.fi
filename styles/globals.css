@@ -51,12 +51,6 @@ a {
   box-sizing: border-box;
 }
 
-.row {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
 .column {
   display: flex;
   flex-direction: column;
