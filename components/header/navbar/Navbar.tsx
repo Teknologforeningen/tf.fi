@@ -88,7 +88,7 @@ const Navbar: NextPage<Props> = ({
               </a>
             </Link>
           </Row>
-          <hr className={'separator'} />
+          <hr className="text-white w-full my-0 mx-auto" />
           <LanguageOptions
             language={language}
             setLanguage={setLanguage}
