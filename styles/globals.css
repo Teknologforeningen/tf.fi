@@ -29,15 +29,13 @@
   --blogpink: #d79ad1;
 }
 
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: Raleway, serif;
-  background-color: var(--darkblue);
-  height: 100%;
-  -ms-overflow-style: none;
-  overflow: -moz-scrollbars-none;
+@layer base {
+  html {
+    font-family: 'Raleway', sans-serif;
+  }
+}
+
+html {
 }
 
 body::-webkit-scrollbar {

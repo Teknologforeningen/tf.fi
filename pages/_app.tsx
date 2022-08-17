@@ -1,5 +1,4 @@
 import '../styles/globals.css'
-import '../styles/index.css'
 import '../styles/event-page.css'
 import '../styles/navbar.css'
 import '../styles/info.css'
