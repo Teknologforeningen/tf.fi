@@ -70,7 +70,7 @@ const Navbar: NextPage<Props> = ({
         </>
       ) : (
         <>
-          <Row className={'side-menu-icons'}>
+          <Row className="min-h-[20px] justify-around">
             <Link href={links.täffäab} passHref>
               <a className={'link link-text'}>
                 <TaffaABLogo />
