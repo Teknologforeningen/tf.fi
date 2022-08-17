@@ -5,7 +5,7 @@ import texts, { AvailableLanguages } from '../utils/languages'
 interface Props {
   language: AvailableLanguages
   setLanguage: (language: AvailableLanguages) => void
-  className?: 'language-options' | 'side-menu-languages'
+  className: string
 }
 
 const LanguageOptions: NextPage<Props> = ({
