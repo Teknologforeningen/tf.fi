@@ -34,9 +34,3 @@
     font-family: 'Raleway', sans-serif;
   }
 }
-
-.column {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
