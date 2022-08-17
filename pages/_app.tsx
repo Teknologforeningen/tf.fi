@@ -1,7 +1,6 @@
 import '../styles/globals.css'
 import '../styles/event-page.css'
 import '../styles/links.css'
-import '../styles/timeline.css'
 import 'overlayscrollbars/css/OverlayScrollbars.css'
 import '../styles/os-theme-round-light.css'
 

@@ -27,11 +27,11 @@ const EventLine: NextPage<Props> = ({ events }) => {
 
   return (
     <Column className="relative">
-      <div className={'eventline-dates'}>
+      <div className="text-creamwhite relative -left-[5px] font-extrabold mt-4">
         {moment(events[0].date).format('DD.MM')}
       </div>
       <VerticalLineLong />
-      <Row className={'ball-row'}>
+      <Row className="justify-evenly w-20 z-10 absolute top-44">
         {events.map((event) => (
           <EventBall
             key={event.id}
