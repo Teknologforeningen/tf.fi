@@ -82,9 +82,9 @@ const Timeline: NextPage<Props> = React.memo(
           callbacks: { onScroll },
         }}
         ref={scrollRef}
-        className={'timeline-container os-theme-round-light'}
+        className="mt-4 w-full overflow-x-scroll overflow-y-hidden h-[500px] os-theme-round-light"
       >
-        <Row className={'timeline'}>
+        <Row className="w-fit">
           {lines.map((line, index) => (
             <div
               key={index}
