@@ -8,7 +8,7 @@ const TF150Logo: NextPage<Props> = ({ degrees }) => {
   const rotation = degrees ?? 0
   return (
     <svg
-      id="logo-utan-text"
+      className="h-full w-full"
       viewBox="0 0 290 289"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

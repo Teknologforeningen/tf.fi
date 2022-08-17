@@ -1,41 +1,7 @@
-.logos-mobile {
-  width: 50%;
-  align-items: center;
-  justify-content: space-around !important;
-}
-
-.main-logo {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-  width: 450px;
-  height: 450px;
-}
-
-#logo-utan-text {
-  width: 100%;
-  height: 100%;
-}
-
-#logo-bara-text {
-  position: absolute;
-  width: 50%;
-  height: 20%;
-  top: 43%;
-}
-
 .separator {
   color: #fff;
   width: 100%;
   margin: 0 auto;
-}
-
-@media screen and (max-width: 768px) {
-  .main-logo {
-    width: 250px;
-    height: 250px;
-  }
 }
 
 @media screen and (max-width: 1200px) {
