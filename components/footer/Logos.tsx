@@ -16,7 +16,8 @@ interface NationImageProps {
 }
 
 const NationImage: NextPage<NationImageProps> = ({ logo }) => (
-  <div className={'logo-container'}>
+  // Tailwind does not work with Next.js images
+  <div style={{ position: 'relative', width: '100px', height: '50px' }}>
     <Link href={logo.url} passHref>
       <a>
         <Image
@@ -35,7 +36,7 @@ interface NationsLogoRowProps {
 }
 
 const NationsLogoRow: NextPage<NationsLogoRowProps> = ({ nationLogos }) => (
-  <Row className={'logo-row'}>
+  <Row className="flex-wrap w-4/5 justify-around my-4 mx-0">
     {nationLogos.map((logo, index) => (
       <NationImage logo={logo} key={index} />
     ))}
