@@ -1,6 +1,5 @@
 import '../styles/globals.css'
 import '../styles/event-page.css'
-import '../styles/info.css'
 import '../styles/fundraising.css'
 import '../styles/links.css'
 import '../styles/timeline.css'

@@ -92,7 +92,7 @@ const Navbar: NextPage<Props> = ({
           <LanguageOptions
             language={language}
             setLanguage={setLanguage}
-            className="justify-around mt-4"
+            sideBarMode
           />
         </>
       )}

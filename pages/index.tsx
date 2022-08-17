@@ -44,7 +44,9 @@ const Home: NextPage<Props> = ({ events, isHomePage, logos }) => {
           <Column className={'fundraising-parent'}>
             <Fundraising language={language} />
             <LanguageOptions language={language} setLanguage={setLanguage} />
-            <p className={'info-text'}>TEKNOLOGFÖRENINGENS NATIONSFÖRETAG</p>
+            <p className="text-white font-display m-4 text-center">
+              TEKNOLOGFÖRENINGENS NATIONSFÖRETAG
+            </p>
             <NationsLogoRow nationLogos={logos} />
           </Column>
         </footer>

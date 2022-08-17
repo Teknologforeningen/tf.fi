@@ -1,17 +1,18 @@
 import { NextPage } from 'next'
 import Row from './Row'
 import texts, { AvailableLanguages } from '../utils/languages'
+import classNames from 'classnames'
 
 interface Props {
   language: AvailableLanguages
   setLanguage: (language: AvailableLanguages) => void
-  className: string
+  sideBarMode?: boolean
 }
 
 const LanguageOptions: NextPage<Props> = ({
   language,
   setLanguage,
-  className = 'language-options',
+  sideBarMode = false,
 }) => {
   const presentLanguages = Object.keys(texts) as AvailableLanguages[]
   const index = presentLanguages.indexOf(language)
@@ -19,7 +20,14 @@ const LanguageOptions: NextPage<Props> = ({
     presentLanguages.splice(index, 1)
   }
   return (
-    <Row className={className}>
+    <Row
+      className={classNames(
+        'justify-around',
+        sideBarMode
+          ? 'mt-4'
+          : 'justify-around align-center text-white font-display m-4 w-[300px] hidden md:flex'
+      )}
+    >
       {presentLanguages.map((lang) => (
         <p
           className="link link-text"
