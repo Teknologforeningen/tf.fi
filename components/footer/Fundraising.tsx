@@ -4,7 +4,6 @@ import Column from '../Column'
 import Image from 'next/image'
 import texts, { AvailableLanguages } from '../../utils/languages'
 import links from '../../utils/links'
-import Row from '../Row'
 
 interface Props {
   language: AvailableLanguages
