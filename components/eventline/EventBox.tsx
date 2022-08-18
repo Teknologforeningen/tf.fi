@@ -59,7 +59,7 @@ const EventBoxBody = ({ event, ...props }: EventBoxProps) => (
 )
 
 type Props = {
-  events: HideableEvent[]
+  events: EventBoxProps['event'][]
 }
 
 /** Box where a short description and title of an event can be displayed */

@@ -2,7 +2,7 @@ import { Event, Line } from '../../types'
 import React, { useEffect, useState } from 'react'
 import { groupEventsByDate, makeLines } from '../../utils'
 import EventLine from './EventLine'
-import VerticalLine from './VerticalLine'
+import { VerticalLine } from './VerticalLine'
 import Row from '../Row'
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react'
 
