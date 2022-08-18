@@ -22,7 +22,7 @@ marked.use({ renderer })
 const EventPage: NextPage<Props> = ({ event }) => (
   <div className="my-6 mx-auto min-h-[92vh] max-w-[95vw] bg-[#ffffe8] p-[15px] md:max-w-[55vw] lg:max-w-[80vw]">
     <Link href={'/'}>
-      <a className={'home-link home-link-text'}>TILL HEMSIDAN</a>
+      <a className="home-link home-link-text">TILL HEMSIDAN</a>
     </Link>
     <Column>
       <Row className="w-full">

@@ -59,12 +59,12 @@ const Navbar = ({ language, setLanguage, position = 'top' }: Props) => (
       {position === 'top' ? (
         <>
           <Link href={links.täffäab} passHref>
-            <a className={'link link-text'}>
+            <a className="link link-text">
               <TaffaABLogo />
             </a>
           </Link>
           <Link href={links.lunch} passHref>
-            <a className={'link link-text'}>
+            <a className="link link-text">
               <DagsenLogo />
             </a>
           </Link>
@@ -73,12 +73,12 @@ const Navbar = ({ language, setLanguage, position = 'top' }: Props) => (
         <>
           <Row className="min-h-[20px] justify-around">
             <Link href={links.täffäab} passHref>
-              <a className={'link link-text'}>
+              <a className="link link-text">
                 <TaffaABLogo />
               </a>
             </Link>
             <Link href={links.lunch} passHref>
-              <a className={'link link-text'}>
+              <a className="link link-text">
                 <DagsenLogo />
               </a>
             </Link>
