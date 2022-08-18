@@ -1,6 +1,6 @@
 export type EventType = 'event' | 'blogpost'
 
-export interface Event {
+export type Event = {
   id: number
   title: string
   slug: string
@@ -16,15 +16,3 @@ export interface Event {
 export type GroupedEvent = Record<string, Event[]>
 
 export type HideableEvent = Event & { hide: boolean }
-
-type PlainLine = {
-  id: number
-  date: string
-}
-
-export type Line = Event[] | PlainLine
-
-export interface Flag {
-  title: string
-  onoff: boolean
-}

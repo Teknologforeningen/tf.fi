@@ -1,5 +1,5 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
-import { Event } from '../types'
+import { Event } from '../models/event'
 import Link from 'next/link'
 import { LeftAngle, RightAngle } from '../components/eventpage/Angles'
 import Row from '../components/Row'

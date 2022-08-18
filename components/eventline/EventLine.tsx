@@ -1,4 +1,4 @@
-import { Event, EventType, HideableEvent } from '../../types'
+import { Event, EventType, HideableEvent } from '../../models/event'
 import { VerticalLineLong } from './VerticalLine'
 import Column from '../Column'
 import Row from '../Row'

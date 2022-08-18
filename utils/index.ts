@@ -1,4 +1,5 @@
-import { Event, GroupedEvent, Line } from '../types'
+import { Event, GroupedEvent } from '../models/event'
+import { Line } from '../models/line'
 
 function groupByGivenCmp(
   events: Event[],

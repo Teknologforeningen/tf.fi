@@ -1,4 +1,4 @@
-import { HideableEvent } from '../../types'
+import { HideableEvent } from '../../models/event'
 import Column from '../Column'
 import Link from 'next/link'
 import classNames from 'classnames'

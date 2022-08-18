@@ -1,6 +1,6 @@
 import type { GetStaticProps, NextPage } from 'next'
 import Timeline from '../components/eventline/Timeline'
-import { Event as TimelineEvent } from '../types'
+import { Event as TimelineEvent } from '../models/event'
 import { useState } from 'react'
 import { AvailableLanguages } from '../utils/languages'
 import { fetchEvents } from '../lib/api/event'

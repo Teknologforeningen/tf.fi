@@ -1,4 +1,5 @@
-import { Event, Line } from '../../types'
+import { Event } from '../../models/event'
+import { Line } from '../../models/line'
 import React, { useEffect, useState } from 'react'
 import { groupEventsByDate, makeLines } from '../../utils'
 import EventLine from './EventLine'
