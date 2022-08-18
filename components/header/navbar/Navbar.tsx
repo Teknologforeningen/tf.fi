@@ -1,5 +1,4 @@
 import React from 'react'
-import { NextPage } from 'next'
 import Link from 'next/link'
 import Row from '../../Row'
 import TFLogoSmall from './TFLogoSmall'
@@ -33,17 +32,13 @@ const menuValues: Array<{ title: keyof Language; link: string }> = [
   },
 ]
 
-interface Props {
+type Props = {
   language: AvailableLanguages
   setLanguage: (language: AvailableLanguages) => void
   position?: 'top' | 'side'
 }
 
-const Navbar: NextPage<Props> = ({
-  language,
-  setLanguage,
-  position = 'top',
-}) => (
+const Navbar = ({ language, setLanguage, position = 'top' }: Props) => (
   <nav>
     <Row
       className={classNames(

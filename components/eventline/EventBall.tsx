@@ -1,8 +1,7 @@
 import classNames from 'classnames'
-import { NextPage } from 'next'
 import { EventType, HideableEvent } from '../../types'
 
-interface Props {
+type Props = {
   eventId: number
   eventType: EventType
   eventsToShow: HideableEvent[]
@@ -10,12 +9,12 @@ interface Props {
 }
 
 /** Ball to be displayed under an verticalLineLong  */
-const EventBall: NextPage<Props> = ({
+const EventBall = ({
   eventId,
   eventType,
   eventsToShow,
   setEventsToShow,
-}) => {
+}: Props) => {
   function handleClick() {
     // If event already in list => remove, else => add
     const event = eventsToShow.find((event) => event.id === eventId)

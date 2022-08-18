@@ -1,4 +1,3 @@
-import { NextPage } from 'next'
 import { MouseEventHandler } from 'react'
 
 type MenuBarProps = {
@@ -18,12 +17,12 @@ const MenuBar = ({ transform, opacity = 1 }: MenuBarProps) => {
   )
 }
 
-interface Props {
+type Props = {
   open: boolean
   onClick: MouseEventHandler<HTMLDivElement>
 }
 
-const MenuIcon: NextPage<Props> = ({ open, onClick }) => (
+const MenuIcon = ({ open, onClick }: Props) => (
   <div
     className="fixed top-[10px] left-[10px] z-50 inline-block xl:hidden"
     onClick={onClick}

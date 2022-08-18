@@ -1,19 +1,18 @@
-import { NextPage } from 'next'
 import Row from './Row'
 import texts, { AvailableLanguages } from '../utils/languages'
 import classNames from 'classnames'
 
-interface Props {
+type Props = {
   language: AvailableLanguages
   setLanguage: (language: AvailableLanguages) => void
   sideBarMode?: boolean
 }
 
-const LanguageOptions: NextPage<Props> = ({
+const LanguageOptions = ({
   language,
   setLanguage,
   sideBarMode = false,
-}) => {
+}: Props) => {
   const presentLanguages = Object.keys(texts) as AvailableLanguages[]
   const index = presentLanguages.indexOf(language)
   if (index > -1) {

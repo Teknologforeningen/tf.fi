@@ -1,6 +1,4 @@
-import { NextPage } from 'next'
-
-const EventBoxHorizontalLine: NextPage = () => (
+const EventBoxHorizontalLine = () => (
   <div className="w-full border border-solid border-darkblue" />
 )
 

@@ -1,7 +1,6 @@
-import { NextPage } from 'next'
 import Column from '../../Column'
 
-const TaffaABLogo: NextPage = () => (
+const TaffaABLogo = () => (
   <Column>
     <svg
       width={32}

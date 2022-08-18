@@ -1,14 +1,17 @@
 import classNames from 'classnames'
-import { NextPage } from 'next'
-import { UIEventHandler } from 'react'
+import React from 'react'
 
-interface Props {
+type Props = {
   className?: string
-  onScroll?: UIEventHandler
+  onScroll?: React.UIEventHandler
 }
 
 /** Component for flexbox row */
-const Row: NextPage<Props> = ({ className, children, onScroll }) => (
+const Row = ({
+  className,
+  children,
+  onScroll,
+}: React.PropsWithChildren<Props>) => (
   <div
     className={classNames('flex', className, 'flex-row justify-center')}
     onScroll={onScroll}

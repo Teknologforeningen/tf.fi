@@ -1,21 +1,19 @@
-import { NextPage } from 'next'
 import Row from '../Row'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export interface NationLogo {
+export type NationLogo = {
   name: string
   url: string
   image: {
     url: string
   }
 }
-
-interface NationImageProps {
+type NationImageProps = {
   logo: NationLogo
 }
 
-const NationImage: NextPage<NationImageProps> = ({ logo }) => (
+const NationImage = ({ logo }: NationImageProps) => (
   // Tailwind does not work with Next.js images
   <div style={{ position: 'relative', width: '100px', height: '50px' }}>
     <Link href={logo.url} passHref>
@@ -31,11 +29,11 @@ const NationImage: NextPage<NationImageProps> = ({ logo }) => (
   </div>
 )
 
-interface NationsLogoRowProps {
+type NationsLogoRowProps = {
   nationLogos: NationLogo[]
 }
 
-const NationsLogoRow: NextPage<NationsLogoRowProps> = ({ nationLogos }) => (
+const NationsLogoRow = ({ nationLogos }: NationsLogoRowProps) => (
   <Row className="my-4 mx-0 w-4/5 flex-wrap justify-around">
     {nationLogos.map((logo, index) => (
       <NationImage logo={logo} key={index} />

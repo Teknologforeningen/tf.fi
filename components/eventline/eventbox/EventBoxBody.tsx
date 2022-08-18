@@ -1,11 +1,10 @@
-import { NextPage } from 'next'
 import Column from '../../Column'
 import Link from 'next/link'
 import { EventBoxProps } from './EventBox'
 import EventBoxTitle from './EventBoxTitle'
 import EventBoxHorizontalLine from './EventBoxHorizontalLine'
 
-const EventBoxBody: NextPage<EventBoxProps> = ({ event, ...props }) => (
+const EventBoxBody = ({ event, ...props }: EventBoxProps) => (
   <Column
     className="relative mt-4 h-full overflow-y-hidden bg-creamwhite"
     {...props}

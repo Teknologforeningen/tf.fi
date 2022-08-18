@@ -1,6 +1,4 @@
-import { NextPage } from 'next'
-
-const RightAngle: NextPage = () => {
+const RightAngle = () => {
   return (
     <svg
       width={67}

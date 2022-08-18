@@ -1,6 +1,4 @@
-import { NextPage } from 'next'
-
-const TFLogoSmall: NextPage = () => (
+const TFLogoSmall = () => (
   <svg
     className="hidden xl:block"
     width={26}

@@ -1,17 +1,16 @@
-import { NextPage } from 'next'
 import Navbar from './navbar/Navbar'
 import { AvailableLanguages } from '../../utils/languages'
 import SideMenu from './navbar/SideMenu'
 import MenuIcon from './navbar/MenuIcon'
 import { useState } from 'react'
 
-interface Props {
+type Props = {
   isHomePage: boolean
   language: AvailableLanguages
   setLanguage: (language: AvailableLanguages) => void
 }
 
-const Header: NextPage<Props> = ({ isHomePage, language, setLanguage }) => {
+const Header = ({ isHomePage, language, setLanguage }: Props) => {
   const [sideMenuOpen, setSideMenuOpen] = useState(false)
 
   return (

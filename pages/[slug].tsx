@@ -7,7 +7,7 @@ import Row from '../components/Row'
 import Column from '../components/Column'
 import * as marked from 'marked'
 
-interface Props {
+type Props = {
   event?: Event
 }
 

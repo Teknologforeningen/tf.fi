@@ -19,7 +19,7 @@ export interface HomePage {
   }
 }
 
-interface Props {
+type Props = {
   events: TimelineEvent[]
   isHomePage: boolean
   logos: NationLogo[]

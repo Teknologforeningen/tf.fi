@@ -1,15 +1,14 @@
-import { NextPage } from 'next'
 import Column from '../../Column'
 import { EventBoxProps } from './EventBox'
 import Link from 'next/link'
 import { Textfit } from 'react-textfit'
 import classNames from 'classnames'
 
-const EventBoxTitle: NextPage<EventBoxProps> = ({
+const EventBoxTitle = ({
   event,
   topMargin = false,
   ...props
-}) => (
+}: EventBoxProps) => (
   <Column
     className={classNames(
       'z-10 p-[7px] text-center text-xl font-extrabold uppercase leading-6 tracking-wide text-darkblue',

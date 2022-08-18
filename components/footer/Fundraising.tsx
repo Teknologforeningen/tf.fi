@@ -1,14 +1,14 @@
-import { NextPage } from 'next'
 import Link from 'next/link'
 import Column from '../Column'
 import Image from 'next/image'
 import texts, { AvailableLanguages } from '../../utils/languages'
 import links from '../../utils/links'
-interface Props {
+
+type Props = {
   language: AvailableLanguages
 }
 
-const Fundraising: NextPage<Props> = ({ language }) => {
+const Fundraising = ({ language }: Props) => {
   return (
     <div className="mb-20 grid h-[400px] w-full max-w-none grid-cols-1 grid-rows-1 place-items-center">
       <div className="absolute col-span-1 row-span-1 mt-32 h-[400px] w-full max-w-none">
