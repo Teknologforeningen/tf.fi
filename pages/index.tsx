@@ -11,6 +11,7 @@ import Column from '../components/Column'
 import Fundraising from '../components/footer/Fundraising'
 import LanguageOptions from '../components/LanguageOptions'
 import NationsLogoRow, { NationLogo } from '../components/footer/Logos'
+import TF150Logo from '../components/TF150Logo'
 
 export interface HomePage {
   footer: {
@@ -34,10 +35,15 @@ const Home: NextPage<Props> = ({ events, isHomePage, logos }) => {
         isHomePage={isHomePage}
         language={language}
         setLanguage={setLanguage}
-        horizontalPosition={horizontalPosition}
       />
 
-      <Timeline events={events} setHorizontalPosition={setHorizontalPosition} />
+      <main>
+        <TF150Logo horizontalPosition={horizontalPosition} />
+        <Timeline
+          events={events}
+          setHorizontalPosition={setHorizontalPosition}
+        />
+      </main>
 
       {isHomePage && (
         <footer>
