@@ -24,7 +24,7 @@ services:
       - strapi
     environment:
       ENV: '${ENV:-production}'
-      NEXT_PUBLIC_API_URL: '${NEXT_PUBLIC_API_URL:-localhost:1337}'
+      NEXT_PUBLIC_BASE_URL: '${NEXT_PUBLIC_BASE_URL:-localhost:1337}'
     ports:
       - '3000:${WEB_PORT:-3000}'
     restart: unless-stopped

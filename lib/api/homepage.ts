@@ -1,6 +1,14 @@
 import { HomePage } from '../../pages'
+import qs from 'qs'
+import { API_URL } from './index'
 
 export async function fetchHomepage(): Promise<HomePage> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/homepage`)
-  return res.json()
+  const query = qs.stringify(
+    {
+      populate: ['footer', 'footer.nationlogos', 'footer.nationlogos.image'],
+    },
+    { encodeValuesOnly: true }
+  )
+  const res = await fetch(`${API_URL}/homepage?${query}`)
+  return res.json().then((j) => j.data.attributes)
 }

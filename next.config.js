@@ -2,6 +2,6 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ['tf.fi'],
+    domains: ['tf.fi', 'cms.tf.fi'],
   },
 }
