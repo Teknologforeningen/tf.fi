@@ -1,6 +1,7 @@
 import { Flag } from '../../models/flag'
-import { fetchMultiple } from './index'
+import { fetchFromStrapi } from './index'
 
 export async function fetchFlags(): Promise<Flag[]> {
-  return fetchMultiple<Flag>('/flags')
+  const res = await fetchFromStrapi<Flag>('/flags')
+  return res.map((f) => ({ id: f.id, ...f.attributes }))
 }

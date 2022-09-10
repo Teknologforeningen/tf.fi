@@ -5,6 +5,7 @@ import { LeftAngle, RightAngle } from '../components/eventpage/Angles'
 import Row from '../components/Row'
 import Column from '../components/Column'
 import * as marked from 'marked'
+import { fetchEvent, fetchEvents } from '../lib/api/event'
 
 type Props = {
   event?: Event
@@ -46,8 +47,7 @@ const EventPage: NextPage<Props> = ({ event }) => (
 
 export const getStaticPaths: GetStaticPaths = async () => {
   // Get all events
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events`)
-  const events: Event[] = await res.json()
+  const events = await fetchEvents()
 
   // Create a path for each event background-color: ;
   const paths = events.map((event) => ({
@@ -61,13 +61,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  // Get a specific event
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/events?slug=${params?.slug}`
-  )
-  const data = await res.json()
-  // slug is a unique field, thus only one can be found
-  const event = data[0]
+  const slug = params?.slug instanceof Array ? params?.slug[0] : params?.slug
+  const event = await fetchEvent(slug)
   return {
     props: { event },
     revalidate: 60,
