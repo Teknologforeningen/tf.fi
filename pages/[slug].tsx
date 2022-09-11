@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { LeftAngle, RightAngle } from '../components/eventpage/Angles'
 import Row from '../components/Row'
 import Column from '../components/Column'
-import * as marked from 'marked'
+import { marked } from 'marked'
 import { fetchEvent, fetchEvents } from '../lib/api/event'
 
 type Props = {
