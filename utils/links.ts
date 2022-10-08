@@ -1,5 +1,5 @@
 const links = {
-  'om-teknologföreningen': 'https://about.teknologforeningen.fi/index.php/',
+  'om-teknologföreningen': '/about',
   medlemsportal:
     'https://medlem.teknologforeningen.fi/index.php/login-menu-hidden',
   abiturienter: 'https://abi.teknologforeningen.fi/index.php/',

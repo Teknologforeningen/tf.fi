@@ -5,40 +5,39 @@ import TFLogoSmall from './TFLogoSmall'
 import TaffaABLogo from './TaffaABLogo'
 import DagsenLogo from './DagsenLogo'
 import links from '../../../utils/links'
-import texts, { Language, AvailableLanguages } from '../../../utils/languages'
+import { AvailableLanguages } from '../../../utils/languages'
 import LanguageOptions from '../../LanguageOptions'
 import classNames from 'classnames'
-
-const menuValues: Array<{ title: keyof Language; link: string }> = [
-  {
-    title: 'om-teknologföreningen',
-    link: links['om-teknologföreningen'],
-  },
-  {
-    title: 'medlemsportal',
-    link: links.medlemsportal,
-  },
-  {
-    title: 'abiturienter',
-    link: links.abiturienter,
-  },
-  {
-    title: 'stälmar',
-    link: links.stälmar,
-  },
-  {
-    title: 'för-företag',
-    link: links['för-företag'],
-  },
-]
+import { NavbarLink, NavbarMultipleLink } from '../../../lib/api/navbar'
 
 type Props = {
+  navbarLinks: NavbarLink[]
   language: AvailableLanguages
   setLanguage: (language: AvailableLanguages) => void
   position?: 'top' | 'side'
 }
 
-const Navbar = ({ language, setLanguage, position = 'top' }: Props) => (
+const NavbarDropdown = ({ link }: { link: NavbarMultipleLink }) => (
+  <div className="relative">
+    <div className="link-text peer text-lg">{link.title}</div>
+    <div className="absolute top-4 left-0 mt-2 hidden w-full rounded-md shadow-lg ring-1 ring-black ring-opacity-5 hover:flex focus:outline-none peer-hover:flex">
+      <div className="py-1">
+        {link.links.map(({ title, link }) => (
+          <Link key={title} href={link} passHref>
+            <a className="link link-text block py-2">{title}</a>
+          </Link>
+        ))}
+      </div>
+    </div>
+  </div>
+)
+
+const Navbar = ({
+  navbarLinks,
+  language,
+  setLanguage,
+  position = 'top',
+}: Props) => (
   <nav>
     <Row
       className={classNames(
@@ -48,13 +47,15 @@ const Navbar = ({ language, setLanguage, position = 'top' }: Props) => (
     >
       <TFLogoSmall />
 
-      {menuValues.map(({ title, link }) => (
-        <Link href={link} key={title} passHref>
-          <a className="link link-text">
-            <span>{texts[language][title]}</span>
-          </a>
-        </Link>
-      ))}
+      {navbarLinks.map((link) =>
+        'links' in link ? (
+          <NavbarDropdown key={link.title} link={link} />
+        ) : (
+          <Link key={link.title} href={link.link} passHref>
+            <a className="link link-text">{link.title}</a>
+          </Link>
+        )
+      )}
 
       {position === 'top' ? (
         <>

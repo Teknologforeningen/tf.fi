@@ -1,0 +1,35 @@
+.about p,
+.about ul,
+.about table,
+.about h1,
+.about h2,
+.about h3 {
+  color: white;
+}
+
+.about h1 {
+  font-size: 30px;
+  margin-bottom: 1rem;
+  font-weight: bolder;
+}
+
+.about h2 {
+  font-size: 24px;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.about h3 {
+  font-size: 22;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.about li {
+  display: list-item;
+  list-style: inside;
+}
+
+.about p + ul {
+  margin: 1rem 0;
+}

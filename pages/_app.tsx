@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import '../styles/about-page.css'
 import '../styles/event-page.css'
 import '../styles/links.css'
 import 'overlayscrollbars/css/OverlayScrollbars.css'
