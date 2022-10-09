@@ -9,6 +9,7 @@ import { AvailableLanguages } from '../../../utils/languages'
 import LanguageOptions from '../../LanguageOptions'
 import classNames from 'classnames'
 import { NavbarLink, NavbarMultipleLink } from '../../../lib/api/navbar'
+import { useRouter } from 'next/router'
 
 type Props = {
   navbarLinks: NavbarLink[]
@@ -20,9 +21,11 @@ type Props = {
 const NavbarDropdown = ({
   link,
   position,
+  path,
 }: {
   link: NavbarMultipleLink
   position: Props['position']
+  path: string
 }) => {
   const isTop = position === 'top'
   const [open, setOpen] = useState(false)
@@ -36,7 +39,11 @@ const NavbarDropdown = ({
   return (
     <div className="relative">
       <div
-        className={classNames(isTop ? 'peer' : '!m-0', 'link-text text-lg')}
+        className={classNames(
+          isTop ? 'peer' : '!m-0',
+          path.startsWith('/about') && '!text-gold',
+          'link-text text-lg'
+        )}
         onClick={onClick}
       >
         {link.title}
@@ -55,6 +62,7 @@ const NavbarDropdown = ({
                 <a
                   className={classNames(
                     isTop && 'py-2',
+                    link === path && '!text-gold',
                     'link link-text block'
                   )}
                 >
@@ -74,42 +82,44 @@ const Navbar = ({
   language,
   setLanguage,
   position = 'top',
-}: Props) => (
-  <nav>
-    <Row
-      className={classNames(
-        'justify-evenly pt-2 xl:items-center',
-        position === 'side' ? 'flex flex-col xl:hidden' : 'hidden xl:flex'
-      )}
-    >
-      <TFLogoSmall />
+}: Props) => {
+  const router = useRouter()
+  const path = router.asPath
 
-      {navbarLinks.map((link) =>
-        'links' in link ? (
-          <NavbarDropdown key={link.title} link={link} position={position} />
-        ) : (
-          <Link key={link.title} href={link.link} passHref>
-            <a className="link link-text">{link.title}</a>
-          </Link>
-        )
-      )}
+  return (
+    <nav>
+      <Row
+        className={classNames(
+          'justify-evenly pt-2 xl:items-center',
+          position === 'side' ? 'flex flex-col xl:hidden' : 'hidden xl:flex'
+        )}
+      >
+        <TFLogoSmall highlight={path === '/'} />
 
-      {position === 'top' ? (
-        <>
-          <Link href={links.täffäab} passHref>
-            <a className="link link-text">
-              <TaffaABLogo />
-            </a>
-          </Link>
-          <Link href={links.lunch} passHref>
-            <a className="link link-text">
-              <DagsenLogo />
-            </a>
-          </Link>
-        </>
-      ) : (
-        <>
-          <Row className="min-h-[20px] justify-around">
+        {navbarLinks.map((link) =>
+          'links' in link ? (
+            <NavbarDropdown
+              key={link.title}
+              link={link}
+              position={position}
+              path={path}
+            />
+          ) : (
+            <Link key={link.title} href={link.link} passHref>
+              <a
+                className={classNames(
+                  path === link.link && '!text-gold',
+                  'link link-text'
+                )}
+              >
+                {link.title}
+              </a>
+            </Link>
+          )
+        )}
+
+        {position === 'top' ? (
+          <>
             <Link href={links.täffäab} passHref>
               <a className="link link-text">
                 <TaffaABLogo />
@@ -120,17 +130,32 @@ const Navbar = ({
                 <DagsenLogo />
               </a>
             </Link>
-          </Row>
-          <hr className="my-0 mx-auto w-full text-white" />
-          <LanguageOptions
-            language={language}
-            setLanguage={setLanguage}
-            sideBarMode
-          />
-        </>
-      )}
-    </Row>
-  </nav>
-)
+          </>
+        ) : (
+          <>
+            <Row className="min-h-[20px] justify-around">
+              <Link href={links.täffäab} passHref>
+                <a className="link link-text">
+                  <TaffaABLogo />
+                </a>
+              </Link>
+              <Link href={links.lunch} passHref>
+                <a className="link link-text">
+                  <DagsenLogo />
+                </a>
+              </Link>
+            </Row>
+            <hr className="my-0 mx-auto w-full text-white" />
+            <LanguageOptions
+              language={language}
+              setLanguage={setLanguage}
+              sideBarMode
+            />
+          </>
+        )}
+      </Row>
+    </nav>
+  )
+}
 
 export default Navbar

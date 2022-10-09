@@ -43,7 +43,7 @@ const AboutPage: NextPage<{ about: AboutPage; navbarLinks: NavbarLink[] }> = ({
 
   return (
     <div className="about grid grid-cols-4">
-      <div className="col-span-full my-4">
+      <div className="col-span-full">
         <Header
           navbarLinks={navbarLinks}
           isHomePage
