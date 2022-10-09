@@ -55,7 +55,8 @@ const NavbarDropdown = ({
           className={classNames(
             isTop
               ? 'absolute top-4 left-0 mt-2 hidden flex-col rounded-md shadow-lg ring-1 ring-black ring-opacity-5 hover:flex focus:outline-none peer-hover:flex'
-              : '!m-0 pl-4'
+              : '!m-0 pl-4',
+            'z-10 bg-darkblue bg-opacity-80 px-1'
           )}
         >
           <div className="!m-0 py-1">
