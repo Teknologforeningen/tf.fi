@@ -12,6 +12,7 @@ import Fundraising from '../components/footer/Fundraising'
 import LanguageOptions from '../components/LanguageOptions'
 import NationsLogoRow, { NationLogo } from '../components/footer/Logos'
 import TF150Logo from '../components/TF150Logo'
+import fetchNavbar, { NavbarLink } from '../lib/api/navbar'
 
 export interface HomePage {
   footer: {
@@ -23,15 +24,17 @@ type Props = {
   events: TimelineEvent[]
   isHomePage: boolean
   logos: NationLogo[]
+  navbarLinks: NavbarLink[]
 }
 
-const Home: NextPage<Props> = ({ events, isHomePage, logos }) => {
+const Home: NextPage<Props> = ({ navbarLinks, events, isHomePage, logos }) => {
   const [horizontalPosition, setHorizontalPosition] = useState(0)
   const [language, setLanguage] = useState<AvailableLanguages>('swedish')
 
   return (
     <div className="bg-darkblue shadow-[0_0_200px_rgba(0,0,0,0.9)_inset]">
       <Header
+        navbarLinks={navbarLinks}
         isHomePage={isHomePage}
         language={language}
         setLanguage={setLanguage}
@@ -65,12 +68,13 @@ export const getStaticProps: GetStaticProps = async () => {
   const events = await fetchEvents()
   const flags = await fetchFlags()
   const homepage = await fetchHomepage()
+  const navbarLinks = await fetchNavbar()
   const logos = homepage.footer.nationlogos
   const isHomePage = flags.some(
     (flag) => flag.title === 'isHomePage' && flag.onoff
   )
   return {
-    props: { events, isHomePage, logos },
+    props: { navbarLinks, events, isHomePage, logos },
     revalidate: 60,
   }
 }
