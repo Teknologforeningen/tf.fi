@@ -75,7 +75,7 @@ export const getStaticProps: GetStaticProps = async () => {
   )
   return {
     props: { navbarLinks, events, isHomePage, logos },
-    revalidate: 60,
+    revalidate: 300,
   }
 }
 
