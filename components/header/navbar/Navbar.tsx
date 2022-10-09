@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import Row from '../../Row'
 import TFLogoSmall from './TFLogoSmall'
@@ -17,20 +17,57 @@ type Props = {
   position?: 'top' | 'side'
 }
 
-const NavbarDropdown = ({ link }: { link: NavbarMultipleLink }) => (
-  <div className="relative">
-    <div className="link-text peer text-lg">{link.title}</div>
-    <div className="absolute top-4 left-0 mt-2 hidden w-full rounded-md shadow-lg ring-1 ring-black ring-opacity-5 hover:flex focus:outline-none peer-hover:flex">
-      <div className="py-1">
-        {link.links.map(({ title, link }) => (
-          <Link key={title} href={link} passHref>
-            <a className="link link-text block py-2">{title}</a>
-          </Link>
-        ))}
+const NavbarDropdown = ({
+  link,
+  position,
+}: {
+  link: NavbarMultipleLink
+  position: Props['position']
+}) => {
+  const isTop = position === 'top'
+  const [open, setOpen] = useState(false)
+
+  const onClick = () => {
+    if (!isTop) {
+      setOpen(!open)
+    }
+  }
+
+  return (
+    <div className="relative">
+      <div
+        className={classNames(isTop ? 'peer' : '!m-0', 'link-text text-lg')}
+        onClick={onClick}
+      >
+        {link.title}
       </div>
+      {(isTop || open) && (
+        <div
+          className={classNames(
+            isTop
+              ? 'absolute top-4 left-0 mt-2 hidden flex-col rounded-md shadow-lg ring-1 ring-black ring-opacity-5 hover:flex focus:outline-none peer-hover:flex'
+              : '!m-0 pl-4'
+          )}
+        >
+          <div className="!m-0 py-1">
+            {link.links.map(({ title, link }) => (
+              <Link key={title} href={link} passHref>
+                <a
+                  className={classNames(
+                    isTop && 'py-2',
+                    'link link-text block'
+                  )}
+                >
+                  {title}
+                </a>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
-  </div>
-)
+  )
+}
 
 const Navbar = ({
   navbarLinks,
@@ -49,7 +86,7 @@ const Navbar = ({
 
       {navbarLinks.map((link) =>
         'links' in link ? (
-          <NavbarDropdown key={link.title} link={link} />
+          <NavbarDropdown key={link.title} link={link} position={position} />
         ) : (
           <Link key={link.title} href={link.link} passHref>
             <a className="link link-text">{link.title}</a>
