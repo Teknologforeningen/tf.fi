@@ -32,7 +32,12 @@ const AboutSideBar: React.FC<{ about: AboutPage }> = ({ about }) => {
   const html =
     about.slug === 'dagsrestaurangen' ? about.sidebar : marked(about.sidebar)
 
-  return <div className="p-4 pt-8" dangerouslySetInnerHTML={{ __html: html }} />
+  return (
+    <div
+      className="w-full p-4 pt-8"
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  )
 }
 
 const AboutPage: NextPage<{ about: AboutPage; navbarLinks: NavbarLink[] }> = ({
@@ -42,7 +47,7 @@ const AboutPage: NextPage<{ about: AboutPage; navbarLinks: NavbarLink[] }> = ({
   const [language, setLanguage] = useState<AvailableLanguages>('swedish')
 
   return (
-    <div className="about grid grid-cols-4">
+    <div className="about grid grid-flow-row grid-cols-1 md:grid-cols-4">
       <div className="col-span-full">
         <Header
           navbarLinks={navbarLinks}
@@ -52,7 +57,7 @@ const AboutPage: NextPage<{ about: AboutPage; navbarLinks: NavbarLink[] }> = ({
         />
       </div>
       <div
-        className="col-span-2 col-start-2 p-8"
+        className="p-8 md:col-span-2 md:col-start-2"
         dangerouslySetInnerHTML={{
           __html: marked.parse(about.content),
         }}
