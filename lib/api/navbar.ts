@@ -1,11 +1,8 @@
 import qs from 'qs'
 import { CollectionResponse, fetchFromStrapi } from '.'
+import { AboutPage } from './about'
 
-// TODO: Change to type alias from AboutPage type
-interface NavbarAbout {
-  title: string
-  slug: string
-}
+type NavbarAbout = Pick<AboutPage, 'slug' | 'title'>
 
 interface BaseNavbarLink {
   title: string
@@ -17,6 +14,8 @@ export interface NavbarSingleLink extends BaseNavbarLink {
 
 export interface NavbarMultipleLink extends BaseNavbarLink {
   links: NavbarSingleLink[]
+  // TODO: Make required
+  basePath?: string
 }
 
 export type NavbarLink = NavbarSingleLink | NavbarMultipleLink
@@ -24,6 +23,12 @@ export type NavbarLink = NavbarSingleLink | NavbarMultipleLink
 export interface Navbar {
   id: number
   abouts: {
+    data: CollectionResponse<NavbarAbout>[]
+  }
+  abi_pages: {
+    data: CollectionResponse<NavbarAbout>[]
+  }
+  staelm_pages: {
     data: CollectionResponse<NavbarAbout>[]
   }
   links: NavbarLink[]
@@ -39,6 +44,12 @@ export default async function fetchNavbar(): Promise<NavbarLink[]> {
         abouts: {
           fields: ['title', 'slug'],
         },
+        abi_pages: {
+          fields: ['title', 'slug'],
+        },
+        staelm_pages: {
+          fields: ['title', 'slug'],
+        },
         links: {
           populate: ['links'],
         },
@@ -50,15 +61,46 @@ export default async function fetchNavbar(): Promise<NavbarLink[]> {
     `/navbar?${query}`
   )) as CollectionResponse<Navbar>
 
-  const aboutLinks = navbar.attributes.abouts.data.map((about) => ({
-    title: about.attributes.title,
-    link: `/about/${about.attributes.slug}`,
-  }))
+  const about = toNavbarMultipleLink(
+    navbar.attributes.abouts.data,
+    'about',
+    'Om Teknologföreningen'
+  )
 
-  const about: NavbarMultipleLink = {
-    title: 'Om Teknologföreningen',
-    links: aboutLinks,
+  const abi = toNavbarMultipleLink(
+    navbar.attributes.abi_pages.data,
+    'abi',
+    'Abiturienter'
+  )
+
+  /* const stalm = toNavbarMultipleLink(
+    navbar.attributes.staelm_pages.data,
+    'stalm',
+    'Stälmar'
+  ) */
+
+  return [about, abi, ...navbar.attributes.links]
+}
+
+function toLink(
+  cr: CollectionResponse<NavbarAbout>,
+  baseUrl: string
+): NavbarSingleLink {
+  return {
+    title: cr.attributes.title,
+    link: `/${baseUrl}/${cr.attributes.slug}`,
   }
+}
 
-  return [about, ...navbar.attributes.links]
+function toNavbarMultipleLink(
+  crs: CollectionResponse<NavbarAbout>[],
+  baseUrl: string,
+  title: string
+): NavbarMultipleLink {
+  const links = crs.map((about) => toLink(about, baseUrl))
+  return {
+    title,
+    links,
+    basePath: baseUrl,
+  }
 }

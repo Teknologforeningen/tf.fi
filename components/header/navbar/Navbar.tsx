@@ -41,7 +41,7 @@ const NavbarDropdown = ({
       <div
         className={classNames(
           isTop ? 'peer' : '!m-0',
-          path.startsWith('/about') &&
+          path.startsWith(`/${link.basePath}` ?? '') &&
             link.links.find((l) => l.link === path) &&
             '!text-gold',
           'link-text text-lg'
