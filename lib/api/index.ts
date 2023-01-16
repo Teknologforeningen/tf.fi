@@ -1,5 +1,7 @@
 export const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/api`
 
+export type Locale = 'sv-FI' | 'fi-FI' | 'en-GB'
+
 export type CollectionResponse<T> = {
   id: number
   attributes: Omit<T, 'id'>

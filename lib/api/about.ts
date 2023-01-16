@@ -1,5 +1,5 @@
 import qs from 'qs'
-import { fetchFromStrapi } from '.'
+import { fetchFromStrapi, Locale } from '.'
 
 export interface AboutPage {
   content: string
@@ -9,7 +9,10 @@ export interface AboutPage {
   locale: string
 }
 
-export async function fetchAboutPage(slug?: string): Promise<AboutPage> {
+export async function fetchAboutPage(
+  slug?: string,
+  locale: Locale = 'sv-FI'
+): Promise<AboutPage> {
   const query = slug
     ? qs.stringify({
         filters: {
@@ -17,8 +20,10 @@ export async function fetchAboutPage(slug?: string): Promise<AboutPage> {
             $eq: slug,
           },
         },
+        locale,
       })
     : ''
+
   const aboutPages = await fetchFromStrapi<AboutPage>(`/about-pages?${query}`)
   if (!(aboutPages instanceof Array)) return Promise.reject()
   else if (aboutPages.length === 0) return Promise.reject()
