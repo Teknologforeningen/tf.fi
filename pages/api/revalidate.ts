@@ -1,5 +1,22 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
+/**
+ * Converts a model and string combination to a path.
+ * The model id can be converted to a prefix by looking at this projects directory layout.
+ * @param model API ID for model. Found in Strapi.
+ * @param slug The slug for a path. Found in Strapi.
+ */
+function getPath(model: string, slug: string): string {
+  switch (model) {
+    case 'about-page':
+      return `/about/${slug}`
+    case 'abi-page':
+      return `/abi/${slug}`
+    default:
+      throw new Error(`Model not found: ${model}`)
+  }
+}
+
 async function revalidate(res: NextApiResponse, path: string) {
   console.log('Revalidating', path, '...')
   await res.revalidate(path)
@@ -21,10 +38,9 @@ export default async function handler(
 
     const model = req.body.model
     const slug = req.body.entry.slug
-    const prefix = model === 'about-page' ? '/about/' : '/'
     if (slug == null) return res.status(400).json({ error: 'Missing slug' })
 
-    return await revalidate(res, `${prefix}${slug}`)
+    return await revalidate(res, getPath(model, slug))
   } catch (err) {
     console.log(err)
     return res.status(500).send('Error revalidating')
