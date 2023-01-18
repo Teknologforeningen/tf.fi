@@ -1,8 +1,9 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 async function revalidate(res: NextApiResponse, path: string) {
+  console.log('Revalidating', path, '...')
   await res.revalidate(path)
-  console.log('Revalidated path', path)
+  console.log('Revalidation complete for', path)
   res.json({ revalidated: true })
 }
 
