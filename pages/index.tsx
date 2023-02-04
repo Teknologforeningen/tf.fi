@@ -6,6 +6,7 @@ import { AvailableLanguages } from '../utils/languages'
 import { fetchEvents } from '../lib/api/event'
 import { fetchFlags } from '../lib/api/flag'
 import { fetchHomepage } from '../lib/api/homepage'
+import { fetchNamokallelse } from '../lib/api/namokallelse'
 import Header from '../components/header/Header'
 import Column from '../components/Column'
 import Fundraising from '../components/footer/Fundraising'
@@ -13,6 +14,7 @@ import LanguageOptions from '../components/LanguageOptions'
 import NationsLogoRow, { NationLogo } from '../components/footer/Logos'
 import TF150Logo from '../components/TF150Logo'
 import fetchNavbar, { NavbarLink } from '../lib/api/navbar'
+import Namokallelses, { Namo } from '../components/namokallese/Namokallelse'
 
 export interface HomePage {
   footer: {
@@ -25,9 +27,16 @@ type Props = {
   isHomePage: boolean
   logos: NationLogo[]
   navbarLinks: NavbarLink[]
+  namokallelses: Namo[]
 }
 
-const Home: NextPage<Props> = ({ navbarLinks, events, isHomePage, logos }) => {
+const Home: NextPage<Props> = ({
+  navbarLinks,
+  events,
+  isHomePage,
+  logos,
+  namokallelses,
+}) => {
   const [horizontalPosition, setHorizontalPosition] = useState(0)
   const [language, setLanguage] = useState<AvailableLanguages>('swedish')
 
@@ -48,18 +57,17 @@ const Home: NextPage<Props> = ({ navbarLinks, events, isHomePage, logos }) => {
         />
       </main>
 
-      {isHomePage && (
-        <footer>
-          <Column className="mt-12">
-            <Fundraising language={language} />
-            <LanguageOptions language={language} setLanguage={setLanguage} />
-            <p className="m-4 text-center font-display text-white">
-              TEKNOLOGFÖRENINGENS NATIONSFÖRETAG
-            </p>
-            <NationsLogoRow nationLogos={logos} />
-          </Column>
-        </footer>
-      )}
+      <footer>
+        <Column className="mt-12">
+          <Fundraising language={language} />
+          <LanguageOptions language={language} setLanguage={setLanguage} />
+          <p className="m-4 text-center font-display text-white">
+            TEKNOLOGFÖRENINGENS NATIONSFÖRETAG
+          </p>
+          <NationsLogoRow nationLogos={logos} />
+        </Column>
+      </footer>
+      <Namokallelses namokallelses={namokallelses} />
     </div>
   )
 }
@@ -69,12 +77,13 @@ export const getStaticProps: GetStaticProps = async () => {
   const flags = await fetchFlags()
   const homepage = await fetchHomepage()
   const navbarLinks = await fetchNavbar()
+  const namokallelses = await fetchNamokallelse()
   const logos = homepage.footer.nationlogos
   const isHomePage = flags.some(
     (flag) => flag.title === 'isHomePage' && flag.onoff
   )
   return {
-    props: { navbarLinks, events, isHomePage, logos },
+    props: { navbarLinks, events, isHomePage, logos, namokallelses },
   }
 }
 
