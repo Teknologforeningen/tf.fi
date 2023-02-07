@@ -15,7 +15,7 @@ const Namokallelses = ({ namokallelses = [] }: NamoKallelseProps) => {
   const [show, setShow] = useState(true)
   return (
     <div
-      className={`sticky bottom-0 z-10 mx-auto w-full self-center p-3 text-gray-700 ${
+      className={`sticky bottom-0 z-10 mx-auto w-full self-center p-3 text-gray-700 transition-all duration-500 ${
         !show && 'pointer-events-none transform opacity-0'
       }`}
       onClick={() => setShow(false)}
@@ -23,7 +23,7 @@ const Namokallelses = ({ namokallelses = [] }: NamoKallelseProps) => {
       {namokallelses.map((namo) => (
         <div
           key={namo.id}
-          className="my-4 rounded-lg bg-gray-200 p-4 shadow-md transition-all duration-500"
+          className="my-4 rounded-lg bg-gray-200 p-4 shadow-md"
         >
           <p className="select-none font-medium">{namo.title}</p>
           <p className="select-none text-sm text-gray-600">{namo.content}</p>
