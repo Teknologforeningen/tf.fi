@@ -3,8 +3,6 @@ import { marked } from 'marked'
 import { AboutPage, fetchAboutPage, fetchAboutPages } from '../../lib/api/about'
 import Header from '../../components/header/Header'
 import fetchNavbar, { NavbarLink } from '../../lib/api/navbar'
-import { useState } from 'react'
-import { AvailableLanguages } from '../../utils/languages'
 
 const renderer: marked.RendererObject = {
   link(href, title, text) {
@@ -43,29 +41,20 @@ const AboutSideBar: React.FC<{ about: AboutPage }> = ({ about }) => {
 const AboutPage: NextPage<{ about: AboutPage; navbarLinks: NavbarLink[] }> = ({
   about,
   navbarLinks,
-}) => {
-  const [language, setLanguage] = useState<AvailableLanguages>('swedish')
-
-  return (
-    <div className="about grid grid-flow-row grid-cols-1 md:grid-cols-4">
-      <div className="col-span-full">
-        <Header
-          navbarLinks={navbarLinks}
-          isHomePage
-          language={language}
-          setLanguage={setLanguage}
-        />
-      </div>
-      <div
-        className="p-8 md:col-span-2 md:col-start-2"
-        dangerouslySetInnerHTML={{
-          __html: marked.parse(about.content),
-        }}
-      />
-      <AboutSideBar about={about} />
+}) => (
+  <div className="about grid grid-flow-row grid-cols-1 md:grid-cols-4">
+    <div className="col-span-full">
+      <Header navbarLinks={navbarLinks} isHomePage language={language} />
     </div>
-  )
-}
+    <div
+      className="p-8 md:col-span-2 md:col-start-2"
+      dangerouslySetInnerHTML={{
+        __html: marked.parse(about.content),
+      }}
+    />
+    <AboutSideBar about={about} />
+  </div>
+)
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const aboutPages = await fetchAboutPages()
@@ -79,9 +68,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const slug = params?.slug instanceof Array ? params?.slug[0] : params?.slug
+
   try {
     const about = await fetchAboutPage(slug, locale)
     const navbarLinks = await fetchNavbar()
+
+    if (about === undefined) return { notFound: true }
+
     return {
       props: {
         about,
@@ -90,9 +83,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     }
   } catch (e: unknown) {
     console.error(e)
-    return {
-      notFound: true,
-    }
+    return { notFound: true }
   }
 }
 

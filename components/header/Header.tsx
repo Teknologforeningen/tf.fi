@@ -9,10 +9,9 @@ type Props = {
   navbarLinks: NavbarLink[]
   isHomePage: boolean
   language: AvailableLanguages
-  setLanguage: (language: AvailableLanguages) => void
 }
 
-const Header = ({ navbarLinks, isHomePage, language, setLanguage }: Props) => {
+const Header = ({ navbarLinks, isHomePage, language }: Props) => {
   const [sideMenuOpen, setSideMenuOpen] = useState(false)
 
   return (
@@ -23,16 +22,11 @@ const Header = ({ navbarLinks, isHomePage, language, setLanguage }: Props) => {
             open={sideMenuOpen}
             onClick={() => setSideMenuOpen(!sideMenuOpen)}
           />
-          <Navbar
-            navbarLinks={navbarLinks}
-            language={language}
-            setLanguage={setLanguage}
-          />
+          <Navbar navbarLinks={navbarLinks} language={language} />
           <SideMenu open={sideMenuOpen}>
             <Navbar
               navbarLinks={navbarLinks}
               language={language}
-              setLanguage={setLanguage}
               position="side"
             />
           </SideMenu>

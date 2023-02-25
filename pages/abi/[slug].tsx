@@ -85,13 +85,22 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const slug = params?.slug instanceof Array ? params?.slug[0] : params?.slug
-  const abiPage = await fetchAbiPage(slug, locale)
-  const navbarLinks = await fetchNavbar()
-  return {
-    props: {
-      abiPage,
-      navbarLinks,
-    },
+
+  try {
+    const abiPage = await fetchAbiPage(slug, locale)
+    const navbarLinks = await fetchNavbar()
+
+    if (abiPage === undefined) return { notFound: true }
+
+    return {
+      props: {
+        abiPage,
+        navbarLinks,
+      },
+    }
+  } catch (e) {
+    console.error(e)
+    return { notFound: true }
   }
 }
 

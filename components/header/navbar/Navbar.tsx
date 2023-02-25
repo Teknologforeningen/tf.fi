@@ -14,7 +14,6 @@ import { useRouter } from 'next/router'
 type Props = {
   navbarLinks: NavbarLink[]
   language: AvailableLanguages
-  setLanguage: (language: AvailableLanguages) => void
   position?: 'top' | 'side'
 }
 
@@ -80,12 +79,7 @@ const NavbarDropdown = ({
   )
 }
 
-const Navbar = ({
-  navbarLinks,
-  language,
-  setLanguage,
-  position = 'top',
-}: Props) => {
+const Navbar = ({ navbarLinks, language, position = 'top' }: Props) => {
   const router = useRouter()
   const path = router.asPath
 
@@ -149,11 +143,7 @@ const Navbar = ({
               </Link>
             </Row>
             <hr className="my-0 mx-auto w-full text-white" />
-            <LanguageOptions
-              language={language}
-              setLanguage={setLanguage}
-              sideBarMode
-            />
+            <LanguageOptions language={language} sideBarMode />
           </>
         )}
       </Row>

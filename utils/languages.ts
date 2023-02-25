@@ -9,14 +9,14 @@ export interface Language {
   fundraising2: string
 }
 
-export type AvailableLanguages = 'swedish' | 'finnish' | 'english'
+export type AvailableLanguages = 'sv-FI' | 'fi-FI' | 'en-GB'
 
 type Languages = {
   [key in AvailableLanguages]: Language
 }
 
 const languages: Languages = {
-  swedish: {
+  'sv-FI': {
     title: 'på svenska',
     'om-teknologföreningen': 'om teknologföreningen',
     medlemsportal: 'medlemsportal',
@@ -26,7 +26,7 @@ const languages: Languages = {
     fundraising1: 'TF samlar medel för sitt nya nationshus!',
     fundraising2: 'Läs mera och delta i insamlingen på: ',
   },
-  finnish: {
+  'fi-FI': {
     title: 'suomeksi',
     'om-teknologföreningen': 'TEKNOLOGFÖRENINGENISTÄ',
     medlemsportal: 'jäsenille',
@@ -36,7 +36,7 @@ const languages: Languages = {
     fundraising1: 'TF kerää rahaa uuteen osakuntataloon!',
     fundraising2: 'Lue lisää ja osallistu varainkeruuseen: ',
   },
-  english: {
+  'en-GB': {
     title: 'in english',
     'om-teknologföreningen': 'about teknologföreningen',
     medlemsportal: 'for members',

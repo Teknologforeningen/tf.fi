@@ -1,18 +1,14 @@
 import Row from './Row'
 import texts, { AvailableLanguages } from '../utils/languages'
 import classNames from 'classnames'
+import Link from 'next/link'
 
 type Props = {
   language: AvailableLanguages
-  setLanguage: (language: AvailableLanguages) => void
   sideBarMode?: boolean
 }
 
-const LanguageOptions = ({
-  language,
-  setLanguage,
-  sideBarMode = false,
-}: Props) => {
+const LanguageOptions = ({ language, sideBarMode = false }: Props) => {
   const presentLanguages = Object.keys(texts) as AvailableLanguages[]
   const index = presentLanguages.indexOf(language)
   if (index > -1) {
@@ -28,15 +24,9 @@ const LanguageOptions = ({
       )}
     >
       {presentLanguages.map((lang) => (
-        <p
-          className="link link-text"
-          key={lang}
-          onClick={() => {
-            setLanguage(lang)
-          }}
-        >
-          {texts[lang]['title']}
-        </p>
+        <Link href="/" locale={lang} key={lang}>
+          <p className="link link-text">{texts[lang]['title']}</p>
+        </Link>
       ))}
     </Row>
   )

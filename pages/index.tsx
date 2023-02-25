@@ -28,6 +28,7 @@ type Props = {
   logos: NationLogo[]
   navbarLinks: NavbarLink[]
   namokallelses: Namo[]
+  locale?: AvailableLanguages
 }
 
 const Home: NextPage<Props> = ({
@@ -36,17 +37,16 @@ const Home: NextPage<Props> = ({
   isHomePage,
   logos,
   namokallelses,
+  locale = 'sv-FI',
 }) => {
   const [horizontalPosition, setHorizontalPosition] = useState(0)
-  const [language, setLanguage] = useState<AvailableLanguages>('swedish')
 
   return (
     <div className="bg-darkblue shadow-[0_0_200px_rgba(0,0,0,0.9)_inset]">
       <Header
         navbarLinks={navbarLinks}
         isHomePage={isHomePage}
-        language={language}
-        setLanguage={setLanguage}
+        language={locale}
       />
 
       <main>
@@ -60,8 +60,8 @@ const Home: NextPage<Props> = ({
       {isHomePage && (
         <footer>
           <Column className="mt-12">
-            <Fundraising language={language} />
-            <LanguageOptions language={language} setLanguage={setLanguage} />
+            <Fundraising language={locale} />
+            <LanguageOptions language={locale} />
             <p className="m-4 text-center font-display text-white">
               TEKNOLOGFÖRENINGENS NATIONSFÖRETAG
             </p>
@@ -74,10 +74,11 @@ const Home: NextPage<Props> = ({
   )
 }
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  // TODO: Add locale to these functions after they are added to CMS
   const events = await fetchEvents()
   const flags = await fetchFlags()
-  const homepage = await fetchHomepage()
+  const homepage = await fetchHomepage(locale)
   const navbarLinks = await fetchNavbar()
   const namokallelses = await fetchNamokallelse()
   const logos = homepage.footer.nationlogos
@@ -85,7 +86,14 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     (flag) => flag.title === 'isHomePage' && flag.onoff
   )
   return {
-    props: { navbarLinks, events, isHomePage, logos, namokallelses },
+    props: {
+      navbarLinks,
+      events,
+      isHomePage,
+      logos,
+      namokallelses,
+      locale,
+    },
   }
 }
 
