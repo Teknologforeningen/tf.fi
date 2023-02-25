@@ -14,7 +14,11 @@ export interface AbiPage {
   locale: string
 }
 
-export async function fetchAbiPage(slug?: string): Promise<AbiPage> {
+export async function fetchAbiPage(
+  slug?: string,
+  locale?: string
+): Promise<AbiPage | undefined> {
+  locale = locale ?? 'sv-FI'
   const query = slug
     ? qs.stringify({
         filters: {
@@ -23,18 +27,15 @@ export async function fetchAbiPage(slug?: string): Promise<AbiPage> {
           },
         },
         populate: '*',
+        locale,
       })
     : ''
-  const abiPages = await fetchFromStrapi<AbiPage>(`/abi-pages?${query}`)
-  if (!(abiPages instanceof Array)) return Promise.reject()
-  else if (abiPages.length === 0) return Promise.reject()
 
-  const abiPage = abiPages[0]
-  return abiPage.attributes
+  const abiPages = await fetchFromStrapi<AbiPage>(`/abi-pages?${query}`)
+  return abiPages[0]?.attributes
 }
 
 export async function fetchAbiPages(): Promise<AbiPage[]> {
   const res = await fetchFromStrapi<AbiPage>('/abi-pages')
-  if (!(res instanceof Array)) return Promise.reject()
   return res.map((e) => e.attributes)
 }

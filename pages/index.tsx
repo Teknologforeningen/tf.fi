@@ -75,8 +75,6 @@ const Home: NextPage<Props> = ({
 }
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
-  const locale = ctx.locale
-  console.log(locale)
   const events = await fetchEvents()
   const flags = await fetchFlags()
   const homepage = await fetchHomepage()

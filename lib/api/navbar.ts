@@ -1,5 +1,5 @@
 import qs from 'qs'
-import { CollectionResponse, fetchFromStrapi } from '.'
+import { API_URL, CollectionResponse } from '.'
 import { AboutPage } from './about'
 
 type NavbarAbout = Pick<AboutPage, 'slug' | 'title'>
@@ -57,9 +57,9 @@ export default async function fetchNavbar(): Promise<NavbarLink[]> {
     },
     { encodeValuesOnly: true }
   )
-  const navbar = (await fetchFromStrapi<Navbar>(
-    `/navbar?${query}`
-  )) as CollectionResponse<Navbar>
+  const res = await fetch(`${API_URL}/navbar?${query}`)
+  const json = await res.json()
+  const navbar: CollectionResponse<Navbar> = json.data
 
   const about = toNavbarMultipleLink(
     navbar.attributes.abouts.data,

@@ -77,15 +77,22 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return { paths, fallback: 'blocking' }
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const slug = params?.slug instanceof Array ? params?.slug[0] : params?.slug
-  const about = await fetchAboutPage(slug)
-  const navbarLinks = await fetchNavbar()
-  return {
-    props: {
-      about,
-      navbarLinks,
-    },
+  try {
+    const about = await fetchAboutPage(slug, locale)
+    const navbarLinks = await fetchNavbar()
+    return {
+      props: {
+        about,
+        navbarLinks,
+      },
+    }
+  } catch (e: unknown) {
+    console.error(e)
+    return {
+      notFound: true,
+    }
   }
 }
 

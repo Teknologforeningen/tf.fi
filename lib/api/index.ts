@@ -10,7 +10,10 @@ export type CollectionResponse<T> = {
 export async function fetchFromStrapi<T>(
   path: string,
   url: string = API_URL // For testing
-): Promise<CollectionResponse<T> | CollectionResponse<T>[]> {
+): Promise<CollectionResponse<T>[]> {
   const res = await fetch(`${url}${path}`)
-  return res.json().then((j) => j.data)
+  const json = await res.json()
+  const data = json.data
+  if (!(data instanceof Array)) throw new Error('Expeceted array')
+  return data
 }
