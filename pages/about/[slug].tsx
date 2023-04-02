@@ -34,7 +34,7 @@ const AboutSideBar: React.FC<{ about: AboutPage }> = ({ about }) => {
 
   return (
     <div
-      className="w-full p-4 pt-8"
+      className="w-full p-4 pt-8 text-black"
       dangerouslySetInnerHTML={{ __html: html }}
     />
   )
@@ -45,9 +45,8 @@ const AboutPage: NextPage<{ about: AboutPage; navbarLinks: NavbarLink[] }> = ({
   navbarLinks,
 }) => {
   const [language, setLanguage] = useState<AvailableLanguages>('swedish')
-
   return (
-    <div className="about grid grid-flow-row grid-cols-1 md:grid-cols-4">
+    <div className="about grid grid-flow-row grid-cols-1 text-black md:grid-cols-4">
       <div className="col-span-full">
         <Header
           navbarLinks={navbarLinks}
@@ -57,7 +56,7 @@ const AboutPage: NextPage<{ about: AboutPage; navbarLinks: NavbarLink[] }> = ({
         />
       </div>
       <div
-        className="p-8 md:col-span-2 md:col-start-2"
+        className="p-8 text-black md:col-span-2 md:col-start-2"
         dangerouslySetInnerHTML={{
           __html: marked.parse(about.content),
         }}

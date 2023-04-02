@@ -13,11 +13,15 @@ module.exports = {
         teknologröd: '#b20738',
         eventblue: '#8ad7d7',
         blogpink: '#d79ad1',
+        darkgray: '#242424',
       },
     },
     fontFamily: {
       body: ['Raleway', 'sans-serif'],
       display: ['Montserrat', 'sans-serif'],
+    },
+    backgroundImage: {
+      'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
     },
   },
   plugins: [
