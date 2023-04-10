@@ -1,5 +1,4 @@
 import type { GetStaticProps, NextPage } from 'next'
-import Timeline from '../components/eventline/Timeline'
 import { Event as TimelineEvent } from '../models/event'
 import { useState } from 'react'
 import { AvailableLanguages } from '../utils/languages'
@@ -9,12 +8,11 @@ import { fetchHomepage } from '../lib/api/homepage'
 import { fetchNamokallelse } from '../lib/api/namokallelse'
 import Header from '../components/header/Header'
 import Column from '../components/Column'
-import Fundraising from '../components/footer/Fundraising'
-import LanguageOptions from '../components/LanguageOptions'
 import NationsLogoRow, { NationLogo } from '../components/footer/Logos'
-import TF150Logo from '../components/TF150Logo'
 import fetchNavbar, { NavbarLink } from '../lib/api/navbar'
 import Namokallelses, { Namo } from '../components/namokallese/Namokallelse'
+import TFLogo from '../components/TFLogo/TFLogo'
+import BasicInfo from '../components/footer/BasicInfo'
 
 export interface HomePage {
   footer: {
@@ -32,45 +30,51 @@ type Props = {
 
 const Home: NextPage<Props> = ({
   navbarLinks,
-  events,
   isHomePage,
   logos,
   namokallelses,
 }) => {
-  const [horizontalPosition, setHorizontalPosition] = useState(0)
   const [language, setLanguage] = useState<AvailableLanguages>('swedish')
 
   return (
-    <div className="bg-darkblue shadow-[0_0_200px_rgba(0,0,0,0.9)_inset]">
-      <Header
-        navbarLinks={navbarLinks}
-        isHomePage={isHomePage}
-        language={language}
-        setLanguage={setLanguage}
-      />
-
-      <main>
-        <TF150Logo horizontalPosition={horizontalPosition} />
-        <Timeline
-          events={events}
-          setHorizontalPosition={setHorizontalPosition}
+    <>
+      <header>
+        <Header
+          navbarLinks={navbarLinks}
+          isHomePage={isHomePage}
+          language={language}
+          setLanguage={setLanguage}
         />
+      </header>
+      <main
+        //could not get tailwind to center content so using inline style
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: 'white',
+          flex: 1,
+          height: '100%',
+          minHeight: '55vh',
+        }}
+      >
+        <TFLogo />
       </main>
-
-      {isHomePage && (
-        <footer>
-          <Column className="mt-12">
-            <Fundraising language={language} />
-            <LanguageOptions language={language} setLanguage={setLanguage} />
-            <p className="m-4 text-center font-display text-white">
-              TEKNOLOGFÖRENINGENS NATIONSFÖRETAG
-            </p>
-            <NationsLogoRow nationLogos={logos} />
-          </Column>
-        </footer>
-      )}
-      <Namokallelses namokallelses={namokallelses} />
-    </div>
+      <footer
+        style={{
+          left: 0,
+          bottom: 0,
+          width: '100%',
+        }}
+      >
+        {/*<LanguageOptions language={language} setLanguage={setLanguage} />*/}
+        <Column className="sticky bottom-0 w-full bg-darkgray pb-5">
+          <NationsLogoRow nationLogos={logos} />
+          <BasicInfo />
+          <Namokallelses namokallelses={namokallelses} />
+        </Column>
+      </footer>
+    </>
   )
 }
 

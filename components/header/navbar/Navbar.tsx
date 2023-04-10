@@ -43,7 +43,7 @@ const NavbarDropdown = ({
           isTop ? 'peer' : '!m-0',
           path.startsWith(`/${link.basePath}` ?? '') &&
             link.links.find((l) => l.link === path) &&
-            '!text-gold',
+            '!text-teknologröd',
           'link-text text-lg'
         )}
         onClick={onClick}
@@ -56,7 +56,7 @@ const NavbarDropdown = ({
             isTop
               ? 'absolute top-4 left-0 mt-2 hidden flex-col rounded-md shadow-lg ring-1 ring-black ring-opacity-5 hover:flex focus:outline-none peer-hover:flex'
               : '!m-0 pl-4',
-            'z-10 bg-darkblue bg-opacity-80 px-1'
+            'z-10 bg-darkgray bg-opacity-80 px-1'
           )}
         >
           <div className="!m-0 py-1">
@@ -65,7 +65,7 @@ const NavbarDropdown = ({
                 <a
                   className={classNames(
                     isTop && 'py-2',
-                    link === path && '!text-gold',
+                    link === path && '!text-teknologröd',
                     'link link-text block'
                   )}
                 >
@@ -111,7 +111,7 @@ const Navbar = ({
             <Link key={link.title} href={link.link} passHref>
               <a
                 className={classNames(
-                  path === link.link && '!text-gold',
+                  path === link.link && '!text-teknologröd',
                   'link link-text'
                 )}
               >
@@ -149,11 +149,13 @@ const Navbar = ({
               </Link>
             </Row>
             <hr className="my-0 mx-auto w-full text-white" />
-            <LanguageOptions
+            {/*<LanguageOptions
               language={language}
               setLanguage={setLanguage}
               sideBarMode
-            />
+        />
+        //Removed since localization is not implemented yet
+        */}
           </>
         )}
       </Row>

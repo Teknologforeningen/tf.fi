@@ -24,7 +24,7 @@ const LanguageOptions = ({
         'justify-around',
         sideBarMode
           ? 'mt-4'
-          : 'align-center m-4 hidden w-[300px] justify-around font-display text-white md:flex'
+          : 'align-center m-4 hidden w-[300px] justify-around font-display text-black md:flex'
       )}
     >
       {presentLanguages.map((lang) => (

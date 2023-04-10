@@ -10,8 +10,8 @@ type Props = {
 
 const Fundraising = ({ language }: Props) => {
   return (
-    <div className="mb-20 grid h-[400px] w-full max-w-none grid-cols-1 grid-rows-1 place-items-center">
-      <div className="absolute col-span-1 row-span-1 mt-32 h-[400px] w-full max-w-none">
+    <div className="grid h-[400px] w-full max-w-none grid-cols-1 grid-rows-1 place-items-center">
+      <div className="absolute col-span-1 row-span-1 h-[400px] w-full max-w-none">
         <Link href={links.fundraising.info} passHref>
           <a>
             <Image
@@ -34,7 +34,7 @@ const Fundraising = ({ language }: Props) => {
           >
             <span>
               <Link href={links.fundraising.info} passHref>
-                <a className="link link-text !text-sm !text-gold">
+                <a className="link link-text !text-sm !text-teknologröd">
                   &nbsp;vision.tf.fi
                 </a>
               </Link>

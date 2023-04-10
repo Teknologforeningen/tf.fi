@@ -18,7 +18,7 @@ const Header = ({ navbarLinks, isHomePage, language, setLanguage }: Props) => {
   return (
     <header>
       {isHomePage && (
-        <>
+        <div className="bg-darkgray pb-2">
           <MenuIcon
             open={sideMenuOpen}
             onClick={() => setSideMenuOpen(!sideMenuOpen)}
@@ -36,7 +36,7 @@ const Header = ({ navbarLinks, isHomePage, language, setLanguage }: Props) => {
               position="side"
             />
           </SideMenu>
-        </>
+        </div>
       )}
     </header>
   )
