@@ -47,7 +47,7 @@ const Home: NextPage<Props> = ({
         />
       </header>
       <main
-        //could not get tailwind to center content
+        //could not get tailwind to center content so using inline style
         style={{
           display: 'flex',
           justifyContent: 'center',
@@ -55,11 +55,18 @@ const Home: NextPage<Props> = ({
           backgroundColor: 'white',
           flex: 1,
           height: '100%',
+          minHeight: '55vh',
         }}
       >
         <TFLogo />
       </main>
-      <footer>
+      <footer
+        style={{
+          left: 0,
+          bottom: 0,
+          width: '100%',
+        }}
+      >
         {/*<LanguageOptions language={language} setLanguage={setLanguage} />*/}
         <Column className="sticky bottom-0 w-full bg-darkgray pb-5">
           <NationsLogoRow nationLogos={logos} />
