@@ -6,7 +6,6 @@ import TaffaABLogo from './TaffaABLogo'
 import DagsenLogo from './DagsenLogo'
 import links from '../../../utils/links'
 import { AvailableLanguages } from '../../../utils/languages'
-import LanguageOptions from '../../LanguageOptions'
 import classNames from 'classnames'
 import { NavbarLink, NavbarMultipleLink } from '../../../lib/api/navbar'
 import { useRouter } from 'next/router'
@@ -80,12 +79,7 @@ const NavbarDropdown = ({
   )
 }
 
-const Navbar = ({
-  navbarLinks,
-  language,
-  setLanguage,
-  position = 'top',
-}: Props) => {
+const Navbar = ({ navbarLinks, position = 'top' }: Props) => {
   const router = useRouter()
   const path = router.asPath
 
