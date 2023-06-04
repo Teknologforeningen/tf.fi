@@ -1,18 +1,22 @@
 import type { GetStaticProps, NextPage } from 'next'
-import { Event as TimelineEvent } from '../models/event'
 import { useState } from 'react'
 import { AvailableLanguages } from '../utils/languages'
 import { fetchEvents } from '../lib/api/event'
 import { fetchFlags } from '../lib/api/flag'
 import { fetchHomepage } from '../lib/api/homepage'
 import { fetchNamokallelse } from '../lib/api/namokallelse'
+import { getCalendarEvents } from './api/calendar'
 import Header from '../components/header/Header'
 import Column from '../components/Column'
 import NationsLogoRow, { NationLogo } from '../components/footer/Logos'
 import fetchNavbar, { NavbarLink } from '../lib/api/navbar'
 import Namokallelses, { Namo } from '../components/namokallese/Namokallelse'
-import TFLogo from '../components/TFLogo/TFLogo'
+import MainBanner from '../components/mainBanner'
 import BasicInfo from '../components/footer/BasicInfo'
+import Calendar from '../components/calendar/calendar'
+import Events from '../components/events/events'
+import { calendar_v3 } from 'googleapis'
+import { Event } from '../models/event'
 
 export interface HomePage {
   footer: {
@@ -21,11 +25,12 @@ export interface HomePage {
 }
 
 type Props = {
-  events: TimelineEvent[]
   isHomePage: boolean
   logos: NationLogo[]
   navbarLinks: NavbarLink[]
   namokallelses: Namo[]
+  calendarEvents: calendar_v3.Schema$Event[]
+  events: Event[]
 }
 
 const Home: NextPage<Props> = ({
@@ -33,9 +38,10 @@ const Home: NextPage<Props> = ({
   isHomePage,
   logos,
   namokallelses,
+  events,
+  calendarEvents,
 }) => {
   const [language, setLanguage] = useState<AvailableLanguages>('swedish')
-
   return (
     <>
       <header>
@@ -46,19 +52,13 @@ const Home: NextPage<Props> = ({
           setLanguage={setLanguage}
         />
       </header>
-      <main
-        //could not get tailwind to center content so using inline style
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: 'white',
-          flex: 1,
-          height: '100%',
-          minHeight: '55vh',
-        }}
-      >
-        <TFLogo />
+
+      <main className="">
+        <MainBanner />
+        <div className="h-400 mx-5 flex flex-row justify-end pt-5 ">
+          <Events events={events} />
+          <Calendar calendarEvents={calendarEvents} />
+        </div>
       </main>
       <footer
         style={{
@@ -84,12 +84,22 @@ export const getStaticProps: GetStaticProps = async () => {
   const homepage = await fetchHomepage()
   const navbarLinks = await fetchNavbar()
   const namokallelses = await fetchNamokallelse()
+  const calendarEvents = await getCalendarEvents(
+    'a2fmh06fcott173jeqasmfnfec@group.calendar.google.com'
+  )
   const logos = homepage.footer.nationlogos
   const isHomePage = flags.some(
     (flag) => flag.title === 'isHomePage' && flag.onoff
   )
   return {
-    props: { navbarLinks, events, isHomePage, logos, namokallelses },
+    props: {
+      navbarLinks,
+      events,
+      isHomePage,
+      logos,
+      namokallelses,
+      calendarEvents,
+    },
   }
 }
 

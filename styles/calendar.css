@@ -1,0 +1,29 @@
+.fc .fc-daygrid-day-number {
+  color: white;
+}
+
+.fc .fc-col-header-cell-cushion {
+  color: white;
+}
+
+.fc .fc-toolbar-title {
+  color: white;
+}
+.fc .fc-scrollgrid-liquid {
+  height: 100%;
+  background-color: var(--gray);
+}
+
+.fc .fc-button-primary:hover {
+  background-color: var(--teknologröd);
+}
+
+.fc .fc-button-primary{
+  background-color: var(--gray);
+}
+
+.fc .fc-toolbar-title {
+  font-size: 1.5rem; 
+}
+
+.fc-toolbar { text-transform: capitalize; }

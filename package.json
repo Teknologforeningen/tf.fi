@@ -10,7 +10,11 @@
     "export": "next export"
   },
   "dependencies": {
+    "@fullcalendar/core": "^6.1.8",
+    "@fullcalendar/daygrid": "^6.1.8",
+    "@fullcalendar/react": "^6.1.8",
     "classnames": "^2.3.1",
+    "googleapis": "105",
     "marked": "^4.1.0",
     "next": "12.3.0",
     "overlayscrollbars": "^1.13.1",

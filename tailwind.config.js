@@ -14,6 +14,7 @@ module.exports = {
         eventblue: '#8ad7d7',
         blogpink: '#d79ad1',
         darkgray: '#242424',
+        gray: '#38404b',
       },
     },
     fontFamily: {

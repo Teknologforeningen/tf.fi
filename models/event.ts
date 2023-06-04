@@ -16,3 +16,12 @@ export type Event = {
 export type GroupedEvent = Record<string, Event[]>
 
 export type HideableEvent = Event & { hide: boolean }
+
+//compatable with FullCalendar event type
+export type CalendarEvent = {
+  id: string | null | undefined
+  title: string | null | undefined
+  start: string | null | undefined
+  end: string | null | undefined
+  htmlLink: string | null | undefined
+}

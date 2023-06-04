@@ -4,6 +4,7 @@ import '../styles/event-page.css'
 import '../styles/links.css'
 import 'overlayscrollbars/css/OverlayScrollbars.css'
 import '../styles/os-theme-round-light.css'
+import '../styles/calendar.css'
 
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
