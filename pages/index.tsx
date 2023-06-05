@@ -5,7 +5,6 @@ import { fetchEvents } from '../lib/api/event'
 import { fetchFlags } from '../lib/api/flag'
 import { fetchHomepage } from '../lib/api/homepage'
 import { fetchNamokallelse } from '../lib/api/namokallelse'
-import { getCalendarEvents } from './api/calendar'
 import Header from '../components/header/Header'
 import Column from '../components/Column'
 import NationsLogoRow, { NationLogo } from '../components/footer/Logos'
@@ -39,9 +38,10 @@ const Home: NextPage<Props> = ({
   logos,
   namokallelses,
   events,
-  calendarEvents,
+  //calendarEvents,
 }) => {
   const [language, setLanguage] = useState<AvailableLanguages>('swedish')
+
   return (
     <>
       <header>
@@ -57,7 +57,7 @@ const Home: NextPage<Props> = ({
         <MainBanner />
         <div className="h-400 mx-5 flex flex-row justify-end pt-5 ">
           <Events events={events} />
-          <Calendar calendarEvents={calendarEvents} />
+          <Calendar />
         </div>
       </main>
       <footer
@@ -84,9 +84,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const homepage = await fetchHomepage()
   const navbarLinks = await fetchNavbar()
   const namokallelses = await fetchNamokallelse()
-  const calendarEvents = await getCalendarEvents(
-    'a2fmh06fcott173jeqasmfnfec@group.calendar.google.com'
-  )
+  // const calendarEvents = await getCalendarEvents(calendarId)
   const logos = homepage.footer.nationlogos
   const isHomePage = flags.some(
     (flag) => flag.title === 'isHomePage' && flag.onoff
@@ -98,7 +96,7 @@ export const getStaticProps: GetStaticProps = async () => {
       isHomePage,
       logos,
       namokallelses,
-      calendarEvents,
+      //calendarEvents,
     },
   }
 }
