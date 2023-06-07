@@ -16,6 +16,7 @@ import Calendar from '../components/calendar/calendar'
 import Events from '../components/events/events'
 import { calendar_v3 } from 'googleapis'
 import { Event } from '../models/event'
+import TFInfo from '../components/tfInfo'
 
 export interface HomePage {
   footer: {
@@ -57,6 +58,7 @@ const Home: NextPage<Props> = ({
           <Events events={events} />
           <Calendar />
         </div>
+        <TFInfo />
       </main>
       <footer
         style={{
