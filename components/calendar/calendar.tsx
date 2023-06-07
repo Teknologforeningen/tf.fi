@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import svLocale from '@fullcalendar/core/locales/sv'
+import { EventSourceInput } from '@fullcalendar/core'
 
 //remove hardcoded colors
 const CalendarComponent = () => {
-  const [data, setData] = useState(null)
+  const [data, setData] = useState<EventSourceInput | undefined>(undefined)
   const [date, setDate] = useState(new Date())
 
   useEffect(() => {
@@ -19,7 +20,7 @@ const CalendarComponent = () => {
   }, [date])
 
   return (
-    <div className="rounded-m w-[50%] p-5">
+    <div className="flex h-[700px] w-[100%] flex-col p-5 md:w-[50%]">
       <FullCalendar
         plugins={[dayGridPlugin]}
         initialView="dayGridMonth"
@@ -28,7 +29,7 @@ const CalendarComponent = () => {
         eventTextColor="white"
         eventBackgroundColor="#B20738"
         eventClick={(info) => window.open(info.event.extendedProps.htmlLink)}
-        height={700}
+        height="100%"
         firstDay={1}
         locale={svLocale}
         datesSet={(arg) => setDate(arg.start)}

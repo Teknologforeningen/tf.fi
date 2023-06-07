@@ -9,7 +9,7 @@ type Props = {
 //TODO: get text ellipse to work properly, kinda spaghetti rn
 const Events = ({ events }: Props) => {
   return (
-    <div className="h-[600px] w-[50%] p-4">
+    <div className="flex h-[700px] w-full flex-col p-5 md:w-[50%]">
       <p className="m-2 pb-5 text-2xl text-white">Anslagstavlan</p>
       <div className="overflow-y h-[635px] overflow-scroll">
         {events.map(

@@ -38,10 +38,8 @@ const Home: NextPage<Props> = ({
   logos,
   namokallelses,
   events,
-  //calendarEvents,
 }) => {
   const [language, setLanguage] = useState<AvailableLanguages>('swedish')
-
   return (
     <>
       <header>
@@ -53,9 +51,9 @@ const Home: NextPage<Props> = ({
         />
       </header>
 
-      <main className="">
+      <main>
         <MainBanner />
-        <div className="h-400 mx-5 flex flex-row justify-end pt-5 ">
+        <div className="flex flex-col md:flex-row">
           <Events events={events} />
           <Calendar />
         </div>
@@ -84,7 +82,6 @@ export const getStaticProps: GetStaticProps = async () => {
   const homepage = await fetchHomepage()
   const navbarLinks = await fetchNavbar()
   const namokallelses = await fetchNamokallelse()
-  // const calendarEvents = await getCalendarEvents(calendarId)
   const logos = homepage.footer.nationlogos
   const isHomePage = flags.some(
     (flag) => flag.title === 'isHomePage' && flag.onoff
@@ -96,7 +93,6 @@ export const getStaticProps: GetStaticProps = async () => {
       isHomePage,
       logos,
       namokallelses,
-      //calendarEvents,
     },
   }
 }
