@@ -46,7 +46,6 @@ const AbiPage: NextPage<{ abiPage: AbiPage; navbarLinks: NavbarLink[] }> = ({
       <div className="col-span-full">
         <Header
           navbarLinks={navbarLinks}
-          isHomePage
           language={language}
           setLanguage={setLanguage}
         />

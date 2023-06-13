@@ -55,7 +55,6 @@ const AboutPage: NextPage<{
         <div className="col-span-full">
           <Header
             navbarLinks={navbarLinks}
-            isHomePage
             language={language}
             setLanguage={setLanguage}
           />
