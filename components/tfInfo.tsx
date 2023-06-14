@@ -3,9 +3,9 @@ import Column from './Column'
 
 const TFInfo = () => {
   return (
-    <Column className="py-8 text-white">
-      <h1 className="text-bold link-text text-2xl">Vad är TF?</h1>
-      <p className="max-w-[1200px] py-3 px-7">
+    <Column className="text-black">
+      <h1 className="text-3xl font-bold">Vad är TF?</h1>
+      <p className="max-w-[1200px] py-3">
         Vad är TF? Teknologföreningen, TF, är den svenskspråkiga nationen vid
         Aalto-universitetet. Nationen grundades 1872. TF:s ändamål är att
         sammanföra svenskspråkiga studerande vid Aalto-universitetet. I och med

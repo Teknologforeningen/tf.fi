@@ -34,7 +34,7 @@ const EventPage: NextPage<Props> = ({ event }) => (
           </h2>
         </Row>
 
-        <div className="mt-12 w-3/4 text-lg leading-7 tracking-wide">
+        <div className="mt-12 w-3/4 overflow-hidden text-lg leading-7 tracking-wide">
           <div
             dangerouslySetInnerHTML={{
               __html: marked.parse(event?.content ?? ''),

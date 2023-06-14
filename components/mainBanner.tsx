@@ -5,14 +5,14 @@ import Column from './Column'
 
 const MainBanner = () => (
   //TODO add more images that cycle?
-  <div className="relative h-[500px] w-[100%] bg-black">
+  <div className="relative h-[500px] w-[100%]">
     <Image
       src={`/images/banner/2.jpg`}
       layout="fill"
       objectFit="cover"
       alt="jeej"
       height={500}
-      className="opacity-50"
+      className="opacity-70"
       loading="eager"
     />
 

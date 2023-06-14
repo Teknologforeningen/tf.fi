@@ -1,5 +1,6 @@
 .fc .fc-daygrid-day-number {
   color: white;
+  text-decoration: none;
 }
 
 .fc .fc-col-header-cell-cushion {
@@ -27,3 +28,8 @@
 }
 
 .fc-toolbar { text-transform: capitalize; }
+
+
+.fc-daygrid-event {
+  white-space: break-spaces;
+}

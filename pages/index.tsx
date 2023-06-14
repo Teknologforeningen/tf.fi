@@ -17,6 +17,7 @@ import Events from '../components/events/events'
 import { calendar_v3 } from 'googleapis'
 import { Event } from '../models/event'
 import TFInfo from '../components/tfInfo'
+import Item from '../components/Item'
 
 export interface HomePage {
   footer: {
@@ -53,22 +54,31 @@ const Home: NextPage<Props> = ({
       </header>
 
       <main>
-        <MainBanner />
-        <div className="flex flex-col md:flex-row">
-          <Events events={events} />
-          <Calendar />
-        </div>
-        <TFInfo />
+        <Column>
+          <MainBanner />
+          <Item backgroundColor="darkgray">
+            <Events
+              events={events.filter((e) => e.type === 'blogpost' || !e.type)}
+              title="Nyheter"
+            />
+          </Item>
+          <Item backgroundColor="gray">
+            <Events
+              events={events.filter((e) => e.type === 'event')}
+              title="Anslagstavlan"
+            />
+          </Item>
+          <Item>
+            <Calendar />
+          </Item>
+          <Item backgroundColor="white">
+            <TFInfo />
+          </Item>
+        </Column>
       </main>
-      <footer
-        style={{
-          left: 0,
-          bottom: 0,
-          width: '100%',
-        }}
-      >
+      <footer>
         {/*<LanguageOptions language={language} setLanguage={setLanguage} />*/}
-        <Column className="sticky bottom-0 w-full bg-darkgray pb-5">
+        <Column className="sticky bottom-0 w-full bg-darkgray py-5">
           <NationsLogoRow nationLogos={logos} />
           <BasicInfo />
           <Namokallelses namokallelses={namokallelses} />

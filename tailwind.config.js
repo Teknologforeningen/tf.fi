@@ -15,6 +15,7 @@ module.exports = {
         blogpink: '#d79ad1',
         darkgray: '#242424',
         gray: '#38404b',
+        lightGray: '#f5f5f5',
       },
     },
     fontFamily: {
