@@ -5,6 +5,7 @@ import '../styles/links.css'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import localFont from 'next/font/local'
+import { AuthContext } from '../components/AuthContext'
 
 const raleway = localFont({
   src: [
@@ -27,6 +28,8 @@ const montserrat = localFont({
   variable: '--font-montserrat',
 })
 
+const STRAPI_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://cms.tf.fi'
+
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
@@ -37,7 +40,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       <main
         className={`${raleway.variable} ${montserrat.variable} h-full font-body`}
       >
-        <Component {...pageProps} />
+        <AuthContext strapiBaseUrl={STRAPI_URL}>
+          <Component {...pageProps} />
+        </AuthContext>
       </main>
     </>
   )
