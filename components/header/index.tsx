@@ -1,4 +1,4 @@
-import Navbar from './navbar/Navbar'
+import Navbar from './navbar'
 import { AvailableLanguages } from '../../utils/languages'
 import SideMenu from './navbar/SideMenu'
 import MenuIcon from './navbar/MenuIcon'

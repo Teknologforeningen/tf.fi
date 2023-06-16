@@ -55,8 +55,8 @@ const NationImage = ({ logo }: NationImageProps) => (
       <Image
         src={`${process.env.NEXT_PUBLIC_BASE_URL}${logo.image.data.attributes.url}`}
         alt={logo.name}
+        className="object-contain"
         fill
-        style={{ objectFit: 'contain' }}
       />
     </Link>
   </div>

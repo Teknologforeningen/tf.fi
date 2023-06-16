@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import Column from '../Column'
+import Column from './Column'
+
 const TFLogo = () => {
   const [show, setShow] = useState(false)
   useEffect(() => setShow(true), [])

@@ -6,7 +6,7 @@
   },
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -16,12 +16,9 @@
     "classnames": "^2.3.1",
     "marked": "^5.1.0",
     "next": "^13.4.6",
-    "overlayscrollbars": "^2.2.0",
-    "overlayscrollbars-react": "^0.5.0",
     "qs": "^6.11.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-textfit": "^1.1.1",
     "sharp": "^0.32.1"
   },
   "devDependencies": {
@@ -36,7 +33,6 @@
     "eslint": "8.42.0",
     "eslint-config-next": "^13.4.6",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "postcss": "^8.4.16",
