@@ -53,23 +53,23 @@ const NavbarDropdown = ({
         <div
           className={classNames(
             isTop
-              ? 'absolute top-4 left-0 mt-2 hidden flex-col rounded-md shadow-lg ring-1 ring-black ring-opacity-5 hover:flex focus:outline-none peer-hover:flex'
+              ? 'absolute left-0 top-4 mt-2 hidden flex-col rounded-md shadow-lg ring-1 ring-black ring-opacity-5 hover:flex focus:outline-none peer-hover:flex'
               : '!m-0 pl-4',
             'z-10 bg-darkgray bg-opacity-80 px-1'
           )}
         >
           <div className="!m-0 py-1">
             {link.links.map(({ title, link }) => (
-              <Link key={title} href={link} passHref>
-                <a
-                  className={classNames(
-                    isTop && 'py-2',
-                    link === path && '!text-teknologröd',
-                    'link link-text block'
-                  )}
-                >
-                  {title}
-                </a>
+              <Link
+                key={title}
+                href={link}
+                className={classNames(
+                  isTop && 'py-2',
+                  link === path && '!text-teknologröd',
+                  'link link-text block'
+                )}
+              >
+                {title}
               </Link>
             ))}
           </div>
@@ -102,47 +102,39 @@ const Navbar = ({ navbarLinks, position = 'top' }: Props) => {
               path={path}
             />
           ) : (
-            <Link key={link.title} href={link.link} passHref>
-              <a
-                className={classNames(
-                  path === link.link && '!text-teknologröd',
-                  'link link-text'
-                )}
-              >
-                {link.title}
-              </a>
+            <Link
+              key={link.title}
+              href={link.link}
+              className={classNames(
+                path === link.link && '!text-teknologröd',
+                'link link-text'
+              )}
+            >
+              {link.title}
             </Link>
           )
         )}
 
         {position === 'top' ? (
           <>
-            <Link href={links.täffäab} passHref>
-              <a className="link link-text">
-                <TaffaABLogo />
-              </a>
+            <Link href={links.täffäab} className="link link-text">
+              <TaffaABLogo />
             </Link>
-            <Link href={links.lunch} passHref>
-              <a className="link link-text">
-                <DagsenLogo />
-              </a>
+            <Link href={links.lunch} className="link link-text">
+              <DagsenLogo />
             </Link>
           </>
         ) : (
           <>
             <Row className="min-h-[20px] justify-around">
-              <Link href={links.täffäab} passHref>
-                <a className="link link-text">
-                  <TaffaABLogo />
-                </a>
+              <Link href={links.täffäab} className="link link-text">
+                <TaffaABLogo />
               </Link>
-              <Link href={links.lunch} passHref>
-                <a className="link link-text">
-                  <DagsenLogo />
-                </a>
+              <Link href={links.lunch} className="link link-text">
+                <DagsenLogo />
               </Link>
             </Row>
-            <hr className="my-0 mx-auto w-full text-white" />
+            <hr className="mx-auto my-0 w-full text-white" />
             {/*<LanguageOptions
               language={language}
               setLanguage={setLanguage}

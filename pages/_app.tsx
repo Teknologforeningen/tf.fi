@@ -2,7 +2,7 @@ import '../styles/globals.css'
 import '../styles/about-page.css'
 import '../styles/event-page.css'
 import '../styles/links.css'
-import 'overlayscrollbars/css/OverlayScrollbars.css'
+import 'overlayscrollbars/overlayscrollbars.css'
 import '../styles/os-theme-round-light.css'
 
 import type { AppProps } from 'next/app'

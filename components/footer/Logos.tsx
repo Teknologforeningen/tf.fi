@@ -52,14 +52,12 @@ const NationImage = ({ logo }: NationImageProps) => (
   // Tailwind does not work with Next.js images
   <div style={{ position: 'relative', width: '100px', height: '50px' }}>
     <Link href={logo.url} passHref>
-      <a>
-        <Image
-          src={`${process.env.NEXT_PUBLIC_BASE_URL}${logo.image.data.attributes.url}`}
-          alt={logo.name}
-          layout={'fill'}
-          objectFit={'contain'}
-        />
-      </a>
+      <Image
+        src={`${process.env.NEXT_PUBLIC_BASE_URL}${logo.image.data.attributes.url}`}
+        alt={logo.name}
+        fill
+        style={{ objectFit: 'contain' }}
+      />
     </Link>
   </div>
 )
@@ -69,7 +67,7 @@ type NationsLogoRowProps = {
 }
 
 const NationsLogoRow = ({ nationLogos }: NationsLogoRowProps) => (
-  <Row className="my-4 mx-0 w-4/5 flex-wrap justify-around">
+  <Row className="mx-0 my-4 w-4/5 flex-wrap justify-around">
     {nationLogos.map((logo, index) => (
       <NationImage logo={logo} key={index} />
     ))}

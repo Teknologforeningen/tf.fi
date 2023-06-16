@@ -12,15 +12,8 @@ const Fundraising = ({ language }: Props) => {
   return (
     <div className="grid h-[400px] w-full max-w-none grid-cols-1 grid-rows-1 place-items-center">
       <div className="absolute col-span-1 row-span-1 h-[400px] w-full max-w-none">
-        <Link href={links.fundraising.info} passHref>
-          <a>
-            <Image
-              src={'/images/fundraising_plain.png'}
-              alt={'map-overlay'}
-              layout={'fill'}
-              objectFit={'cover'}
-            />
-          </a>
+        <Link href={links.fundraising.info}>
+          <Image src={'/images/fundraising_plain.png'} alt={'map-overlay'} />
         </Link>
       </div>
       <Column className="relative z-10 col-span-1 row-span-1 m-4 font-display text-base font-semibold leading-5">
@@ -33,10 +26,11 @@ const Fundraising = ({ language }: Props) => {
             }}
           >
             <span>
-              <Link href={links.fundraising.info} passHref>
-                <a className="link link-text !text-sm !text-teknologröd">
-                  &nbsp;vision.tf.fi
-                </a>
+              <Link
+                href={links.fundraising.info}
+                className="link link-text !text-sm !text-teknologröd"
+              >
+                &nbsp;vision.tf.fi
               </Link>
             </span>
           </p>

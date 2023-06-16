@@ -13,7 +13,7 @@ const MenuBar = ({
 }: MenuBarProps) => {
   return (
     <div
-      className='ease-in-out" my-[6px] mx-0 h-[5px] w-[35px] transition duration-[.4s]'
+      className='ease-in-out" mx-0 my-[6px] h-[5px] w-[35px] transition duration-[.4s]'
       style={{
         opacity,
         transform,
@@ -30,7 +30,7 @@ type Props = {
 
 const MenuIcon = ({ open, onClick }: Props) => (
   <div
-    className="fixed top-[10px] left-[10px] z-50 inline-block xl:hidden"
+    className="fixed left-[10px] top-[10px] z-50 inline-block xl:hidden"
     onClick={onClick}
   >
     <MenuBar

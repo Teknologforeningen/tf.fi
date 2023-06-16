@@ -24,14 +24,12 @@ const EventBoxTitle = ({
     {...props}
   >
     <Link key={event.id} href={`/${event.slug}`}>
-      <a>
-        <p className="m-0 text-[10px] font-black leading-[18px]">
-          {event.type === 'event' ? 'EVENEMANG' : 'BLOGGINLÄGG'}
-        </p>
-        <Textfit mode="multi" max={20} className="m-0">
-          {event.title}
-        </Textfit>
-      </a>
+      <p className="m-0 text-[10px] font-black leading-[18px]">
+        {event.type === 'event' ? 'EVENEMANG' : 'BLOGGINLÄGG'}
+      </p>
+      <Textfit mode="multi" max={20} className="m-0">
+        {event.title}
+      </Textfit>
     </Link>
   </Column>
 )

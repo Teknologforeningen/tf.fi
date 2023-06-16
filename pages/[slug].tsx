@@ -21,7 +21,7 @@ marked.use({ renderer })
 
 /** Page for a single event */
 const EventPage: NextPage<Props> = ({ event }) => (
-  <div className="my-6 mx-auto min-h-[92vh] max-w-[95vw] bg-[#ffffe8] p-[15px] md:max-w-[55vw] lg:max-w-[80vw]">
+  <div className="mx-auto my-6 min-h-[92vh] max-w-[95vw] bg-[#ffffe8] p-[15px] md:max-w-[55vw] lg:max-w-[80vw]">
     <Link href={'/'}>
       <a className="home-link home-link-text">TILL HEMSIDAN</a>
     </Link>
