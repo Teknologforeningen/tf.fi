@@ -1,5 +1,7 @@
 {
-  "plugins": ["@typescript-eslint", "prettier"],
+  "plugins": [
+    "@typescript-eslint"
+  ],
   "extends": [
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended",
@@ -9,7 +11,6 @@
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-explicit-any": "error",
     "max-len": "off",
-    "prettier/prettier": "error",
     "no-unused-vars": "warn",
     "no-console": "off",
     "func-names": "off",
@@ -18,7 +19,9 @@
     "class-methods-use-this": "off",
     "react/function-component-definition": [
       2,
-      { "namedComponents": "arrow-function" }
+      {
+        "namedComponents": "arrow-function"
+      }
     ]
   }
 }

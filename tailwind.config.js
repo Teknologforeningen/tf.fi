@@ -15,10 +15,10 @@ module.exports = {
         blogpink: '#d79ad1',
         darkgray: '#242424',
       },
-    },
-    fontFamily: {
-      body: ['Raleway', 'sans-serif'],
-      display: ['Montserrat', 'sans-serif'],
+      fontFamily: {
+        body: ['var(--font-raleway)'],
+        display: ['var(--font-montserrat)'],
+      },
     },
     backgroundImage: {
       'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

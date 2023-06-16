@@ -1,18 +1,17 @@
 import type { GetStaticProps, NextPage } from 'next'
-import { Event as TimelineEvent } from '../models/event'
 import { useState } from 'react'
 import { AvailableLanguages } from '../utils/languages'
 import { fetchEvents } from '../lib/api/event'
 import { fetchFlags } from '../lib/api/flag'
 import { fetchHomepage } from '../lib/api/homepage'
 import { fetchNamokallelse } from '../lib/api/namokallelse'
-import Header from '../components/header/Header'
 import Column from '../components/Column'
 import NationsLogoRow, { NationLogo } from '../components/footer/Logos'
 import fetchNavbar, { NavbarLink } from '../lib/api/navbar'
-import Namokallelses, { Namo } from '../components/namokallese/Namokallelse'
-import TFLogo from '../components/TFLogo/TFLogo'
+import Namokallelses, { Namo } from '../components/Namokallelse'
+import TFLogo from '../components/TFLogo'
 import BasicInfo from '../components/footer/BasicInfo'
+import Header from '../components/header'
 
 export interface HomePage {
   footer: {
@@ -21,7 +20,6 @@ export interface HomePage {
 }
 
 type Props = {
-  events: TimelineEvent[]
   isHomePage: boolean
   logos: NationLogo[]
   navbarLinks: NavbarLink[]
@@ -38,36 +36,19 @@ const Home: NextPage<Props> = ({
 
   return (
     <>
-      <header>
-        <Header
-          navbarLinks={navbarLinks}
-          isHomePage={isHomePage}
-          language={language}
-          setLanguage={setLanguage}
-        />
-      </header>
+      <Header
+        navbarLinks={navbarLinks}
+        isHomePage={isHomePage}
+        language={language}
+        setLanguage={setLanguage}
+      />
       <main
         //could not get tailwind to center content so using inline style
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: 'white',
-          flex: 1,
-          height: '100%',
-          minHeight: '55vh',
-        }}
+        className="flex h-full min-h-[55vh] flex-1 items-center justify-center bg-white"
       >
         <TFLogo />
       </main>
-      <footer
-        style={{
-          left: 0,
-          bottom: 0,
-          width: '100%',
-        }}
-      >
-        {/*<LanguageOptions language={language} setLanguage={setLanguage} />*/}
+      <footer className="bottom-0 left-0 w-full">
         <Column className="sticky bottom-0 w-full bg-darkgray pb-5">
           <NationsLogoRow nationLogos={logos} />
           <BasicInfo />
