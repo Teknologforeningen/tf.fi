@@ -1,8 +1,6 @@
-const LoginButton = async () => {
-  const useAuth = await import(
-    '@hipsquare/react-strapi-keycloak-auth-context'
-  ).then((mod) => mod.useAuth)
+import { useAuth } from '@hipsquare/react-strapi-keycloak-auth-context'
 
+const LoginButton = () => {
   const { isAuthenticated, login, logout } = useAuth()
 
   return !isAuthenticated ? (

@@ -5,7 +5,8 @@ import '../styles/links.css'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import localFont from 'next/font/local'
-import { AuthContext } from '../components/AuthContext'
+
+import { WithAuthContext } from '@hipsquare/react-strapi-keycloak-auth-context'
 
 const raleway = localFont({
   src: [
@@ -40,9 +41,12 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       <main
         className={`${raleway.variable} ${montserrat.variable} h-full font-body`}
       >
-        <AuthContext strapiBaseUrl={STRAPI_URL}>
+        <WithAuthContext
+          strapiBaseUrl={STRAPI_URL}
+          redirectToUrlAfterLogin="http://localhost:3000"
+        >
           <Component {...pageProps} />
-        </AuthContext>
+        </WithAuthContext>
       </main>
     </>
   )

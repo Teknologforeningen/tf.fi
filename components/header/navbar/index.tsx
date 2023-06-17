@@ -9,6 +9,7 @@ import { AvailableLanguages } from '../../../utils/languages'
 import classNames from 'classnames'
 import { NavbarLink, NavbarMultipleLink } from '../../../lib/api/navbar'
 import { useRouter } from 'next/router'
+import LoginButton from './LoginButton'
 
 type Props = {
   navbarLinks: NavbarLink[]
@@ -144,6 +145,7 @@ const Navbar = ({ navbarLinks, position = 'top' }: Props) => {
         */}
           </>
         )}
+        <LoginButton />
       </Row>
     </nav>
   )
