@@ -8,9 +8,9 @@ import { NavbarLink } from '../../lib/api/navbar'
 
 type Props = {
   navbarLinks: NavbarLink[]
-  isHomePage: boolean
-  language: AvailableLanguages
-  setLanguage: (language: AvailableLanguages) => void
+  isHomePage?: boolean
+  language?: AvailableLanguages
+  setLanguage?: (language: AvailableLanguages) => void
 }
 
 const Header = ({ navbarLinks, isHomePage, language, setLanguage }: Props) => {

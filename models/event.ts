@@ -19,9 +19,9 @@ export type HideableEvent = Event & { hide: boolean }
 
 //compatable with FullCalendar event type
 export type CalendarEvent = {
-  id: string | null | undefined
+  id: string
   title: string | null | undefined
   start: string | null | undefined
   end: string | null | undefined
-  htmlLink: string | null | undefined
+  htmlLink: string
 }

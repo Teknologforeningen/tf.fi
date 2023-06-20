@@ -1,6 +1,8 @@
 import React from 'react'
 import { Event } from '../../models/event'
 import Link from 'next/link'
+import Column from '../Column'
+import EventItem from './EventItem'
 
 type Props = {
   events: Event[]
@@ -10,34 +12,18 @@ type Props = {
 //TODO: get text ellipse to work properly, kinda spaghetti rn
 const Events = ({ events, title }: Props) => {
   return (
-    <div className="w-full">
-      <p className="m-2 pb-5 text-center text-3xl text-white">{title}</p>
-      <div className="overflow-y max-h-[600px] overflow-y-scroll">
-        {events.map((post) => (
-          <div
-            className="m-2 rounded-md border-[1px] border-white bg-gray p-2"
-            key={post.id}
-          >
-            <p className="select-none text-xl font-medium text-white">
-              {post.title}
-            </p>
-            {post.type === 'event' && (
-              <p className="select-none font-medium text-white">
-                {post.date.slice(0, 10)}
-              </p>
-            )}
-            <p className="max-h-[100px] overflow-hidden text-ellipsis text-sm text-white">
-              {post.description}
-            </p>
-            <Link href={`/events/${post.slug}`}>
-              <a className="text-center text-sm font-extrabold leading-[18px] tracking-wide text-teknologröd hover:text-[15px] hover:font-semibold">
-                läs mer
-              </a>
-            </Link>
-          </div>
-        ))}
-      </div>
-    </div>
+    <Column className="mr-4 w-full md:w-[60%]">
+      <p className="pb-5 text-3xl text-white">{title}</p>
+
+      {events.map((post) => (
+        <EventItem post={post} key={post.id} />
+      ))}
+      <Link href={`/events`}>
+        <a className=" mt-3 rounded-md border-[1px] border-white p-2 text-center text-sm leading-[18px] tracking-wide text-white hover:text-[15px] hover:font-semibold">
+          Mera nyheter
+        </a>
+      </Link>
+    </Column>
   )
 }
 

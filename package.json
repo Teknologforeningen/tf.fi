@@ -21,6 +21,7 @@
     "overlayscrollbars-react": "^0.2.3",
     "qs": "^6.11.0",
     "react": "18.2.0",
+    "react-calendar": "^4.3.0",
     "react-dom": "18.2.0",
     "react-textfit": "^1.1.1",
     "sharp": "^0.31.0"

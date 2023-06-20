@@ -18,7 +18,8 @@ import { calendar_v3 } from 'googleapis'
 import { Event } from '../models/event'
 import TFInfo from '../components/tfInfo'
 import Item from '../components/Item'
-
+import Image from 'next/image'
+import Row from '../components/Row'
 export interface HomePage {
   footer: {
     nationlogos: NationLogo[]
@@ -56,28 +57,36 @@ const Home: NextPage<Props> = ({
       <main>
         <Column>
           <MainBanner />
-          <Item backgroundColor="darkgray">
-            <Events
-              events={events.filter((e) => e.type === 'blogpost' || !e.type)}
-              title="Nyheter"
-            />
-          </Item>
-          <Item backgroundColor="gray">
-            <Events
-              events={events.filter((e) => e.type === 'event')}
-              title="Anslagstavlan"
-            />
-          </Item>
-          <Item>
+          <Item
+            backgroundColor="darkgray"
+            className="flex max-w-none flex-col justify-between md:flex-row"
+          >
+            <Events events={events.slice(0, 5)} title="Nyheter" />
+
             <Calendar />
           </Item>
+          <Row className=" h-[500px] w-full">
+            <Image
+              src={`/images/banner/1.jpg`}
+              objectFit="cover"
+              alt="jeej"
+              height={500}
+              width={1000}
+            />
+            <Image
+              src={`/images/banner/0.jpg`}
+              objectFit="cover"
+              alt="jeej"
+              height={500}
+              width={1000}
+            />
+          </Row>
           <Item backgroundColor="white">
             <TFInfo />
           </Item>
         </Column>
       </main>
       <footer>
-        {/*<LanguageOptions language={language} setLanguage={setLanguage} />*/}
         <Column className="sticky bottom-0 w-full bg-darkgray py-5">
           <NationsLogoRow nationLogos={logos} />
           <BasicInfo />

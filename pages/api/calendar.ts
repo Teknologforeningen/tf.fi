@@ -33,9 +33,10 @@ async function listEvents(
   const calendar = google.calendar({ version: 'v3', auth })
 
   const parsedDate = Date.parse(date)
+
   const res = await calendar.events.list({
     calendarId,
-    //laod dates 2 months back and 3 forward
+    //load dates 2 months back and 3 forward
     timeMin: new Date(parsedDate - 1 * 30 * 24 * 60 * 60 * 1000).toISOString(),
     timeMax: new Date(parsedDate + 3 * 30 * 24 * 60 * 60 * 1000).toISOString(),
     maxResults: 100,
@@ -43,7 +44,6 @@ async function listEvents(
     orderBy: 'startTime',
   })
   const events = res.data.items
-
   //no events found
   if (!events || events.length === 0) {
     return []
@@ -57,6 +57,7 @@ const getCalendarEvents = async (
   date: string
 ): Promise<CalendarEvent[]> => {
   try {
+    console.log(date)
     const credentials = await loadServiceAccountCredentials()
     const auth = new google.auth.JWT(
       credentials.client_email,
@@ -66,14 +67,13 @@ const getCalendarEvents = async (
     )
     await auth.authorize()
     const res = await listEvents(auth, calendarId, date)
-
     const data =
       res.map((event, i) => ({
         id: event.id || i.toString(),
         title: event.summary,
-        start: event.start?.dateTime?.slice(0, 10) || null,
-        end: event.end?.dateTime?.slice(0, 10) || null,
-        htmlLink: event.htmlLink,
+        start: event.start?.dateTime || event.start?.date + 'T00:00:00' || null,
+        end: event.end?.dateTime || event.end?.date + 'T23:59:59' || null,
+        htmlLink: event.htmlLink || '',
       })) || []
     return data
   } catch (err) {
