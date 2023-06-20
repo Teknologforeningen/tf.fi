@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import { marked } from 'marked'
 import { AbiPage, fetchAbiPage, fetchAbiPages } from '../../lib/api/abi'
-import Header from '../../components/header/Header'
+import Header from '../../components/header'
 import fetchNavbar, { NavbarLink } from '../../lib/api/navbar'
 import { useState } from 'react'
 import { AvailableLanguages } from '../../utils/languages'

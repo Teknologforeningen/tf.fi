@@ -15,9 +15,9 @@ const Events = ({ events }: Props) => {
   return (
     <div className=" z-10 my-6 mx-auto min-h-[92vh] max-w-[95vw] p-[15px] md:max-w-[55vw] lg:max-w-[80vw]">
       <Link href={'/'}>
-        <a className="home-link home-link-text text-teknologröd">
+        <p className="home-link home-link-text text-teknologröd">
           TILL HEMSIDAN
-        </a>
+        </p>
       </Link>
       <Column>
         <p className=" pb-5 text-3xl text-white">Nyheter</p>

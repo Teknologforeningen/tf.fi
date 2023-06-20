@@ -17,10 +17,10 @@ module.exports = {
         gray: '#38404b',
         lightGray: '#f5f5f5',
       },
-    },
-    fontFamily: {
-      body: ['Raleway', 'sans-serif'],
-      display: ['Montserrat', 'sans-serif'],
+      fontFamily: {
+        body: ['var(--font-raleway)'],
+        display: ['var(--font-montserrat)'],
+      },
     },
     backgroundImage: {
       'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

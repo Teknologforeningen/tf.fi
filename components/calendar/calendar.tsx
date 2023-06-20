@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import Link from 'next/link'
 import Calendar from 'react-calendar'
 import Column from '../Column'
 import { CalendarEvent } from '../../models/event'
+import Subtitle from '../subtitle'
+import { getDateShort } from '../../utils/helpers'
 
 //remove hardcoded colors
 const CalendarComponent = () => {
@@ -30,11 +33,9 @@ const CalendarComponent = () => {
   }
 
   return (
-    <Column>
-      <p className="m-2 pb-5 text-center text-3xl text-white">
-        Händelsekalendern
-      </p>
-      <div className="rounded-md bg-white p-5 pb-5 shadow-md">
+    <div className="mx-5 flex flex-col">
+      <Subtitle>Händelsekalendern</Subtitle>
+      <div className="mt-4 flex max-w-[400px] items-center self-center rounded-md bg-white p-5 pb-5 shadow-md">
         <Calendar
           tileClassName={({ date }) => setClass(date)}
           minDetail="month"
@@ -60,24 +61,21 @@ const CalendarComponent = () => {
           )
           .slice(0, 5)
           .map((x) => {
-            console.log(date)
+            const start = x.start && getDateShort(x.start)
+            const end = x.end && getDateShort(x.end)
             return (
-              <a
+              <Link
                 key={x.id}
-                className="highlight my-1.5 w-full max-w-[390px] rounded-md border-[2px] border-lightGray bg-white p-2 text-black shadow-md hover:bg-lightGray"
+                className="highlight border-1 my-1.5 w-full max-w-[390px] rounded-md border-teknologröd bg-white p-2 shadow-md hover:bg-lightGray"
                 href={x.htmlLink}
               >
-                {x.title}
-                <br />
-                {x.start?.split('T')[0] +
-                  (x.start?.split('T')[0] !== x.end?.split('T')[0]
-                    ? ' - ' + x.end?.split('T')[0]
-                    : '')}
-              </a>
+                <p className="text-bold text-teknologröd">{x.title}</p>
+                <p>{start + (start !== end ? ' - ' + end : '')}</p>
+              </Link>
             )
           })}
       </Column>
-    </Column>
+    </div>
   )
 }
 

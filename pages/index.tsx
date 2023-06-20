@@ -1,25 +1,25 @@
 import type { GetStaticProps, NextPage } from 'next'
+import Image from 'next/image'
 import { useState } from 'react'
 import { AvailableLanguages } from '../utils/languages'
 import { fetchEvents } from '../lib/api/event'
 import { fetchFlags } from '../lib/api/flag'
 import { fetchHomepage } from '../lib/api/homepage'
 import { fetchNamokallelse } from '../lib/api/namokallelse'
-import Header from '../components/header/Header'
 import Column from '../components/Column'
 import NationsLogoRow, { NationLogo } from '../components/footer/Logos'
 import fetchNavbar, { NavbarLink } from '../lib/api/navbar'
-import Namokallelses, { Namo } from '../components/namokallese/Namokallelse'
-import MainBanner from '../components/mainBanner'
+import Namokallelses, { Namo } from '../components/Namokallelse'
 import BasicInfo from '../components/footer/BasicInfo'
-import Calendar from '../components/calendar/calendar'
-import Events from '../components/events/events'
-import { calendar_v3 } from 'googleapis'
-import { Event } from '../models/event'
-import TFInfo from '../components/tfInfo'
+import Header from '../components/header'
 import Item from '../components/Item'
-import Image from 'next/image'
 import Row from '../components/Row'
+import Calendar from '../components/calendar/calendar'
+import { Event } from '../models/event'
+import MainBanner from '../components/mainBanner'
+import TFInfo from '../components/tfInfo'
+import Events from '../components/events/events'
+
 export interface HomePage {
   footer: {
     nationlogos: NationLogo[]
@@ -31,7 +31,6 @@ type Props = {
   logos: NationLogo[]
   navbarLinks: NavbarLink[]
   namokallelses: Namo[]
-  calendarEvents: calendar_v3.Schema$Event[]
   events: Event[]
 }
 
@@ -58,29 +57,19 @@ const Home: NextPage<Props> = ({
         <Column>
           <MainBanner />
           <Item
-            backgroundColor="darkgray"
-            className="flex max-w-none flex-col justify-between md:flex-row"
+            backgroundColor="gray"
+            className="max-w-[1500px] flex-col md:flex-row"
           >
-            <Events events={events.slice(0, 5)} title="Nyheter" />
-
+            <Events events={events.slice(0, 5)} />
             <Calendar />
           </Item>
-          <Row className=" h-[500px] w-full">
-            <Image
-              src={`/images/banner/1.jpg`}
-              objectFit="cover"
-              alt="jeej"
-              height={500}
-              width={1000}
-            />
-            <Image
-              src={`/images/banner/0.jpg`}
-              objectFit="cover"
-              alt="jeej"
-              height={500}
-              width={1000}
-            />
-          </Row>
+          <Image
+            src={`/images/banner/0.jpg`}
+            alt="jeej"
+            height={500}
+            width={1000}
+            style={{ objectFit: 'cover' }}
+          />
           <Item backgroundColor="white">
             <TFInfo />
           </Item>

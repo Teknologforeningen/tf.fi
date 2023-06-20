@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import { marked } from 'marked'
 import { AboutPage, fetchAboutPage, fetchAboutPages } from '../../lib/api/about'
-import Header from '../../components/header/Header'
+import Header from '../../components/header'
 import fetchNavbar, { NavbarLink } from '../../lib/api/navbar'
 import { useState } from 'react'
 import { AvailableLanguages } from '../../utils/languages'

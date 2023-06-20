@@ -8,11 +8,9 @@ const MainBanner = () => (
   <div className="relative h-[500px] w-[100%]">
     <Image
       src={`/images/banner/2.jpg`}
-      layout="fill"
-      objectFit="cover"
       alt="jeej"
-      height={500}
-      className="opacity-70"
+      style={{ objectFit: 'cover', opacity: 0.8 }}
+      fill
       loading="eager"
     />
 

@@ -79,7 +79,7 @@
 }
 
 .react-calendar__month-view__days__day--neighboringMonth {
-  color: #757575;
+  color: var(--lightGray);
 }
 
 .react-calendar__year-view .react-calendar__tile,
@@ -103,7 +103,7 @@
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
   background-color: #e6e6e6;
-}*/
+}
 
 .react-calendar__tile--now {
   background: #ffff76;

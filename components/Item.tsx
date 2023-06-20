@@ -17,7 +17,7 @@ const Item = ({
   >
     <div
       className={classNames(
-        'flex h-[100%] w-[100%] max-w-6xl py-10 px-5',
+        'flex h-[100%] w-[100%] max-w-6xl justify-center py-10 px-5',
         className
       )}
     >
