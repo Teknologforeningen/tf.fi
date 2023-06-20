@@ -145,7 +145,7 @@ const Navbar = ({ navbarLinks, position = 'top' }: Props) => {
         */}
           </>
         )}
-        <LoginButton />
+        <LoginButton className={position === 'side' ? 'mt-6' : ''} />
       </Row>
     </nav>
   )
