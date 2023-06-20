@@ -45,10 +45,6 @@ const CalendarComponent = () => {
           onActiveStartDateChange={({ activeStartDate }) =>
             activeStartDate && setDate(activeStartDate)
           }
-          onClickDay={(date, event) => {
-            console.log(event)
-            setDate(date)
-          }}
         />
       </div>
       <Column className=" mt-2 flex w-full">

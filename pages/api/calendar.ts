@@ -57,7 +57,6 @@ const getCalendarEvents = async (
   date: string
 ): Promise<CalendarEvent[]> => {
   try {
-    console.log(date)
     const credentials = await loadServiceAccountCredentials()
     const auth = new google.auth.JWT(
       credentials.client_email,
