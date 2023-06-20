@@ -5,12 +5,9 @@ import { AvailableLanguages } from '../utils/languages'
 import { fetchEvents } from '../lib/api/event'
 import { fetchFlags } from '../lib/api/flag'
 import { fetchHomepage } from '../lib/api/homepage'
-import { fetchNamokallelse } from '../lib/api/namokallelse'
 import Column from '../components/Column'
-import NationsLogoRow, { NationLogo } from '../components/footer/Logos'
+import  { NationLogo } from '../components/footer/Logos'
 import fetchNavbar, { NavbarLink } from '../lib/api/navbar'
-import Namokallelses, { Namo } from '../components/Namokallelse'
-import BasicInfo from '../components/footer/BasicInfo'
 import Header from '../components/header'
 import Item from '../components/Item'
 import Calendar from '../components/calendar/calendar'
@@ -19,6 +16,7 @@ import MainBanner from '../components/mainBanner'
 import TFInfo from '../components/tfInfo'
 import Events from '../components/events/events'
 import Row from '../components/Row'
+import Footer from '../components/footer/footer'
 
 export interface HomePage {
   footer: {
@@ -30,17 +28,10 @@ type Props = {
   isHomePage: boolean
   logos: NationLogo[]
   navbarLinks: NavbarLink[]
-  namokallelses: Namo[]
   events: Event[]
 }
 
-const Home: NextPage<Props> = ({
-  navbarLinks,
-  isHomePage,
-  logos,
-  namokallelses,
-  events,
-}) => {
+const Home: NextPage<Props> = ({ navbarLinks, isHomePage, logos, events }) => {
   const [language, setLanguage] = useState<AvailableLanguages>('swedish')
   return (
     <>
@@ -63,7 +54,7 @@ const Home: NextPage<Props> = ({
             <Events events={events.slice(0, 5)} />
             <Calendar />
           </Item>
-          <Row>
+          <Row className="w-full overflow-hidden">
             <Image
               src={`/images/banner/0.jpg`}
               alt="jeej"
@@ -85,11 +76,7 @@ const Home: NextPage<Props> = ({
         </Column>
       </main>
       <footer>
-        <Column className="sticky bottom-0 w-full bg-darkgray py-5">
-          <NationsLogoRow nationLogos={logos} />
-          <BasicInfo />
-          <Namokallelses namokallelses={namokallelses} />
-        </Column>
+        <Footer logos={logos} />
       </footer>
     </>
   )
@@ -100,7 +87,6 @@ export const getStaticProps: GetStaticProps = async () => {
   const flags = await fetchFlags()
   const homepage = await fetchHomepage()
   const navbarLinks = await fetchNavbar()
-  const namokallelses = await fetchNamokallelse()
   const logos = homepage.footer.nationlogos
   const isHomePage = flags.some(
     (flag) => flag.title === 'isHomePage' && flag.onoff
@@ -111,7 +97,6 @@ export const getStaticProps: GetStaticProps = async () => {
       events,
       isHomePage,
       logos,
-      namokallelses,
     },
   }
 }

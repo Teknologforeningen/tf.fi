@@ -1,13 +1,20 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import { Event } from '../../models/event'
-import Link from 'next/link'
 import Row from '../../components/Row'
 import Column from '../../components/Column'
 import { marked } from 'marked'
 import { fetchEvent, fetchEvents } from '../../lib/api/event'
+import { getLayoutProps } from '../../utils/helpers'
+import { NationLogo } from '../../components/footer/Logos'
+import { NavbarLink } from '../../lib/api/navbar'
+import Footer from '../../components/footer/footer'
+import Header from '../../components/header'
 
 type Props = {
   event?: Event
+  isHomePage: boolean
+  logos: NationLogo[]
+  navbarLinks: NavbarLink[]
 }
 
 const renderer: marked.RendererObject = {
@@ -19,12 +26,17 @@ const renderer: marked.RendererObject = {
 marked.use({ renderer })
 
 /** Page for a single event */
-const EventPage: NextPage<Props> = ({ event }) => (
-  <div>
-    <div className=" z-10 my-6 mx-auto min-h-[92vh] max-w-[95vw] bg-white p-[15px] md:max-w-[55vw] lg:max-w-[80vw]">
-      <Link href={'/'} className="home-link home-link-text text-teknologröd">
-        TILL HEMSIDAN
-      </Link>
+const EventPage: NextPage<Props> = ({
+  event,
+  isHomePage,
+  logos,
+  navbarLinks,
+}) => (
+  <>
+    <header>
+      <Header navbarLinks={navbarLinks} isHomePage={isHomePage} />
+    </header>
+    <div className=" z-10 my-6 mx-auto min-h-[92vh] max-w-[95vw] rounded-lg bg-white p-[15px] md:max-w-[55vw] lg:max-w-[80vw]">
       <Column>
         <Row className="w-full">
           <h2 className="text-center text-2xl font-extrabold uppercase leading-7 tracking-wide text-darkblue md:text-4xl">
@@ -41,7 +53,10 @@ const EventPage: NextPage<Props> = ({ event }) => (
         </div>
       </Column>
     </div>
-  </div>
+    <footer>
+      <Footer logos={logos} />
+    </footer>
+  </>
 )
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -62,8 +77,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params?.slug instanceof Array ? params?.slug[0] : params?.slug
   const event = await fetchEvent(slug)
+  const { events, flags, homepage, isHomePage, logos, navbarLinks } =
+    await getLayoutProps()
   return {
-    props: { event },
+    props: { event, events, flags, homepage, isHomePage, logos, navbarLinks },
   }
 }
 
