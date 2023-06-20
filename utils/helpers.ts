@@ -1,10 +1,8 @@
 import { NationLogo } from '../components/footer/Logos'
-import { fetchEvents } from '../lib/api/event'
 import { fetchFlags } from '../lib/api/flag'
 import { fetchHomepage } from '../lib/api/homepage'
 import fetchNavbar, { NavbarLink } from '../lib/api/navbar'
 import { Flag } from '../models/flag'
-import { Event } from '../models/event'
 import { HomePage } from '../pages'
 
 export const getDateLong = (date: Date | string): string =>
@@ -21,7 +19,6 @@ export const getDateShort = (date: Date | string): string =>
   })
 
 export type LayoutProps = {
-  events: Event[]
   flags: Flag[]
   homepage: HomePage
   navbarLinks: NavbarLink[]
@@ -29,7 +26,6 @@ export type LayoutProps = {
   isHomePage: boolean
 }
 export const getLayoutProps = async (): Promise<LayoutProps> => {
-  const events = await fetchEvents()
   const flags = await fetchFlags()
   const homepage = await fetchHomepage()
   const navbarLinks = await fetchNavbar()
@@ -39,7 +35,6 @@ export const getLayoutProps = async (): Promise<LayoutProps> => {
   )
 
   return {
-    events,
     flags,
     homepage,
     navbarLinks,

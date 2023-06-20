@@ -36,7 +36,7 @@ const EventPage: NextPage<Props> = ({
     <header>
       <Header navbarLinks={navbarLinks} isHomePage={isHomePage} />
     </header>
-    <div className=" z-10 my-6 mx-auto min-h-[92vh] max-w-[95vw] rounded-lg bg-white p-[15px] md:max-w-[55vw] lg:max-w-[80vw]">
+    <div className=" md:max-w-[55vw] lg:max-w-[80vw] z-10 mx-auto my-6 min-h-[92vh] max-w-[95vw] rounded-lg bg-white p-[15px]">
       <Column>
         <Row className="w-full">
           <h2 className="text-center text-2xl font-extrabold uppercase leading-7 tracking-wide text-darkblue md:text-4xl">
@@ -61,10 +61,10 @@ const EventPage: NextPage<Props> = ({
 
 export const getStaticPaths: GetStaticPaths = async () => {
   // Get all events
-  const events = await fetchEvents()
+  const events = await fetchEvents(1)
 
   // Create a path for each event background-color: ;
-  const paths = events.map((event) => ({
+  const paths = events.data.map((event) => ({
     params: { slug: event.slug },
   }))
 
@@ -77,10 +77,17 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params?.slug instanceof Array ? params?.slug[0] : params?.slug
   const event = await fetchEvent(slug)
-  const { events, flags, homepage, isHomePage, logos, navbarLinks } =
+  const { flags, homepage, isHomePage, logos, navbarLinks } =
     await getLayoutProps()
   return {
-    props: { event, events, flags, homepage, isHomePage, logos, navbarLinks },
+    props: {
+      event,
+      flags,
+      homepage,
+      isHomePage,
+      logos,
+      navbarLinks,
+    },
   }
 }
 

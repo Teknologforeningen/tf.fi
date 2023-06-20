@@ -51,7 +51,7 @@ const AboutPage: NextPage<{
   const [language, setLanguage] = useState<AvailableLanguages>('swedish')
   return (
     <>
-      <div className="about grid grid-flow-row grid-cols-1 text-black md:grid-cols-4">
+      <div className="about grid grid-flow-row grid-cols-1 text-black md:grid-cols-4 min-h-[90%]">
         <div className="col-span-full">
           <Header
             navbarLinks={navbarLinks}

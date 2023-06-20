@@ -6,7 +6,7 @@ import { fetchEvents } from '../lib/api/event'
 import { fetchFlags } from '../lib/api/flag'
 import { fetchHomepage } from '../lib/api/homepage'
 import Column from '../components/Column'
-import  { NationLogo } from '../components/footer/Logos'
+import { NationLogo } from '../components/footer/Logos'
 import fetchNavbar, { NavbarLink } from '../lib/api/navbar'
 import Header from '../components/header'
 import Item from '../components/Item'
@@ -54,21 +54,23 @@ const Home: NextPage<Props> = ({ navbarLinks, isHomePage, logos, events }) => {
             <Events events={events.slice(0, 5)} />
             <Calendar />
           </Item>
-          <Row className="w-full overflow-hidden">
-            <Image
-              src={`/images/banner/0.jpg`}
-              alt="jeej"
-              height={500}
-              width={1000}
-              style={{ objectFit: 'cover' }}
-            />
-            <Image
-              src={`/images/banner/1.jpg`}
-              alt="jeej"
-              height={500}
-              width={1000}
-              style={{ objectFit: 'cover' }}
-            />
+          <Row className="relative w-full overflow-hidden">
+            <div className="md:w-1/2 h-[500px] w-0">
+              <Image
+                src={`/images/banner/0.jpg`}
+                alt="jeej"
+                fill
+                style={{ objectFit: 'cover' }}
+              />
+            </div>
+            <div className="relative h-[500px] md:w-1/2 w-0">
+              <Image
+                src={`/images/banner/1.jpg`}
+                alt="jeej"
+                fill
+                style={{ objectFit: 'cover' }}
+              />
+            </div>
           </Row>
           <Item backgroundColor="white">
             <TFInfo />
@@ -83,7 +85,7 @@ const Home: NextPage<Props> = ({ navbarLinks, isHomePage, logos, events }) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const events = await fetchEvents()
+  const events = await fetchEvents(1)
   const flags = await fetchFlags()
   const homepage = await fetchHomepage()
   const navbarLinks = await fetchNavbar()
@@ -94,7 +96,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       navbarLinks,
-      events,
+      events: events.data,
       isHomePage,
       logos,
     },

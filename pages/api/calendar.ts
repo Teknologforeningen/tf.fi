@@ -52,7 +52,7 @@ async function listEvents(
   return events
 }
 
-const getCalendarEvents = async (
+export const getCalendarEvents = async (
   calendarId: string,
   date: string
 ): Promise<CalendarEvent[]> => {

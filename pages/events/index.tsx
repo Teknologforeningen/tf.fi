@@ -1,35 +1,55 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import type { GetStaticProps } from 'next'
 import { Event } from '../../models/event'
 import Column from '../../components/Column'
 import EventItem from '../../components/events/EventItem'
-import  { NavbarLink } from '../../lib/api/navbar'
+import { NavbarLink } from '../../lib/api/navbar'
 import { NationLogo } from '../../components/footer/Logos'
 import Header from '../../components/header'
 import Footer from '../../components/footer/footer'
 import { getLayoutProps } from '../../utils/helpers'
+import { fetchEvents } from '../../lib/api/event'
+import PageNavigation from '../../components/pageNavigation'
+import { EVENT_PAGE_SIZE } from '../../utils/constants'
 
 type Props = {
   isHomePage: boolean
   logos: NationLogo[]
   navbarLinks: NavbarLink[]
-  events: Event[]
 }
 
 //TODO: get text ellipse to work properly, kinda spaghetti rn
-const Events = ({ events, logos, navbarLinks, isHomePage }: Props) => {
+const Events = ({ logos, navbarLinks, isHomePage }: Props) => {
+  const [events, setEvents] = useState<Event[]>([])
+  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
+
+  useEffect(() => {
+    const fetch = async () => {
+      const res = await fetchEvents(page)
+      setEvents(res.data)
+      setTotalPages(res.totalPages)
+    }
+    fetch()
+  }, [page])
+
   return (
     <>
       <header>
         <Header navbarLinks={navbarLinks} isHomePage={isHomePage} />
       </header>
-      <main className=" z-10 my-6 mx-auto min-h-[92vh] max-w-[95vw] p-[15px] md:max-w-[55vw] lg:max-w-[80vw]">
+      <main className="z-10 mx-auto my-6 min-h-[92vh] max-w-7xl p-[15px]">
         <Column>
-          <p className=" pb-5 text-3xl text-white">Nyheter</p>
+          <p className="pb-5 text-3xl text-white">Nyheter</p>
 
           {events.map((post) => (
             <EventItem post={post} key={post.id} />
           ))}
+          <PageNavigation
+            currentPage={page}
+            totalPages={Math.ceil(totalPages / EVENT_PAGE_SIZE)}
+            setPage={setPage}
+          />
         </Column>
       </main>
       <footer>

@@ -11,7 +11,7 @@ type Props = {
 const EventItem = ({ post }: Props) => {
   return (
     <div
-      className=" mt-4 w-full rounded-md border-[1px] border-white bg-white p-2 shadow-md"
+      className="mt-4 w-full rounded-md border-[1px] border-white bg-white p-2 shadow-md"
       key={post.id}
     >
       <p className="select-none text-xl font-medium">{post.title}</p>
