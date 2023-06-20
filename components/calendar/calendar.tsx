@@ -33,7 +33,7 @@ const CalendarComponent = () => {
   }
 
   return (
-    <div className="mx-5 flex flex-col">
+    <div className="md:py-0 mx-5 py-10 flex flex-col">
       <Subtitle>Händelsekalendern</Subtitle>
       <div className="mt-4 flex max-w-[400px] items-center self-center rounded-md bg-white p-5 pb-5 shadow-md">
         <Calendar

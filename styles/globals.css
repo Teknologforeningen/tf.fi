@@ -11,13 +11,13 @@
   --blogpink: #d79ad1;
   --darkGray: #222222;
   --gray: #38404b;
-  --lightGray: #f2f2f2;
+  --lightGray: #a9a9a9;
 }
 
 @layer base {
   html,
   body {
-    background-color: var(--gray);
+    background-color: var(--lightGray);
     height: 100vh;
     display: flex;
     flex-direction: column;

@@ -5,7 +5,7 @@ import Column from './Column'
 
 const MainBanner = () => (
   //TODO add more images that cycle?
-  <div className="relative h-[500px] w-[100%]">
+  <div className="relative h-[500px] w-[100%] bg-black">
     <Image
       src={`/images/banner/2.jpg`}
       alt="jeej"

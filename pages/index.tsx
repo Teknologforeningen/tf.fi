@@ -13,12 +13,12 @@ import Namokallelses, { Namo } from '../components/Namokallelse'
 import BasicInfo from '../components/footer/BasicInfo'
 import Header from '../components/header'
 import Item from '../components/Item'
-import Row from '../components/Row'
 import Calendar from '../components/calendar/calendar'
 import { Event } from '../models/event'
 import MainBanner from '../components/mainBanner'
 import TFInfo from '../components/tfInfo'
 import Events from '../components/events/events'
+import Row from '../components/Row'
 
 export interface HomePage {
   footer: {
@@ -57,19 +57,28 @@ const Home: NextPage<Props> = ({
         <Column>
           <MainBanner />
           <Item
-            backgroundColor="gray"
+            backgroundColor="darkgray"
             className="max-w-[1500px] flex-col md:flex-row"
           >
             <Events events={events.slice(0, 5)} />
             <Calendar />
           </Item>
-          <Image
-            src={`/images/banner/0.jpg`}
-            alt="jeej"
-            height={500}
-            width={1000}
-            style={{ objectFit: 'cover' }}
-          />
+          <Row>
+            <Image
+              src={`/images/banner/0.jpg`}
+              alt="jeej"
+              height={500}
+              width={1000}
+              style={{ objectFit: 'cover' }}
+            />
+            <Image
+              src={`/images/banner/1.jpg`}
+              alt="jeej"
+              height={500}
+              width={1000}
+              style={{ objectFit: 'cover' }}
+            />
+          </Row>
           <Item backgroundColor="white">
             <TFInfo />
           </Item>
