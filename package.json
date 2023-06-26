@@ -17,6 +17,7 @@
     "@fullcalendar/daygrid": "^6.1.8",
     "@fullcalendar/react": "^6.1.8",
     "@types/gapi": "^0.0.44",
+    "@hipsquare/react-strapi-keycloak-auth-context": "^1.0.1",
     "classnames": "^2.3.1",
     "googleapis": "105",
     "marked": "^5.1.0",

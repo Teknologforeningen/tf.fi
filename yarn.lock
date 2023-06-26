@@ -63,6 +63,11 @@
   resolved "https://registry.yarnpkg.com/@fullcalendar/react/-/react-6.1.8.tgz#247b979c5ab9dd74680935fb24a3235df46c7e80"
   integrity sha512-E8GQSQyZHkjpwxQW5Vci7iZgN7f33ntuRcvfGii4Fn35t9VHGz2SEyKAWXpVf38elcKTZKVgajU9ipStd+1LEg==
 
+"@hipsquare/react-strapi-keycloak-auth-context@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@hipsquare/react-strapi-keycloak-auth-context/-/react-strapi-keycloak-auth-context-1.0.1.tgz#64bc569f78e7b7b6a72d16ae416cb82967bffe49"
+  integrity sha512-1x6aHLkPeC46K56LOgQTIow3p7CH2sXhrXH5y18bsc1SlxCM8HjoaRMPmjlxp7YEiXKwx4TE1A3bSa8zexsp0A==
+
 "@humanwhocodes/config-array@^0.11.10":
   version "0.11.10"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.11.10.tgz#5a3ffe32cc9306365fb3fd572596cd602d5e12d2"
