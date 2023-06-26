@@ -11,7 +11,7 @@ const PageNavigation = ({ currentPage, totalPages, setPage }: Props) => {
   const nextPage = currentPage < totalPages ? currentPage + 1 : null
 
   return (
-    <div className="flex items-center justify-center space-x-4 my-5">
+    <div className="my-5 flex items-center justify-center space-x-4">
       {prevPage && (
         <button
           onClick={() => setPage(1)}

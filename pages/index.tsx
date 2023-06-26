@@ -10,13 +10,13 @@ import { NationLogo } from '../components/footer/Logos'
 import fetchNavbar, { NavbarLink } from '../lib/api/navbar'
 import Header from '../components/header'
 import Item from '../components/Item'
-import Calendar from '../components/calendar/calendar'
+import Calendar from '../components/calendar/Calendar'
 import { Event } from '../models/event'
-import MainBanner from '../components/mainBanner'
-import TFInfo from '../components/tfInfo'
-import Events from '../components/events/events'
+import MainBanner from '../components/MainBanner'
+import TFInfo from '../components/TFInfo'
+import Events from '../components/events/Events'
 import Row from '../components/Row'
-import Footer from '../components/footer/footer'
+import Footer from '../components/footer/Footer'
 
 export interface HomePage {
   footer: {
@@ -35,14 +35,12 @@ const Home: NextPage<Props> = ({ navbarLinks, isHomePage, logos, events }) => {
   const [language, setLanguage] = useState<AvailableLanguages>('swedish')
   return (
     <>
-      <header>
-        <Header
-          navbarLinks={navbarLinks}
-          isHomePage={isHomePage}
-          language={language}
-          setLanguage={setLanguage}
-        />
-      </header>
+      <Header
+        navbarLinks={navbarLinks}
+        isHomePage={isHomePage}
+        language={language}
+        setLanguage={setLanguage}
+      />
 
       <main>
         <Column>
@@ -55,7 +53,7 @@ const Home: NextPage<Props> = ({ navbarLinks, isHomePage, logos, events }) => {
             <Calendar />
           </Item>
           <Row className="relative w-full overflow-hidden">
-            <div className="md:w-1/2 h-[500px] w-0">
+            <div className="h-[500px] w-0 md:w-1/2">
               <Image
                 src={`/images/banner/0.jpg`}
                 alt="jeej"
@@ -63,7 +61,7 @@ const Home: NextPage<Props> = ({ navbarLinks, isHomePage, logos, events }) => {
                 style={{ objectFit: 'cover' }}
               />
             </div>
-            <div className="relative h-[500px] md:w-1/2 w-0">
+            <div className="relative h-[500px] w-0 md:w-1/2">
               <Image
                 src={`/images/banner/1.jpg`}
                 alt="jeej"
@@ -77,9 +75,7 @@ const Home: NextPage<Props> = ({ navbarLinks, isHomePage, logos, events }) => {
           </Item>
         </Column>
       </main>
-      <footer>
-        <Footer logos={logos} />
-      </footer>
+      <Footer logos={logos} />
     </>
   )
 }

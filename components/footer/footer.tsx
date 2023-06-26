@@ -6,10 +6,12 @@ type Props = {
   logos: NationLogo[]
 }
 const Footer = ({ logos }: Props) => (
-  <Column className="sticky bottom-0 w-full bg-darkgray py-5">
-    <NationsLogoRow nationLogos={logos} />
-    <BasicInfo />
-  </Column>
+  <footer>
+    <Column className="sticky bottom-0 w-full bg-darkgray py-5">
+      <NationsLogoRow nationLogos={logos} />
+      <BasicInfo />
+    </Column>
+  </footer>
 )
 
 export default Footer

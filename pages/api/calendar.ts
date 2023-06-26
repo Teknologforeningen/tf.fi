@@ -1,23 +1,10 @@
-import fs from 'fs/promises'
-import path from 'path'
 import { calendar_v3, google } from 'googleapis'
 import { CalendarEvent } from '../../models/event'
 import { NextApiRequest, NextApiResponse } from 'next/types'
+import { OAuth2Client } from 'google-auth-library'
 
 // If modifying these scopes, update the service account permissions.
 const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
-const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json')
-/**
- * Loads the service account credentials from the JSON file.
- *
- * @return {Promise<Object>}
- */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-async function loadServiceAccountCredentials(): Promise<any> {
-  const content = await fs.readFile(CREDENTIALS_PATH)
-
-  return JSON.parse(content.toString())
-}
 
 /**
  * Lists the next 10 events on the specified calendar.
@@ -25,8 +12,7 @@ async function loadServiceAccountCredentials(): Promise<any> {
  * @param {string} calendarId The ID of the calendar to fetch events from.
  */
 async function listEvents(
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  auth: any,
+  auth: OAuth2Client,
   calendarId: string,
   date: string
 ): Promise<calendar_v3.Schema$Event[]> {
@@ -36,8 +22,8 @@ async function listEvents(
 
   const res = await calendar.events.list({
     calendarId,
-    //load dates 2 months back and 3 forward
-    timeMin: new Date(parsedDate - 1 * 30 * 24 * 60 * 60 * 1000).toISOString(),
+    //load dates 2 month back and 3 forward
+    timeMin: new Date(parsedDate - 2 * 30 * 24 * 60 * 60 * 1000).toISOString(),
     timeMax: new Date(parsedDate + 3 * 30 * 24 * 60 * 60 * 1000).toISOString(),
     maxResults: 100,
     singleEvents: true,
@@ -57,14 +43,18 @@ export const getCalendarEvents = async (
   date: string
 ): Promise<CalendarEvent[]> => {
   try {
-    const credentials = await loadServiceAccountCredentials()
+    const keysEnvVar = process.env.GOOGLE_CREDS
+    if (!keysEnvVar) {
+      throw new Error('The GOOGLE_CREDS environment variable was not found!')
+    }
+    const credentials = JSON.parse(keysEnvVar)
+
     const auth = new google.auth.JWT(
       credentials.client_email,
       undefined,
       credentials.private_key,
       SCOPES
     )
-    await auth.authorize()
     const res = await listEvents(auth, calendarId, date)
     const data =
       res.map((event, i) => ({

@@ -7,7 +7,7 @@ import { fetchEvent, fetchEvents } from '../../lib/api/event'
 import { getLayoutProps } from '../../utils/helpers'
 import { NationLogo } from '../../components/footer/Logos'
 import { NavbarLink } from '../../lib/api/navbar'
-import Footer from '../../components/footer/footer'
+import Footer from '../../components/footer/Footer'
 import Header from '../../components/header'
 
 type Props = {
@@ -33,10 +33,8 @@ const EventPage: NextPage<Props> = ({
   navbarLinks,
 }) => (
   <>
-    <header>
-      <Header navbarLinks={navbarLinks} isHomePage={isHomePage} />
-    </header>
-    <div className=" md:max-w-[55vw] lg:max-w-[80vw] z-10 mx-auto my-6 min-h-[92vh] max-w-[95vw] rounded-lg bg-white p-[15px]">
+    <Header navbarLinks={navbarLinks} isHomePage={isHomePage} />
+    <div className=" z-10 mx-auto my-6 min-h-[92vh] max-w-[95vw] rounded-lg bg-white p-[15px] md:max-w-[55vw] lg:max-w-[80vw]">
       <Column>
         <Row className="w-full">
           <h2 className="text-center text-2xl font-extrabold uppercase leading-7 tracking-wide text-darkblue md:text-4xl">
@@ -53,9 +51,7 @@ const EventPage: NextPage<Props> = ({
         </div>
       </Column>
     </div>
-    <footer>
-      <Footer logos={logos} />
-    </footer>
+    <Footer logos={logos} />
   </>
 )
 

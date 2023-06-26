@@ -5,16 +5,16 @@ import Column from './Column'
 
 const MainBanner = () => (
   //TODO add more images that cycle?
-  <div className="relative h-[500px] w-[100%] bg-black">
+  <div className="relative h-[500px] w-full bg-black">
     <Image
-      src={`/images/banner/2.jpg`}
+      src="https://cms.tf.fi/uploads/2_0dd69fe48b.jpg"
       alt="jeej"
       style={{ objectFit: 'cover', opacity: 0.8 }}
       fill
       loading="eager"
     />
 
-    <div className="absolute top-[180px] left-0 right-0 flex flex-col xl:left-40 xl:right-auto xl:flex-row">
+    <div className="absolute left-0 right-0 top-[180px] flex flex-col xl:left-40 xl:right-auto xl:flex-row">
       <svg
         className="xl:block"
         width="100%"

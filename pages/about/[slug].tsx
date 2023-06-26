@@ -6,7 +6,7 @@ import { NavbarLink } from '../../lib/api/navbar'
 import { useState } from 'react'
 import { AvailableLanguages } from '../../utils/languages'
 import { getLayoutProps } from '../../utils/helpers'
-import Footer from '../../components/footer/footer'
+import Footer from '../../components/footer/Footer'
 import { NationLogo } from '../../components/footer/Logos'
 
 const renderer: marked.RendererObject = {
@@ -51,7 +51,7 @@ const AboutPage: NextPage<{
   const [language, setLanguage] = useState<AvailableLanguages>('swedish')
   return (
     <>
-      <div className="about grid grid-flow-row grid-cols-1 text-black md:grid-cols-4 min-h-[90%]">
+      <div className="about grid min-h-[90%] grid-flow-row grid-cols-1 text-black md:grid-cols-4">
         <div className="col-span-full">
           <Header
             navbarLinks={navbarLinks}
@@ -68,9 +68,7 @@ const AboutPage: NextPage<{
         />
         <AboutSideBar about={about} />
       </div>
-      <footer>
-        <Footer logos={logos} />
-      </footer>
+      <Footer logos={logos} />
     </>
   )
 }

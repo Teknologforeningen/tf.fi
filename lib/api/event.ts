@@ -39,7 +39,7 @@ export async function fetchEvents(page?: number): Promise<EventsResponse> {
   const data = parsed.data
   if (!(data instanceof Array)) return Promise.reject()
   return {
-    data: data.map((e) => ({ id: e.id, ...e.attributes })),
-    totalPages: parsed.meta.pagination.total,
+    data: data.map((e) => ({ id: e.id, ...e.attributes })) || [],
+    totalPages: parsed.meta.pagination.total || 0,
   }
 }

@@ -3,8 +3,41 @@ import Link from 'next/link'
 import Calendar from 'react-calendar'
 import Column from '../Column'
 import { CalendarEvent } from '../../models/event'
-import Subtitle from '../subtitle'
+import Subtitle from '../Subtitle'
 import { getDateShort } from '../../utils/helpers'
+
+const CalendarEventsList = ({
+  events,
+  selectedDate,
+}: {
+  events: CalendarEvent[]
+  selectedDate: Date
+}) => (
+  <Column className=" mt-2 flex w-full">
+    {events
+      ?.filter(
+        (x) =>
+          x.start &&
+          x.end &&
+          (new Date(x.start) >= selectedDate || new Date(x.end) >= selectedDate)
+      )
+      .slice(0, 5)
+      .map((x) => {
+        const start = x.start && getDateShort(x.start)
+        const end = x.end && getDateShort(x.end)
+        return (
+          <Link
+            key={x.id}
+            className="highlight border-1 my-1.5 w-full max-w-[390px] rounded-md border-teknologröd bg-white p-2 shadow-md hover:bg-lightGray"
+            href={x.htmlLink}
+          >
+            <p className="text-bold text-teknologröd">{x.title}</p>
+            <p>{start + (start !== end ? ' - ' + end : '')}</p>
+          </Link>
+        )
+      })}
+  </Column>
+)
 
 //remove hardcoded colors
 const CalendarComponent = () => {
@@ -24,7 +57,7 @@ const CalendarComponent = () => {
   const isActive = (item: CalendarEvent, date: Date) => {
     const start = new Date(item.start?.split('T')[0] + 'T00:00:00')
     const end = new Date(item.end?.split('T')[0] + 'T23:59:59')
-    return start <= date && end >= date
+    return start <= date && date <= end
   }
 
   const setClass = (date: Date) => {
@@ -48,30 +81,7 @@ const CalendarComponent = () => {
           onClickDay={(value) => setDate(value)}
         />
       </div>
-      <Column className=" mt-2 flex w-full">
-        {data
-          ?.filter(
-            (x) =>
-              x.start &&
-              x.end &&
-              (new Date(x.start) >= date || new Date(x.end) >= date)
-          )
-          .slice(0, 5)
-          .map((x) => {
-            const start = x.start && getDateShort(x.start)
-            const end = x.end && getDateShort(x.end)
-            return (
-              <Link
-                key={x.id}
-                className="highlight border-1 my-1.5 w-full max-w-[390px] rounded-md border-teknologröd bg-white p-2 shadow-md hover:bg-lightGray"
-                href={x.htmlLink}
-              >
-                <p className="text-bold text-teknologröd">{x.title}</p>
-                <p>{start + (start !== end ? ' - ' + end : '')}</p>
-              </Link>
-            )
-          })}
-      </Column>
+      <CalendarEventsList events={data} selectedDate={date} />
     </div>
   )
 }

@@ -12,12 +12,12 @@ const Item = ({
   backgroundColor,
 }: React.PropsWithChildren<Props>) => (
   <div
-    className={`flex h-[100%] w-[100%] justify-center`}
+    className={`flex h-full w-full justify-center`}
     style={{ backgroundColor }}
   >
     <div
       className={classNames(
-        'flex h-[100%] w-[100%] max-w-6xl justify-center py-10 px-5',
+        'flex h-full w-full max-w-6xl justify-center px-5 py-10',
         className
       )}
     >

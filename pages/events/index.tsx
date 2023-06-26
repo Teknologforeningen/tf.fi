@@ -6,10 +6,10 @@ import EventItem from '../../components/events/EventItem'
 import { NavbarLink } from '../../lib/api/navbar'
 import { NationLogo } from '../../components/footer/Logos'
 import Header from '../../components/header'
-import Footer from '../../components/footer/footer'
+import Footer from '../../components/footer/Footer'
 import { getLayoutProps } from '../../utils/helpers'
 import { fetchEvents } from '../../lib/api/event'
-import PageNavigation from '../../components/pageNavigation'
+import PageNavigation from '../../components/PageNavigation'
 import { EVENT_PAGE_SIZE } from '../../utils/constants'
 
 type Props = {
@@ -35,9 +35,7 @@ const Events = ({ logos, navbarLinks, isHomePage }: Props) => {
 
   return (
     <>
-      <header>
-        <Header navbarLinks={navbarLinks} isHomePage={isHomePage} />
-      </header>
+      <Header navbarLinks={navbarLinks} isHomePage={isHomePage} />
       <main className="z-10 mx-auto my-6 min-h-[92vh] max-w-7xl p-[15px]">
         <Column>
           <p className="pb-5 text-3xl text-white">Nyheter</p>
@@ -52,9 +50,7 @@ const Events = ({ logos, navbarLinks, isHomePage }: Props) => {
           />
         </Column>
       </main>
-      <footer>
-        <Footer logos={logos} />
-      </footer>
+      <Footer logos={logos} />
     </>
   )
 }

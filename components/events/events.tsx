@@ -2,7 +2,7 @@ import React from 'react'
 import { Event } from '../../models/event'
 import Link from 'next/link'
 import EventItem from './EventItem'
-import Subtitle from '../subtitle'
+import Subtitle from '../Subtitle'
 type Props = {
   events: Event[]
 }

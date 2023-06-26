@@ -16,9 +16,7 @@ const EventItem = ({ post }: Props) => {
     >
       <p className="select-none text-xl font-medium">{post.title}</p>
       {post.type === 'event' && (
-        <p className="select-none font-medium ">
-          {getDateLong(post.date)}
-        </p>
+        <p className="select-none font-medium ">{getDateLong(post.date)}</p>
       )}
       <p className="max-h-[100px] overflow-hidden text-ellipsis text-sm">
         {post.description}
