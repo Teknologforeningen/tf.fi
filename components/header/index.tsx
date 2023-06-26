@@ -1,15 +1,16 @@
+import { useState } from 'react'
 import Navbar from './navbar'
 import { AvailableLanguages } from '../../utils/languages'
 import SideMenu from './navbar/SideMenu'
 import MenuIcon from './navbar/MenuIcon'
-import { useState } from 'react'
+
 import { NavbarLink } from '../../lib/api/navbar'
 
 type Props = {
   navbarLinks: NavbarLink[]
-  isHomePage: boolean
-  language: AvailableLanguages
-  setLanguage: (language: AvailableLanguages) => void
+  isHomePage?: boolean
+  language?: AvailableLanguages
+  setLanguage?: (language: AvailableLanguages) => void
 }
 
 const Header = ({ navbarLinks, isHomePage, language, setLanguage }: Props) => {

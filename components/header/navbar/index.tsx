@@ -13,8 +13,8 @@ import LoginButton from './LoginButton'
 
 type Props = {
   navbarLinks: NavbarLink[]
-  language: AvailableLanguages
-  setLanguage: (language: AvailableLanguages) => void
+  language?: AvailableLanguages
+  setLanguage?: (language: AvailableLanguages) => void
   position?: 'top' | 'side'
 }
 

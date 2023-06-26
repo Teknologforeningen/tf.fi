@@ -9,12 +9,15 @@
   --teknologröd: #b20738;
   --eventblue: #9ad7d7;
   --blogpink: #d79ad1;
-  --darkGray: #242424;
+  --darkGray: #222222;
+  --gray: #38404b;
+  --lightGray: #a9a9a9;
 }
 
 @layer base {
   html,
   body {
+    background-color: var(--lightGray);
     height: 100vh;
     display: flex;
     flex-direction: column;
