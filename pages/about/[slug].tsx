@@ -6,7 +6,7 @@ import { NavbarLink } from '../../lib/api/navbar'
 import { useState } from 'react'
 import { AvailableLanguages } from '../../utils/languages'
 import { getLayoutProps } from '../../utils/helpers'
-import Footer from '../../components/footer/Footer'
+import Footer from '../../components/footer/footer'
 import { NationLogo } from '../../components/footer/Logos'
 
 const renderer: marked.RendererObject = {

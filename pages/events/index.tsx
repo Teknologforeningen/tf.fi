@@ -6,20 +6,19 @@ import EventItem from '../../components/events/EventItem'
 import { NavbarLink } from '../../lib/api/navbar'
 import { NationLogo } from '../../components/footer/Logos'
 import Header from '../../components/header'
-import Footer from '../../components/footer/Footer'
+import Footer from '../../components/footer/footer'
 import { getLayoutProps } from '../../utils/helpers'
 import { fetchEvents } from '../../lib/api/event'
 import PageNavigation from '../../components/PageNavigation'
 import { EVENT_PAGE_SIZE } from '../../utils/constants'
 
 type Props = {
-  isHomePage: boolean
   logos: NationLogo[]
   navbarLinks: NavbarLink[]
 }
 
 //TODO: get text ellipse to work properly, kinda spaghetti rn
-const Events = ({ logos, navbarLinks, isHomePage }: Props) => {
+const Events = ({ logos, navbarLinks }: Props) => {
   const [events, setEvents] = useState<Event[]>([])
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
@@ -35,7 +34,7 @@ const Events = ({ logos, navbarLinks, isHomePage }: Props) => {
 
   return (
     <>
-      <Header navbarLinks={navbarLinks} isHomePage={isHomePage} />
+      <Header navbarLinks={navbarLinks} />
       <main className="z-10 mx-auto my-6 min-h-[92vh] max-w-7xl p-[15px]">
         <Column>
           <p className="pb-5 text-3xl text-white">Nyheter</p>

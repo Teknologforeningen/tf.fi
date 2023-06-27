@@ -7,12 +7,11 @@ import { fetchEvent, fetchEvents } from '../../lib/api/event'
 import { getLayoutProps } from '../../utils/helpers'
 import { NationLogo } from '../../components/footer/Logos'
 import { NavbarLink } from '../../lib/api/navbar'
-import Footer from '../../components/footer/Footer'
+import Footer from '../../components/footer/footer'
 import Header from '../../components/header'
 
 type Props = {
   event?: Event
-  isHomePage: boolean
   logos: NationLogo[]
   navbarLinks: NavbarLink[]
 }
@@ -28,12 +27,11 @@ marked.use({ renderer })
 /** Page for a single event */
 const EventPage: NextPage<Props> = ({
   event,
-  isHomePage,
   logos,
   navbarLinks,
 }) => (
   <>
-    <Header navbarLinks={navbarLinks} isHomePage={isHomePage} />
+    <Header navbarLinks={navbarLinks} />
     <div className=" z-10 mx-auto my-6 min-h-[92vh] max-w-[95vw] rounded-lg bg-white p-[15px] md:max-w-[55vw] lg:max-w-[80vw]">
       <Column>
         <Row className="w-full">
@@ -73,14 +71,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params?.slug instanceof Array ? params?.slug[0] : params?.slug
   const event = await fetchEvent(slug)
-  const { flags, homepage, isHomePage, logos, navbarLinks } =
-    await getLayoutProps()
+  const { homepage, logos, navbarLinks } = await getLayoutProps()
   return {
     props: {
       event,
-      flags,
       homepage,
-      isHomePage,
       logos,
       navbarLinks,
     },
