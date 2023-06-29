@@ -10,7 +10,7 @@ import Footer from '../../components/footer/Footer'
 import { NationLogo } from '../../components/footer/Logos'
 
 const renderer: marked.RendererObject = {
-  link(href, title, text) {
+  link(href, _, text) {
     return `<a class="link" href=${href}>${text}</a>`
   },
   image(href) {
