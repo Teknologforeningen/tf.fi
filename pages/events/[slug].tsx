@@ -7,7 +7,7 @@ import { fetchEvent, fetchEvents } from '../../lib/api/event'
 import { getLayoutProps } from '../../utils/helpers'
 import { NationLogo } from '../../components/footer/Logos'
 import { NavbarLink } from '../../lib/api/navbar'
-import Footer from '../../components/footer/footer'
+import Footer from '../../components/footer/Footer'
 import Header from '../../components/header'
 
 type Props = {

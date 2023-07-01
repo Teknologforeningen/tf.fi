@@ -6,10 +6,8 @@ import { NavbarLink } from '../../lib/api/navbar'
 import Header from '../../components/header'
 import { useState } from 'react'
 import { AvailableLanguages } from '../../utils/languages'
-import Column from '../../components/Column'
-import Row from '../../components/Row'
 import { NationLogo } from '../../components/footer/Logos'
-import Footer from '../../components/footer/footer'
+import Footer from '../../components/footer/Footer'
 import { getLayoutProps } from '../../utils/helpers'
 
 type Props = {
@@ -32,7 +30,6 @@ const ContentPage: NextPage<Props> = ({
   logos 
 }) => {
   const [language, setLanguage] = useState<AvailableLanguages>('swedish')
-
   return (
     <>
       <Header
@@ -40,22 +37,15 @@ const ContentPage: NextPage<Props> = ({
         language={language}
         setLanguage={setLanguage}
       />
-      <div className=" z-10 mx-auto my-6 min-h-[92vh] max-w-[95vw] rounded-lg bg-white p-[15px] md:max-w-[80vw]">
-      <Column>
-        <Row className="w-full">
-          <h2 className="text-left text-2xl font-extrabold uppercase leading-7 tracking-wide text-darkblue md:text-4xl">
-            {contentPage?.title}
-          </h2>
-        </Row>
-
-        <div className="mt-12 w-3/4 overflow-hidden text-lg leading-7 tracking-wide">
+      <div className="mx-auto mb-6 mt-14 xl:mt-6 min-h-[92vh] rounded-lg bg-white p-[15px] max-w-[85vw] xl:max-w-screen-lg">
+        <article className="prose prose-sm m-8">
+          <h1>{contentPage.title}</h1>
           <div
             dangerouslySetInnerHTML={{
               __html: marked.parse(contentPage?.content ?? ''),
             }}
           />
-        </div>
-      </Column>
+        </article>
     </div>
     <Footer logos={logos} />
     </>
