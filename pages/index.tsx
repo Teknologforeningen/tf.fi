@@ -17,6 +17,7 @@ import TFInfo from '../components/TFInfo'
 import Events from '../components/events/Events'
 import Row from '../components/Row'
 import Footer from '../components/footer/Footer'
+import DriveExplorer from '../components/FileExplorer'
 
 export interface HomePage {
   footer: {
@@ -33,6 +34,7 @@ type Props = {
 
 const Home: NextPage<Props> = ({ navbarLinks, isHomePage, logos, events }) => {
   const [language, setLanguage] = useState<AvailableLanguages>('swedish')
+
   return (
     <>
       <Header
@@ -41,10 +43,12 @@ const Home: NextPage<Props> = ({ navbarLinks, isHomePage, logos, events }) => {
         language={language}
         setLanguage={setLanguage}
       />
-
       <main>
         <Column>
           <MainBanner />
+          <div className="w-fill flex h-full">
+            <DriveExplorer folderId="1WwnO0JgDeyKrcSrIIiGuWL_WsEH2Lwgl" />
+          </div>
           <Item
             backgroundColor="darkgray"
             className="max-w-[1500px] flex-col md:flex-row"
