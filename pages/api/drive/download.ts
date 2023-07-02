@@ -6,7 +6,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    const { fileId } = req.query
+    const { fileId, fileName } = req.query
     if (!fileId) {
       throw new Error('The rootFolderId query parameter is required!')
     }
@@ -38,12 +38,10 @@ export default async function handler(
     if (!response || !response.data) {
       throw new Error('File data not found!')
     }
+    console.log(response)
     const stream = response.data
 
-    res.setHeader(
-      'content-disposition',
-      `attachment; filename="${'donwload.pdf'}"`
-    )
+    res.setHeader('content-disposition', `attachment; filename="${fileName || fileId}"`)
     stream.pipe(res)
   } catch (error) {
     console.error('Error downloading file', error)

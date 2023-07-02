@@ -1,5 +1,12 @@
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { Folder, File } from '../models/files'
+import {
+  MdKeyboardArrowDown,
+  MdKeyboardArrowRight,
+  MdOutlineFolder,
+  MdFileDownload,
+} from 'react-icons/md'
 
 type DriveExplorerProps = {
   folderId: string
@@ -7,18 +14,21 @@ type DriveExplorerProps = {
 
 const FileItem: React.FC<{ file: File }> = ({ file }) => {
   const downloadFile = () => {
-    window.location.href = `/api/drive/download?fileId=${file.id}`
+    window.location.href = `/api/drive/download?fileId=${file.id}&fileName=${file.name}`
   }
 
   return (
-    <div className="pl-4">
+    <ItemWrapper>
       <button
         onClick={downloadFile}
-        className="cursor-pointer text-blue-500 underline"
+        className="flex flex-row items-center tracking-wide text-white hover:text-[15px]  hover:font-semibold"
       >
+        <div className="mx-1">
+          <MdFileDownload />
+        </div>
         {file.name}
       </button>
-    </div>
+    </ItemWrapper>
   )
 }
 
@@ -30,15 +40,20 @@ const FolderItem: React.FC<{ folder: Folder }> = ({ folder }) => {
   }
 
   return (
-    <div className="pl-4">
+    <ItemWrapper>
       <button
         onClick={toggleExpanded}
-        className="cursor-pointer text-blue-500 underline"
+        className="flex flex-row items-center tracking-wide text-white hover:font-semibold
+        "
       >
-        {isExpanded ? '-' : '+'} {folder.name}
+        {isExpanded ? <MdKeyboardArrowDown /> : <MdKeyboardArrowRight />}
+        <div className="mx-1">
+          <MdOutlineFolder />
+        </div>
+        {folder.name}
       </button>
       {isExpanded && <DriveExplorer folderId={folder.id} />}
-    </div>
+    </ItemWrapper>
   )
 }
 
@@ -62,9 +77,9 @@ const DriveExplorer: React.FC<DriveExplorerProps> = ({ folderId }) => {
   }, [folderId])
 
   return (
-    <div className="pl-4">
+    <div className="pl-4 text-white">
       {isLoading ? (
-        <p>Loading...</p>
+        <Image src="/loading.svg" alt="loading" width={25} height={25} />
       ) : (
         folderArray.map((item) =>
           item.mimeType === 'application/vnd.google-apps.folder' ? (
@@ -77,5 +92,9 @@ const DriveExplorer: React.FC<DriveExplorerProps> = ({ folderId }) => {
     </div>
   )
 }
+
+const ItemWrapper = ({ children }: React.PropsWithChildren) => (
+  <div className=" p-[4px] pl-4">{children}</div>
+)
 
 export default DriveExplorer
