@@ -3,7 +3,6 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { AvailableLanguages } from '../utils/languages'
 import { fetchEvents } from '../lib/api/event'
-import { fetchFlags } from '../lib/api/flag'
 import { fetchHomepage } from '../lib/api/homepage'
 import Column from '../components/Column'
 import { NationLogo } from '../components/footer/Logos'
@@ -25,19 +24,17 @@ export interface HomePage {
 }
 
 type Props = {
-  isHomePage: boolean
   logos: NationLogo[]
   navbarLinks: NavbarLink[]
   events: Event[]
 }
 
-const Home: NextPage<Props> = ({ navbarLinks, isHomePage, logos, events }) => {
+const Home: NextPage<Props> = ({ navbarLinks, logos, events }) => {
   const [language, setLanguage] = useState<AvailableLanguages>('swedish')
   return (
     <>
       <Header
         navbarLinks={navbarLinks}
-        isHomePage={isHomePage}
         language={language}
         setLanguage={setLanguage}
       />
@@ -82,20 +79,11 @@ const Home: NextPage<Props> = ({ navbarLinks, isHomePage, logos, events }) => {
 
 export const getStaticProps: GetStaticProps = async () => {
   const events = await fetchEvents(1)
-  const flags = await fetchFlags()
   const homepage = await fetchHomepage()
   const navbarLinks = await fetchNavbar()
   const logos = homepage.footer.nationlogos
-  const isHomePage = flags.some(
-    (flag) => flag.title === 'isHomePage' && flag.onoff
-  )
   return {
-    props: {
-      navbarLinks,
-      events: events.data,
-      isHomePage,
-      logos,
-    },
+    props: { navbarLinks, events: events.data, logos, },
   }
 }
 
