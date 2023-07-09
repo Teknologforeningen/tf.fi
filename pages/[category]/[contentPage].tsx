@@ -9,6 +9,7 @@ import { AvailableLanguages } from '../../utils/languages'
 import { NationLogo } from '../../components/footer/Logos'
 import Footer from '../../components/footer/Footer'
 import { getLayoutProps } from '../../utils/helpers'
+import TableOfContents from '../../components/TableOfContents'
 
 type Props = {
   contentPage: ContentPage
@@ -31,7 +32,7 @@ const ContentPage: NextPage<Props> = ({
 }) => {
   const [language, setLanguage] = useState<AvailableLanguages>('swedish')
   return (
-    <>
+    <div className='bg-white'>
       <Header
         navbarLinks={navbarLinks}
         language={language}
@@ -40,15 +41,16 @@ const ContentPage: NextPage<Props> = ({
       <div className="mx-auto mb-6 mt-14 xl:mt-6 min-h-[92vh] rounded-lg bg-white p-[15px] max-w-[85vw] xl:max-w-screen-lg">
         <article className="prose prose-sm m-8">
           <h1>{contentPage.title}</h1>
+          <TableOfContents content={contentPage.content ?? ''}/>
           <div
             dangerouslySetInnerHTML={{
               __html: marked.parse(contentPage?.content ?? ''),
             }}
           />
         </article>
+      </div>
+      <Footer logos={logos} />
     </div>
-    <Footer logos={logos} />
-    </>
   )
 }
 

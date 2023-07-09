@@ -1,5 +1,4 @@
 .link {
-  cursor: pointer;
   font-size: 18px;
   position: relative;
   white-space: nowrap;
@@ -23,6 +22,7 @@
 }
 
 .link-text {
+  cursor: pointer;
   color: #fff;
   font-family: var(--font-montserrat), sans-serif;
   text-transform: uppercase;
