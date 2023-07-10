@@ -17,7 +17,6 @@ type Props = {
   navbarLinks: NavbarLink[]
 }
 
-//TODO: get text ellipse to work properly, kinda spaghetti rn
 const Events = ({ logos, navbarLinks }: Props) => {
   const [events, setEvents] = useState<Event[]>([])
   const [page, setPage] = useState(1)
@@ -42,11 +41,13 @@ const Events = ({ logos, navbarLinks }: Props) => {
           {events.map((post) => (
             <EventItem post={post} key={post.id} />
           ))}
-          <PageNavigation
-            currentPage={page}
-            totalPages={Math.ceil(totalPages / EVENT_PAGE_SIZE)}
-            setPage={setPage}
-          />
+          {totalPages / EVENT_PAGE_SIZE > 1 && (
+            <PageNavigation
+              currentPage={page}
+              totalPages={Math.ceil(totalPages / EVENT_PAGE_SIZE)}
+              setPage={setPage}
+            />
+          )}
         </Column>
       </main>
       <Footer logos={logos} />
