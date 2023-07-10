@@ -1,8 +1,9 @@
 import qs from 'qs'
 import { CollectionResponse, fetchFromStrapi } from '.'
-import { AboutPage } from './about'
+import { ContentPage } from '../../models/contentpage'
+import { Category } from '../../models/category'
 
-type NavbarAbout = Pick<AboutPage, 'slug' | 'title'>
+type NavbarCategory = Pick<Category, 'content_pages' | 'slug' | 'title'>
 
 interface BaseNavbarLink {
   title: string
@@ -14,24 +15,17 @@ export interface NavbarSingleLink extends BaseNavbarLink {
 
 export interface NavbarMultipleLink extends BaseNavbarLink {
   links: NavbarSingleLink[]
-  // TODO: Make required
-  basePath?: string
+  basePath: string
 }
 
 export type NavbarLink = NavbarSingleLink | NavbarMultipleLink
 
 export interface Navbar {
   id: number
-  abouts: {
-    data: CollectionResponse<NavbarAbout>[]
-  }
-  abi_pages: {
-    data: CollectionResponse<NavbarAbout>[]
-  }
-  staelm_pages: {
-    data: CollectionResponse<NavbarAbout>[]
-  }
   links: NavbarLink[]
+  categories: {
+    data: CollectionResponse<NavbarCategory>[]
+  }
 }
 
 export default async function fetchNavbar(): Promise<NavbarLink[]> {
@@ -41,17 +35,11 @@ export default async function fetchNavbar(): Promise<NavbarLink[]> {
         logo: {
           populate: ['url'],
         },
-        abouts: {
-          fields: ['title', 'slug'],
-        },
-        abi_pages: {
-          fields: ['title', 'slug'],
-        },
-        staelm_pages: {
-          fields: ['title', 'slug'],
-        },
         links: {
           populate: ['links'],
+        },
+        categories: {
+          populate: ['name', 'slug', 'content_pages'],
         },
       },
     },
@@ -61,46 +49,31 @@ export default async function fetchNavbar(): Promise<NavbarLink[]> {
     `/navbar?${query}`
   )) as CollectionResponse<Navbar>
 
-  const about = toNavbarMultipleLink(
-    navbar.attributes.abouts.data,
-    'about',
-    'Om Teknologföreningen'
-  )
-
-  const abi = toNavbarMultipleLink(
-    navbar.attributes.abi_pages.data,
-    'abi',
-    'Abiturienter'
-  )
-
-  /* const stalm = toNavbarMultipleLink(
-    navbar.attributes.staelm_pages.data,
-    'stalm',
-    'Stälmar'
-  ) */
-
-  return [about, abi, ...navbar.attributes.links]
+  const categories = toNavbarMultipleLink(navbar.attributes.categories.data)
+  return [...categories, ...navbar.attributes.links]
 }
 
 function toLink(
-  cr: CollectionResponse<NavbarAbout>,
+  contentPage: CollectionResponse<ContentPage>,
   baseUrl: string
 ): NavbarSingleLink {
   return {
-    title: cr.attributes.title,
-    link: `/${baseUrl}/${cr.attributes.slug}`,
+    title: contentPage.attributes.title,
+    link: `/${baseUrl}/${contentPage.attributes.slug}`,
   }
 }
 
 function toNavbarMultipleLink(
-  crs: CollectionResponse<NavbarAbout>[],
-  baseUrl: string,
-  title: string
-): NavbarMultipleLink {
-  const links = crs.map((about) => toLink(about, baseUrl))
-  return {
-    title,
-    links,
-    basePath: baseUrl,
-  }
+  categories: CollectionResponse<NavbarCategory>[]
+): NavbarMultipleLink[] {
+  return categories.map((category) => {
+    const links = category.attributes.content_pages.data.map((page) => {
+      return toLink(page, category.attributes.slug)
+    })
+    return {
+      title: category.attributes.title,
+      links,
+      basePath: category.attributes.slug,
+    }
+  })
 }

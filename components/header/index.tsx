@@ -8,37 +8,34 @@ import { NavbarLink } from '../../lib/api/navbar'
 
 type Props = {
   navbarLinks: NavbarLink[]
-  isHomePage?: boolean
   language?: AvailableLanguages
   setLanguage?: (language: AvailableLanguages) => void
 }
 
-const Header = ({ navbarLinks, isHomePage, language, setLanguage }: Props) => {
+const Header = ({ navbarLinks, language, setLanguage }: Props) => {
   const [sideMenuOpen, setSideMenuOpen] = useState(false)
 
   return (
     <header>
-      {isHomePage && (
-        <div className="bg-darkgray pb-2">
-          <MenuIcon
-            open={sideMenuOpen}
-            onClick={() => setSideMenuOpen(!sideMenuOpen)}
-          />
+      <div className="bg-darkgray pb-2">
+        <MenuIcon
+          open={sideMenuOpen}
+          onClick={() => setSideMenuOpen(!sideMenuOpen)}
+        />
+        <Navbar
+          navbarLinks={navbarLinks}
+          language={language}
+          setLanguage={setLanguage}
+        />
+        <SideMenu open={sideMenuOpen}>
           <Navbar
             navbarLinks={navbarLinks}
             language={language}
             setLanguage={setLanguage}
+            position="side"
           />
-          <SideMenu open={sideMenuOpen}>
-            <Navbar
-              navbarLinks={navbarLinks}
-              language={language}
-              setLanguage={setLanguage}
-              position="side"
-            />
-          </SideMenu>
-        </div>
-      )}
+        </SideMenu>
+      </div>
     </header>
   )
 }

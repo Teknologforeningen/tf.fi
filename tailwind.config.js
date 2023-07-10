@@ -21,6 +21,13 @@ module.exports = {
         body: ['var(--font-raleway)'],
         display: ['var(--font-montserrat)'],
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: '100ch',
+          }
+        }
+      }
     },
     backgroundImage: {
       'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -31,5 +38,6 @@ module.exports = {
       addVariant('descendant', '& *')
       addVariant('child', '& > *')
     },
+    require('@tailwindcss/typography'),
   ],
 }
