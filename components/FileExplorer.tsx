@@ -12,9 +12,12 @@ type DriveExplorerProps = {
   folderId: string
 }
 
+const publicDownloadUrl = '/api/drive/public/'
+
 const FileItem: React.FC<{ file: File }> = ({ file }) => {
   const downloadFile = () => {
-    window.location.href = `/api/drive/download?fileId=${file.id}&fileName=${file.name}`
+    window.location.href =
+      publicDownloadUrl + `download?fileId=${file.id}&fileName=${file.name}`
   }
 
   return (
@@ -63,19 +66,21 @@ const DriveExplorer: React.FC<DriveExplorerProps> = ({ folderId }) => {
 
   useEffect(() => {
     const fetchFolder = async () => {
-      const res = await fetch(`/api/drive/listFiles?folderId=${folderId}`)
+      const res = await fetch(
+        publicDownloadUrl + `listFiles?folderId=${folderId}`
+      )
       const data = await res.json()
       if (data.error) {
         console.error(data.error)
         return
       }
-      setFolderArray(data)
+      setFolderArray(data.data.files)
       setLoading(false)
     }
 
     fetchFolder()
   }, [folderId])
-
+  console.log(folderArray)
   return (
     <div className="pl-4 text-white">
       {isLoading ? (

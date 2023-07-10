@@ -1,28 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Calendar from 'react-calendar'
-import Column from '../Column'
+import Column from '../../components/Column'
 import { CalendarEvent } from '../../models/event'
-import Subtitle from '../Subtitle'
+import Subtitle from '../../components/Subtitle'
 import { getDateShort } from '../../utils/helpers'
+import Image from 'next/image'
 
 const CalendarEventsList = ({
   events,
-  selectedDate,
+  isLoading,
 }: {
   events: CalendarEvent[]
-  selectedDate: Date
+  isLoading: boolean
 }) => (
-  <Column className=" mt-2 flex w-full">
-    {events
-      ?.filter(
-        (x) =>
-          x.start &&
-          x.end &&
-          (new Date(x.start) >= selectedDate || new Date(x.end) >= selectedDate)
-      )
-      .slice(0, 5)
-      .map((x) => {
+  <Column className="mt-2 flex w-full">
+    {isLoading && events.length < 1 ? (
+      <Image src="/loading.svg" alt="loading" width={25} height={25} />
+    ) : (
+      events.map((x) => {
         const start = x.start && getDateShort(x.start)
         const end = x.end && getDateShort(x.end)
         return (
@@ -35,23 +31,28 @@ const CalendarEventsList = ({
             <p>{start + (start !== end ? ' - ' + end : '')}</p>
           </Link>
         )
-      })}
+      })
+    )}
   </Column>
 )
 
-//remove hardcoded colors
 const CalendarComponent = () => {
   const [data, setData] = useState<CalendarEvent[]>([])
   const [date, setDate] = useState(new Date())
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    fetch(
-      `/api/calendar?calendarId=${process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_ID}&date=${date}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data)
-      })
+    const getAsync = async () => {
+      setIsLoading(true)
+      const res = await fetch(
+        `/api/calendar?calendarId=${process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_ID}&date=${date}`
+      )
+      const prasedData = await res.json()
+      setData(prasedData)
+
+      setIsLoading(false)
+    }
+    getAsync()
   }, [date])
 
   const isActive = (item: CalendarEvent, date: Date) => {
@@ -81,7 +82,17 @@ const CalendarComponent = () => {
           onClickDay={(value) => setDate(value)}
         />
       </div>
-      <CalendarEventsList events={data} selectedDate={date} />
+      <CalendarEventsList
+        events={data
+          ?.filter(
+            (x) =>
+              x.start &&
+              x.end &&
+              (new Date(x.start) >= date || new Date(x.end) >= date)
+          )
+          .slice(0, 5)}
+        isLoading={isLoading}
+      />
     </div>
   )
 }
