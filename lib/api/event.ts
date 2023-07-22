@@ -14,8 +14,8 @@ export async function fetchEvent(slug?: string): Promise<TimelineEvent> {
       })
     : ''
   const events = await fetchFromStrapi<TimelineEvent>(`/events?${query}`)
-  if (!(events instanceof Array)) return Promise.reject()
-  else if (events.length === 0) return Promise.reject()
+  if (!(events instanceof Array)) throw new Error('Events need to be an array')
+  else if (events.length === 0) throw new Error('Events cannot be empty')
 
   const event = events[0]
   return { id: event.id, ...event.attributes }
@@ -37,7 +37,7 @@ export async function fetchEvents(page?: number): Promise<EventsResponse> {
 
   const parsed = await res.json()
   const data = parsed.data
-  if (!(data instanceof Array)) return Promise.reject()
+  if (!(data instanceof Array)) throw new Error('Data needs to be an array')
   return {
     data: data.map((e) => ({ id: e.id, ...e.attributes })) || [],
     totalPages: parsed.meta.pagination.total || 0,

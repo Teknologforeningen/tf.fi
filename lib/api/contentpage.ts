@@ -15,8 +15,10 @@ export async function fetchContentPage(slug?: string): Promise<ContentPage> {
   const contentPages = await fetchFromStrapi<ContentPage>(
     `/content-pages?${query}`
   )
-  if (!(contentPages instanceof Array)) return Promise.reject()
-  else if (contentPages.length === 0) return Promise.reject()
+  if (!(contentPages instanceof Array))
+    throw new Error('Content pages needs to be an array')
+  else if (contentPages.length === 0)
+    throw new Error('Content pages cannot be empty')
 
   const contentPage = contentPages[0]
   return contentPage.attributes
@@ -35,6 +37,6 @@ export async function fetchContentPages(): Promise<ContentPage[]> {
   )
 
   const res = await fetchFromStrapi<ContentPage>(`/content-pages?${query}`)
-  if (!(res instanceof Array)) return Promise.reject()
+  if (!(res instanceof Array)) throw new Error('Response needs to be an array')
   return res.map((c) => c.attributes)
 }
