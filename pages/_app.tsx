@@ -29,7 +29,8 @@ const montserrat = localFont({
   variable: '--font-montserrat',
 })
 
-const STRAPI_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://cms.tf.fi'
+export const STRAPI_URL =
+  process.env.NEXT_PUBLIC_BASE_URL ?? 'https://cms.tf.fi'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (

@@ -8,7 +8,7 @@ const LoginButton = ({ className }: { className?: string }) => {
     <button
       onClick={login}
       className={classNames(
-        'rounded-lg border border-white p-3 text-white hover:bg-gray-900',
+        'hover:bg-gray-900 rounded-lg border border-white p-3 text-white',
         className
       )}
     >

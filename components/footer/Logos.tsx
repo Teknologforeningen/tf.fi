@@ -1,42 +1,7 @@
 import Row from '../Row'
 import Image from 'next/image'
 import Link from 'next/link'
-
-export type StrapiImage = {
-  data: {
-    id: number
-    attributes: {
-      name: string
-      alternativeText: string
-      caption: string
-      width: number
-      height: number
-      formats: {
-        thumbnail: {
-          ext: string
-          url: string
-          hash: string
-          mime: string
-          name: string
-          path: null
-          size: number
-          width: number
-          height: number
-        }
-      }
-      hash: string
-      ext: string
-      mime: string
-      size: number
-      url: string
-      previewUrl: null
-      provider: string
-      provider_metadata: null
-      createdAt: string | Date
-      updatedAt: string | Date
-    }
-  }
-}
+import { StrapiImage } from '../../models/image'
 
 export type NationLogo = {
   id: number

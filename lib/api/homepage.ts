@@ -5,7 +5,13 @@ import { API_URL } from './index'
 export async function fetchHomepage(): Promise<HomePage> {
   const query = qs.stringify(
     {
-      populate: ['footer', 'footer.nationlogos', 'footer.nationlogos.image'],
+      populate: [
+        'banner',
+        'banner.bannerImages',
+        'footer',
+        'footer.nationlogos',
+        'footer.nationlogos.image',
+      ],
     },
     { encodeValuesOnly: true }
   )

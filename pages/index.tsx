@@ -11,13 +11,18 @@ import Header from '../components/header'
 import Item from '../components/Item'
 import Calendar from '../components/calendar/Calendar'
 import { Event } from '../models/event'
-import MainBanner from '../components/Banner'
+import MainBanner, { BannerImage } from '../components/Banner'
 import TFInfo from '../components/TFInfo'
 import Events from '../components/events/Events'
 import Row from '../components/Row'
 import Footer from '../components/footer/Footer'
 
 export interface HomePage {
+  banner?: {
+    bannerImages?: {
+      data: BannerImage[]
+    }
+  }
   footer: {
     nationlogos: NationLogo[]
   }
@@ -27,9 +32,15 @@ type Props = {
   logos: NationLogo[]
   navbarLinks: NavbarLink[]
   events: Event[]
+  bannerImages: BannerImage[]
 }
 
-const Home: NextPage<Props> = ({ navbarLinks, logos, events }) => {
+const Home: NextPage<Props> = ({
+  navbarLinks,
+  logos,
+  events,
+  bannerImages,
+}) => {
   const [language, setLanguage] = useState<AvailableLanguages>('swedish')
 
   return (
@@ -41,7 +52,7 @@ const Home: NextPage<Props> = ({ navbarLinks, logos, events }) => {
       />
       <main>
         <Column>
-          <MainBanner />
+          <MainBanner bannerImages={bannerImages} />
           <Item
             backgroundColor="darkgray"
             className="max-w-[1500px] flex-col md:flex-row"
@@ -83,7 +94,12 @@ export const getStaticProps: GetStaticProps = async () => {
   const navbarLinks = await fetchNavbar()
   const logos = homepage.footer.nationlogos
   return {
-    props: { navbarLinks, events: events.data, logos, },
+    props: {
+      navbarLinks,
+      events: events.data,
+      logos,
+      bannerImages: homepage.banner?.bannerImages?.data,
+    },
   }
 }
 
