@@ -10,6 +10,12 @@ export async function fetchContentPage(slug?: string): Promise<ContentPage> {
             $eq: slug,
           },
         },
+        populate: {
+          content_sections: {
+            populate: ['title', 'content', 'file_folders'],
+            sort: 'title',
+          },
+        },
       })
     : ''
   const contentPages = await fetchFromStrapi<ContentPage>(

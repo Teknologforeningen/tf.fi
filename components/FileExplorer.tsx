@@ -24,7 +24,7 @@ const FileItem: React.FC<{ file: File }> = ({ file }) => {
     <ItemWrapper>
       <button
         onClick={downloadFile}
-        className="flex flex-row items-center tracking-wide text-white hover:text-[15px]  hover:font-semibold"
+        className="flex flex-row items-center tracking-wide hover:text-[15px]  hover:font-semibold"
       >
         <div className="mx-1">
           <MdFileDownload />
@@ -46,7 +46,7 @@ const FolderItem: React.FC<{ folder: Folder }> = ({ folder }) => {
     <ItemWrapper>
       <button
         onClick={toggleExpanded}
-        className="flex flex-row items-center tracking-wide text-white hover:font-semibold
+        className="flex flex-row items-center tracking-wide hover:font-semibold
         "
       >
         {isExpanded ? <MdKeyboardArrowDown /> : <MdKeyboardArrowRight />}
@@ -82,7 +82,7 @@ const DriveExplorer: React.FC<DriveExplorerProps> = ({ folderId }) => {
   }, [folderId])
   console.log(folderArray)
   return (
-    <div className="pl-4 text-white">
+    <div className="pl-4 ">
       {isLoading ? (
         <Image src="/loading.svg" alt="loading" width={25} height={25} />
       ) : (

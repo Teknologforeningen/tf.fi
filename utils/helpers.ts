@@ -32,3 +32,10 @@ export const getLayoutProps = async (): Promise<LayoutProps> => {
     logos,
   }
 }
+
+export const titleToAnchor = (title: string) => {
+  return title
+    .replace(/ /g, '-')
+    .replace(/[\/\\^$*+?.()|\[\]{}<>:;"'~,=@`#!%&]/g, '')
+    .toLowerCase()
+}

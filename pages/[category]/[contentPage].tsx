@@ -9,7 +9,8 @@ import { AvailableLanguages } from '../../utils/languages'
 import { NationLogo } from '../../components/footer/Logos'
 import Footer from '../../components/footer/Footer'
 import { getLayoutProps } from '../../utils/helpers'
-import TableOfContents from '../../components/TableOfContents'
+import TableOfContents from '../../components/content/TableOfContents'
+import ContentSection from '../../components/pages/ContentSection'
 
 type Props = {
   contentPage: ContentPage
@@ -25,29 +26,29 @@ const renderer: marked.RendererObject = {
 
 marked.use({ renderer })
 
-const ContentPage: NextPage<Props> = ({
-  contentPage,
-  navbarLinks,
-  logos 
-}) => {
+const ContentPage: NextPage<Props> = ({ contentPage, navbarLinks, logos }) => {
   const [language, setLanguage] = useState<AvailableLanguages>('swedish')
   return (
-    <div className='bg-white'>
+    <div className="bg-white">
       <Header
         navbarLinks={navbarLinks}
         language={language}
         setLanguage={setLanguage}
       />
-      <div className="mx-auto mb-6 mt-14 xl:mt-6 min-h-[92vh] rounded-lg bg-white p-[15px] max-w-[85vw] xl:max-w-screen-lg">
-        <article className="prose prose-sm m-8">
-          <h1>{contentPage.title}</h1>
-          <TableOfContents content={contentPage.content ?? ''}/>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: marked.parse(contentPage?.content ?? ''),
-            }}
+      <div className="prose prose-sm m-8 mx-auto  min-h-[92vh] max-w-[85vw] rounded-lg bg-white p-[15px] xl:mt-6 xl:max-w-screen-lg">
+        <h1>{contentPage.title}</h1>
+        {contentPage.content && <p>{contentPage.content}</p>}
+        {contentPage.showTableOfContents && (
+          <TableOfContents sections={contentPage.content_sections.data} />
+        )}
+        {contentPage.content_sections.data.map((section, i) => (
+          <ContentSection
+            key={i}
+            title={section.attributes.title}
+            content={section.attributes.content}
+            file_folders={section.attributes.file_folders.data}
           />
-        </article>
+        ))}
       </div>
       <Footer logos={logos} />
     </div>
@@ -79,7 +80,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       : params?.contentPage
   const contentPage = await fetchContentPage(slug)
   const { logos, navbarLinks } = await getLayoutProps()
-
   return {
     props: {
       contentPage,
