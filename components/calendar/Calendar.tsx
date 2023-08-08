@@ -5,7 +5,7 @@ import Column from '../../components/Column'
 import { CalendarEvent } from '../../models/event'
 import Subtitle from '../../components/Subtitle'
 import { getDateShort } from '../../utils/helpers'
-import Image from 'next/image'
+import ActivityIndicator from '../ActivityIndicator'
 
 const CalendarEventsList = ({
   events,
@@ -16,7 +16,7 @@ const CalendarEventsList = ({
 }) => (
   <Column className="mt-2 flex w-full">
     {isLoading && events.length < 1 ? (
-      <Image src="/loading.svg" alt="loading" width={25} height={25} />
+      <ActivityIndicator width={25} height={25} stroke="white" />
     ) : (
       events.map((x) => {
         const start = x.start && getDateShort(x.start)

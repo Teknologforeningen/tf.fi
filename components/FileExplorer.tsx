@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import Image from 'next/image'
 import { Folder, File } from '../models/files'
 import {
   MdKeyboardArrowDown,
@@ -7,6 +6,7 @@ import {
   MdOutlineFolder,
   MdFileDownload,
 } from 'react-icons/md'
+import ActivityIndicator from './ActivityIndicator'
 
 type DriveExplorerProps = {
   folderId: string
@@ -24,7 +24,7 @@ const FileItem: React.FC<{ file: File }> = ({ file }) => {
     <ItemWrapper>
       <button
         onClick={downloadFile}
-        className="flex flex-row items-center tracking-wide hover:text-[15px]  hover:font-semibold"
+        className="flex flex-row items-center tracking-wide hover:font-semibold"
       >
         <div className="mx-1">
           <MdFileDownload />
@@ -80,11 +80,12 @@ const DriveExplorer: React.FC<DriveExplorerProps> = ({ folderId }) => {
 
     fetchFolder()
   }, [folderId])
-  console.log(folderArray)
   return (
     <div className="pl-4 ">
       {isLoading ? (
-        <Image src="/loading.svg" alt="loading" width={25} height={25} />
+        <div className="mx-2 h-[25px] w-[25px] pl-4">
+          <ActivityIndicator width={25} height={25} stroke="black" />
+        </div>
       ) : (
         folderArray.map((item) =>
           item.mimeType === 'application/vnd.google-apps.folder' ? (
@@ -99,7 +100,7 @@ const DriveExplorer: React.FC<DriveExplorerProps> = ({ folderId }) => {
 }
 
 const ItemWrapper = ({ children }: React.PropsWithChildren) => (
-  <div className=" p-[4px] pl-4">{children}</div>
+  <div className="p-[4px] pl-4">{children}</div>
 )
 
 export default DriveExplorer
