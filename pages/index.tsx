@@ -98,7 +98,7 @@ export const getStaticProps: GetStaticProps = async () => {
       navbarLinks,
       events: events.data,
       logos,
-      bannerImages: homepage.banner?.bannerImages?.data,
+      bannerImages: homepage.banner?.bannerImages?.data ?? [],
     },
   }
 }
