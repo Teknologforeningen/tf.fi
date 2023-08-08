@@ -1,0 +1,11 @@
+**/node_modules
+**/build
+.git
+.gitignore
+.dockerignore
+Dockerfile
+**/data
+**/.next
+.env.prod
+.env.local
+app
