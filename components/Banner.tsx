@@ -13,9 +13,7 @@ type BannerProps = {
 }
 
 const MainBanner: React.FC<BannerProps> = ({ bannerImages }) => {
-  const urls = bannerImages.map((img) =>
-    img.attributes.formats.large?.url ?? img.attributes.url
-  )
+  const urls = bannerImages.map((img) => img.attributes.url)
 
   return (
     <>
@@ -67,15 +65,20 @@ const Carousel = ({ urls }: { urls: string[] }) => {
     <motion.div
       animate={{ x: `-${index * 100}%` }}
       transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
-      className='flex max-h-full'>
+      className='flex h-full max-h-full'>
       {urls.map((url, i) => (
-          <img
-            key={url}
+        <div
+          key={url}
+          className='relative h-full w-full shrink-0'
+        >
+          <Image
             src={`${STRAPI_URL}${url}`}
             alt=''
-            className='object-cover w-full opacity-80 shrink-0'
-            loading={i === 0 ? 'eager' : 'lazy'}
+            className='object-cover opacity-80'
+            loading={i > 2 ? 'eager' : 'lazy'}
+            fill
           />
+        </div>
       ))}
     </motion.div>
   )
@@ -88,7 +91,7 @@ const SingleBannerImage = () => {
       alt='banner'
       style={{ objectFit: 'cover', opacity: 0.8 }}
       fill
-      loading="eager"
+      loading='eager'
     />
   )
 }
