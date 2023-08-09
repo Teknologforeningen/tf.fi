@@ -1,12 +1,16 @@
 import React from 'react'
 
-type Props = {
+type PageNavigationProps = {
   currentPage: number
   totalPages: number
-  setPage: (page: number) => void
+  setPage: React.Dispatch<React.SetStateAction<number>>
 }
 
-const PageNavigation = ({ currentPage, totalPages, setPage }: Props) => {
+const PageNavigation = ({
+  currentPage,
+  totalPages,
+  setPage,
+}: PageNavigationProps) => {
   const prevPage = currentPage > 1 ? currentPage - 1 : null
   const nextPage = currentPage < totalPages ? currentPage + 1 : null
 

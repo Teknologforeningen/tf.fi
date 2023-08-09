@@ -1,10 +1,10 @@
-import '../styles/globals.css'
-import '../styles/links.css'
-import '../styles/calendar.css'
-
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import localFont from 'next/font/local'
+
+import '@styles/globals.css'
+import '@styles/links.css'
+import '@styles/calendar.css'
 
 import { WithAuthContext } from '@hipsquare/react-strapi-keycloak-auth-context'
 
@@ -32,7 +32,7 @@ const montserrat = localFont({
 export const STRAPI_URL =
   process.env.NEXT_PUBLIC_BASE_URL ?? 'https://cms.tf.fi'
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
+const TFApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Head>
@@ -53,4 +53,4 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   )
 }
 
-export default MyApp
+export default TFApp

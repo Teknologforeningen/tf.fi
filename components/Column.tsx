@@ -1,12 +1,10 @@
 import classNames from 'classnames'
 import React from 'react'
 
-type Props = {
-  className?: string
-}
+type ColumnProps = React.PropsWithChildren<{ className?: string }>
 
 /** Component for flexbox column */
-const Column = ({ className, children }: React.PropsWithChildren<Props>) => (
+const Column = ({ className, children }: ColumnProps) => (
   <div className={classNames('flex flex-col items-center', className)}>
     {children}
   </div>

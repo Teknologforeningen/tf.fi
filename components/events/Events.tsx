@@ -1,13 +1,10 @@
 import React from 'react'
-import { Event } from '../../models/event'
+import { Event } from '@models/event'
 import Link from 'next/link'
 import EventItem from './EventItem'
 import Subtitle from '../Subtitle'
-type Props = {
-  events: Event[]
-}
 
-const Events = ({ events }: Props) => {
+const Events = ({ events }: { events: Event[] }) => {
   return (
     <div className="mx-5 mr-4 flex flex-col md:w-[60%]">
       <Subtitle>Nyheter</Subtitle>

@@ -1,7 +1,7 @@
 import qs from 'qs'
 import { Event as TimelineEvent } from '../../models/event'
 import { API_URL, fetchFromStrapi } from './index'
-import { EVENT_PAGE_SIZE } from '../../utils/constants'
+import { EVENT_PAGE_SIZE } from '@utils/constants'
 
 export async function fetchEvent(slug?: string): Promise<TimelineEvent> {
   const query = slug

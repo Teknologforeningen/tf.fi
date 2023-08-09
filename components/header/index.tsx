@@ -1,18 +1,10 @@
 import { useState } from 'react'
 import Navbar from './navbar'
-import { AvailableLanguages } from '../../utils/languages'
 import SideMenu from './navbar/SideMenu'
 import MenuIcon from './navbar/MenuIcon'
+import { NavbarLink } from '@lib/api/navbar'
 
-import { NavbarLink } from '../../lib/api/navbar'
-
-type Props = {
-  navbarLinks: NavbarLink[]
-  language?: AvailableLanguages
-  setLanguage?: (language: AvailableLanguages) => void
-}
-
-const Header = ({ navbarLinks, language, setLanguage }: Props) => {
+const Header = ({ navbarLinks }: { navbarLinks: NavbarLink[] }) => {
   const [sideMenuOpen, setSideMenuOpen] = useState(false)
 
   return (
@@ -22,18 +14,9 @@ const Header = ({ navbarLinks, language, setLanguage }: Props) => {
           open={sideMenuOpen}
           onClick={() => setSideMenuOpen(!sideMenuOpen)}
         />
-        <Navbar
-          navbarLinks={navbarLinks}
-          language={language}
-          setLanguage={setLanguage}
-        />
+        <Navbar navbarLinks={navbarLinks} />
         <SideMenu open={sideMenuOpen}>
-          <Navbar
-            navbarLinks={navbarLinks}
-            language={language}
-            setLanguage={setLanguage}
-            position="side"
-          />
+          <Navbar navbarLinks={navbarLinks} position="side" />
         </SideMenu>
       </div>
     </header>

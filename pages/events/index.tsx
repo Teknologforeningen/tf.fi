@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import type { GetStaticProps } from 'next'
-import { Event } from '../../models/event'
-import Column from '../../components/Column'
-import EventItem from '../../components/events/EventItem'
-import { NavbarLink } from '../../lib/api/navbar'
-import { NationLogo } from '../../components/footer/Logos'
-import Header from '../../components/header'
-import Footer from '../../components/footer/Footer'
-import { getLayoutProps } from '../../utils/helpers'
-import { fetchEvents } from '../../lib/api/event'
-import PageNavigation from '../../components/PageNavigation'
-import { EVENT_PAGE_SIZE } from '../../utils/constants'
+import { Event } from '@models/event'
+import Column from '@components/Column'
+import EventItem from '@components/events/EventItem'
+import { NavbarLink } from '@lib/api/navbar'
+import { NationLogo } from '@components/footer/Logos'
+import Header from '@components/header'
+import Footer from '@components/footer'
+import { getLayoutProps } from '@utils/helpers'
+import { fetchEvents } from '@lib/api/event'
+import PageNavigation from '@components/PageNavigation'
+import { EVENT_PAGE_SIZE } from '@utils/constants'
 
-type Props = {
+type EventsProps = {
   logos: NationLogo[]
   navbarLinks: NavbarLink[]
 }
 
-const Events = ({ logos, navbarLinks }: Props) => {
+const Events = ({ logos, navbarLinks }: EventsProps) => {
   const [events, setEvents] = useState<Event[]>([])
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)

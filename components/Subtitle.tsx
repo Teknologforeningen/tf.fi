@@ -1,3 +1,5 @@
+import React from 'react'
+
 const Subtitle = ({ children }: React.PropsWithChildren) => (
   <>
     <p className="text-3xl text-white">{children}</p>

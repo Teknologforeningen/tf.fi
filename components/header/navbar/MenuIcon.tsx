@@ -23,12 +23,12 @@ const MenuBar = ({
   )
 }
 
-type Props = {
+type MenuIconProps = {
   open: boolean
   onClick: MouseEventHandler<HTMLDivElement>
 }
 
-const MenuIcon = ({ open, onClick }: Props) => (
+const MenuIcon = ({ open, onClick }: MenuIconProps) => (
   <div
     className="fixed left-[10px] top-[10px] z-50 inline-block xl:hidden"
     onClick={onClick}

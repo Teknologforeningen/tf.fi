@@ -1,16 +1,20 @@
 import React from 'react'
 import { marked } from 'marked'
-import { titleToAnchor } from '../../utils/helpers'
-import { FileFolder } from '../../models/contentpage'
-import DriveExplorer from '../FileExplorer'
+import { titleToAnchor } from '@utils/helpers'
+import { FileFolder } from '@models/contentpage'
+import DriveExplorer from './FileExplorer'
 
-type Props = {
+type ContentSectionProps = {
   title: string
   content?: string
   file_folders: FileFolder[]
 }
 
-const ContentSection = ({ title, content, file_folders }: Props) => (
+const ContentSection = ({
+  title,
+  content,
+  file_folders,
+}: ContentSectionProps) => (
   <div>
     <h2 id={titleToAnchor(title)}>{title}</h2>
     <div

@@ -1,22 +1,14 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
-import { ContentPage } from '../../models/contentpage'
+import { ContentPage } from '@models/contentpage'
 import { marked } from 'marked'
-import { fetchContentPage, fetchContentPages } from '../../lib/api/contentpage'
-import { NavbarLink } from '../../lib/api/navbar'
-import Header from '../../components/header'
-import { useState } from 'react'
-import { AvailableLanguages } from '../../utils/languages'
-import { NationLogo } from '../../components/footer/Logos'
-import Footer from '../../components/footer/Footer'
-import { getLayoutProps } from '../../utils/helpers'
-import TableOfContents from '../../components/content/TableOfContents'
-import ContentSection from '../../components/pages/ContentSection'
-
-type Props = {
-  contentPage: ContentPage
-  logos: NationLogo[]
-  navbarLinks: NavbarLink[]
-}
+import { fetchContentPage, fetchContentPages } from '@lib/api/contentpage'
+import { NavbarLink } from '@lib/api/navbar'
+import Header from '@components/header'
+import { NationLogo } from '@components/footer/Logos'
+import Footer from '@components/footer'
+import { getLayoutProps } from '@utils/helpers'
+import TableOfContents from '@components/TableOfContents'
+import ContentSection from '@components/ContentSection'
 
 const renderer: marked.RendererObject = {
   image(href: string | null): string {
@@ -26,15 +18,20 @@ const renderer: marked.RendererObject = {
 
 marked.use({ renderer })
 
-const ContentPage: NextPage<Props> = ({ contentPage, navbarLinks, logos }) => {
-  const [language, setLanguage] = useState<AvailableLanguages>('swedish')
+type ContentPageProps = {
+  contentPage: ContentPage
+  logos: NationLogo[]
+  navbarLinks: NavbarLink[]
+}
+
+const ContentPage: NextPage<ContentPageProps> = ({
+  contentPage,
+  navbarLinks,
+  logos,
+}) => {
   return (
     <div className="bg-white">
-      <Header
-        navbarLinks={navbarLinks}
-        language={language}
-        setLanguage={setLanguage}
-      />
+      <Header navbarLinks={navbarLinks} />
       <div className="prose prose-sm m-8 mx-auto  min-h-[92vh] max-w-[85vw] rounded-lg bg-white p-[15px] xl:mt-6 xl:max-w-screen-lg">
         <h1>{contentPage.title}</h1>
         {contentPage.content && <p>{contentPage.content}</p>}

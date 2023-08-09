@@ -1,6 +1,6 @@
 import qs from 'qs'
 import { fetchFromStrapi } from '.'
-import { Category } from '../../models/category'
+import { Category } from '@models/category'
 
 export async function fetchCategory(slug?: string): Promise<Category> {
   const query = slug
