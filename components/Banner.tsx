@@ -4,7 +4,7 @@ import { STRAPI_URL } from '../pages/_app'
 import { StrapiImage } from '../models/image'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import defaultBannerPic from '../public/images/banner/banner.webp'
+import defaultBannerPic from '../public/images/banner/banner.jpg'
 
 export type BannerImage = StrapiImage['data']
 
@@ -13,7 +13,9 @@ type BannerProps = {
 }
 
 const MainBanner: React.FC<BannerProps> = ({ bannerImages }) => {
-  const urls = bannerImages.map((img) => img.attributes.url)
+  const urls = bannerImages.map((img) =>
+    img.attributes.formats.large?.url ?? img.attributes.url
+  )
 
   return (
     <>
@@ -67,13 +69,13 @@ const Carousel = ({ urls }: { urls: string[] }) => {
       transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
       className='flex max-h-full'>
       {urls.map((url, i) => (
-        <img
-          key={url}
-          src={`${STRAPI_URL}${url}`}
-          alt=''
-          className='object-cover opacity-80'
-          loading={i === 0 ? 'eager' : 'lazy'}
-        />
+          <img
+            key={url}
+            src={`${STRAPI_URL}${url}`}
+            alt=''
+            className='object-cover w-full opacity-80 shrink-0'
+            loading={i === 0 ? 'eager' : 'lazy'}
+          />
       ))}
     </motion.div>
   )
