@@ -1,12 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { getDriveInstance, getDriveFile } from '../../../../utils/driveFiles'
+import { getDriveInstance, getDriveFile } from '../../../../lib/api/driveFiles'
 
 const drive = getDriveInstance()
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { fileId, fileName } = req.query
     const stream = await getDriveFile(fileId, drive)
@@ -21,3 +18,5 @@ export default async function handler(
     res.status(500).json({ error: 'Failed to download file' })
   }
 }
+
+export default handler

@@ -2,14 +2,11 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import {
   getDriveFilesList,
   getDriveInstance,
-} from '../../../../utils/driveFiles'
+} from '../../../../lib/api/driveFiles'
 
 const drive = getDriveInstance()
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { folderId } = req.query
     const folderStructure = await getDriveFilesList(folderId, drive)
@@ -19,3 +16,5 @@ export default async function handler(
     res.status(500).json({ error: 'Failed to retrieve folder structure' })
   }
 }
+
+export default handler

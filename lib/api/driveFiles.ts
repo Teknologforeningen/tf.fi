@@ -21,21 +21,6 @@ export const getDriveInstance = (keysEnvParam?: string) => {
   return google.drive({ version: 'v3', auth })
 }
 
-export const checkIfLoggedIn = async (cookies?: string) => {
-  const fetchHeaders = new Headers()
-  fetchHeaders.append('Cookie', cookies || '') // Add the cookie header if cookies exist
-
-  const kcRes = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/keycloak/isLoggedIn`,
-    {
-      headers: fetchHeaders,
-    }
-  )
-  const isLoggedIn = await kcRes.json()
-  
-  return isLoggedIn === true
-}
-
 export const getDriveFilesList = async (
   folderId: string | string[] | undefined,
   drive: drive_v3.Drive

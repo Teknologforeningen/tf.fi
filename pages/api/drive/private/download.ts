@@ -1,23 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import {
-  getDriveInstance,
-  getDriveFile,
-  checkIfLoggedIn,
-} from '../../../../utils/driveFiles'
+import { getDriveInstance, getDriveFile } from '../../../../lib/api/driveFiles'
+import requireAuthMiddleware from '../../../../middleware/checkAuth'
 
 const drive = getDriveInstance(process.env.GOOGLE_PRIVATE_CREDS)
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    //check if logged in
-    const isLoggedIn = await checkIfLoggedIn(req.headers.cookie)
-    if (!isLoggedIn) {
-      res.status(403).json({ error: 'User not logged in' })
-    }
-
     const { fileId, fileName } = req.query
     const stream = await getDriveFile(fileId, drive)
 
@@ -31,3 +19,5 @@ export default async function handler(
     res.status(500).json({ error: 'Failed to download file' })
   }
 }
+
+export default requireAuthMiddleware(handler)

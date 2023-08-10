@@ -2,21 +2,13 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import {
   getDriveFilesList,
   getDriveInstance,
-  checkIfLoggedIn,
-} from '../../../../utils/driveFiles'
+} from '../../../../lib/api/driveFiles'
+import requireAuthMiddleware from '../../../../middleware/checkAuth'
 
 const drive = getDriveInstance(process.env.GOOGLE_PRIVATE_CREDS)
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  try {
-    //check if logged in
-    const isLoggedIn = await checkIfLoggedIn(req.headers.cookie)
-    if (!isLoggedIn) {
-      res.status(403).json({ error: 'User not logged in' })
-    }
 
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  try {
     const { folderId } = req.query
     const folderStructure = await getDriveFilesList(folderId, drive)
     res.status(200).json(folderStructure)
@@ -25,3 +17,5 @@ export default async function handler(
     res.status(500).json({ error: 'Failed to retrieve folder structure' })
   }
 }
+
+export default requireAuthMiddleware(handler)
