@@ -1,8 +1,10 @@
-import Image from 'next/image'
 import Column from './Column'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { STRAPI_URL } from '../pages/_app'
 import { StrapiImage } from '../models/image'
+import { motion } from 'framer-motion'
+import Image from 'next/image'
+import defaultBannerPic from '../public/images/banner/banner.jpg'
 
 export type BannerImage = StrapiImage['data']
 
@@ -11,19 +13,11 @@ type BannerProps = {
 }
 
 const MainBanner: React.FC<BannerProps> = ({ bannerImages }) => {
-  // TODO: Image carousel
-  const image = bannerImages[0].attributes
-  const imagePath = image.formats?.large?.url ?? image.url
-  return (
-    <div className="relative h-[500px] w-full bg-black">
-      <Image
-        src={`${STRAPI_URL}${imagePath}`}
-        alt={image.alternativeText}
-        style={{ objectFit: 'cover', opacity: 0.8 }}
-        fill
-        loading="eager"
-      />
+  const urls = bannerImages.map((img) => img.attributes.url)
 
+  return (
+    <div className="relative h-[500px] w-screen overflow-x-hidden bg-black">
+      {urls.length !== 0 ? <Carousel urls={urls} /> : <SingleBannerImage />}
       <div className="absolute left-0 right-0 top-[180px] flex flex-col xl:left-40 xl:right-auto xl:flex-row">
         <svg
           className="xl:block"
@@ -46,6 +40,50 @@ const MainBanner: React.FC<BannerProps> = ({ bannerImages }) => {
         </Column>
       </div>
     </div>
+  )
+}
+
+const Carousel = ({ urls }: { urls: string[] }) => {
+  const [index, setIndex] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((index + 1) % urls.length)
+    }, 5000)
+
+    return () => clearInterval(interval)
+  })
+
+  return (
+    <motion.div
+      animate={{ x: `-${index * 100}%` }}
+      transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
+      className="flex h-full max-h-full"
+    >
+      {urls.map((url, i) => (
+        <div key={url} className="relative h-full w-full shrink-0">
+          <Image
+            src={`${STRAPI_URL}${url}`}
+            alt=""
+            className="object-cover opacity-80"
+            loading={i > 2 ? 'eager' : 'lazy'}
+            fill
+          />
+        </div>
+      ))}
+    </motion.div>
+  )
+}
+
+const SingleBannerImage = () => {
+  return (
+    <Image
+      src={defaultBannerPic}
+      alt="banner"
+      style={{ objectFit: 'cover', opacity: 0.8 }}
+      fill
+      loading="eager"
+    />
   )
 }
 
