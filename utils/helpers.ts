@@ -1,5 +1,5 @@
-import { NationLogo } from '../components/footer/Logos'
-import { fetchHomepage } from '../lib/api/homepage'
+import { NationLogo } from '@components/footer/Logos'
+import { fetchHomepage } from '@lib/api/homepage'
 import fetchNavbar, { NavbarLink } from '../lib/api/navbar'
 import { HomePage } from '../pages'
 

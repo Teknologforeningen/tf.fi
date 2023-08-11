@@ -1,18 +1,14 @@
-import classNames from 'classnames'
 import React from 'react'
+import classNames from 'classnames'
 
-type Props = {
+type ItemProps = React.PropsWithChildren<{
   className?: string
   backgroundColor?: string
-}
+}>
 
-const Item = ({
-  className,
-  children,
-  backgroundColor,
-}: React.PropsWithChildren<Props>) => (
+const Item = ({ className, children, backgroundColor }: ItemProps) => (
   <div
-    className={`flex h-full w-full justify-center`}
+    className="flex h-full w-full justify-center"
     style={{ backgroundColor }}
   >
     <div

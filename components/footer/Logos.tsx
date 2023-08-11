@@ -1,7 +1,7 @@
 import Row from '../Row'
 import Image from 'next/image'
 import Link from 'next/link'
-import { StrapiImage } from '../../models/image'
+import { StrapiImage } from '@models/image'
 
 export type NationLogo = {
   id: number
@@ -9,6 +9,7 @@ export type NationLogo = {
   url: string
   image: StrapiImage
 }
+
 type NationImageProps = {
   logo: NationLogo
 }

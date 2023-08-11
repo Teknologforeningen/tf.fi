@@ -1,12 +1,8 @@
 import Link from 'next/link'
-import { ContentSection } from '../../models/contentpage'
-import { titleToAnchor } from '../../utils/helpers'
+import { ContentSection } from '@models/contentpage'
+import { titleToAnchor } from '@utils/helpers'
 
-const TableOfContents = ({
-  sections,
-}: {
-  sections: ContentSection[]
-}): JSX.Element => {
+const TableOfContents = ({ sections }: { sections: ContentSection[] }) => {
   return (
     <div>
       <ul>

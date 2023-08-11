@@ -1,40 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Calendar from 'react-calendar'
-import Column from '../../components/Column'
-import { CalendarEvent } from '../../models/event'
-import Subtitle from '../../components/Subtitle'
-import { getDateShort } from '../../utils/helpers'
-import ActivityIndicator from '../ActivityIndicator'
-
-const CalendarEventsList = ({
-  events,
-  isLoading,
-}: {
-  events: CalendarEvent[]
-  isLoading: boolean
-}) => (
-  <Column className="mt-2 flex w-full">
-    {isLoading && events.length < 1 ? (
-      <ActivityIndicator width={25} height={25} stroke="white" />
-    ) : (
-      events.map((x) => {
-        const start = x.start && getDateShort(x.start)
-        const end = x.end && getDateShort(x.end)
-        return (
-          <Link
-            key={x.id}
-            className="highlight border-1 my-1.5 w-full max-w-[390px] rounded-md border-teknologröd bg-white p-2 shadow-md hover:bg-lightGray"
-            href={x.htmlLink}
-          >
-            <p className="text-bold text-teknologröd">{x.title}</p>
-            <p>{start + (start !== end ? ' - ' + end : '')}</p>
-          </Link>
-        )
-      })
-    )}
-  </Column>
-)
+import Column from './Column'
+import { CalendarEvent } from '@models/event'
+import Subtitle from './Subtitle'
+import { getDateShort } from '@utils/helpers'
+import ActivityIndicator from './ActivityIndicator'
 
 const CalendarComponent = () => {
   const [data, setData] = useState<CalendarEvent[]>([])
@@ -96,5 +67,34 @@ const CalendarComponent = () => {
     </div>
   )
 }
+
+const CalendarEventsList = ({
+  events,
+  isLoading,
+}: {
+  events: CalendarEvent[]
+  isLoading: boolean
+}) => (
+  <Column className="mt-2 flex w-full">
+    {isLoading && events.length < 1 ? (
+      <ActivityIndicator width={25} height={25} stroke="white" />
+    ) : (
+      events.map((x) => {
+        const start = x.start && getDateShort(x.start)
+        const end = x.end && getDateShort(x.end)
+        return (
+          <Link
+            key={x.id}
+            className="highlight border-1 my-1.5 w-full max-w-[390px] rounded-md border-teknologröd bg-white p-2 shadow-md hover:bg-lightGray"
+            href={x.htmlLink}
+          >
+            <p className="text-bold text-teknologröd">{x.title}</p>
+            <p>{start + (start !== end ? ' - ' + end : '')}</p>
+          </Link>
+        )
+      })
+    )}
+  </Column>
+)
 
 export default CalendarComponent

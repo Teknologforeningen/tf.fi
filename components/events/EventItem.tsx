@@ -1,14 +1,10 @@
 import React from 'react'
 import Link from 'next/link'
-import { Event } from '../../models/event'
-import { getDateLong } from '../../utils/helpers'
+import { Event } from '@models/event'
+import { getDateLong } from '@utils/helpers'
 
-type Props = {
-  post: Event
-}
-
-//TODO: get text ellipse to work properly, kinda spaghetti rn
-const EventItem = ({ post }: Props) => {
+// TODO: get text ellipse to work properly, kinda spaghetti rn
+const EventItem = ({ post }: { post: Event }) => {
   return (
     <div
       className="mt-4 w-full rounded-md border-[1px] border-white bg-white p-2 shadow-md"

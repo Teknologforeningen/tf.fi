@@ -1,5 +1,6 @@
-import * as React from "react"
-import { SVGProps } from "react"
+import React from 'react'
+import { SVGProps } from 'react'
+
 const ActivityIndicator = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -7,10 +8,10 @@ const ActivityIndicator = (props: SVGProps<SVGSVGElement>) => (
     height={200}
     preserveAspectRatio="xMidYMid"
     style={{
-      margin: "auto",
-      background: "0 0",
-      display: "block",
-      shapeRendering: "auto",
+      margin: 'auto',
+      background: '0 0',
+      display: 'block',
+      shapeRendering: 'auto',
     }}
     viewBox="0 0 100 100"
     {...props}
@@ -34,4 +35,5 @@ const ActivityIndicator = (props: SVGProps<SVGSVGElement>) => (
     </circle>
   </svg>
 )
+
 export default ActivityIndicator

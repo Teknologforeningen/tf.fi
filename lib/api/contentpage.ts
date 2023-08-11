@@ -1,6 +1,6 @@
 import qs from 'qs'
 import { fetchFromStrapi } from '.'
-import { ContentPage } from '../../models/contentpage'
+import { ContentPage } from '@models/contentpage'
 
 export async function fetchContentPage(slug?: string): Promise<ContentPage> {
   const query = slug

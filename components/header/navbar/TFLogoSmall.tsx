@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-const TFLogoSmall: React.FC<{ highlight: boolean }> = ({ highlight }) => (
+const TFLogoSmall = ({ highlight }: { highlight: boolean }) => (
   <Link href="/">
     <svg
       className="hidden xl:block"

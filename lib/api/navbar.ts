@@ -1,7 +1,7 @@
 import qs from 'qs'
 import { CollectionResponse, fetchFromStrapi } from '.'
-import { ContentPage } from '../../models/contentpage'
-import { Category } from '../../models/category'
+import { ContentPage } from '@models/contentpage'
+import { Category } from '@models/category'
 
 type NavbarCategory = Pick<Category, 'content_pages' | 'slug' | 'title'>
 

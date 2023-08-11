@@ -1,12 +1,12 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
-import { Event } from '../../models/event'
+import { Event } from '@models/event'
 import { marked } from 'marked'
-import { fetchEvent, fetchEvents } from '../../lib/api/event'
-import { getLayoutProps } from '../../utils/helpers'
-import { NationLogo } from '../../components/footer/Logos'
-import { NavbarLink } from '../../lib/api/navbar'
-import Footer from '../../components/footer/Footer'
-import Header from '../../components/header'
+import { fetchEvent, fetchEvents } from '@lib/api/event'
+import { getLayoutProps } from '@utils/helpers'
+import { NationLogo } from '@components/footer/Logos'
+import { NavbarLink } from '@lib/api/navbar'
+import Footer from '@components/footer'
+import Header from '@components/header'
 
 type Props = {
   event?: Event
@@ -23,22 +23,18 @@ const renderer: marked.RendererObject = {
 marked.use({ renderer })
 
 /** Page for a single event */
-const EventPage: NextPage<Props> = ({
-  event,
-  logos,
-  navbarLinks,
-}) => (
+const EventPage: NextPage<Props> = ({ event, logos, navbarLinks }) => (
   <>
     <Header navbarLinks={navbarLinks} />
-    <div className="mx-auto mb-6 mt-14 xl:mt-6 min-h-[92vh] rounded-lg bg-white p-[15px] max-w-[85vw] xl:max-w-screen-lg">
-        <article className="prose prose-sm m-8">
-          <h1>{event?.title}</h1>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: marked.parse(event?.content ?? ''),
-            }}
-          />
-        </article>
+    <div className="mx-auto mb-6 mt-14 min-h-[92vh] max-w-[85vw] rounded-lg bg-white p-[15px] xl:mt-6 xl:max-w-screen-lg">
+      <article className="prose prose-sm m-8">
+        <h1>{event?.title}</h1>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: marked.parse(event?.content ?? ''),
+          }}
+        />
+      </article>
     </div>
     <Footer logos={logos} />
   </>

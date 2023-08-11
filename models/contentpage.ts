@@ -1,4 +1,4 @@
-import { CollectionResponse } from '../lib/api'
+import { CollectionResponse } from '@lib/api'
 import { Category } from './category'
 
 export type ContentPage = {

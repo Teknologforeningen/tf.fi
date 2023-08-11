@@ -1,20 +1,15 @@
 import Column from './Column'
 import React, { useEffect, useState } from 'react'
 import { STRAPI_URL } from '../pages/_app'
-import { StrapiImage } from '../models/image'
+import { StrapiImage } from '@models/image'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import defaultBannerPic from '../public/images/banner/banner.jpg'
 
 export type BannerImage = StrapiImage['data']
 
-type BannerProps = {
-  bannerImages: BannerImage[]
-}
-
-const MainBanner: React.FC<BannerProps> = ({ bannerImages }) => {
+const MainBanner = ({ bannerImages }: { bannerImages: BannerImage[] }) => {
   const urls = bannerImages.map((img) => img.attributes.url)
-
   return (
     <div className="relative h-[500px] w-screen overflow-x-hidden bg-black">
       {urls.length !== 0 ? <Carousel urls={urls} /> : <SingleBannerImage />}
