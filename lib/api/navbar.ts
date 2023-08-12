@@ -1,7 +1,11 @@
 import qs from 'qs'
-import { CollectionResponse, fetchFromStrapi } from '.'
 import { ContentPage } from '@models/contentpage'
 import { Category } from '@models/category'
+import {
+  CollectionResponse,
+  fetchSingle,
+  SingleResponse,
+} from '@lib/api/strapi'
 
 type NavbarCategory = Pick<Category, 'content_pages' | 'slug' | 'title'>
 
@@ -24,7 +28,7 @@ export interface Navbar {
   id: number
   links: NavbarLink[]
   categories: {
-    data: CollectionResponse<NavbarCategory>[]
+    data: CollectionResponse<NavbarCategory>
   }
 }
 
@@ -45,16 +49,16 @@ export default async function fetchNavbar(): Promise<NavbarLink[]> {
     },
     { encodeValuesOnly: true }
   )
-  const navbar = (await fetchFromStrapi<Navbar>(
-    `/navbar?${query}`
-  )) as CollectionResponse<Navbar>
+  const res = await fetchSingle<Navbar>('/navbar', { query })
 
-  const categories = toNavbarMultipleLink(navbar.attributes.categories.data)
-  return [...categories, ...navbar.attributes.links]
+  if (res === null || res?.data === null) return []
+
+  const categories = toNavbarMultipleLink(res.data.attributes.categories.data)
+  return [...categories, ...res.data.attributes.links]
 }
 
 function toLink(
-  contentPage: CollectionResponse<ContentPage>,
+  contentPage: SingleResponse<ContentPage>,
   baseUrl: string
 ): NavbarSingleLink {
   return {
@@ -64,7 +68,7 @@ function toLink(
 }
 
 function toNavbarMultipleLink(
-  categories: CollectionResponse<NavbarCategory>[]
+  categories: CollectionResponse<NavbarCategory>
 ): NavbarMultipleLink[] {
   return categories.map((category) => {
     const links = category.attributes.content_pages.data.map((page) => {

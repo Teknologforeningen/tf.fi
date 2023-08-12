@@ -82,12 +82,13 @@ export const getStaticProps: GetStaticProps = async () => {
   const events = await fetchEvents(1)
   const homepage = await fetchHomepage()
   const navbarLinks = await fetchNavbar()
+
   return {
     props: {
       navbarLinks,
-      events: events.data,
+      events: events?.data ?? [],
       logos: homepage?.footer?.nationlogos ?? [],
-      bannerImages: homepage.banner?.bannerImages?.data ?? [],
+      bannerImages: homepage?.banner?.bannerImages?.data ?? [],
     },
   }
 }

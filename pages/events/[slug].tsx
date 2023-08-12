@@ -41,13 +41,12 @@ const EventPage: NextPage<Props> = ({ event, logos, navbarLinks }) => (
 )
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  // Get all events
   const events = await fetchEvents(1)
 
-  // Create a path for each event background-color: ;
-  const paths = events.data.map((event) => ({
-    params: { slug: event.slug },
-  }))
+  const paths =
+    events?.data.map((event) => ({
+      params: { slug: event.slug },
+    })) ?? []
 
   return {
     paths,

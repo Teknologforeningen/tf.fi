@@ -1,7 +1,6 @@
 export type EventType = 'event' | 'blogpost'
 
 export type Event = {
-  id: number
   title: string
   slug: string
   date: string

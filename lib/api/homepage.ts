@@ -1,8 +1,8 @@
 import { HomePage } from '../../pages'
 import qs from 'qs'
-import { API_URL } from './index'
+import { fetchSingle } from './strapi'
 
-export async function fetchHomepage(): Promise<HomePage> {
+export async function fetchHomepage(): Promise<HomePage | null> {
   const query = qs.stringify(
     {
       populate: [
@@ -15,6 +15,6 @@ export async function fetchHomepage(): Promise<HomePage> {
     },
     { encodeValuesOnly: true }
   )
-  const res = await fetch(`${API_URL}/homepage?${query}`)
-  return res.json().then((j) => j.data.attributes)
+  const res = await fetchSingle<HomePage>('/homepage', { query })
+  return res?.data?.attributes ?? null
 }

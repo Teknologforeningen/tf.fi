@@ -1,33 +1,24 @@
 import qs from 'qs'
-import { fetchFromStrapi } from '.'
 import { ContentPage } from '@models/contentpage'
+import { fetchCollection, fetchCollectionSingle } from '@lib/api/strapi'
 
-export async function fetchContentPage(slug?: string): Promise<ContentPage> {
-  const query = slug
-    ? qs.stringify({
-        filters: {
-          slug: {
-            $eq: slug,
-          },
-        },
-        populate: {
-          content_sections: {
-            populate: ['title', 'content', 'file_folders'],
-            sort: 'title',
-          },
-        },
-      })
-    : ''
-  const contentPages = await fetchFromStrapi<ContentPage>(
-    `/content-pages?${query}`
-  )
-  if (!(contentPages instanceof Array))
-    throw new Error('Content pages needs to be an array')
-  else if (contentPages.length === 0)
-    throw new Error('Content pages cannot be empty')
+export async function fetchContentPage(
+  slug?: string
+): Promise<ContentPage | null> {
+  if (slug === undefined) return null
+  const query = qs.stringify({
+    populate: {
+      content_sections: {
+        populate: ['title', 'content', 'file_folders'],
+        sort: 'title',
+      },
+    },
+  })
 
-  const contentPage = contentPages[0]
-  return contentPage.attributes
+  const res = await fetchCollectionSingle<ContentPage>('/content-pages', slug, {
+    query,
+  })
+  return res?.data?.attributes ?? null
 }
 
 export async function fetchContentPages(): Promise<ContentPage[]> {
@@ -42,7 +33,6 @@ export async function fetchContentPages(): Promise<ContentPage[]> {
     { encodeValuesOnly: true }
   )
 
-  const res = await fetchFromStrapi<ContentPage>(`/content-pages?${query}`)
-  if (!(res instanceof Array)) throw new Error('Response needs to be an array')
-  return res.map((c) => c.attributes)
+  const res = await fetchCollection<ContentPage>('/content-pages', { query })
+  return res?.data?.map((c) => c.attributes) ?? []
 }
