@@ -8,7 +8,7 @@ const EventItem = ({ post }: { post: Event }) => {
   return (
     <div
       className="mt-4 w-full rounded-md border-[1px] border-white bg-white p-2 shadow-md"
-      key={post.id}
+      key={post.slug}
     >
       <p className="select-none text-xl font-medium">{post.title}</p>
       {post.type === 'event' && (
