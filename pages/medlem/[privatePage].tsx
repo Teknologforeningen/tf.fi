@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import { PageType } from '@models/page'
 import { marked } from 'marked'
-import { fetchContentPage, fetchContentPages } from '@lib/api/contentpage'
+import { fetchPrivatePage, fetchPrivatePages } from '@lib/api/privatepage'
 import { NavbarLink } from '@lib/api/navbar'
 import { NationLogo } from '@components/footer/Logos'
 import { getLayoutProps } from '@utils/helpers'
@@ -15,25 +15,24 @@ const renderer: marked.RendererObject = {
 
 marked.use({ renderer })
 
-type ContentPageProps = {
+type PrivatePageProps = {
   page: PageType
   logos: NationLogo[]
   navbarLinks: NavbarLink[]
 }
 
-const ContentPage: NextPage<ContentPageProps> = (props) => {
+const PrivatePage: NextPage<PrivatePageProps> = (props) => {
   return <Page {...props}/>
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
   // Get all content pages
-  const contentPages = await fetchContentPages()
+  const privatePages = await fetchPrivatePages()
 
   // Create a path for each page
-  const paths = contentPages.filter(category => category).map((contentpage) => ({
+  const paths = privatePages.map((page) => ({
     params: {
-      category: contentpage.category?.data.attributes.slug,
-      contentPage: contentpage.slug,
+      privatePage: page.slug,
     },
   }))
 
@@ -48,15 +47,15 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     params?.contentPage instanceof Array
       ? params?.contentPage[0]
       : params?.contentPage
-  const contentPage = await fetchContentPage(slug)
+  const page = await fetchPrivatePage(slug)
   const { logos, navbarLinks } = await getLayoutProps()
   return {
     props: {
-      contentPage,
+      page,
       navbarLinks,
       logos,
     },
   }
 }
 
-export default ContentPage
+export default PrivatePage

@@ -1,5 +1,5 @@
 import qs from 'qs'
-import { ContentPage } from '@models/contentpage'
+import { PageType } from '@models/page'
 import { Category } from '@models/category'
 import strapi, { CollectionResponse, SingleResponse } from '@lib/api/strapi'
 
@@ -54,7 +54,7 @@ export default async function fetchNavbar(): Promise<NavbarLink[]> {
 }
 
 function toLink(
-  contentPage: SingleResponse<ContentPage>,
+  contentPage: SingleResponse<PageType>,
   baseUrl: string
 ): NavbarSingleLink {
   return {

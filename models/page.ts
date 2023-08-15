@@ -1,7 +1,7 @@
 import { SingleResponse } from '@lib/api/strapi'
 import { Category } from './category'
 
-export type ContentPage = {
+export type PageType = {
   title: string
   slug: string
   content?: string
@@ -10,15 +10,15 @@ export type ContentPage = {
   publishedAt: Date
   locale: string
   showTableOfContents: boolean
-  content_sections: {
-    data: ContentSection[]
+  sections: {
+    data: Section[]
   }
-  category: {
+  category?: {
     data: SingleResponse<Category>
   }
 }
 
-export interface ContentSection {
+export interface Section {
   id: number
   attributes: {
     title: string
@@ -41,6 +41,5 @@ export interface FileFolder {
     createdAt: Date
     updatedAt: Date
     publishedAt: Date
-    file_folders: ContentSection
   }
 }

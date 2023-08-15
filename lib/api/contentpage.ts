@@ -1,21 +1,21 @@
 import qs from 'qs'
-import { ContentPage } from '@models/contentpage'
+import { PageType } from '@models/page'
 import strapi from '@lib/api/strapi'
 
 export async function fetchContentPage(
   slug?: string
-): Promise<ContentPage | null> {
+): Promise<PageType | null> {
   if (slug === undefined) return null
   const query = qs.stringify({
     populate: {
-      content_sections: {
+      sections: {
         populate: ['title', 'content', 'file_folders'],
         sort: 'title',
       },
     },
   })
 
-  const res = await strapi.fetchCollectionSingle<ContentPage>(
+  const res = await strapi.fetchCollectionSingle<PageType>(
     '/content-pages',
     slug,
     {
@@ -25,7 +25,7 @@ export async function fetchContentPage(
   return res?.data?.attributes ?? null
 }
 
-export async function fetchContentPages(): Promise<ContentPage[]> {
+export async function fetchContentPages(): Promise<PageType[]> {
   const query = qs.stringify(
     {
       populate: {
@@ -37,7 +37,7 @@ export async function fetchContentPages(): Promise<ContentPage[]> {
     { encodeValuesOnly: true }
   )
 
-  const res = await strapi.fetchCollection<ContentPage>('/content-pages', {
+  const res = await strapi.fetchCollection<PageType>('/content-pages', {
     query,
   })
   return res?.data?.map((c) => c.attributes) ?? []
