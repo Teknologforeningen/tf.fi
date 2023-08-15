@@ -1,6 +1,6 @@
 import qs from 'qs'
 import { ContentPage } from '@models/contentpage'
-import { fetchCollection, fetchCollectionSingle } from '@lib/api/strapi'
+import strapi from '@lib/api/strapi'
 
 export async function fetchContentPage(
   slug?: string
@@ -15,9 +15,13 @@ export async function fetchContentPage(
     },
   })
 
-  const res = await fetchCollectionSingle<ContentPage>('/content-pages', slug, {
-    query,
-  })
+  const res = await strapi.fetchCollectionSingle<ContentPage>(
+    '/content-pages',
+    slug,
+    {
+      query,
+    }
+  )
   return res?.data?.attributes ?? null
 }
 
@@ -33,6 +37,8 @@ export async function fetchContentPages(): Promise<ContentPage[]> {
     { encodeValuesOnly: true }
   )
 
-  const res = await fetchCollection<ContentPage>('/content-pages', { query })
+  const res = await strapi.fetchCollection<ContentPage>('/content-pages', {
+    query,
+  })
   return res?.data?.map((c) => c.attributes) ?? []
 }

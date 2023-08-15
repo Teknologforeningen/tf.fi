@@ -1,15 +1,11 @@
 import { Event as TimelineEvent } from '@models/event'
-import {
-  fetchCollection,
-  fetchCollectionSingle,
-  PagePagination,
-} from '@lib/api/strapi'
+import strapi, { PagePagination } from '@lib/api/strapi'
 
 export const EVENT_PAGE_SIZE = 10
 
 export async function fetchEvent(slug?: string): Promise<TimelineEvent | null> {
   if (slug === undefined) return null
-  const res = await fetchCollectionSingle<TimelineEvent>(`/events`, slug)
+  const res = await strapi.fetchCollectionSingle<TimelineEvent>(`/events`, slug)
   return res?.data?.attributes ?? null
 }
 
@@ -26,7 +22,9 @@ export async function fetchEvents(
     pageSize: EVENT_PAGE_SIZE,
   }
 
-  const res = await fetchCollection<TimelineEvent>('/events', { pagination })
+  const res = await strapi.fetchCollection<TimelineEvent>('/events', {
+    pagination,
+  })
 
   return {
     data: res?.data?.map((e) => ({ id: e.id, ...e.attributes })) ?? [],

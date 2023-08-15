@@ -62,7 +62,7 @@ type StrapiResponse<
   meta: Meta<P>
 }
 
-export async function fetchSingle<T>(
+async function fetchSingle<T>(
   path: string,
   options?: Omit<StrapiFetchOptions, 'slug'>
 ): Promise<StrapiResponse<T, SingleResponse<T>> | null> {
@@ -72,7 +72,7 @@ export async function fetchSingle<T>(
   return fetchFromStrapi<T, SingleResponse<T>>(`${url}${path}?${query}`)
 }
 
-export async function fetchCollectionSingle<T>(
+async function fetchCollectionSingle<T>(
   path: string,
   slug: string,
   options?: StrapiFetchOptions
@@ -101,7 +101,7 @@ export async function fetchCollectionSingle<T>(
   }
 }
 
-export async function fetchCollection<T, P extends Pagination = PagePagination>(
+async function fetchCollection<T, P extends Pagination = PagePagination>(
   path: string,
   options?: Omit<StrapiFetchOptions, 'slug'> & { pagination?: P }
 ): Promise<StrapiResponse<T> | null> {
@@ -131,3 +131,11 @@ async function fetchFromStrapi<
   }
   return json
 }
+
+const strapi = {
+  fetchSingle,
+  fetchCollection,
+  fetchCollectionSingle,
+}
+
+export default strapi

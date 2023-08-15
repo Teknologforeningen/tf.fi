@@ -1,11 +1,7 @@
 import qs from 'qs'
 import { ContentPage } from '@models/contentpage'
 import { Category } from '@models/category'
-import {
-  CollectionResponse,
-  fetchSingle,
-  SingleResponse,
-} from '@lib/api/strapi'
+import strapi, { CollectionResponse, SingleResponse } from '@lib/api/strapi'
 
 type NavbarCategory = Pick<Category, 'content_pages' | 'slug' | 'title'>
 
@@ -49,7 +45,7 @@ export default async function fetchNavbar(): Promise<NavbarLink[]> {
     },
     { encodeValuesOnly: true }
   )
-  const res = await fetchSingle<Navbar>('/navbar', { query })
+  const res = await strapi.fetchSingle<Navbar>('/navbar', { query })
 
   if (res === null || res?.data === null) return []
 

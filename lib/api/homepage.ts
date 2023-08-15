@@ -1,6 +1,6 @@
 import { HomePage } from '../../pages'
 import qs from 'qs'
-import { fetchSingle } from './strapi'
+import strapi from './strapi'
 
 export async function fetchHomepage(): Promise<HomePage | null> {
   const query = qs.stringify(
@@ -15,6 +15,6 @@ export async function fetchHomepage(): Promise<HomePage | null> {
     },
     { encodeValuesOnly: true }
   )
-  const res = await fetchSingle<HomePage>('/homepage', { query })
+  const res = await strapi.fetchSingle<HomePage>('/homepage', { query })
   return res?.data?.attributes ?? null
 }
