@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getDriveInstance, getDriveFile } from '../../../../lib/api/driveFiles'
+import requireAuthMiddleware from '../../../../middleware/checkAuth'
 
-const drive = getDriveInstance()
+const drive = getDriveInstance(process.env.GOOGLE_PRIVATE_CREDS)
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
@@ -19,4 +20,4 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-export default handler
+export default requireAuthMiddleware(handler)
