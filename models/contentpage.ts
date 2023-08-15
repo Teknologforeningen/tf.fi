@@ -1,4 +1,4 @@
-import { CollectionResponse } from '@lib/api'
+import { SingleResponse } from '@lib/api/strapi'
 import { Category } from './category'
 
 export type ContentPage = {
@@ -14,7 +14,7 @@ export type ContentPage = {
     data: ContentSection[]
   }
   category: {
-    data: CollectionResponse<Category>
+    data: SingleResponse<Category>
   }
 }
 

@@ -1,24 +1,12 @@
-import qs from 'qs'
-import { Event as TimelineEvent } from '../../models/event'
-import { API_URL, fetchFromStrapi } from './index'
-import { EVENT_PAGE_SIZE } from '@utils/constants'
+import { Event as TimelineEvent } from '@models/event'
+import strapi, { PagePagination } from '@lib/api/strapi'
 
-export async function fetchEvent(slug?: string): Promise<TimelineEvent> {
-  const query = slug
-    ? qs.stringify({
-        filters: {
-          slug: {
-            $eq: slug,
-          },
-        },
-      })
-    : ''
-  const events = await fetchFromStrapi<TimelineEvent>(`/events?${query}`)
-  if (!(events instanceof Array)) throw new Error('Events need to be an array')
-  else if (events.length === 0) throw new Error('Events cannot be empty')
+export const EVENT_PAGE_SIZE = 10
 
-  const event = events[0]
-  return { id: event.id, ...event.attributes }
+export async function fetchEvent(slug?: string): Promise<TimelineEvent | null> {
+  if (slug === undefined) return null
+  const res = await strapi.fetchCollectionSingle<TimelineEvent>(`/events`, slug)
+  return res?.data?.attributes ?? null
 }
 
 type EventsResponse = {
@@ -26,20 +14,20 @@ type EventsResponse = {
   totalPages: number
 }
 
-export async function fetchEvents(page?: number): Promise<EventsResponse> {
-  const res = await fetch(
-    API_URL +
-      '/events' +
-      (page
-        ? `?pagination[page]=${page}&pagination[pageSize]=${EVENT_PAGE_SIZE}`
-        : '')
-  )
+export async function fetchEvents(
+  page?: number
+): Promise<EventsResponse | null> {
+  const pagination: PagePagination = {
+    page,
+    pageSize: EVENT_PAGE_SIZE,
+  }
 
-  const parsed = await res.json()
-  const data = parsed.data
-  if (!(data instanceof Array)) throw new Error('Data needs to be an array')
+  const res = await strapi.fetchCollection<TimelineEvent>('/events', {
+    pagination,
+  })
+
   return {
-    data: data.map((e) => ({ id: e.id, ...e.attributes })) || [],
-    totalPages: parsed.meta.pagination.total || 0,
+    data: res?.data?.map((e) => ({ id: e.id, ...e.attributes })) ?? [],
+    totalPages: res?.meta?.pagination.total ?? 0,
   }
 }

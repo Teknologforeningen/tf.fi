@@ -17,14 +17,14 @@ export const getDateShort = (date: Date | string): string =>
   })
 
 export type LayoutProps = {
-  homepage: HomePage
+  homepage: HomePage | null
   navbarLinks: NavbarLink[]
   logos: NationLogo[]
 }
 export const getLayoutProps = async (): Promise<LayoutProps> => {
   const homepage = await fetchHomepage()
   const navbarLinks = await fetchNavbar()
-  const logos = homepage.footer.nationlogos
+  const logos = homepage?.footer?.nationlogos ?? []
 
   return {
     homepage,

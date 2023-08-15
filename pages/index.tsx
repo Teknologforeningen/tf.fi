@@ -21,8 +21,8 @@ export interface HomePage {
       data: BannerImage[]
     }
   }
-  footer: {
-    nationlogos: NationLogo[]
+  footer?: {
+    nationlogos?: NationLogo[]
   }
 }
 
@@ -82,13 +82,13 @@ export const getStaticProps: GetStaticProps = async () => {
   const events = await fetchEvents(1)
   const homepage = await fetchHomepage()
   const navbarLinks = await fetchNavbar()
-  const logos = homepage.footer.nationlogos
+
   return {
     props: {
       navbarLinks,
-      events: events.data,
-      logos,
-      bannerImages: homepage.banner?.bannerImages?.data ?? [],
+      events: events?.data ?? [],
+      logos: homepage?.footer?.nationlogos ?? [],
+      bannerImages: homepage?.banner?.bannerImages?.data ?? [],
     },
   }
 }

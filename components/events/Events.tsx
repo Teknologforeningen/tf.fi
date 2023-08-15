@@ -9,7 +9,7 @@ const Events = ({ events }: { events: Event[] }) => {
     <div className="mx-5 mr-4 flex flex-col md:w-[60%]">
       <Subtitle>Nyheter</Subtitle>
       {events.map((post) => (
-        <EventItem post={post} key={post.id} />
+        <EventItem post={post} key={post.slug} />
       ))}
       <Link
         href={`/events`}

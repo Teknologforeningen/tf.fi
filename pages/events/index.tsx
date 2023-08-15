@@ -8,9 +8,8 @@ import { NationLogo } from '@components/footer/Logos'
 import Header from '@components/header'
 import Footer from '@components/footer'
 import { getLayoutProps } from '@utils/helpers'
-import { fetchEvents } from '@lib/api/event'
+import { EVENT_PAGE_SIZE, fetchEvents } from '@lib/api/event'
 import PageNavigation from '@components/PageNavigation'
-import { EVENT_PAGE_SIZE } from '@utils/constants'
 
 type EventsProps = {
   logos: NationLogo[]
@@ -25,6 +24,7 @@ const Events = ({ logos, navbarLinks }: EventsProps) => {
   useEffect(() => {
     const fetch = async () => {
       const res = await fetchEvents(page)
+      if (res === null) return
       setEvents(res.data)
       setTotalPages(res.totalPages)
     }
@@ -39,7 +39,7 @@ const Events = ({ logos, navbarLinks }: EventsProps) => {
           <p className="pb-5 text-3xl text-white">Nyheter</p>
 
           {events.map((post) => (
-            <EventItem post={post} key={post.id} />
+            <EventItem post={post} key={post.slug} />
           ))}
           {totalPages / EVENT_PAGE_SIZE > 1 && (
             <PageNavigation
