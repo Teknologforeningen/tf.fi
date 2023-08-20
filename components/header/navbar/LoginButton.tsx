@@ -1,12 +1,15 @@
-import { useAuth } from '@hipsquare/react-strapi-keycloak-auth-context'
+import { useSession, signIn, signOut } from 'next-auth/react'
 import classNames from 'classnames'
 
 const LoginButton = ({ className }: { className?: string }) => {
-  const { isAuthenticated, login, logout } = useAuth()
+  const { data: session } = useSession()
 
-  return !isAuthenticated ? (
+  return !session ? (
     <button
-      onClick={login}
+      onClick={(e) => {
+        e.preventDefault()
+        signIn('keycloak')
+      }}
       className={classNames(
         'hover:bg-gray-900 rounded-lg border border-white p-3 text-white',
         className
@@ -16,7 +19,10 @@ const LoginButton = ({ className }: { className?: string }) => {
     </button>
   ) : (
     <button
-      onClick={logout}
+      onClick={(e) => {
+        e.preventDefault()
+        signOut()
+      }}
       className={classNames(
         'rounded-lg border border-teknologröd p-3 text-teknologröd',
         className
