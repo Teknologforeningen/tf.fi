@@ -22,7 +22,7 @@ type ContentPageProps = {
 }
 
 const ContentPage: NextPage<ContentPageProps> = (props) => {
-  return <Page {...props}/>
+  return <Page {...props} />
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -30,12 +30,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const contentPages = await fetchContentPages()
 
   // Create a path for each page
-  const paths = contentPages.filter(category => category).map((contentpage) => ({
-    params: {
-      category: contentpage.category?.data.attributes.slug,
-      contentPage: contentpage.slug,
-    },
-  }))
+  const paths = contentPages
+    .filter((category) => category)
+    .map((contentpage) => ({
+      params: {
+        category: contentpage.category?.data.attributes.slug,
+        contentPage: contentpage.slug,
+      },
+    }))
 
   return {
     paths,
@@ -48,11 +50,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     params?.contentPage instanceof Array
       ? params?.contentPage[0]
       : params?.contentPage
-  const contentPage = await fetchContentPage(slug)
+  const page = await fetchContentPage(slug)
   const { logos, navbarLinks } = await getLayoutProps()
   return {
     props: {
-      contentPage,
+      page,
       navbarLinks,
       logos,
     },

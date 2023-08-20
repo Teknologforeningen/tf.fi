@@ -1,7 +1,5 @@
-import type { GetServerSideProps, NextPage } from 'next'
+import type { GetStaticProps, NextPage } from 'next'
 import Image from 'next/image'
-import { getSession } from 'next-auth/react'
-import { Session } from 'next-auth'
 import { fetchEvents } from '@lib/api/event'
 import { fetchHomepage } from '@lib/api/homepage'
 import Column from '@components/Column'
@@ -80,9 +78,7 @@ const Home: NextPage<HomeProps> = ({
   </>
 )
 
-export const getServerSideProps: GetServerSideProps<{
-  session: Session | null
-}> = async (context) => {
+export const getStaticProps: GetStaticProps = async () => {
   const events = await fetchEvents(1)
   const homepage = await fetchHomepage()
   const navbarLinks = await fetchNavbar()
@@ -93,7 +89,6 @@ export const getServerSideProps: GetServerSideProps<{
       events: events?.data ?? [],
       logos: homepage?.footer?.nationlogos ?? [],
       bannerImages: homepage?.banner?.bannerImages?.data ?? [],
-      session: await getSession(context),
     },
   }
 }

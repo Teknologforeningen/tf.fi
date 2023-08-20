@@ -1,7 +1,11 @@
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
+import { GetServerSideProps, NextPage } from 'next'
 import { PageType } from '@models/page'
 import { marked } from 'marked'
-import { fetchPrivatePage, fetchPrivatePages } from '@lib/api/privatepage'
+import { signIn } from 'next-auth/react'
+import { useEffect } from 'react'
+import { Session } from 'next-auth'
+import { getSession } from 'next-auth/react'
+import { fetchPrivatePage } from '@lib/api/privatepage'
 import { NavbarLink } from '@lib/api/navbar'
 import { NationLogo } from '@components/footer/Logos'
 import { getLayoutProps } from '@utils/helpers'
@@ -19,41 +23,41 @@ type PrivatePageProps = {
   page: PageType
   logos: NationLogo[]
   navbarLinks: NavbarLink[]
+  session: Session
 }
 
-const PrivatePage: NextPage<PrivatePageProps> = (props) => {
-  return <Page {...props}/>
+const PrivatePage: NextPage<PrivatePageProps> = ({
+  session,
+  ...props
+}: PrivatePageProps) => {
+  // TODO: Fix login redirect flow
+  useEffect(() => {
+    if (!session) {
+      void signIn('keycloak')
+    }
+  }, [session])
+
+  // TODO: Return something meaningful instead.. maybe empty page contents?
+  return session ? <Page {...props} /> : <></>
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  // Get all content pages
-  const privatePages = await fetchPrivatePages()
-
-  // Create a path for each page
-  const paths = privatePages.map((page) => ({
-    params: {
-      privatePage: page.slug,
-    },
-  }))
-
-  return {
-    paths,
-    fallback: 'blocking',
-  }
-}
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const slug =
-    params?.contentPage instanceof Array
-      ? params?.contentPage[0]
-      : params?.contentPage
-  const page = await fetchPrivatePage(slug)
+export const getServerSideProps: GetServerSideProps<{
+  session: Session | null
+}> = async (context) => {
+  const query = context.query.privatePage
+  const slug = query instanceof Array ? query[0] : query
+  const session = await getSession(context)
+  // TODO: Fix types
+  const page = session?.jwt
+    ? await fetchPrivatePage(session.jwt, slug)
+    : undefined
   const { logos, navbarLinks } = await getLayoutProps()
   return {
     props: {
       page,
       navbarLinks,
       logos,
+      session,
     },
   }
 }

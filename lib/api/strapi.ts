@@ -5,6 +5,7 @@ export const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/api`
 export type StrapiFetchOptions = {
   query?: string
   url?: string
+  headers?: HeadersInit
 }
 
 export type SingleResponse<T> = {
@@ -69,7 +70,10 @@ async function fetchSingle<T>(
   const url = options?.url ?? API_URL
   const query = options?.query ?? ''
 
-  return fetchFromStrapi<T, SingleResponse<T>>(`${url}${path}?${query}`)
+  return fetchFromStrapi<T, SingleResponse<T>>(
+    `${url}${path}?${query}`,
+    options?.headers
+  )
 }
 
 async function fetchCollectionSingle<T>(
@@ -88,7 +92,8 @@ async function fetchCollectionSingle<T>(
   })
 
   const res = await fetchFromStrapi<T, CollectionResponse<T>>(
-    `${url}${path}?${query}&${slugQuery}`
+    `${url}${path}?${query}&${slugQuery}`,
+    options?.headers
   )
 
   if (!res?.data?.[0]) {
@@ -111,15 +116,16 @@ async function fetchCollection<T, P extends Pagination = PagePagination>(
     : ''
   const query = options?.query ?? ''
   return fetchFromStrapi<T, CollectionResponse<T>>(
-    `${url}${path}?${query}&${paginationQuery}`
+    `${url}${path}?${query}&${paginationQuery}`,
+    options?.headers
   )
 }
 
 async function fetchFromStrapi<
   T,
   S extends CollectionResponse<T> | SingleResponse<T>
->(url: string): Promise<StrapiResponse<T, S> | null> {
-  const res = await fetch(url)
+>(url: string, headers?: HeadersInit): Promise<StrapiResponse<T, S> | null> {
+  const res = await fetch(url, { headers })
   const json = (await res.json()) as StrapiResponse<T, S>
   if (json.error !== undefined) {
     console.error(`Error fetching ${url}: ${JSON.stringify(json.error)}`)

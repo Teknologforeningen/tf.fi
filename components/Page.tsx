@@ -22,11 +22,7 @@ type PageProps = {
   navbarLinks: NavbarLink[]
 }
 
-const Page: NextPage<PageProps> = ({
-  page,
-  navbarLinks,
-  logos,
-}) => {
+const Page: NextPage<PageProps> = ({ page, navbarLinks, logos }) => {
   return (
     <div className="bg-white">
       <Header navbarLinks={navbarLinks} />

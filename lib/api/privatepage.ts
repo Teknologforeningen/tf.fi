@@ -1,8 +1,9 @@
 import qs from 'qs'
 import { PageType } from '@models/page'
-import { fetchCollection, fetchCollectionSingle } from '@lib/api/strapi'
+import strapi from '@lib/api/strapi'
 
 export async function fetchPrivatePage(
+  sessionToken: string,
   slug?: string
 ): Promise<PageType | null> {
   if (slug === undefined) return null
@@ -15,13 +16,22 @@ export async function fetchPrivatePage(
     },
   })
 
-  const res = await fetchCollectionSingle<PageType>('/private-pages', slug, {
-    query,
-  })
+  const res = await strapi.fetchCollectionSingle<PageType>(
+    '/private-pages',
+    slug,
+    {
+      query,
+      headers: { Authorization: `Bearer ${sessionToken}` },
+    }
+  )
   return res?.data?.attributes ?? null
 }
 
-export async function fetchPrivatePages(): Promise<PageType[]> {
-  const res = await fetchCollection<PageType>('/private-pages')
+export async function fetchPrivatePages(
+  sessionToken: string
+): Promise<PageType[]> {
+  const res = await strapi.fetchCollection<PageType>('/private-pages', {
+    headers: { Authorization: `Bearer ${sessionToken}` },
+  })
   return res?.data?.map((c) => c.attributes) ?? []
 }
