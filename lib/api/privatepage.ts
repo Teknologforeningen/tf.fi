@@ -2,7 +2,8 @@ import qs from 'qs'
 import { PageType } from '@models/page'
 import strapi from '@lib/api/strapi'
 
-export async function fetchContentPage(
+export async function fetchPrivatePage(
+  sessionToken: string,
   slug?: string
 ): Promise<PageType | null> {
   if (slug === undefined) return null
@@ -16,29 +17,21 @@ export async function fetchContentPage(
   })
 
   const res = await strapi.fetchCollectionSingle<PageType>(
-    '/content-pages',
+    '/private-pages',
     slug,
     {
       query,
+      headers: { Authorization: `Bearer ${sessionToken}` },
     }
   )
   return res?.data?.attributes ?? null
 }
 
-export async function fetchContentPages(): Promise<PageType[]> {
-  const query = qs.stringify(
-    {
-      populate: {
-        category: {
-          populate: ['slug'],
-        },
-      },
-    },
-    { encodeValuesOnly: true }
-  )
-
-  const res = await strapi.fetchCollection<PageType>('/content-pages', {
-    query,
+export async function fetchPrivatePages(
+  sessionToken: string
+): Promise<PageType[]> {
+  const res = await strapi.fetchCollection<PageType>('/private-pages', {
+    headers: { Authorization: `Bearer ${sessionToken}` },
   })
   return res?.data?.map((c) => c.attributes) ?? []
 }

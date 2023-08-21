@@ -1,4 +1,4 @@
-import Column from '../../Column'
+import Column from '@components/Column'
 
 const TaffaABLogo = () => (
   <Column>

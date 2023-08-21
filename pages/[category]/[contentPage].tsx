@@ -1,55 +1,19 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
-import { ContentPage } from '@models/contentpage'
-import { marked } from 'marked'
+import { PageType } from '@models/page'
 import { fetchContentPage, fetchContentPages } from '@lib/api/contentpage'
 import { NavbarLink } from '@lib/api/navbar'
-import Header from '@components/header'
 import { NationLogo } from '@components/footer/Logos'
-import Footer from '@components/footer'
 import { getLayoutProps } from '@utils/helpers'
-import TableOfContents from '@components/TableOfContents'
-import ContentSection from '@components/ContentSection'
-
-const renderer: marked.RendererObject = {
-  image(href: string | null): string {
-    return `<img class='event-page-image' src=${href} alt='bild' />`
-  },
-}
-
-marked.use({ renderer })
+import Page from '@components/Page'
 
 type ContentPageProps = {
-  contentPage: ContentPage
+  page: PageType
   logos: NationLogo[]
   navbarLinks: NavbarLink[]
 }
 
-const ContentPage: NextPage<ContentPageProps> = ({
-  contentPage,
-  navbarLinks,
-  logos,
-}) => {
-  return (
-    <div className="bg-white">
-      <Header navbarLinks={navbarLinks} />
-      <div className="prose prose-sm m-8 mx-auto  min-h-[92vh] max-w-[85vw] rounded-lg bg-white p-[15px] xl:mt-6 xl:max-w-screen-lg">
-        <h1>{contentPage.title}</h1>
-        {contentPage.content && <p>{contentPage.content}</p>}
-        {contentPage.showTableOfContents && (
-          <TableOfContents sections={contentPage.content_sections.data} />
-        )}
-        {contentPage.content_sections.data.map((section, i) => (
-          <ContentSection
-            key={i}
-            title={section.attributes.title}
-            content={section.attributes.content}
-            file_folders={section.attributes.file_folders.data}
-          />
-        ))}
-      </div>
-      <Footer logos={logos} />
-    </div>
-  )
+const ContentPage: NextPage<ContentPageProps> = (props) => {
+  return <Page {...props} isPrivate={false} />
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -57,12 +21,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const contentPages = await fetchContentPages()
 
   // Create a path for each page
-  const paths = contentPages.map((contentpage) => ({
-    params: {
-      category: contentpage.category.data.attributes.slug,
-      contentPage: contentpage.slug,
-    },
-  }))
+  const paths = contentPages
+    .filter((category) => category)
+    .map((contentpage) => ({
+      params: {
+        category: contentpage.category?.data.attributes.slug,
+        contentPage: contentpage.slug,
+      },
+    }))
 
   return {
     paths,
@@ -75,11 +41,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     params?.contentPage instanceof Array
       ? params?.contentPage[0]
       : params?.contentPage
-  const contentPage = await fetchContentPage(slug)
+  const page = await fetchContentPage(slug)
   const { logos, navbarLinks } = await getLayoutProps()
   return {
     props: {
-      contentPage,
+      page,
       navbarLinks,
       logos,
     },

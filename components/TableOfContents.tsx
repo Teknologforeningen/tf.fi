@@ -1,8 +1,9 @@
 import Link from 'next/link'
-import { ContentSection } from '@models/contentpage'
+import { Section } from '@models/page'
 import { titleToAnchor } from '@utils/helpers'
 
-const TableOfContents = ({ sections }: { sections: ContentSection[] }) => {
+const TableOfContents = ({ sections }: { sections: Section[] }) => {
+  // TODO: Fix formatting
   return (
     <div>
       <ul>
