@@ -1,19 +1,10 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import { PageType } from '@models/page'
-import { marked } from 'marked'
 import { fetchContentPage, fetchContentPages } from '@lib/api/contentpage'
 import { NavbarLink } from '@lib/api/navbar'
 import { NationLogo } from '@components/footer/Logos'
 import { getLayoutProps } from '@utils/helpers'
 import Page from '@components/Page'
-
-const renderer: marked.RendererObject = {
-  image(href: string | null): string {
-    return `<img class='event-page-image' src=${href} alt='bild' />`
-  },
-}
-
-marked.use({ renderer })
 
 type ContentPageProps = {
   page: PageType
@@ -22,7 +13,7 @@ type ContentPageProps = {
 }
 
 const ContentPage: NextPage<ContentPageProps> = (props) => {
-  return <Page {...props} />
+  return <Page {...props} isPrivate={false} />
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {

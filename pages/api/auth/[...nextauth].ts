@@ -1,9 +1,8 @@
-import NextAuth, { AuthOptions, Session } from 'next-auth'
+import NextAuth, { NextAuthOptions } from 'next-auth'
 import KeycloakProvider from 'next-auth/providers/keycloak'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { JWT } from 'next-auth/jwt'
 
-const options: AuthOptions = {
+const options: NextAuthOptions = {
   debug: false,
   providers: [
     KeycloakProvider({
@@ -16,7 +15,8 @@ const options: AuthOptions = {
     strategy: 'jwt',
   },
   callbacks: {
-    async session({ session, token }: { session: Session; token: JWT }) {
+    async session({ session, token }) {
+      session.user.token = token.jwt
       return { ...session, jwt: token.jwt, id: token.id }
     },
     async jwt({ token, user, account }) {

@@ -9,20 +9,22 @@ import {
 import ActivityIndicator from './ActivityIndicator'
 
 const publicDownloadUrl = '/api/drive/public/'
+const privateDownloadUrl = '/api/drive/private/'
 
 type DriveExplorerProps = {
   folderId: string
+  isPrivate: boolean
 }
 
-const DriveExplorer = ({ folderId }: DriveExplorerProps) => {
+const DriveExplorer = ({ folderId, isPrivate }: DriveExplorerProps) => {
   const [folderArray, setFolderArray] = useState<(Folder | File)[]>([])
   const [isLoading, setLoading] = useState(true)
 
+  const downloadUrl = isPrivate ? privateDownloadUrl : publicDownloadUrl
+
   useEffect(() => {
     const fetchFolder = async () => {
-      const res = await fetch(
-        publicDownloadUrl + `listFiles?folderId=${folderId}`
-      )
+      const res = await fetch(downloadUrl + `listFiles?folderId=${folderId}`)
       const data = await res.json()
       if (data.error) {
         console.error(data.error)
@@ -33,7 +35,7 @@ const DriveExplorer = ({ folderId }: DriveExplorerProps) => {
     }
 
     fetchFolder()
-  }, [folderId])
+  }, [folderId, downloadUrl])
   return (
     <div className="pl-4">
       {isLoading ? (
@@ -43,9 +45,17 @@ const DriveExplorer = ({ folderId }: DriveExplorerProps) => {
       ) : (
         folderArray.map((item) =>
           item.mimeType === 'application/vnd.google-apps.folder' ? (
-            <FolderItem key={item.id} folder={item as Folder} />
+            <FolderItem
+              key={item.id}
+              folder={item as Folder}
+              isPrivate={isPrivate}
+            />
           ) : (
-            <FileItem key={item.id} file={item as File} />
+            <FileItem
+              key={item.id}
+              file={item as File}
+              downloadUrl={downloadUrl}
+            />
           )
         )
       )}
@@ -53,10 +63,16 @@ const DriveExplorer = ({ folderId }: DriveExplorerProps) => {
   )
 }
 
-const FileItem = ({ file }: { file: File }) => {
+const FileItem = ({
+  file,
+  downloadUrl,
+}: {
+  file: File
+  downloadUrl: string
+}) => {
   const downloadFile = () => {
     window.location.href =
-      publicDownloadUrl + `download?fileId=${file.id}&fileName=${file.name}`
+      downloadUrl + `download?fileId=${file.id}&fileName=${file.name}`
   }
 
   return (
@@ -74,7 +90,13 @@ const FileItem = ({ file }: { file: File }) => {
   )
 }
 
-const FolderItem = ({ folder }: { folder: Folder }) => {
+const FolderItem = ({
+  folder,
+  isPrivate,
+}: {
+  folder: Folder
+  isPrivate: boolean
+}) => {
   const [isExpanded, setExpanded] = useState(false)
 
   const toggleExpanded = () => {
@@ -94,7 +116,9 @@ const FolderItem = ({ folder }: { folder: Folder }) => {
         </div>
         {folder.name}
       </button>
-      {isExpanded && <DriveExplorer folderId={folder.id} />}
+      {isExpanded && (
+        <DriveExplorer folderId={folder.id} isPrivate={isPrivate} />
+      )}
     </ItemWrapper>
   )
 }

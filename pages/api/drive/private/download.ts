@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { getDriveInstance, getDriveFile } from '../../../../lib/api/driveFiles'
-import requireAuthMiddleware from '../../../../middleware/checkAuth'
+import { getDriveInstance, getDriveFile } from '@lib/api/driveFiles'
+import requireAuthMiddleware from '@middleware/checkAuth'
 
 const drive = getDriveInstance(process.env.GOOGLE_PRIVATE_CREDS)
 

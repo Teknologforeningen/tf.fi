@@ -8,14 +8,17 @@ type PageSectionProps = {
   title: string
   content?: string
   file_folders: FileFolder[]
+  isPrivate: boolean
 }
 
 const PageSection = ({
   title,
   content,
   file_folders,
+  isPrivate,
 }: PageSectionProps) => (
   <div>
+    {/* TODO: Fix formatting */}
     <h2 id={titleToAnchor(title)}>{title}</h2>
     <div
       dangerouslySetInnerHTML={{
@@ -26,7 +29,7 @@ const PageSection = ({
       <div key={i}>
         <h3>{attributes.title}</h3>
         <p>{attributes.description}</p>
-        <DriveExplorer folderId={attributes.folderId} />
+        <DriveExplorer folderId={attributes.folderId} isPrivate={isPrivate} />
       </div>
     ))}
   </div>

@@ -17,27 +17,30 @@ const renderer: marked.RendererObject = {
 marked.use({ renderer })
 
 type PageProps = {
-  page: PageType
+  page: PageType | null
   logos: NationLogo[]
   navbarLinks: NavbarLink[]
+  isPrivate: boolean
 }
 
-const Page: NextPage<PageProps> = ({ page, navbarLinks, logos }) => {
+const Page: NextPage<PageProps> = ({ page, navbarLinks, logos, isPrivate }) => {
   return (
     <div className="bg-white">
       <Header navbarLinks={navbarLinks} />
+      {/* TODO: Fix formatting */}
       <div className="prose prose-sm m-8 mx-auto  min-h-[92vh] max-w-[85vw] rounded-lg bg-white p-[15px] xl:mt-6 xl:max-w-screen-lg">
-        <h1>{page.title}</h1>
-        {page.content && <p>{page.content}</p>}
-        {page.showTableOfContents && (
+        <h1>{page?.title}</h1>
+        {page?.content && <p>{page.content}</p>}
+        {page?.showTableOfContents && (
           <TableOfContents sections={page.sections.data} />
         )}
-        {page.sections.data.map((section, i) => (
+        {page?.sections.data.map((section, i) => (
           <PageSection
             key={i}
             title={section.attributes.title}
             content={section.attributes.content}
             file_folders={section.attributes.file_folders.data}
+            isPrivate={isPrivate}
           />
         ))}
       </div>

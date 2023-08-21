@@ -1,8 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import {
-  getDriveFilesList,
-  getDriveInstance,
-} from '../../../../lib/api/driveFiles'
+import { getDriveFilesList, getDriveInstance } from '@lib/api/driveFiles'
 
 const drive = getDriveInstance()
 
