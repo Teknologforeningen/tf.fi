@@ -35,6 +35,10 @@ export const getDriveFilesList = async (
     (await drive.files.list({
       q: `'${folderId}' in parents`,
       fields: 'files(id, name, mimeType, parents)',
+      supportsAllDrives: true,
+      includeItemsFromAllDrives: true,
+      driveId: process.env.SHARED_GOOGLE_DRIVE_ID,
+      corpora:'drive'
     })) || []
   return folderStructure
 }
