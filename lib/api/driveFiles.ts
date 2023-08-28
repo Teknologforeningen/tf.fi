@@ -38,7 +38,7 @@ export const getDriveFilesList = async (
       supportsAllDrives: true,
       includeItemsFromAllDrives: true,
       driveId: process.env.SHARED_GOOGLE_DRIVE_ID,
-      corpora:'drive'
+      corpora: 'drive',
     })) || []
   return folderStructure
 }
