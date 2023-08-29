@@ -40,7 +40,7 @@ const Page: NextPage<PageProps> = ({ page, navbarLinks, logos, isPrivate }) => {
         {page?.showTableOfContents && (
           <TableOfContents sections={page.sections.data} />
         )}
-        {page?.sections.data.map((section, i) => (
+        {page?.sections?.data.map((section, i) => (
           <PageSection
             key={i}
             title={section.attributes.title}

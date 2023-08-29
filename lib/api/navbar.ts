@@ -9,6 +9,8 @@ interface BaseNavbarLink {
   title: string
 }
 
+type SanitizedPage = Pick<PageType, 'slug' | 'title'>
+
 export interface NavbarSingleLink extends BaseNavbarLink {
   link: string
 }
@@ -26,6 +28,9 @@ export interface Navbar {
   categories: {
     data: CollectionResponse<NavbarCategory>
   }
+  private_pages: {
+    data: CollectionResponse<SanitizedPage>
+  }
 }
 
 export default async function fetchNavbar(): Promise<NavbarLink[]> {
@@ -41,6 +46,9 @@ export default async function fetchNavbar(): Promise<NavbarLink[]> {
         categories: {
           populate: ['name', 'slug', 'content_pages'],
         },
+        private_pages: {
+          populate: ['title', 'slug'],
+        },
       },
     },
     { encodeValuesOnly: true }
@@ -49,31 +57,49 @@ export default async function fetchNavbar(): Promise<NavbarLink[]> {
 
   if (res === null || res?.data === null) return []
 
-  const categories = toNavbarMultipleLink(res.data.attributes.categories.data)
-  return [...categories, ...res.data.attributes.links]
+  const categories = categoriesToLinks(res.data.attributes.categories.data)
+
+  const privatePages = toNavbarMultipleLink(
+    'För medlemmar',
+    'medlem',
+    res.data.attributes.private_pages
+  )
+  return [...categories, ...res.data.attributes.links, privatePages]
 }
 
 function toLink(
-  contentPage: SingleResponse<PageType>,
+  page: SingleResponse<PageType | SanitizedPage>,
   baseUrl: string
 ): NavbarSingleLink {
   return {
-    title: contentPage.attributes.title,
-    link: `/${baseUrl}/${contentPage.attributes.slug}`,
+    title: page.attributes.title,
+    link: `/${baseUrl}/${page.attributes.slug}`,
   }
 }
 
 function toNavbarMultipleLink(
+  title: string,
+  basePath: string,
+  pages: { data: CollectionResponse<PageType | SanitizedPage> }
+): NavbarMultipleLink {
+  const links = pages.data.map((page) => {
+    return toLink(page, basePath)
+  })
+  return {
+    title,
+    links,
+    basePath,
+  }
+}
+
+function categoriesToLinks(
   categories: CollectionResponse<NavbarCategory>
 ): NavbarMultipleLink[] {
   return categories.map((category) => {
-    const links = category.attributes.content_pages.data.map((page) => {
-      return toLink(page, category.attributes.slug)
-    })
-    return {
-      title: category.attributes.title,
-      links,
-      basePath: category.attributes.slug,
-    }
+    return toNavbarMultipleLink(
+      category.attributes.title,
+      category.attributes.slug,
+      category.attributes.content_pages
+    )
   })
 }
