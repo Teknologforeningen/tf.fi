@@ -16,14 +16,10 @@ export async function fetchPrivatePage(
     },
   })
 
-  const res = await strapi.fetchCollectionSingle<PageType>(
-    '/private-pages',
-    slug,
-    {
-      query,
-      headers: { Authorization: `Bearer ${sessionToken}` },
-    }
-  )
+  const res = await strapi.fetchSingle<PageType>(`/private-pages/${slug}`, {
+    query,
+    headers: { Authorization: `Bearer ${sessionToken}` },
+  })
   return res?.data?.attributes ?? null
 }
 
