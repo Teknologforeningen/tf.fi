@@ -30,7 +30,13 @@ const Page: NextPage<PageProps> = ({ page, navbarLinks, logos, isPrivate }) => {
       {/* TODO: Fix formatting */}
       <div className="prose prose-sm m-8 mx-auto  min-h-[92vh] max-w-[85vw] rounded-lg bg-white p-[15px] xl:mt-6 xl:max-w-screen-lg">
         <h1>{page?.title}</h1>
-        {page?.content && <p>{page.content}</p>}
+        {page?.content && (
+          <div
+            dangerouslySetInnerHTML={{
+              __html: marked.parse(page.content ?? ''),
+            }}
+          />
+        )}
         {page?.showTableOfContents && (
           <TableOfContents sections={page.sections.data} />
         )}

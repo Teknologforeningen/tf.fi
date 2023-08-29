@@ -55,6 +55,7 @@ const DriveExplorer = ({ folderId, isPrivate }: DriveExplorerProps) => {
               key={item.id}
               file={item as File}
               downloadUrl={downloadUrl}
+              isPrivate={isPrivate}
             />
           )
         )
@@ -66,9 +67,11 @@ const DriveExplorer = ({ folderId, isPrivate }: DriveExplorerProps) => {
 const FileItem = ({
   file,
   downloadUrl,
+  isPrivate,
 }: {
   file: File
   downloadUrl: string
+  isPrivate: boolean
 }) => {
   const downloadFile = () => {
     window.location.href =
@@ -77,15 +80,24 @@ const FileItem = ({
 
   return (
     <ItemWrapper>
-      <button
-        onClick={downloadFile}
-        className="flex flex-row items-center tracking-wide hover:font-semibold"
-      >
-        <div className="mx-1">
-          <MdFileDownload />
-        </div>
-        {file.name}
-      </button>
+      {isPrivate ? (
+        <button
+          onClick={downloadFile}
+          className="flex flex-row items-center tracking-wide no-underline hover:text-teknologröd"
+        >
+          <MdFileDownload className="mx-1" />
+          {file.name}
+        </button>
+      ) : (
+        <a
+          href={`https://drive.google.com/file/d/${file.id}/view`}
+          target="_blank"
+          className="flex flex-row items-center tracking-wide no-underline hover:text-teknologröd"
+        >
+          <MdFileDownload className="mx-1" />
+          {file.name}
+        </a>
+      )}
     </ItemWrapper>
   )
 }
@@ -107,7 +119,7 @@ const FolderItem = ({
     <ItemWrapper>
       <button
         onClick={toggleExpanded}
-        className="flex flex-row items-center tracking-wide hover:font-semibold
+        className="flex flex-row items-center tracking-wide hover:text-teknologröd
         "
       >
         {isExpanded ? <MdKeyboardArrowDown /> : <MdKeyboardArrowRight />}
