@@ -21,60 +21,73 @@ const Navbar = ({ navbarLinks, position = 'top' }: NavbarProps) => {
 
   return (
     <nav>
-      <Row
+      <div
         className={classNames(
-          'justify-evenly pt-2 xl:items-center',
-          position === 'side' ? 'flex flex-col xl:hidden' : 'hidden xl:flex'
+          'flex w-full justify-between px-4 pt-2 lg:items-center',
+          position === 'side'
+            ? 'flex flex-col lg:hidden'
+            : 'hidden flex-row lg:flex'
         )}
       >
-        <TFLogoSmall highlight={path === '/'} />
+        <div className="flex-start flex flex-col justify-between lg:flex-row lg:items-center">
+          <div className="mx-3">
+            <TFLogoSmall highlight={path === '/'} />
+          </div>
+          {navbarLinks.map((link) =>
+            'links' in link ? (
+              <NavbarDropdown
+                key={link.title}
+                link={link}
+                position={position}
+                path={path}
+              />
+            ) : (
+              <Link
+                key={link.title}
+                href={link.link}
+                className={classNames(
+                  path === link.link && '!text-teknologröd',
+                  'link link-text mx-3'
+                )}
+              >
+                {link.title}
+              </Link>
+            )
+          )}
 
-        {navbarLinks.map((link) =>
-          'links' in link ? (
-            <NavbarDropdown
-              key={link.title}
-              link={link}
-              position={position}
-              path={path}
-            />
-          ) : (
-            <Link
-              key={link.title}
-              href={link.link}
-              className={classNames(
-                path === link.link && '!text-teknologröd',
-                'link link-text'
-              )}
-            >
-              {link.title}
-            </Link>
-          )
-        )}
-
-        {position === 'top' ? (
-          <>
-            <Link href={links.täffäab} className="link link-text">
-              <TaffaABLogo />
-            </Link>
-            <Link href={links.lunch} className="link link-text">
-              <DagsenLogo />
-            </Link>
-          </>
-        ) : (
-          <>
-            <Row className="min-h-[20px] justify-around">
-              <Link href={links.täffäab} className="link link-text">
+          {position === 'top' ? (
+            <>
+              <Link href={links.täffäab} className="link link-text mx-2">
                 <TaffaABLogo />
               </Link>
-              <Link href={links.lunch} className="link link-text">
+              <Link href={links.lunch} className="link link-text mx-2">
                 <DagsenLogo />
               </Link>
-            </Row>
-            <hr className="mx-auto my-0 w-full text-white" />
-          </>
-        )}
+            </>
+          ) : (
+            <>
+              <Row className="min-h-[20px] justify-around">
+                <Link
+                  href={links.täffäab}
+                  className="link link-text flex flex-col items-center"
+                >
+                  <TaffaABLogo />
+                  Täffä AB
+                </Link>
+                <Link
+                  href={links.lunch}
+                  className="link link-text flex flex-col items-center"
+                >
+                  <DagsenLogo />
+                  Täffä Lunch
+                </Link>
+              </Row>
+              <hr className="mx-auto my-0 w-full text-white" />
+            </>
+          )}
+        </div>
         <LoginButton className={position === 'side' ? 'mt-6' : ''} />
-      </Row>
+      </div>
     </nav>
   )
 }
@@ -98,14 +111,14 @@ const NavbarDropdown = ({
   }
 
   return (
-    <div className="relative">
+    <div className="relative mx-3">
       <div
         className={classNames(
           isTop ? 'peer' : '!m-0',
           path.startsWith(`/${link.basePath}` ?? '') &&
             link.links.find((l) => l.link === path) &&
             '!text-teknologröd',
-          'link-text text-lg'
+          'link-text text-link'
         )}
         onClick={onClick}
       >

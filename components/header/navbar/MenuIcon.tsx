@@ -30,7 +30,7 @@ type MenuIconProps = {
 
 const MenuIcon = ({ open, onClick }: MenuIconProps) => (
   <div
-    className="fixed left-[10px] top-[10px] z-50 inline-block xl:hidden"
+    className="fixed left-[10px] top-[10px] z-50 inline-block lg:hidden"
     onClick={onClick}
   >
     <MenuBar
