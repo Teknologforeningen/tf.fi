@@ -13,9 +13,14 @@ import LoginButton from './LoginButton'
 type NavbarProps = {
   navbarLinks: NavbarLink[]
   position?: 'top' | 'side'
+  setSideMenuOpen: (state: boolean) => void
 }
 
-const Navbar = ({ navbarLinks, position = 'top' }: NavbarProps) => {
+const Navbar = ({
+  navbarLinks,
+  setSideMenuOpen,
+  position = 'top',
+}: NavbarProps) => {
   const router = useRouter()
   const path = router.asPath
 
@@ -40,6 +45,7 @@ const Navbar = ({ navbarLinks, position = 'top' }: NavbarProps) => {
                 link={link}
                 position={position}
                 path={path}
+                setSideMenuOpen={setSideMenuOpen}
               />
             ) : (
               <Link
@@ -96,10 +102,12 @@ const NavbarDropdown = ({
   link,
   position,
   path,
+  setSideMenuOpen,
 }: {
   link: NavbarMultipleLink
   position: NavbarProps['position']
   path: string
+  setSideMenuOpen: (state: boolean) => void
 }) => {
   const isTop = position === 'top'
   const [open, setOpen] = useState(false)
@@ -143,6 +151,7 @@ const NavbarDropdown = ({
                   link === path && '!text-teknologröd',
                   'link link-text block'
                 )}
+                onClick={() => setSideMenuOpen(false)}
               >
                 {title}
               </Link>
