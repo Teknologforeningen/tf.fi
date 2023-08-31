@@ -28,13 +28,13 @@ const Navbar = ({
     <nav>
       <div
         className={classNames(
-          'flex w-full justify-between px-4 pt-2 lg:items-center',
+          'flex w-full justify-between px-4 pt-2 md:items-center',
           position === 'side'
-            ? 'flex flex-col lg:hidden'
-            : 'hidden flex-row lg:flex'
+            ? 'flex flex-col md:hidden'
+            : 'hidden flex-row md:flex'
         )}
       >
-        <div className="flex-start flex flex-col justify-between lg:flex-row lg:items-center">
+        <div className="flex-start flex flex-col justify-between md:flex-row md:items-center">
           <div className="mx-3">
             <TFLogoSmall highlight={path === '/'} />
           </div>
