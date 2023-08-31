@@ -4,6 +4,5 @@ module.exports = {
   images: {
     domains: ['tf.fi', 'cms.tf.fi', 'localhost'],
   },
-  transpilePackages: ['@hipsquare/react-strapi-keycloak-auth-context'],
   output: 'standalone',
 }

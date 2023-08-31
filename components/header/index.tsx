@@ -14,9 +14,13 @@ const Header = ({ navbarLinks }: { navbarLinks: NavbarLink[] }) => {
           open={sideMenuOpen}
           onClick={() => setSideMenuOpen(!sideMenuOpen)}
         />
-        <Navbar navbarLinks={navbarLinks} />
+        <Navbar navbarLinks={navbarLinks} setSideMenuOpen={setSideMenuOpen} />
         <SideMenu open={sideMenuOpen}>
-          <Navbar navbarLinks={navbarLinks} position="side" />
+          <Navbar
+            navbarLinks={navbarLinks}
+            position="side"
+            setSideMenuOpen={setSideMenuOpen}
+          />
         </SideMenu>
       </div>
     </header>

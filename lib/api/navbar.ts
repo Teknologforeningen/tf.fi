@@ -64,7 +64,10 @@ export default async function fetchNavbar(): Promise<NavbarLink[]> {
     'medlem',
     res.data.attributes.private_pages
   )
-  return [...categories, ...res.data.attributes.links, privatePages]
+  // Temporarily removed links while testing with prod CMS, to be added back
+  // when links to other pages start using the .links attribute
+  // return [...categories, ...res.data.attributes.links, privatePages]
+  return [...categories, privatePages]
 }
 
 function toLink(

@@ -13,9 +13,14 @@ import LoginButton from './LoginButton'
 type NavbarProps = {
   navbarLinks: NavbarLink[]
   position?: 'top' | 'side'
+  setSideMenuOpen: (state: boolean) => void
 }
 
-const Navbar = ({ navbarLinks, position = 'top' }: NavbarProps) => {
+const Navbar = ({
+  navbarLinks,
+  setSideMenuOpen,
+  position = 'top',
+}: NavbarProps) => {
   const router = useRouter()
   const path = router.asPath
 
@@ -23,13 +28,13 @@ const Navbar = ({ navbarLinks, position = 'top' }: NavbarProps) => {
     <nav>
       <div
         className={classNames(
-          'flex w-full justify-between px-4 pt-2 lg:items-center',
+          'flex w-full justify-between px-4 pt-2 md:items-center',
           position === 'side'
-            ? 'flex flex-col lg:hidden'
-            : 'hidden flex-row lg:flex'
+            ? 'flex flex-col md:hidden'
+            : 'hidden flex-row md:flex'
         )}
       >
-        <div className="flex-start flex flex-col justify-between lg:flex-row lg:items-center">
+        <div className="flex-start flex flex-col justify-between md:flex-row md:items-center">
           <div className="mx-3">
             <TFLogoSmall highlight={path === '/'} />
           </div>
@@ -40,6 +45,7 @@ const Navbar = ({ navbarLinks, position = 'top' }: NavbarProps) => {
                 link={link}
                 position={position}
                 path={path}
+                setSideMenuOpen={setSideMenuOpen}
               />
             ) : (
               <Link
@@ -96,10 +102,12 @@ const NavbarDropdown = ({
   link,
   position,
   path,
+  setSideMenuOpen,
 }: {
   link: NavbarMultipleLink
   position: NavbarProps['position']
   path: string
+  setSideMenuOpen: (state: boolean) => void
 }) => {
   const isTop = position === 'top'
   const [open, setOpen] = useState(false)
@@ -130,7 +138,7 @@ const NavbarDropdown = ({
             isTop
               ? 'absolute left-0 top-4 mt-2 hidden flex-col rounded-md shadow-lg ring-1 ring-black ring-opacity-5 hover:flex focus:outline-none peer-hover:flex'
               : '!m-0 pl-4',
-            'z-10 bg-darkgray bg-opacity-80 px-1'
+            'z-10 bg-darkgray bg-opacity-90 px-1'
           )}
         >
           <div className="!m-0 py-1">
@@ -143,6 +151,7 @@ const NavbarDropdown = ({
                   link === path && '!text-teknologröd',
                   'link link-text block'
                 )}
+                onClick={() => setSideMenuOpen(false)}
               >
                 {title}
               </Link>

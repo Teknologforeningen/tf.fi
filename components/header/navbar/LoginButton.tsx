@@ -21,7 +21,7 @@ const LoginButton = ({ className }: { className?: string }) => {
     <button
       onClick={(e) => {
         e.preventDefault()
-        signOut()
+        signOut({ callbackUrl: '/' })
       }}
       className={classNames(
         'rounded-lg border border-teknologröd p-2 text-teknologröd hover:font-bold',
