@@ -138,7 +138,7 @@ const NavbarDropdown = ({
             isTop
               ? 'absolute left-0 top-4 mt-2 hidden flex-col rounded-md shadow-lg ring-1 ring-black ring-opacity-5 hover:flex focus:outline-none peer-hover:flex'
               : '!m-0 pl-4',
-            'z-10 bg-darkgray bg-opacity-80 px-1'
+            'z-10 bg-darkgray bg-opacity-90 px-1'
           )}
         >
           <div className="!m-0 py-1">
