@@ -27,7 +27,7 @@ const Page: NextPage<PageProps> = ({ page, navbarLinks, logos, isPrivate }) => {
   return (
     <div className="bg-white">
       <Header navbarLinks={navbarLinks} />
-      <div className="flex items-center">
+      <div className="flex justify-center">
         <div className="prose prose-sm my-12 ml-16 mr-8 flex flex-col">
           <h1>{page?.title}</h1>
           {page?.content && (
