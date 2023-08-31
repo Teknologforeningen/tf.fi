@@ -12,6 +12,9 @@ const renderer: marked.RendererObject = {
   image(href: string | null): string {
     return `<img class='event-page-image' src=${href} alt='bild' />`
   },
+  link(href, _, text) {
+    return `<a class="text-blue-600 underline visited:text-purple-600 hover:text-blue-800" href=${href}>${text}</a>`
+  },
 }
 
 marked.use({ renderer })
