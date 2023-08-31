@@ -18,7 +18,6 @@ const PageSection = ({
   isPrivate,
 }: PageSectionProps) => (
   <div>
-    {/* TODO: Fix formatting */}
     <h2 id={titleToAnchor(title)}>{title}</h2>
     <div
       dangerouslySetInnerHTML={{

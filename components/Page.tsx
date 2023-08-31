@@ -27,28 +27,29 @@ const Page: NextPage<PageProps> = ({ page, navbarLinks, logos, isPrivate }) => {
   return (
     <div className="bg-white">
       <Header navbarLinks={navbarLinks} />
-      {/* TODO: Fix formatting */}
-      <div className="prose prose-sm m-8 mx-auto  min-h-[92vh] max-w-[85vw] rounded-lg bg-white p-[15px] xl:mt-6 xl:max-w-screen-lg">
-        <h1>{page?.title}</h1>
-        {page?.content && (
-          <div
-            dangerouslySetInnerHTML={{
-              __html: marked.parse(page.content ?? ''),
-            }}
-          />
-        )}
-        {page?.showTableOfContents && (
-          <TableOfContents sections={page.sections.data} />
-        )}
-        {page?.sections?.data.map((section, i) => (
-          <PageSection
-            key={i}
-            title={section.attributes.title}
-            content={section.attributes.content}
-            file_folders={section.attributes.file_folders.data}
-            isPrivate={isPrivate}
-          />
-        ))}
+      <div className="flex items-center">
+        <div className="prose prose-sm my-12 ml-16 mr-8 flex flex-col">
+          <h1>{page?.title}</h1>
+          {page?.content && (
+            <div
+              dangerouslySetInnerHTML={{
+                __html: marked.parse(page.content ?? ''),
+              }}
+            />
+          )}
+          {page?.showTableOfContents && (
+            <TableOfContents sections={page.sections.data} />
+          )}
+          {page?.sections?.data.map((section, i) => (
+            <PageSection
+              key={i}
+              title={section.attributes.title}
+              content={section.attributes.content}
+              file_folders={section.attributes.file_folders.data}
+              isPrivate={isPrivate}
+            />
+          ))}
+        </div>
       </div>
       <Footer logos={logos} />
     </div>
