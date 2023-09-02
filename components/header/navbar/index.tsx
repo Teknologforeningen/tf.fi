@@ -119,13 +119,15 @@ const NavbarDropdown = ({
     }
   }
 
+  const pathWithoutAnchor = path.split('#')[0]
+
   return (
     <div className="relative mx-3">
       <div
         className={classNames(
           isTop ? 'peer' : '!m-0',
-          path.startsWith(`/${link.basePath}` ?? '') &&
-            link.links.find((l) => l.link === path) &&
+          pathWithoutAnchor.startsWith(`/${link.basePath}` ?? '') &&
+            link.links.find((l) => l.link === pathWithoutAnchor) &&
             '!text-teknologröd',
           'link-text text-link'
         )}
@@ -151,7 +153,7 @@ const NavbarDropdown = ({
                 setSideMenuOpen={setSideMenuOpen}
                 className={classNames(
                   isTop && 'py-2',
-                  link === path && '!text-teknologröd',
+                  link === pathWithoutAnchor && '!text-teknologröd',
                   'link link-text block'
                 )}
               />
