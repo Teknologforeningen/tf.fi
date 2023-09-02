@@ -9,6 +9,7 @@ import classNames from 'classnames'
 import { NavbarLink, NavbarMultipleLink } from '@lib/api/navbar'
 import { useRouter } from 'next/router'
 import LoginButton from './LoginButton'
+import HeaderLink from '@components/header/navbar/HeaderLink'
 
 type NavbarProps = {
   navbarLinks: NavbarLink[]
@@ -48,16 +49,16 @@ const Navbar = ({
                 setSideMenuOpen={setSideMenuOpen}
               />
             ) : (
-              <Link
+              <HeaderLink
                 key={link.title}
+                title={link.title}
                 href={link.link}
+                setSideMenuOpen={setSideMenuOpen}
                 className={classNames(
                   path === link.link && '!text-teknologröd',
                   'link link-text mx-3'
                 )}
-              >
-                {link.title}
-              </Link>
+              />
             )
           )}
 
@@ -143,18 +144,17 @@ const NavbarDropdown = ({
         >
           <div className="!m-0 py-1">
             {link.links.map(({ title, link }) => (
-              <Link
+              <HeaderLink
                 key={title}
+                title={title}
                 href={link}
+                setSideMenuOpen={setSideMenuOpen}
                 className={classNames(
                   isTop && 'py-2',
                   link === path && '!text-teknologröd',
                   'link link-text block'
                 )}
-                onClick={() => setSideMenuOpen(false)}
-              >
-                {title}
-              </Link>
+              />
             ))}
           </div>
         </div>
