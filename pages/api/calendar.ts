@@ -1,5 +1,5 @@
 import { calendar_v3, google } from 'googleapis'
-import { CalendarEvent } from '@models/event'
+import { CalendarEvent } from '@components/Calendar'
 import { NextApiRequest, NextApiResponse } from 'next/types'
 import { OAuth2Client } from 'google-auth-library'
 
