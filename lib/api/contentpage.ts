@@ -10,7 +10,6 @@ export async function fetchContentPage(
     populate: {
       sections: {
         populate: ['title', 'content', 'file_folders'],
-        sort: 'title',
       },
       category: {
         populate: ['slug'],
