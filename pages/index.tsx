@@ -1,6 +1,6 @@
 import type { GetStaticProps, NextPage } from 'next'
 import Image from 'next/image'
-import { fetchEvents } from '@lib/api/event'
+import { fetchNews } from '@lib/api/news'
 import { fetchHomepage } from '@lib/api/homepage'
 import Column from '@components/Column'
 import { NationLogo } from '@components/footer/Logos'
@@ -8,10 +8,10 @@ import fetchNavbar, { NavbarLink } from '../lib/api/navbar'
 import Header from '@components/header'
 import Item from '@components/Item'
 import Calendar from '@components/Calendar'
-import { Event } from '@models/event'
+import { NewsType } from '@models/news'
 import MainBanner, { BannerImage } from '@components/Banner'
 import TFInfo from '@components/TFInfo'
-import Events from '@components/events/Events'
+import News from '@components/news'
 import Row from '@components/Row'
 import Footer from '@components/footer'
 
@@ -29,14 +29,14 @@ export interface HomePage {
 type HomeProps = {
   logos: NationLogo[]
   navbarLinks: NavbarLink[]
-  events: Event[]
+  news: NewsType[]
   bannerImages: BannerImage[]
 }
 
 const Home: NextPage<HomeProps> = ({
   navbarLinks,
   logos,
-  events,
+  news,
   bannerImages,
 }) => (
   <>
@@ -48,7 +48,7 @@ const Home: NextPage<HomeProps> = ({
           backgroundColor="darkgray"
           className="max-w-[1500px] flex-col md:flex-row"
         >
-          <Events events={events.slice(0, 5)} />
+          <News news={news.slice(0, 5)} />
           <Calendar />
         </Item>
         <Row className="relative w-full overflow-hidden">
@@ -79,14 +79,14 @@ const Home: NextPage<HomeProps> = ({
 )
 
 export const getStaticProps: GetStaticProps = async () => {
-  const events = await fetchEvents(1)
+  const news = await fetchNews(1)
   const homepage = await fetchHomepage()
   const navbarLinks = await fetchNavbar()
 
   return {
     props: {
       navbarLinks,
-      events: events?.data ?? [],
+      news: news?.data ?? [],
       logos: homepage?.footer?.nationlogos ?? [],
       bannerImages: homepage?.banner?.bannerImages?.data ?? [],
     },

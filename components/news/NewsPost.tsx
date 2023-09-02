@@ -1,10 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
-import { Event } from '@models/event'
+import { NewsType } from '@models/news'
 import { getDateLong } from '@utils/helpers'
 
-// TODO: get text ellipse to work properly, kinda spaghetti rn
-const EventItem = ({ post }: { post: Event }) => {
+const NewsPost = ({ post }: { post: NewsType }) => {
   return (
     <div
       className="mt-4 w-full rounded-md border-[1px] border-white bg-white p-2 shadow-md"
@@ -18,7 +17,7 @@ const EventItem = ({ post }: { post: Event }) => {
         {post.description}
       </p>
       <Link
-        href={`/events/${post.slug}`}
+        href={`/nyheter/${post.slug}`}
         className="text-sm font-extrabold leading-[18px] tracking-wide text-teknologröd hover:text-[15px] hover:font-semibold"
       >
         läs mera
@@ -27,4 +26,4 @@ const EventItem = ({ post }: { post: Event }) => {
   )
 }
 
-export default EventItem
+export default NewsPost

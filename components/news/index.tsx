@@ -1,18 +1,18 @@
 import React from 'react'
-import { Event } from '@models/event'
+import { NewsType } from '@models/news'
 import Link from 'next/link'
-import EventItem from './EventItem'
-import Subtitle from '../Subtitle'
+import NewsPost from './NewsPost'
+import Subtitle from '@components/Subtitle'
 
-const Events = ({ events }: { events: Event[] }) => {
+const News = ({ news }: { news: NewsType[] }) => {
   return (
     <div className="mx-5 mr-4 flex flex-col md:w-[60%]">
       <Subtitle>Nyheter</Subtitle>
-      {events.map((post) => (
-        <EventItem post={post} key={post.slug} />
+      {news.map((post) => (
+        <NewsPost post={post} key={post.slug} />
       ))}
       <Link
-        href={`/events`}
+        href={`/nyheter`}
         className="mt-4 rounded-md border-[1px] border-white p-2 text-center text-sm leading-[18px] tracking-wide text-white hover:text-[15px] hover:font-semibold"
       >
         Mera nyheter
@@ -21,4 +21,4 @@ const Events = ({ events }: { events: Event[] }) => {
   )
 }
 
-export default Events
+export default News

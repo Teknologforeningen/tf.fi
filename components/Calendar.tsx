@@ -2,10 +2,18 @@ import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Calendar from 'react-calendar'
 import Column from './Column'
-import { CalendarEvent } from '@models/event'
 import Subtitle from './Subtitle'
 import { getDateShort } from '@utils/helpers'
 import ActivityIndicator from './ActivityIndicator'
+
+// Compatible with FullCalendar event type
+export type CalendarEvent = {
+  id: string
+  title: string | null | undefined
+  start: string | null | undefined
+  end: string | null | undefined
+  htmlLink: string
+}
 
 const CalendarComponent = () => {
   const [data, setData] = useState<CalendarEvent[]>([])
