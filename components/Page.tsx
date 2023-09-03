@@ -28,10 +28,10 @@ type PageProps = {
 
 const Page: NextPage<PageProps> = ({ page, navbarLinks, logos, isPrivate }) => {
   return (
-    <div className="bg-white">
+    <div className="flex min-h-screen flex-col bg-white">
       <Header navbarLinks={navbarLinks} />
-      <div className="flex justify-center">
-        <div className="prose prose-sm my-12 ml-16 mr-8 flex flex-col">
+      <div className="flex flex-grow justify-center">
+        <div className="prose prose-sm mx-4 mb-12 mt-6 flex flex-col sm:mx-8 md:mx-16 md:mt-12">
           <h1>{page?.title}</h1>
           {page?.content && (
             <div

@@ -25,7 +25,6 @@
   cursor: pointer;
   color: #fff;
   font-family: var(--font-montserrat), sans-serif;
-  text-transform: uppercase;
 }
 
 .link-text::before {

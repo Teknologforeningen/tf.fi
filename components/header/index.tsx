@@ -8,7 +8,7 @@ const Header = ({ navbarLinks }: { navbarLinks: NavbarLink[] }) => {
   const [sideMenuOpen, setSideMenuOpen] = useState(false)
 
   return (
-    <header className="sticky top-0">
+    <header className="sticky top-0 z-10">
       <div className="bg-darkgray">
         <ExpandableNavbar
           sideMenuOpen={sideMenuOpen}

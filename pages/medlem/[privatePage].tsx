@@ -23,7 +23,7 @@ const PrivatePage: NextPage<PrivatePageProps> = ({
 }: PrivatePageProps) => {
   useEffect(() => {
     if (!session) {
-      void signIn('keycloak')
+      signIn('keycloak')
     }
   }, [session])
 
@@ -36,7 +36,7 @@ export const getServerSideProps: GetServerSideProps<{
   const query = context.query.privatePage
   const slug = query instanceof Array ? query[0] : query
   const session = await getSession(context)
-  const page = session?.user.token
+  const page = session?.user?.token
     ? await fetchPrivatePage(session?.user.token, slug)
     : null
   const { logos, navbarLinks } = await getLayoutProps()

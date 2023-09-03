@@ -11,7 +11,7 @@ const LoginButton = ({ className }: { className?: string }) => {
         signIn('keycloak')
       }}
       className={classNames(
-        'hover:bg-gray-900 rounded-lg border border-white p-2 text-white hover:font-bold',
+        'hover:bg-gray-900 mx-3 rounded-lg border border-white p-2 text-white hover:font-bold',
         className
       )}
     >
@@ -24,7 +24,7 @@ const LoginButton = ({ className }: { className?: string }) => {
         signOut({ callbackUrl: '/' })
       }}
       className={classNames(
-        'rounded-lg border border-teknologröd p-2 text-teknologröd hover:font-bold',
+        'mx-3 rounded-lg border border-teknologröd p-2 text-teknologröd hover:font-bold',
         className
       )}
     >
