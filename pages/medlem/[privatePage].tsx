@@ -1,7 +1,5 @@
 import { GetServerSideProps, NextPage } from 'next'
 import { PageType } from '@models/page'
-import { signIn } from 'next-auth/react'
-import { useEffect } from 'react'
 import { Session } from 'next-auth'
 import { getSession } from 'next-auth/react'
 import { fetchPrivatePage } from '@lib/api/privatepage'
@@ -20,15 +18,9 @@ type PrivatePageProps = {
 const PrivatePage: NextPage<PrivatePageProps> = ({
   session,
   ...props
-}: PrivatePageProps) => {
-  useEffect(() => {
-    if (!session) {
-      signIn('keycloak')
-    }
-  }, [session])
-
-  return <Page {...props} isPrivate={true} />
-}
+}: PrivatePageProps) => (
+  <Page {...props} isPrivate={true} unauthorized={!session || !props.page} />
+)
 
 export const getServerSideProps: GetServerSideProps<{
   session: Session | null
