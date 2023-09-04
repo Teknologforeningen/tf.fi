@@ -21,8 +21,8 @@ export type PageType = {
 export interface Section {
   id: number
   attributes: {
-    title: string
-    content: string
+    title?: string
+    content?: string
     createdAt: Date
     updatedAt: Date
     publishedAt: Date
@@ -35,7 +35,7 @@ export interface Section {
 export interface FileFolder {
   id: number
   attributes: {
-    title: string
+    title?: string
     folderId: string
     description?: string
     createdAt: Date

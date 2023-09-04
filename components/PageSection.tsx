@@ -5,7 +5,7 @@ import { FileFolder } from '@models/page'
 import DriveExplorer from './FileExplorer'
 
 type PageSectionProps = {
-  title: string
+  title?: string
   content?: string
   file_folders: FileFolder[]
   isPrivate: boolean
@@ -18,9 +18,11 @@ const PageSection = ({
   isPrivate,
 }: PageSectionProps) => (
   <div>
-    <h2 id={titleToAnchor(title)} className="scroll-mt-24">
-      {title}
-    </h2>
+    {title && (
+      <h2 id={titleToAnchor(title)} className="scroll-mt-24">
+        {title}
+      </h2>
+    )}
     <div
       dangerouslySetInnerHTML={{
         __html: marked.parse(content ?? ''),
