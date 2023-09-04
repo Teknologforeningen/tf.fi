@@ -11,7 +11,6 @@ export async function fetchPrivatePage(
     populate: {
       sections: {
         populate: ['title', 'content', 'file_folders'],
-        sort: 'title',
       },
     },
   })

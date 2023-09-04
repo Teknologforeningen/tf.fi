@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 
 type PageNavigationProps = {
   currentPage: number
@@ -28,11 +29,12 @@ const PageNavigation = ({
       {Array.from({ length: totalPages }, (_, index) => (
         <button onClick={() => setPage(index + 1)} key={index + 1}>
           <p
-            className={`rounded-lg p-2 ${
+            className={classNames(
+              'rounded-lg p-2',
               currentPage === index + 1
                 ? 'bg-teknologröd text-white'
                 : 'hover:bg-gray-300'
-            }`}
+            )}
           >
             {index + 1}
           </p>

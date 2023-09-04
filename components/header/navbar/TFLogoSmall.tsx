@@ -3,7 +3,6 @@ import Link from 'next/link'
 const TFLogoSmall = ({ highlight }: { highlight: boolean }) => (
   <Link href="/">
     <svg
-      className="hidden md:block"
       width={26}
       height={26}
       viewBox="0 0 26 26"

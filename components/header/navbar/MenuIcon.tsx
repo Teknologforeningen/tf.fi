@@ -1,24 +1,17 @@
 import { MouseEventHandler } from 'react'
+import classNames from 'classnames'
 
 type MenuBarProps = {
-  transform: string
-  opacity?: number
-  backgroundColor?: string
+  className: string
 }
 
-const MenuBar = ({
-  transform,
-  backgroundColor = 'black',
-  opacity = 1,
-}: MenuBarProps) => {
+const MenuBar = ({ className }: MenuBarProps) => {
   return (
     <div
-      className='ease-in-out" mx-0 my-[6px] h-[5px] w-[35px] transition duration-[.4s]'
-      style={{
-        opacity,
-        transform,
-        backgroundColor,
-      }}
+      className={classNames(
+        className,
+        'h-[2px] w-[28px] origin-left transform bg-white transition-all duration-[.4s] ease-in-out'
+      )}
     />
   )
 }
@@ -29,22 +22,17 @@ type MenuIconProps = {
 }
 
 const MenuIcon = ({ open, onClick }: MenuIconProps) => (
-  <div
-    className="fixed left-[10px] top-[10px] z-50 inline-block md:hidden"
-    onClick={onClick}
-  >
+  <div className="z-50 m-2 p-2 md:hidden" onClick={onClick}>
     <MenuBar
-      transform={open ? 'rotate(-45deg) translate(-9px, 7px)' : 'rotate(0)'}
-      backgroundColor={open ? 'white' : 'black'}
+      className={classNames(open ? 'rotate-[42deg]' : 'rotate-0', 'mb-[7px]')}
     />
     <MenuBar
-      opacity={open ? 0 : 1}
-      transform={open ? 'translateX(-100%)' : 'translateX(0)'}
+      className={classNames(
+        open ? 'translate-x-full opacity-0' : 'translate-x-0 opacity-100',
+        'mb-[7px]'
+      )}
     />
-    <MenuBar
-      transform={open ? 'rotate(45deg) translate(-8px, -7px)' : 'rotate(0)'}
-      backgroundColor={open ? 'white' : 'black'}
-    />
+    <MenuBar className={open ? '-rotate-[42deg]' : 'rotate-0'} />
   </div>
 )
 

@@ -9,6 +9,7 @@ import classNames from 'classnames'
 import { NavbarLink, NavbarMultipleLink } from '@lib/api/navbar'
 import { useRouter } from 'next/router'
 import LoginButton from './LoginButton'
+import HeaderLink from '@components/header/navbar/HeaderLink'
 
 type NavbarProps = {
   navbarLinks: NavbarLink[]
@@ -28,14 +29,14 @@ const Navbar = ({
     <nav>
       <div
         className={classNames(
-          'flex w-full justify-between px-4 pt-2 md:items-center',
+          'flex w-full justify-between px-4 py-2 md:items-center',
           position === 'side'
             ? 'flex flex-col md:hidden'
             : 'hidden flex-row md:flex'
         )}
       >
         <div className="flex-start flex flex-col justify-between md:flex-row md:items-center">
-          <div className="mx-3">
+          <div className="mx-3 hidden md:block">
             <TFLogoSmall highlight={path === '/'} />
           </div>
           {navbarLinks.map((link) =>
@@ -48,16 +49,16 @@ const Navbar = ({
                 setSideMenuOpen={setSideMenuOpen}
               />
             ) : (
-              <Link
+              <HeaderLink
                 key={link.title}
+                title={link.title}
                 href={link.link}
+                setSideMenuOpen={setSideMenuOpen}
                 className={classNames(
                   path === link.link && '!text-teknologröd',
                   'link link-text mx-3'
                 )}
-              >
-                {link.title}
-              </Link>
+              />
             )
           )}
 
@@ -118,13 +119,15 @@ const NavbarDropdown = ({
     }
   }
 
+  const pathWithoutAnchor = path.split('#')[0]
+
   return (
     <div className="relative mx-3">
       <div
         className={classNames(
           isTop ? 'peer' : '!m-0',
-          path.startsWith(`/${link.basePath}` ?? '') &&
-            link.links.find((l) => l.link === path) &&
+          pathWithoutAnchor.startsWith(`/${link.basePath}` ?? '') &&
+            link.links.find((l) => l.link === pathWithoutAnchor) &&
             '!text-teknologröd',
           'link-text text-link'
         )}
@@ -143,18 +146,17 @@ const NavbarDropdown = ({
         >
           <div className="!m-0 py-1">
             {link.links.map(({ title, link }) => (
-              <Link
+              <HeaderLink
                 key={title}
+                title={title}
                 href={link}
+                setSideMenuOpen={setSideMenuOpen}
                 className={classNames(
                   isTop && 'py-2',
-                  link === path && '!text-teknologröd',
+                  link === pathWithoutAnchor && '!text-teknologröd',
                   'link link-text block'
                 )}
-                onClick={() => setSideMenuOpen(false)}
-              >
-                {title}
-              </Link>
+              />
             ))}
           </div>
         </div>

@@ -44,7 +44,11 @@ export default async function fetchNavbar(): Promise<NavbarLink[]> {
           populate: ['links'],
         },
         categories: {
-          populate: ['name', 'slug', 'content_pages'],
+          populate: {
+            content_pages: {
+              fields: ['slug', 'title'],
+            },
+          },
         },
         private_pages: {
           populate: ['title', 'slug'],
