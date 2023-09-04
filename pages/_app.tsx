@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import localFont from 'next/font/local'
 import { SessionProvider } from 'next-auth/react'
+import classNames from 'classnames'
 
 import '@styles/globals.css'
 import '@styles/links.css'
@@ -39,7 +40,11 @@ const TFApp = ({ Component, pageProps }: AppProps) => {
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
       <main
-        className={`${raleway.variable} ${montserrat.variable} h-full font-body`}
+        className={classNames(
+          raleway.variable,
+          montserrat.variable,
+          'h-full font-body'
+        )}
       >
         <SessionProvider session={pageProps.session}>
           <Component {...pageProps} />
