@@ -18,7 +18,9 @@ const PageSection = ({
   isPrivate,
 }: PageSectionProps) => (
   <div>
-    <h2 id={titleToAnchor(title)}>{title}</h2>
+    <h2 id={titleToAnchor(title)} className="scroll-mt-24">
+      {title}
+    </h2>
     <div
       dangerouslySetInnerHTML={{
         __html: marked.parse(content ?? ''),

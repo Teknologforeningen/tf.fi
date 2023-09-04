@@ -35,6 +35,7 @@ export const getLayoutProps = async (): Promise<LayoutProps> => {
 
 export const titleToAnchor = (title: string) => {
   return title
+    .trim()
     .replace(/ /g, '-')
     .replace(/[\/\\^$*+?.()|\[\]{}<>:;"'~,=@`#!%&]/g, '')
     .toLowerCase()
