@@ -10,12 +10,14 @@ const TableOfContents = ({ sections }: { sections: Section[] }) => {
         <tbody>
           {sections.map((section, i) => (
             <tr key={i}>
-              <Link
-                className="no-underline hover:underline"
-                href={`#${titleToAnchor(section.attributes.title)}`}
-              >
-                {section.attributes.title}
-              </Link>
+              {section.attributes.title && (
+                <Link
+                  className="no-underline hover:underline"
+                  href={`#${titleToAnchor(section.attributes.title)}`}
+                >
+                  {section.attributes.title}
+                </Link>
+              )}
             </tr>
           ))}
         </tbody>

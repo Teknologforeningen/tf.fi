@@ -11,7 +11,7 @@ export type BannerImage = StrapiImage['data']
 const MainBanner = ({ bannerImages }: { bannerImages: BannerImage[] }) => {
   const urls = bannerImages.map((img) => img.attributes.url)
   return (
-    <div className="relative h-[500px] w-screen overflow-x-hidden bg-black">
+    <div className="relative h-[500px] w-full overflow-x-hidden bg-black">
       {urls.length !== 0 ? <Carousel urls={urls} /> : <SingleBannerImage />}
       <div className="absolute left-0 right-0 top-[180px] flex flex-col xl:left-40 xl:right-auto xl:flex-row">
         <svg
