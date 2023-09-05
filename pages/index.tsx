@@ -1,5 +1,5 @@
 import type { GetStaticProps, NextPage } from 'next'
-import Image from 'next/image'
+// import Image from 'next/image'
 import { fetchNews } from '@lib/api/news'
 import { fetchHomepage } from '@lib/api/homepage'
 import Column from '@components/Column'
@@ -12,7 +12,7 @@ import { NewsType } from '@models/news'
 import MainBanner, { BannerImage } from '@components/Banner'
 import TFInfo from '@components/TFInfo'
 import News from '@components/news'
-import Row from '@components/Row'
+// import Row from '@components/Row'
 import Footer from '@components/footer'
 
 export interface HomePage {
@@ -51,7 +51,7 @@ const Home: NextPage<HomeProps> = ({
           <News news={news.slice(0, 5)} />
           <Calendar />
         </Item>
-        <Row className="relative w-full overflow-hidden">
+        {/* <Row className="relative w-full overflow-hidden">
           <div className="h-[500px] w-0 md:w-1/2">
             <Image
               src={`/images/banner/0.jpg`}
@@ -68,7 +68,7 @@ const Home: NextPage<HomeProps> = ({
               style={{ objectFit: 'cover' }}
             />
           </div>
-        </Row>
+        </Row> */}
         <Item backgroundColor="white">
           <TFInfo />
         </Item>
