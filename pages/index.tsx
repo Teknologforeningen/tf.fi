@@ -1,6 +1,6 @@
 import type { GetStaticProps, NextPage } from 'next'
 // import Image from 'next/image'
-import { fetchNews } from '@lib/api/news'
+import { fetchPosts } from '@lib/api/post'
 import { fetchHomepage } from '@lib/api/homepage'
 import Column from '@components/Column'
 import { NationLogo } from '@components/footer/Logos'
@@ -8,10 +8,10 @@ import fetchNavbar, { NavbarLink } from '../lib/api/navbar'
 import Header from '@components/header'
 import Item from '@components/Item'
 import Calendar from '@components/Calendar'
-import { NewsType } from '@models/news'
+import { PostType } from '@models/post'
 import MainBanner, { BannerImage } from '@components/Banner'
 import TFInfo from '@components/TFInfo'
-import News from '@components/news'
+import Posts from '@components/posts'
 // import Row from '@components/Row'
 import Footer from '@components/footer'
 
@@ -29,14 +29,14 @@ export interface HomePage {
 type HomeProps = {
   logos: NationLogo[]
   navbarLinks: NavbarLink[]
-  news: NewsType[]
+  posts: PostType[]
   bannerImages: BannerImage[]
 }
 
 const Home: NextPage<HomeProps> = ({
   navbarLinks,
   logos,
-  news,
+  posts,
   bannerImages,
 }) => (
   <>
@@ -48,7 +48,7 @@ const Home: NextPage<HomeProps> = ({
           backgroundColor="darkgray"
           className="max-w-[1500px] flex-col md:flex-row"
         >
-          <News news={news.slice(0, 5)} />
+          <Posts posts={posts.slice(0, 5)} />
           <Calendar />
         </Item>
         {/* <Row className="relative w-full overflow-hidden">
@@ -79,14 +79,14 @@ const Home: NextPage<HomeProps> = ({
 )
 
 export const getStaticProps: GetStaticProps = async () => {
-  const news = await fetchNews(1)
+  const posts = await fetchPosts(1)
   const homepage = await fetchHomepage()
   const navbarLinks = await fetchNavbar()
 
   return {
     props: {
       navbarLinks,
-      news: news?.data ?? [],
+      posts: posts?.data ?? [],
       logos: homepage?.footer?.nationlogos ?? [],
       bannerImages: homepage?.banner?.bannerImages?.data ?? [],
     },

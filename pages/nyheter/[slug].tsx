@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
-import { NewsType } from '@models/news'
+import { PostType } from '@models/post'
 import { marked } from 'marked'
-import { fetchNewsPost, fetchNews } from '@lib/api/news'
+import { fetchPost, fetchPosts } from '@lib/api/post'
 import { getLayoutProps } from '@utils/helpers'
 import { NationLogo } from '@components/footer/Logos'
 import { NavbarLink } from '@lib/api/navbar'
@@ -9,7 +9,7 @@ import Footer from '@components/footer'
 import Header from '@components/header'
 
 type Props = {
-  post?: NewsType
+  post?: PostType
   logos: NationLogo[]
   navbarLinks: NavbarLink[]
 }
@@ -22,8 +22,8 @@ const renderer: marked.RendererObject = {
 
 marked.use({ renderer })
 
-/** Page for a single NewsPost */
-const NewsPost: NextPage<Props> = ({ post, logos, navbarLinks }) => (
+/** Page for a single Post */
+const Post: NextPage<Props> = ({ post, logos, navbarLinks }) => (
   <>
     <Header navbarLinks={navbarLinks} />
     <div className="mx-auto mb-6 mt-14 min-h-[92vh] max-w-[85vw] rounded-lg bg-white p-[15px] xl:mt-6 xl:max-w-screen-lg">
@@ -41,10 +41,10 @@ const NewsPost: NextPage<Props> = ({ post, logos, navbarLinks }) => (
 )
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const news = await fetchNews(1)
+  const posts = await fetchPosts(1)
 
   const paths =
-    news?.data.map((post) => ({
+    posts?.data.map((post) => ({
       params: { slug: post.slug },
     })) ?? []
 
@@ -56,7 +56,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params?.slug instanceof Array ? params?.slug[0] : params?.slug
-  const post = await fetchNewsPost(slug)
+  const post = await fetchPost(slug)
   const { homepage, logos, navbarLinks } = await getLayoutProps()
   return {
     props: {
@@ -68,4 +68,4 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 }
 
-export default NewsPost
+export default Post

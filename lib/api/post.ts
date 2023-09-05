@@ -1,28 +1,28 @@
-import { NewsType } from '@models/news'
+import { PostType } from '@models/post'
 import strapi, { PagePagination } from '@lib/api/strapi'
 
-export const NEWS_PAGE_SIZE = 10
+export const POSTS_PAGE_SIZE = 10
 
-export async function fetchNewsPost(slug?: string): Promise<NewsType | null> {
+export async function fetchPost(slug?: string): Promise<PostType | null> {
   if (slug === undefined) return null
   // TODO: Rename model in strapi
-  const res = await strapi.fetchCollectionSingle<NewsType>(`/events`, slug)
+  const res = await strapi.fetchCollectionSingle<PostType>(`/posts`, slug)
   return res?.data?.attributes ?? null
 }
 
-type NewsResponse = {
-  data: NewsType[]
+type PostsResponse = {
+  data: PostType[]
   totalPages: number
 }
 
-export async function fetchNews(page?: number): Promise<NewsResponse | null> {
+export async function fetchPosts(page?: number): Promise<PostsResponse | null> {
   const pagination: PagePagination = {
     page,
-    pageSize: NEWS_PAGE_SIZE,
+    pageSize: POSTS_PAGE_SIZE,
   }
 
   // TODO: Rename model in strapi
-  const res = await strapi.fetchCollection<NewsType>('/events', {
+  const res = await strapi.fetchCollection<PostType>('/posts', {
     pagination,
   })
 
