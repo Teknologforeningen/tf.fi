@@ -1,16 +1,16 @@
 import React from 'react'
 import Link from 'next/link'
-import { NewsType } from '@models/news'
+import { PostType } from '@models/post'
 import { getDateLong } from '@utils/helpers'
 
-const NewsPost = ({ post }: { post: NewsType }) => {
+const Post = ({ post }: { post: PostType }) => {
   return (
     <div
       className="mt-4 w-full rounded-md border-[1px] border-white bg-white p-2 shadow-md"
       key={post.slug}
     >
       <p className="select-none text-xl font-medium">{post.title}</p>
-      {post.type === 'event' && (
+      {post.date && (
         <p className="select-none font-medium ">{getDateLong(post.date)}</p>
       )}
       <p className="max-h-[100px] overflow-hidden text-ellipsis text-sm">
@@ -26,4 +26,4 @@ const NewsPost = ({ post }: { post: NewsType }) => {
   )
 }
 
-export default NewsPost
+export default Post

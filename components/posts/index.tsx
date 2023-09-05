@@ -1,15 +1,15 @@
 import React from 'react'
-import { NewsType } from '@models/news'
+import { PostType } from '@models/post'
 import Link from 'next/link'
-import NewsPost from './NewsPost'
+import Post from './Post'
 import Subtitle from '@components/Subtitle'
 
-const News = ({ news }: { news: NewsType[] }) => {
+const Posts = ({ posts }: { posts: PostType[] }) => {
   return (
     <div className="mx-5 mr-4 flex flex-col md:w-[60%]">
       <Subtitle>Nyheter</Subtitle>
-      {news.map((post) => (
-        <NewsPost post={post} key={post.slug} />
+      {posts.map((post) => (
+        <Post post={post} key={post.slug} />
       ))}
       <Link
         href={`/nyheter`}
@@ -21,4 +21,4 @@ const News = ({ news }: { news: NewsType[] }) => {
   )
 }
 
-export default News
+export default Posts

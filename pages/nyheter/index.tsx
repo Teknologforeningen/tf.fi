@@ -1,31 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import type { GetStaticProps } from 'next'
-import { NewsType } from '@models/news'
+import { PostType } from '@models/post'
 import Column from '@components/Column'
-import NewsPost from '@components/news/NewsPost'
+import Post from '@components/posts/Post'
 import { NavbarLink } from '@lib/api/navbar'
 import { NationLogo } from '@components/footer/Logos'
 import Header from '@components/header'
 import Footer from '@components/footer'
 import { getLayoutProps } from '@utils/helpers'
-import { NEWS_PAGE_SIZE, fetchNews } from '@lib/api/news'
+import { POSTS_PAGE_SIZE, fetchPosts } from '@lib/api/post'
 import PageNavigation from '@components/PageNavigation'
 
-type NewsProps = {
+type PostsProps = {
   logos: NationLogo[]
   navbarLinks: NavbarLink[]
 }
 
-const News = ({ logos, navbarLinks }: NewsProps) => {
-  const [news, setNews] = useState<NewsType[]>([])
+const Posts = ({ logos, navbarLinks }: PostsProps) => {
+  const [posts, setPosts] = useState<PostType[]>([])
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
 
   useEffect(() => {
     const fetch = async () => {
-      const res = await fetchNews(page)
+      const res = await fetchPosts(page)
       if (res === null) return
-      setNews(res.data)
+      setPosts(res.data)
       setTotalPages(res.totalPages)
     }
     fetch()
@@ -38,13 +38,13 @@ const News = ({ logos, navbarLinks }: NewsProps) => {
         <Column>
           <p className="pb-5 text-3xl text-white">Nyheter</p>
 
-          {news.map((post) => (
-            <NewsPost post={post} key={post.slug} />
+          {posts.map((post) => (
+            <Post post={post} key={post.slug} />
           ))}
-          {totalPages / NEWS_PAGE_SIZE > 1 && (
+          {totalPages / POSTS_PAGE_SIZE > 1 && (
             <PageNavigation
               currentPage={page}
-              totalPages={Math.ceil(totalPages / NEWS_PAGE_SIZE)}
+              totalPages={Math.ceil(totalPages / POSTS_PAGE_SIZE)}
               setPage={setPage}
             />
           )}
@@ -60,4 +60,4 @@ export const getStaticProps: GetStaticProps = async () => {
   return { props }
 }
 
-export default News
+export default Posts
