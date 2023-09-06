@@ -19,7 +19,7 @@ const PrivatePage: NextPage<PrivatePageProps> = ({
   session,
   ...props
 }: PrivatePageProps) => (
-  <Page {...props} isPrivate={true} unauthorized={!session || !props.page} />
+  <Page {...props} isPrivate={true} unauthorized={session === null} />
 )
 
 export const getServerSideProps: GetServerSideProps<{
@@ -27,10 +27,12 @@ export const getServerSideProps: GetServerSideProps<{
 }> = async (context) => {
   const query = context.query.privatePage
   const slug = query instanceof Array ? query[0] : query
-  const session = await getSession(context)
-  const page = session?.user?.token
-    ? await fetchPrivatePage(session?.user.token, slug)
-    : null
+  let session = await getSession(context)
+  const page = await fetchPrivatePage(session?.user.token, slug)
+  // Reset the session if page fetch failed as it's most likely caused by an invalid session token
+  if (page === null) {
+    session = null
+  }
   const { logos, navbarLinks } = await getLayoutProps()
   return {
     props: {
