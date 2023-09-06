@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 import { PageType } from '@models/page'
-import { marked } from 'marked'
+import { marked, RendererObject } from 'marked'
 import { NavbarLink } from '@lib/api/navbar'
 import Header from '@components/header'
 import { NationLogo } from '@components/footer/Logos'
@@ -9,7 +9,7 @@ import TableOfContents from '@components/TableOfContents'
 import PageSection from '@components/PageSection'
 import Unauthorized from '@components/Unauthorized'
 
-const renderer: marked.RendererObject = {
+const renderer: RendererObject = {
   image(href: string | null): string {
     return `<img class='event-page-image' src=${href} alt='bild' />`
   },

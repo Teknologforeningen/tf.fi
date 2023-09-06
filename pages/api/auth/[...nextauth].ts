@@ -9,6 +9,9 @@ const options: NextAuthOptions = {
       clientId: process.env.KEYCLOAK_CLIENT_ID || 'strapi',
       clientSecret: process.env.KEYCLOAK_CLIENT_SECRET || 'strapi',
       issuer: process.env.KEYCLOAK_ISSUER,
+      httpOptions: {
+        timeout: 10000,
+      },
     }),
   ],
   session: {
@@ -17,16 +20,17 @@ const options: NextAuthOptions = {
   callbacks: {
     async session({ session, token }) {
       session.user.token = token.jwt
-      return { ...session, jwt: token.jwt, id: token.id }
+      return session
     },
     async jwt({ token, user, account }) {
       if (user) {
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/keycloak/callback?access_token=${account?.access_token}`
         )
-        const data = await response.json()
-        token.jwt = data.jwt
-        token.id = data.user.id
+        if (response.ok) {
+          const data = await response.json()
+          token.jwt = data.jwt
+        }
       }
       return token
     },
