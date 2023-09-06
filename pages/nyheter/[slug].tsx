@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import { PostType } from '@models/post'
-import { marked } from 'marked'
+import { marked, RendererObject } from 'marked'
 import { fetchPost, fetchPosts } from '@lib/api/post'
 import { getLayoutProps } from '@utils/helpers'
 import { NationLogo } from '@components/footer/Logos'
@@ -14,7 +14,7 @@ type Props = {
   navbarLinks: NavbarLink[]
 }
 
-const renderer: marked.RendererObject = {
+const renderer: RendererObject = {
   image(href: string | null): string {
     return `<img class='event-page-image' src=${href} alt='bild' />`
   },

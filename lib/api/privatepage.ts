@@ -3,10 +3,10 @@ import { PageType } from '@models/page'
 import strapi from '@lib/api/strapi'
 
 export async function fetchPrivatePage(
-  sessionToken: string,
+  sessionToken?: string,
   slug?: string
 ): Promise<PageType | null> {
-  if (slug === undefined) return null
+  if (slug === undefined || sessionToken === undefined) return null
   const query = qs.stringify({
     populate: {
       sections: {
