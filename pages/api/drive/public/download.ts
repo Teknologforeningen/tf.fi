@@ -6,9 +6,11 @@ const drive = getDriveInstance()
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const { fileId, fileName } = req.query
+    let { fileId, fileName } = req.query
+    if (fileId instanceof Array) fileId = fileId[0]
+    if (fileName instanceof Array) fileName = fileName[0]
     const stream = await getDriveFile(fileId, drive)
-    console.log(contentDisposition(fileName))
+
     res.setHeader('content-disposition', contentDisposition(fileName || fileId))
     stream.pipe(res)
   } catch (error) {
