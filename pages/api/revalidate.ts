@@ -73,6 +73,11 @@ export default async function handler(
           await revalidate(res, `/${category}/${page}`)
           break
         }
+        case 'post': {
+          const post = req.body.entry.slug
+          await revalidate(res, `/nyheter/${post}`)
+          await revalidate(res, '/')
+        }
         default:
           return res.status(400).json({ error: 'Invalid model' })
       }

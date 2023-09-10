@@ -5,7 +5,6 @@ export const POSTS_PAGE_SIZE = 10
 
 export async function fetchPost(slug?: string): Promise<PostType | null> {
   if (slug === undefined) return null
-  // TODO: Rename model in strapi
   const res = await strapi.fetchCollectionSingle<PostType>(`/posts`, slug)
   return res?.data?.attributes ?? null
 }
@@ -21,7 +20,6 @@ export async function fetchPosts(page?: number): Promise<PostsResponse | null> {
     pageSize: POSTS_PAGE_SIZE,
   }
 
-  // TODO: Rename model in strapi
   const res = await strapi.fetchCollection<PostType>('/posts', {
     pagination,
   })
