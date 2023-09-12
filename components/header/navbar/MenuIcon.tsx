@@ -28,7 +28,7 @@ const MenuIcon = ({ open, onClick }: MenuIconProps) => (
     />
     <MenuBar
       className={classNames(
-        open ? 'translate-x-full opacity-0' : 'translate-x-0 opacity-100',
+        open ? 'translate-x-4 opacity-0' : 'translate-x-0 opacity-100',
         'mb-[7px]'
       )}
     />
