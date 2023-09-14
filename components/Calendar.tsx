@@ -47,8 +47,8 @@ const CalendarComponent = () => {
 
   return (
     <div className="mx-5 flex flex-col py-10 md:py-0">
-      <Subtitle>Händelsekalendern</Subtitle>
-      <div className="mt-4 flex max-w-[400px] items-center self-center rounded-md bg-white p-5 pb-5 shadow-md">
+      <Subtitle underline={false}>Händelsekalendern</Subtitle>
+      <div className="mt-4 flex max-w-[400px] items-center self-center rounded-md border-[1px] border-teknologröd bg-white p-5 pb-5 shadow-md">
         <Calendar
           tileClassName={({ date }) => setClass(date)}
           minDetail="month"
@@ -93,7 +93,7 @@ const CalendarEventsList = ({
         return (
           <Link
             key={x.id}
-            className="highlight border-1 my-1.5 w-full max-w-[390px] rounded-md border-teknologröd bg-white p-2 shadow-md hover:bg-lightGray"
+            className="highlight border-1 my-1.5 w-full max-w-[390px] rounded-md border-teknologröd bg-white p-2 hover:bg-lightGray"
             href={x.htmlLink}
           >
             <p className="text-bold text-teknologröd">{x.title}</p>

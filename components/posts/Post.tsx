@@ -6,7 +6,7 @@ import { getDateLong } from '@utils/helpers'
 const Post = ({ post }: { post: PostType }) => {
   return (
     <div
-      className="mt-4 w-full rounded-md border-[1px] border-white bg-white p-2 shadow-md"
+      className="mt-4 w-full rounded-md bg-lightGray p-2"
       key={post.slug}
     >
       <p className="select-none text-xl font-medium">{post.title}</p>

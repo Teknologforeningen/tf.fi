@@ -13,7 +13,7 @@ const Posts = ({ posts }: { posts: PostType[] }) => {
       ))}
       <Link
         href={`/nyheter`}
-        className="mt-4 rounded-md border-[1px] border-white p-2 text-center text-sm leading-[18px] tracking-wide text-white hover:text-[15px] hover:font-semibold"
+        className="mt-4 rounded-md border-[1px] border-teknologröd p-2 text-center text-sm leading-[18px] tracking-wide text-teknologröd hover:text-[15px] hover:font-semibold"
       >
         Mera nyheter
       </Link>

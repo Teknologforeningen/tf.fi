@@ -60,7 +60,7 @@ const Carousel = ({ urls }: { urls: string[] }) => {
           <Image
             src={`${STRAPI_URL}${url}`}
             alt=""
-            className="object-cover opacity-80"
+            className="object-cover opacity-50 bg-black"
             loading={i > 2 ? 'lazy' : 'eager'}
             fill
             quality={100}
@@ -76,7 +76,7 @@ const SingleBannerImage = () => {
     <Image
       src={defaultBannerPic}
       alt="banner"
-      style={{ objectFit: 'cover', opacity: 0.8 }}
+      style={{ objectFit: 'cover', opacity: 0.5, backgroundColor: 'black' }}
       fill
       loading="eager"
       quality={100}

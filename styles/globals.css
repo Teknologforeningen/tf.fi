@@ -17,7 +17,7 @@
 @layer base {
   html,
   body {
-    background-color: var(--lightGray);
+    background-color: white;
     height: 100vh;
     display: flex;
     flex-direction: column;
