@@ -93,7 +93,7 @@ const CalendarEventsList = ({
         return (
           <Link
             key={x.id}
-            className="highlight border-1 my-1.5 w-full max-w-[390px] rounded-md border-teknologröd bg-white p-2 hover:bg-lightGray"
+            className="highlight border-1 duration-50 my-1.5 w-full max-w-[390px] rounded-md bg-white p-2 transition-colors ease-in-out hover:bg-lightGray"
             href={x.htmlLink}
           >
             <p className="text-bold text-teknologröd">{x.title}</p>
