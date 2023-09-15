@@ -36,7 +36,7 @@ const Page: NextPage<PageProps> = ({
   unauthorized = false,
 }) => {
   return (
-    <div className="flex min-h-screen flex-col bg-white">
+    <div className="flex min-h-screen flex-col">
       <Header navbarLinks={navbarLinks} />
       <div className="flex flex-grow justify-center">
         <div className="prose prose-sm mx-4 mb-12 mt-6 flex flex-col sm:mx-8 md:mx-16 md:mt-12">
