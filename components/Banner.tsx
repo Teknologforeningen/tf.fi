@@ -10,10 +10,16 @@ import TaffaABLogo from './header/navbar/TaffaABLogo'
 import DagsenLogo from './header/navbar/DagsenLogo'
 import Link from 'next/link'
 import links from '@utils/links'
+import classNames from 'classnames'
 
 export type BannerImage = StrapiImage['data']
 
 const MainBanner = ({ bannerImages }: { bannerImages: BannerImage[] }) => {
+  const [infoVisible, setInfoVisible] = useState(true)
+  useEffect(() => {
+    setTimeout(() => setInfoVisible(false), 15000)
+  })
+
   const urls = bannerImages.map((img) => img.attributes.url)
   return (
     <>
@@ -40,11 +46,21 @@ const MainBanner = ({ bannerImages }: { bannerImages: BannerImage[] }) => {
             </p>
           </Column>
         </div>
-        <div className="absolute bottom-0 right-0 hidden rounded-md xxs:block ">
+        <div
+          className={classNames(
+            'duration-400 absolute bottom-0 right-0 hidden rounded-md bg-darkgray p-2 text-white transition ease-in-out xxs:block',
+            infoVisible ? 'translate-x-0' : 'translate-x-full'
+          )}
+        >
           <InfoBlock />
         </div>
       </div>
-      <div className="block w-full xxs:hidden">
+      <div
+        className={classNames(
+          infoVisible ? 'block' : 'hidden',
+          'w-full xxs:hidden'
+        )}
+      >
         <InfoBlock />
       </div>
     </>
@@ -103,18 +119,14 @@ const InfoBlock = () => (
       Tänkte du besöka?
     </p>
     <Row>
-      <div>
+      <div className="mr-4">
         <Link
           href={links.täffäab}
-          className="link link-text inline-flex items-center pr-2"
+          className="link link-text inline-flex items-center"
         >
           <TaffaABLogo textHidden={false} />
         </Link>
-        <div className="mr-2 mt-2 text-sm">
-          Det nationsagda aktiebolaget
-          <br />
-          Catering och barverksamhet
-        </div>
+        <div className="mt-2 text-sm">Catering och barverksamhet</div>
       </div>
       <div>
         <Link
