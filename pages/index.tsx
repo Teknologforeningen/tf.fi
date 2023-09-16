@@ -69,7 +69,7 @@ const Home: NextPage<HomeProps> = ({
             />
           </div>
         </Row> */}
-        <Item backgroundColor="lightgray">
+        <Item backgroundColor="white">
           <TFInfo />
         </Item>
       </Column>

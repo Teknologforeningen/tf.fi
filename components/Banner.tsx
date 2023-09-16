@@ -103,14 +103,14 @@ const InfoBlock = () => (
       Tänkte du besöka?
     </p>
     <Row>
-      <div>
+      <div className='border-r-[1px] border-r-white mr-2 pr-2'>
         <Link
           href={links.täffäab}
           className="link link-text inline-flex items-center pr-2"
         >
           <TaffaABLogo textHidden={false} />
         </Link>
-        <div className="mr-2 mt-2 text-sm">
+        <div className="mt-2 text-sm">
           Det nationsagda aktiebolaget
           <br />
           Catering och barverksamhet

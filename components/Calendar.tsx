@@ -83,9 +83,9 @@ const CalendarEventsList = ({
   events: CalendarEvent[]
   isLoading: boolean
 }) => (
-  <Column className="mt-2 flex w-full">
+  <Column className="mt-2 flex w-full min-h-[380px]">
     {isLoading && events.length < 1 ? (
-      <ActivityIndicator width={25} height={25} stroke="white" />
+      <ActivityIndicator width={25} height={25} stroke="black" />
     ) : (
       events.map((x) => {
         const start = x.start && getDateShort(x.start)
@@ -93,11 +93,13 @@ const CalendarEventsList = ({
         return (
           <Link
             key={x.id}
-            className="highlight border-1 duration-50 my-1.5 w-full max-w-[390px] rounded-md bg-white p-2 transition-colors ease-in-out hover:bg-lightGray"
+            className="highlight border-1 duration-50 my-1.5 w-full max-w-[390px] rounded-md bg-white p-2 shadow transition-colors ease-in-out hover:bg-lightGray"
             href={x.htmlLink}
           >
             <p className="text-bold text-teknologröd">{x.title}</p>
-            <p>{start + (start !== end ? ' - ' + end : '')}</p>
+            <p>
+              {start + (start !== end ? ' - ' + end : ' ')}
+            </p>
           </Link>
         )
       })
