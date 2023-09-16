@@ -83,7 +83,7 @@ const CalendarEventsList = ({
   events: CalendarEvent[]
   isLoading: boolean
 }) => (
-  <Column className="mt-2 flex w-full min-h-[380px]">
+  <Column className="mt-2 flex min-h-[380px] w-full">
     {isLoading && events.length < 1 ? (
       <ActivityIndicator width={25} height={25} stroke="black" />
     ) : (
@@ -97,9 +97,7 @@ const CalendarEventsList = ({
             href={x.htmlLink}
           >
             <p className="text-bold text-teknologröd">{x.title}</p>
-            <p>
-              {start + (start !== end ? ' - ' + end : ' ')}
-            </p>
+            <p>{start + (start !== end ? ' - ' + end : ' ')}</p>
           </Link>
         )
       })

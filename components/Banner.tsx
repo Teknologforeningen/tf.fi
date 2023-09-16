@@ -119,7 +119,7 @@ const InfoBlock = () => (
       Tänkte du besöka?
     </p>
     <Row>
-      <div className='border-r-[1px] border-r-white mr-2 pr-2'>
+      <div className="mr-2 border-r-[1px] border-r-white pr-2">
         <Link
           href={links.täffäab}
           className="link link-text inline-flex items-center"
