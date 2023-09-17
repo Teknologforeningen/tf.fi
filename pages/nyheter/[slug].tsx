@@ -7,6 +7,7 @@ import { NationLogo } from '@components/footer/Logos'
 import { NavbarLink } from '@lib/api/navbar'
 import Footer from '@components/footer'
 import Header from '@components/header'
+import { getDateLong } from '@utils/helpers'
 
 type Props = {
   post?: PostType
@@ -18,26 +19,32 @@ const renderer: RendererObject = {
   image(href: string | null): string {
     return `<img class='event-page-image' src=${href} alt='bild' />`
   },
+  link(href, _, text) {
+    return `<a class="text-blue-600 underline visited:text-purple-600 hover:text-blue-800" href=${href}>${text}</a>`
+  },
 }
 
 marked.use({ renderer })
 
 /** Page for a single Post */
 const Post: NextPage<Props> = ({ post, logos, navbarLinks }) => (
-  <>
+  <div className="flex min-h-screen flex-col">
     <Header navbarLinks={navbarLinks} />
-    <div className="mx-auto mb-6 mt-14 min-h-[92vh] max-w-[85vw] rounded-lg bg-white p-[15px] xl:mt-6 xl:max-w-screen-lg">
-      <article className="prose prose-sm m-8">
-        <h1>{post?.title}</h1>
+    <div className="flex flex-grow justify-center">
+      <div className="prose prose-sm mx-4 mb-12 mt-6 flex flex-col sm:mx-8 md:mx-16 md:mt-12">
+        <h1>
+          {post?.title}
+          {post?.date && <p className="text-lg">{getDateLong(post?.date)}</p>}
+        </h1>
         <div
           dangerouslySetInnerHTML={{
             __html: marked.parse(post?.content ?? ''),
           }}
         />
-      </article>
+      </div>
     </div>
     <Footer logos={logos} />
-  </>
+  </div>
 )
 
 export const getStaticPaths: GetStaticPaths = async () => {
