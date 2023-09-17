@@ -45,7 +45,7 @@ const Home: NextPage<HomeProps> = ({
       <Column>
         <MainBanner bannerImages={bannerImages} />
         <Item
-          backgroundColor="darkgray"
+          backgroundColor="white"
           className="max-w-[1500px] flex-col md:flex-row"
         >
           <Posts posts={posts.slice(0, 5)} />

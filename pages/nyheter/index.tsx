@@ -36,7 +36,7 @@ const Posts = ({ logos, navbarLinks }: PostsProps) => {
       <Header navbarLinks={navbarLinks} />
       <main className="z-10 mx-auto my-6 min-h-[92vh] max-w-7xl p-[15px]">
         <Column>
-          <p className="pb-5 text-3xl text-white">Nyheter</p>
+          <p className="pb-5 text-3xl">Nyheter</p>
 
           {posts.map((post) => (
             <Post post={post} key={post.slug} />

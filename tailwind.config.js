@@ -21,6 +21,9 @@ module.exports = {
         body: ['var(--font-raleway)'],
         display: ['var(--font-montserrat)'],
       },
+      screens: {
+        'xxs': '450px',
+      },
       typography: {
         DEFAULT: {
           css: {

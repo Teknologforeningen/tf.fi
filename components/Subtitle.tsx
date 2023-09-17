@@ -1,9 +1,14 @@
 import React from 'react'
 
-const Subtitle = ({ children }: React.PropsWithChildren) => (
+const Subtitle = ({
+  children,
+  underline = true,
+}: React.PropsWithChildren<{ underline?: boolean }>) => (
   <>
-    <p className="text-3xl text-white">{children}</p>
-    <div className="my-1 h-[3px] w-full rounded-sm bg-white" />{' '}
+    <p className="text-3xl text-black">{children}</p>
+    {underline && (
+      <div className="my-1 h-[3px] w-full rounded-sm bg-teknologröd" />
+    )}
   </>
 )
 
