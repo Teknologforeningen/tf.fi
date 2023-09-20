@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useSession } from 'next-auth/react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -94,11 +95,15 @@ const SingleBannerImage = () => {
 }
 
 const InfoBlock = () => {
-  const [infoVisible, setInfoVisible] = useState(true)
+  const [infoVisible, setInfoVisible] = useState(false)
+  const { status: authStatus } = useSession()
 
   useEffect(() => {
-    setTimeout(() => setInfoVisible(false), 15000)
-  })
+    if (authStatus === 'unauthenticated') {
+      setInfoVisible(true)
+      setTimeout(() => setInfoVisible(false), 15000)
+    }
+  }, [authStatus])
 
   return (
     <div
