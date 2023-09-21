@@ -62,6 +62,7 @@ export default async function handler(
     } else {
       // Strapi webhook
       const model = req.body.model
+      console.log(req.body)
 
       switch (model) {
         case 'content-page': {
@@ -104,6 +105,9 @@ export default async function handler(
         }
         case 'navbar': {
           await revalidateAllStaticPages(res)
+        }
+        case 'homepage': {
+          await revalidate(res, '/')
         }
         default:
           return res.status(400).json({ error: 'Invalid model' })
