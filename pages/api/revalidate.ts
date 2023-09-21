@@ -1,11 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import crypto from 'crypto'
+import { revalidateTag } from 'next/cache'
 import { fetchContentPage } from '@lib/api/contentpage'
 import { fetchSection } from '@lib/api/contentSection'
 import { PageType } from '@models/page'
 import { SingleResponse } from '@lib/api/strapi'
-import { fetchPosts } from '@lib/api/post'
-import { fetchCategories } from '@lib/api/category'
 
 const API_KEY = process.env.API_KEY
 
@@ -19,25 +18,13 @@ async function revalidate(res: NextApiResponse, path: string) {
   }
 }
 
-async function revalidateAllStaticPages(res: NextApiResponse) {
-  // Revalidate home page
-  await revalidate(res, '/')
-
-  // Revalidate all posts
-  await revalidate(res, '/nyheter')
-  const posts = await fetchPosts()
-  if (posts?.data) {
-    for (const post of posts.data) {
-      await revalidate(res, `/nyheter/${post.slug}`)
-    }
-  }
-
-  // Revalidate all content pages
-  const categories = await fetchCategories()
-  for (const category of categories) {
-    for (const content_page of category.content_pages.data) {
-      await revalidate(res, `/${category.slug}/${content_page.attributes.slug}`)
-    }
+async function revalidateTags(res: NextApiResponse, tag: string) {
+  try {
+    console.log('Revalidating tag:', tag, '...')
+    await revalidateTag(tag)
+    console.log('Revalidated tag:', tag)
+  } catch (err) {
+    console.log('Error revalidating tag:', tag, err)
   }
 }
 
@@ -62,7 +49,6 @@ export default async function handler(
     } else {
       // Strapi webhook
       const model = req.body.model
-      console.log(req.body)
 
       switch (model) {
         case 'content-page': {
@@ -70,6 +56,7 @@ export default async function handler(
           const page = req.body.entry.slug
           if (!page) return res.status(400).json({ error: 'Missing slug' })
           await revalidate(res, `/${category}/${page}`)
+          await revalidateTags(res, 'navbar')
           break
         }
         case 'category': {
@@ -77,6 +64,7 @@ export default async function handler(
           for (const page of req.body.entry.content_pages) {
             await revalidate(res, `/${category}/${page.slug}`)
           }
+          await revalidateTags(res, 'navbar')
           break
         }
         case 'content-section': {
@@ -102,12 +90,19 @@ export default async function handler(
           const post = req.body.entry.slug
           await revalidate(res, `/nyheter/${post}`)
           await revalidate(res, '/')
+          break
         }
         case 'navbar': {
-          await revalidateAllStaticPages(res)
+          await revalidateTags(res, 'navbar')
+          break
         }
         case 'homepage': {
           await revalidate(res, '/')
+          break
+        }
+        case 'private-page': {
+          await revalidateTags(res, 'navbar')
+          break
         }
         default:
           return res.status(400).json({ error: 'Invalid model' })

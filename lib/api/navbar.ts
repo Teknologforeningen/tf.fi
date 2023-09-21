@@ -57,7 +57,10 @@ export default async function fetchNavbar(): Promise<NavbarLink[]> {
     },
     { encodeValuesOnly: true }
   )
-  const res = await strapi.fetchSingle<Navbar>('/navbar', { query })
+  const res = await strapi.fetchSingle<Navbar>('/navbar', {
+    query,
+    tags: ['navbar'],
+  })
 
   if (res === null || res?.data === null) return []
 
