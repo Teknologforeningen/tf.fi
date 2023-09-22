@@ -47,7 +47,9 @@ const CalendarComponent = () => {
 
   return (
     <div className="mx-5 flex flex-col py-10 md:py-0">
+      <div className='self-center md:self-auto'>
       <Subtitle underline={false}>Händelsekalendern</Subtitle>
+      </div>
       <div className="mt-4 flex max-w-[400px] items-center self-center rounded-md border-[1px] border-teknologröd bg-white p-5 pb-5 shadow-md">
         <Calendar
           tileClassName={({ date }) => setClass(date)}

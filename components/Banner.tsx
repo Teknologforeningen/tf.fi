@@ -34,7 +34,7 @@ const MainBanner = ({ bannerImages }: { bannerImages: BannerImage[] }) => {
             <path d="M12.3057 7.95203H7.4856V10.1511H11.5727V19.3026H13.7717V15.1489H16.0596V12.9498H14.327H14.1938H13.7717V10.1511H17.8588V7.95203H12.7055H12.3057Z" />
           </svg>
           <Column className="flex justify-center text-center md:text-left">
-            <p className="font-display text-2xl font-bold uppercase text-white md:text-4xl">
+            <p className="font-display text-xl xxs:text-2xl font-bold uppercase text-white md:text-4xl">
               Teknologföreningen
             </p>
             <p className="text-m text-white md:text-xl">
