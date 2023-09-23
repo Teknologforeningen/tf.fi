@@ -1,3 +1,5 @@
+'use client'
+
 import MenuIcon from '@components/header/navbar/MenuIcon'
 import TFLogoSmall from '@components/header/navbar/TFLogoSmall'
 

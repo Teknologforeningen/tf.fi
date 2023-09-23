@@ -4,7 +4,7 @@
 version: '3'
 services:
   strapi:
-    image: strapi/strapi
+    image: strapi
     environment:
       DATABASE_CLIENT: '${STRAPI_DATABASE_CLIENT:-postgres}'
       DATABASE_NAME: '${STRAPI_DATABASE_NAME:-strapi}'

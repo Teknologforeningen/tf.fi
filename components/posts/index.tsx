@@ -12,7 +12,7 @@ const Posts = ({ posts }: { posts: PostType[] }) => {
         <Post post={post} key={post.slug} />
       ))}
       <Link
-        href={`/nyheter`}
+        href="/nyheter"
         className="duration-50 mt-4 rounded-md p-2 text-center text-sm text-teknologröd transition-colors ease-in-out hover:bg-lightGray"
       >
         Mera nyheter

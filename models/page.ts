@@ -1,4 +1,4 @@
-import { SingleResponse } from '@lib/api/strapi'
+import { SingleResponse } from '@lib/strapi'
 import { Category } from './category'
 
 export type PageType = {

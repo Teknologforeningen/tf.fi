@@ -6,7 +6,7 @@
   },
   "private": true,
   "scripts": {
-    "dev": "NODE_OPTIONS='--dns-result-order=ipv4first' next dev --turbo",
+    "dev": "NODE_OPTIONS='--dns-result-order=ipv4first' next dev",
     "build": "next build",
     "start": "next start",
     "lint": "prettier -c components lib models pages utils && next lint",

@@ -1,4 +1,6 @@
-import { useSession, signIn, signOut } from 'next-auth/react'
+'use client'
+
+import { signIn, signOut, useSession } from 'next-auth/react'
 import classNames from 'classnames'
 
 const LoginButton = ({ className }: { className?: string }) => {

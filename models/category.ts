@@ -1,4 +1,4 @@
-import { CollectionResponse } from '@lib/api/strapi'
+import { CollectionResponse } from '@lib/strapi'
 import { PageType } from './page'
 
 export type Category = {
