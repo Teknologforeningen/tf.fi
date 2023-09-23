@@ -56,7 +56,7 @@ export type Meta<T extends Pagination> = T extends PagePagination
 type StrapiResponse<
   T,
   S extends SingleResponse<T> | CollectionResponse<T> = CollectionResponse<T>,
-  P extends Pagination = PagePagination
+  P extends Pagination = PagePagination,
 > = {
   data: S | null
   error?: StrapiError
@@ -123,7 +123,7 @@ async function fetchCollection<T, P extends Pagination = PagePagination>(
 
 async function fetchFromStrapi<
   T,
-  S extends CollectionResponse<T> | SingleResponse<T>
+  S extends CollectionResponse<T> | SingleResponse<T>,
 >(url: string, headers?: HeadersInit): Promise<StrapiResponse<T, S> | null> {
   const res = await fetch(url, { headers })
   const json = (await res.json()) as StrapiResponse<T, S>
