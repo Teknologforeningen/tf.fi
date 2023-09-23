@@ -5,7 +5,7 @@ const Subtitle = ({
   underline = true,
 }: React.PropsWithChildren<{ underline?: boolean }>) => (
   <>
-    <p className="xxs:text-3xl text-2xl text-black">{children}</p>
+    <p className="text-2xl text-black xxs:text-3xl">{children}</p>
     {underline && (
       <div className="my-1 h-[3px] w-full rounded-sm bg-teknologröd" />
     )}
