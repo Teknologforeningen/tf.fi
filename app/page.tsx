@@ -1,4 +1,3 @@
-// import Image from 'next/image'
 import { fetchPosts } from '@lib/strapi/post'
 import Column from '@components/Column'
 import Item from '@components/Item'
