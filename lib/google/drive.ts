@@ -34,9 +34,7 @@ export default class Drive {
 
 function getDriveInstance(keys: string | undefined = process.env.GOOGLE_CREDS) {
   if (!keys) {
-    throw new Error(
-      'The GOOGLE_DRIVE_CREDS environment variable was not found!'
-    )
+    throw new Error('The GOOGLE_CREDS environment variable was not found!')
   }
 
   const credentials = JSON.parse(keys)
