@@ -9,7 +9,7 @@ import { revalidatePath, revalidateTag } from 'next/cache'
 
 const API_KEY = process.env.API_KEY
 
-export default async function POST(request: NextRequest) {
+export async function POST(request: NextRequest) {
   const bearer = request.headers
     .get('authorization')
     ?.split('Bearer:')[1]
