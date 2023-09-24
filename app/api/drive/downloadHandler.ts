@@ -6,9 +6,8 @@ import { Readable } from 'stream'
 export default function downloadHandler(drive: Drive) {
   return async (request: NextRequest) => {
     try {
-      const params = request.nextUrl.searchParams
-      const fileId = params.get('fileId')
-      const fileName = params.get('fileName')
+      const fileId = request.nextUrl.searchParams.get('fileId')
+      const fileName = request.nextUrl.searchParams.get('fileName')
 
       if (!fileId) {
         return NextResponse.json(

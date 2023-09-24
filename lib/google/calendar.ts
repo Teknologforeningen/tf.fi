@@ -1,7 +1,16 @@
 import { google } from 'googleapis'
-import { CalendarEvent } from '@components/Calendar'
 
+const CALENDAR_ID = process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_ID
 const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
+
+// Compatible with FullCalendar event type
+export type CalendarEvent = {
+  id: string
+  title: string | null | undefined
+  start: string | null | undefined
+  end: string | null | undefined
+  htmlLink: string
+}
 
 const keysEnvVar = process.env.GOOGLE_CREDS
 if (!keysEnvVar) {
@@ -17,15 +26,12 @@ const auth = new google.auth.JWT(
   SCOPES
 )
 
-export default async function listEvents(
-  calendarId: string,
-  date: Date
-): Promise<CalendarEvent[]> {
+export default async function listEvents(date: Date): Promise<CalendarEvent[]> {
   try {
     const calendar = google.calendar({ version: 'v3', auth })
 
     const res = await calendar.events.list({
-      calendarId,
+      calendarId: CALENDAR_ID,
       // load dates two months back and three in the future
       timeMin: new Date(
         date.getTime() - 2 * 30 * 24 * 60 * 60 * 1000

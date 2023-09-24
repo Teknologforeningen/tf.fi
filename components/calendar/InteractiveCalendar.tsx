@@ -1,12 +1,12 @@
 'use client'
 
-import { CalendarEvent } from '@components/calendar/Calendar'
 import React, { useEffect, useState } from 'react'
 import Calendar from 'react-calendar'
 import Column from '@components/Column'
 import ActivityIndicator from '@components/ActivityIndicator'
 import { getDateShort } from '@utils/helpers'
 import Link from 'next/link'
+import { CalendarEvent } from '@lib/google/calendar'
 
 type InteractiveCalendarProps = {
   initialEvents: CalendarEvent[]
