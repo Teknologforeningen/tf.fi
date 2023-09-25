@@ -5,4 +5,7 @@ module.exports = {
     domains: ['tf.fi', 'cms.tf.fi', 'localhost', 'test.tf.fi'],
   },
   output: 'standalone',
+  experimental: {
+    serverActions: true,
+  },
 }

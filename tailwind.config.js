@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
+    './app/**/*.{js,jsx,ts,tsx}',
     './pages/**/*.{js,jsx,ts,tsx}',
     './components/**/*.{js,jsx,ts,tsx}',
   ],
@@ -22,15 +23,15 @@ module.exports = {
         display: ['var(--font-montserrat)'],
       },
       screens: {
-        'xxs': '450px',
+        xxs: '450px',
       },
       typography: {
         DEFAULT: {
           css: {
             maxWidth: '100ch',
-          }
-        }
-      }
+          },
+        },
+      },
     },
     backgroundImage: {
       'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

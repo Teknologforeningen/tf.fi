@@ -2,19 +2,19 @@ import React from 'react'
 import { marked } from 'marked'
 import { titleToAnchor } from '@utils/helpers'
 import { FileFolder } from '@models/page'
-import DriveExplorer from './FileExplorer'
+import DriveExplorer from './drive/DriveExplorer'
 
 type PageSectionProps = {
   title?: string
   content?: string
-  file_folders: FileFolder[]
+  fileFolders: FileFolder[]
   isPrivate: boolean
 }
 
 const PageSection = ({
   title,
   content,
-  file_folders,
+  fileFolders,
   isPrivate,
 }: PageSectionProps) => (
   <div>
@@ -28,8 +28,8 @@ const PageSection = ({
         __html: marked.parse(content ?? ''),
       }}
     />
-    {file_folders.map(({ attributes }, i) => (
-      <div key={i}>
+    {fileFolders.map(({ attributes }) => (
+      <div key={attributes.title}>
         <h3>{attributes.title}</h3>
         <p>{attributes.description}</p>
         <DriveExplorer folderId={attributes.folderId} isPrivate={isPrivate} />

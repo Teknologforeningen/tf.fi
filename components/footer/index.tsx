@@ -1,11 +1,14 @@
 import Column from '../Column'
-import NationsLogoRow, { NationLogo } from './Logos'
+import NationsLogos from './Logos'
 import BasicInfo from './BasicInfo'
+import { Homepage } from '../../app/page'
 
-const Footer = ({ logos }: { logos: NationLogo[] }) => (
+export type FooterProps = Pick<Homepage, 'footer'>
+
+const Footer = async ({ footer }: FooterProps) => (
   <footer>
     <Column className="sticky bottom-0 w-full bg-darkgray py-5">
-      <NationsLogoRow nationLogos={logos} />
+      <NationsLogos nationLogos={footer?.nationlogos ?? []} />
       <BasicInfo />
     </Column>
   </footer>

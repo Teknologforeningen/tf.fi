@@ -7,10 +7,10 @@ const TableOfContents = ({ sections }: { sections: Section[] }) => {
     <>
       <h2>Innehållsförteckning</h2>
       {sections.map(
-        (section, i) =>
+        (section) =>
           section.attributes.title && (
             <Link
-              key={i}
+              key={section.attributes.title}
               className="no-underline hover:underline"
               href={`#${titleToAnchor(section.attributes.title)}`}
             >

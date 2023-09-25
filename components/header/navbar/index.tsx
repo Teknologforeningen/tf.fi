@@ -6,8 +6,8 @@ import TaffaABLogo from './TaffaABLogo'
 import DagsenLogo from './DagsenLogo'
 import links from '@utils/links'
 import classNames from 'classnames'
-import { NavbarLink, NavbarMultipleLink } from '@lib/api/navbar'
-import { useRouter } from 'next/router'
+import { NavbarLink, NavbarMultipleLink } from '@lib/strapi/navbar'
+import { usePathname } from 'next/navigation'
 import LoginButton from './LoginButton'
 import HeaderLink from '@components/header/navbar/HeaderLink'
 
@@ -22,8 +22,7 @@ const Navbar = ({
   setSideMenuOpen,
   position = 'top',
 }: NavbarProps) => {
-  const router = useRouter()
-  const path = router.asPath
+  const path = usePathname()
 
   return (
     <nav>
@@ -107,7 +106,7 @@ const NavbarDropdown = ({
 }: {
   link: NavbarMultipleLink
   position: NavbarProps['position']
-  path: string
+  path: string | null
   setSideMenuOpen: (state: boolean) => void
 }) => {
   const isTop = position === 'top'
@@ -119,14 +118,14 @@ const NavbarDropdown = ({
     }
   }
 
-  const pathWithoutAnchor = path.split('#')[0]
+  const pathWithoutAnchor = path?.split('#')[0]
 
   return (
     <div className="relative mx-3">
       <div
         className={classNames(
           isTop ? 'peer' : '!m-0',
-          pathWithoutAnchor.startsWith(`/${link.basePath}` ?? '') &&
+          pathWithoutAnchor?.startsWith(`/${link.basePath}` ?? '') &&
             link.links.find((l) => l.link === pathWithoutAnchor) &&
             '!text-teknologröd',
           'link-text text-link'

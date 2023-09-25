@@ -1,7 +1,9 @@
+'use client'
+
 import { useState } from 'react'
 import Navbar from './navbar'
 import SideMenu from './navbar/SideMenu'
-import { NavbarLink } from '@lib/api/navbar'
+import { NavbarLink } from '@lib/strapi/navbar'
 import ExpandableNavbar from './navbar/ExpandableNavbar'
 
 const Header = ({ navbarLinks }: { navbarLinks: NavbarLink[] }) => {

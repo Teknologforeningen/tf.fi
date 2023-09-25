@@ -15,8 +15,7 @@ type NationImageProps = {
 }
 
 const NationImage = ({ logo }: NationImageProps) => (
-  // Tailwind does not work with Next.js images
-  <div style={{ position: 'relative', width: '100px', height: '50px' }}>
+  <div className="relative h-[50px] w-[100px]">
     <Link href={logo.url} passHref>
       <Image
         src={`${process.env.NEXT_PUBLIC_BASE_URL}${logo.image.data.attributes.url}`}
@@ -28,16 +27,18 @@ const NationImage = ({ logo }: NationImageProps) => (
   </div>
 )
 
-type NationsLogoRowProps = {
+type NationsLogosProps = {
   nationLogos: NationLogo[]
 }
 
-const NationsLogoRow = ({ nationLogos }: NationsLogoRowProps) => (
-  <Row className="mx-0 my-4 w-4/5 flex-wrap justify-around">
-    {nationLogos.map((logo, index) => (
-      <NationImage logo={logo} key={index} />
-    ))}
-  </Row>
-)
+const NationsLogos = async ({ nationLogos }: NationsLogosProps) => {
+  return (
+    <Row className="mx-0 my-4 w-4/5 flex-wrap justify-around">
+      {nationLogos?.map((logo, index) => (
+        <NationImage logo={logo} key={index} />
+      ))}
+    </Row>
+  )
+}
 
-export default NationsLogoRow
+export default NationsLogos

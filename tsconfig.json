@@ -13,16 +13,44 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "paths": {
-      "@components/*": ["./components/*"],
-      "@lib/*": ["./lib/*"],
-      "@models/*": ["./models/*"],
-      "@styles/*": ["./styles/*"],
-      "@utils/*": ["./utils/*"],
-      "@middleware/*": ["./middleware/*"]
-    }
+      "@components/*": [
+        "./components/*"
+      ],
+      "@lib/*": [
+        "./lib/*"
+      ],
+      "@models/*": [
+        "./models/*"
+      ],
+      "@styles/*": [
+        "./styles/*"
+      ],
+      "@utils/*": [
+        "./utils/*"
+      ],
+      "@middleware/*": [
+        "./middleware/*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

@@ -1,4 +1,6 @@
-import router from 'next/router'
+'use client'
+
+import { useRouter } from 'next/navigation'
 
 type HeaderLinkProps = {
   title: string
@@ -15,6 +17,8 @@ const HeaderLink = ({
   setSideMenuOpen,
   className,
 }: HeaderLinkProps) => {
+  const router = useRouter()
+
   const onClick = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault()
     setSideMenuOpen(false)
