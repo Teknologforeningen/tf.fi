@@ -3,8 +3,16 @@ import Drive from '@lib/google/drive'
 import { NextRequest, NextResponse } from 'next/server'
 import { Readable } from 'stream'
 
-export default function downloadHandler(drive: Drive) {
+export default function downloadHandler(drive: Drive | null) {
   return async (request: NextRequest) => {
+    if (!drive) {
+      console.error("'drive' instance missing")
+      return NextResponse.json(
+        { error: 'Internal server error' },
+        { status: 500 }
+      )
+    }
+
     try {
       const fileId = request.nextUrl.searchParams.get('fileId')
       const fileName = request.nextUrl.searchParams.get('fileName')
