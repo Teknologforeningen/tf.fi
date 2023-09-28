@@ -1,4 +1,4 @@
-import { google } from 'googleapis'
+import { calendar_v3, google } from 'googleapis'
 
 const CALENDAR_ID = process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_ID
 const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
@@ -12,24 +12,29 @@ export type CalendarEvent = {
   htmlLink: string
 }
 
+let calendar: calendar_v3.Calendar | null = null
+
 const keysEnvVar = process.env.GOOGLE_CREDS
 if (!keysEnvVar) {
-  throw new Error('The GOOGLE_CREDS environment variable was not found!')
+  console.error('The GOOGLE_CREDS environment variable was not found!')
+} else {
+  const credentials = JSON.parse(keysEnvVar)
+  const auth = new google.auth.JWT(
+    credentials.client_email,
+    undefined,
+    credentials.private_key,
+    SCOPES
+  )
+  calendar = google.calendar({ version: 'v3', auth })
 }
 
-const credentials = JSON.parse(keysEnvVar)
-
-const auth = new google.auth.JWT(
-  credentials.client_email,
-  undefined,
-  credentials.private_key,
-  SCOPES
-)
-
 export default async function listEvents(date: Date): Promise<CalendarEvent[]> {
-  try {
-    const calendar = google.calendar({ version: 'v3', auth })
+  if (calendar === null) {
+    console.warn('Calendar auth has failed')
+    return []
+  }
 
+  try {
     const res = await calendar.events.list({
       calendarId: CALENDAR_ID,
       // load dates two months back and three in the future

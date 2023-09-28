@@ -18,12 +18,12 @@ const Loading = () => (
 const DriveExplorer = async ({ folderId, isPrivate }: DriveExplorerProps) => {
   const drive = isPrivate ? privateDrive : publicDrive
 
-  const folderArray = await drive.listFiles(folderId)
+  const folderArray = await drive?.listFiles(folderId)
 
   return (
     <Suspense fallback={<Loading />}>
       <div className="pl-4">
-        {folderArray.map((item) =>
+        {folderArray?.map((item) =>
           item.mimeType === 'application/vnd.google-apps.folder' ? (
             item.id && (
               <FolderItem key={item.id} folder={item} isPrivate={isPrivate}>

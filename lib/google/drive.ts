@@ -32,9 +32,12 @@ export default class Drive {
   }
 }
 
-function getDriveInstance(keys: string | undefined = process.env.GOOGLE_CREDS) {
+function createDrive(
+  keys: string | undefined = process.env.GOOGLE_CREDS
+): Drive | null {
   if (!keys) {
-    throw new Error('The GOOGLE_CREDS environment variable was not found!')
+    console.error('The GOOGLE_CREDS environment variable was not found!')
+    return null
   }
 
   const credentials = JSON.parse(keys)
@@ -46,10 +49,8 @@ function getDriveInstance(keys: string | undefined = process.env.GOOGLE_CREDS) {
     ['https://www.googleapis.com/auth/drive']
   )
 
-  return google.drive({ version: 'v3', auth })
+  return new Drive(google.drive({ version: 'v3', auth }))
 }
 
-export const publicDrive = new Drive(getDriveInstance())
-export const privateDrive = new Drive(
-  getDriveInstance(process.env.GOOGLE_PRIVATE_CREDS)
-)
+export const publicDrive = createDrive()
+export const privateDrive = createDrive(process.env.GOOGLE_PRIVATE_CREDS)
