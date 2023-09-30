@@ -8,7 +8,7 @@ import SessionProvider from '@components/SessionProvider'
 import Header from '@components/header'
 import getNavbar from '@lib/strapi/navbar'
 import Footer from '@components/footer'
-import { fetchHomepage } from '@lib/strapi/homepage'
+import { fetchFooter } from '@lib/strapi/footer'
 
 import '@styles/globals.css'
 import '@styles/links.css'
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   const session = await getServerSession()
   const navbarLinks = await getNavbar()
-  const homepage = await fetchHomepage()
+  const footer = await fetchFooter()
 
   return (
     <html lang="sv">
@@ -58,7 +58,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
           <Header navbarLinks={navbarLinks} />
           <main>{children}</main>
         </SessionProvider>
-        <Footer footer={homepage?.footer} />
+        <Footer nationlogos={footer?.nationlogos} />
       </body>
     </html>
   )
