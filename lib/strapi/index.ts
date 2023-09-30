@@ -8,6 +8,7 @@ export type StrapiFetchOptions = {
   query?: string
   url?: string
   headers?: HeadersInit
+  tags?: string[]
 }
 
 export type SingleResponse<T> = {
@@ -72,10 +73,11 @@ export async function fetchSingle<T>(
   const url = options?.url ?? API_URL
   const query = options?.query ?? ''
 
-  return fetchFromStrapi<T, SingleResponse<T>>(
-    `${url}${path}?${query}`,
-    options?.headers
-  )
+  return fetchFromStrapi<T, SingleResponse<T>>({
+    url: `${url}${path}?${query}`,
+    headers: options?.headers,
+    tags: options?.tags,
+  })
 }
 
 export async function fetchCollectionSingle<T>(
@@ -93,10 +95,11 @@ export async function fetchCollectionSingle<T>(
     },
   })
 
-  const res = await fetchFromStrapi<T, CollectionResponse<T>>(
-    `${url}${path}?${query}&${slugQuery}`,
-    options?.headers
-  )
+  const res = await fetchFromStrapi<T, CollectionResponse<T>>({
+    url: `${url}${path}?${query}&${slugQuery}`,
+    headers: options?.headers,
+    tags: options?.tags,
+  })
 
   if (!res?.data?.[0]) {
     return null
@@ -117,17 +120,28 @@ export async function fetchCollection<T, P extends Pagination = PagePagination>(
     ? qs.stringify({ pagination: options.pagination })
     : ''
   const query = options?.query ?? ''
-  return fetchFromStrapi<T, CollectionResponse<T>>(
-    `${url}${path}?${query}&${paginationQuery}`,
-    options?.headers
-  )
+  return fetchFromStrapi<T, CollectionResponse<T>>({
+    url: `${url}${path}?${query}&${paginationQuery}`,
+    headers: options?.headers,
+    tags: options?.tags,
+  })
+}
+
+interface StrapiFetchProps {
+  url: string
+  headers?: HeadersInit
+  tags?: string[]
 }
 
 async function fetchFromStrapi<
   T,
   S extends CollectionResponse<T> | SingleResponse<T>,
->(url: string, headers?: HeadersInit): Promise<StrapiResponse<T, S> | null> {
-  const res = await fetch(url, { headers })
+>({
+  url,
+  headers,
+  tags,
+}: StrapiFetchProps): Promise<StrapiResponse<T, S> | null> {
+  const res = await fetch(url, { headers, next: { tags } })
   const json = (await res.json()) as StrapiResponse<T, S>
   if (json.error !== undefined) {
     console.error(`Error fetching ${url}: ${JSON.stringify(json.error)}`)
