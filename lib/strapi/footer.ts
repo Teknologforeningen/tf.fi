@@ -9,6 +9,9 @@ export async function fetchFooter(): Promise<FooterType | null> {
     },
     { encodeValuesOnly: true }
   )
-  const res = await fetchSingle<FooterType>('/footer', { query })
+  const res = await fetchSingle<FooterType>('/footer', {
+    query,
+    tags: ['footer'],
+  })
   return res?.data?.attributes ?? null
 }

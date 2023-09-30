@@ -89,6 +89,10 @@ export async function POST(request: NextRequest) {
           revalidatePath('/')
           break
         }
+        case 'footer': {
+          revalidateTag('footer')
+          break
+        }
 
         default:
           return NextResponse.json({ error: 'Invalid model' }, { status: 400 })
