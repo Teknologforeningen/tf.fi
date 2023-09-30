@@ -19,8 +19,4 @@ jobs:
         run: yarn lint
 
       - name: Build
-        env:
-          GOOGLE_CREDS: ${{ secrets.GOOGLE_CREDS }}
-          GOOGLE_PRIVATE_CREDS: ${{ secrets.GOOGLE_PRIVATE_CREDS }}
-          SHARED_GOOGLE_DRIVE_ID: ${{ secrets.SHARED_GOOGLE_DRIVE_ID }}
         run: yarn build --no-lint
