@@ -5,13 +5,7 @@ import { fetchSingle } from '@lib/strapi/index'
 export async function fetchHomepage(): Promise<Homepage | null> {
   const query = qs.stringify(
     {
-      populate: [
-        'banner',
-        'banner.bannerImages',
-        'footer',
-        'footer.nationlogos',
-        'footer.nationlogos.image',
-      ],
+      populate: ['banner', 'banner.bannerImages'],
     },
     { encodeValuesOnly: true }
   )

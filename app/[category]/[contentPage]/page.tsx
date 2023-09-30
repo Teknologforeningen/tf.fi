@@ -1,3 +1,4 @@
+export const dynamic = 'force-static'
 import { fetchContentPage, fetchContentPages } from '@lib/strapi/contentpage'
 import Page from '@components/Page'
 

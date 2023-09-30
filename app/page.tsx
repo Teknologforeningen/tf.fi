@@ -6,16 +6,12 @@ import { PostType } from '@models/post'
 import MainBanner, { BannerImage } from '@components/banner/Banner'
 import TFInfo from '@components/TFInfo'
 import Posts from '@components/posts'
-import { NationLogo } from '@components/footer/Logos'
 
 export type Homepage = {
   banner?: {
     bannerImages?: {
       data: BannerImage[]
     }
-  }
-  footer?: {
-    nationlogos?: NationLogo[]
   }
 }
 

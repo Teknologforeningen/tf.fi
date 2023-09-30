@@ -41,6 +41,7 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: 'Missing slug' }, { status: 400 })
           }
           revalidatePath(`/${category}/${page}`)
+          revalidateTag('navbar')
           break
         }
         case 'category': {
@@ -48,6 +49,7 @@ export async function POST(request: NextRequest) {
           for (const page of body?.entry?.content_pages) {
             revalidatePath(`/${category}/${page?.slug}`)
           }
+          revalidateTag('navbar')
           break
         }
         case 'content-section': {
@@ -75,6 +77,23 @@ export async function POST(request: NextRequest) {
           revalidatePath('/')
           break
         }
+        case 'navbar': {
+          revalidateTag('navbar')
+          break
+        }
+        case 'private-page': {
+          revalidateTag('navbar')
+          break
+        }
+        case 'homepage': {
+          revalidatePath('/')
+          break
+        }
+        case 'footer': {
+          revalidateTag('footer')
+          break
+        }
+
         default:
           return NextResponse.json({ error: 'Invalid model' }, { status: 400 })
       }
