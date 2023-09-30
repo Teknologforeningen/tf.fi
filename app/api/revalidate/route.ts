@@ -85,6 +85,11 @@ export async function POST(request: NextRequest) {
           revalidateTag('navbar')
           break
         }
+        case 'homepage': {
+          revalidatePath('/')
+          break
+        }
+
         default:
           return NextResponse.json({ error: 'Invalid model' }, { status: 400 })
       }
