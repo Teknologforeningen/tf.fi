@@ -1,3 +1,4 @@
+import qs from 'qs'
 import { PostType } from '@models/post'
 import {
   fetchCollection,
@@ -23,9 +24,13 @@ export async function fetchPosts(page?: number): Promise<PostsResponse | null> {
     page,
     pageSize: POSTS_PAGE_SIZE,
   }
+  const query = qs.stringify({
+    sort: { createdAt: 'desc' },
+  })
 
   const res = await fetchCollection<PostType>('/posts', {
     pagination,
+    query,
   })
 
   return {
