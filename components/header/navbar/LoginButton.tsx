@@ -1,12 +1,16 @@
 'use client'
 
-import { signIn, signOut, useSession } from 'next-auth/react'
+import { signIn, signOut, getSession } from 'next-auth/react'
+import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
 
 const LoginButton = ({ className }: { className?: string }) => {
-  const { data: session } = useSession()
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  useEffect(() => {
+    getSession().then((session) => setIsLoggedIn(session !== null))
+  }, [])
 
-  return !session ? (
+  return !isLoggedIn ? (
     <button
       onClick={(e) => {
         e.preventDefault()

@@ -1,4 +1,3 @@
-export const dynamic = 'force-static'
 import { fetchContentPage, fetchContentPages } from '@lib/strapi/contentpage'
 import Page from '@components/Page'
 
@@ -10,10 +9,8 @@ export const generateStaticParams = async () => {
   return contentPages
     .filter((category) => category)
     .map((contentPage) => ({
-      params: {
-        category: contentPage.category?.data?.attributes?.slug,
-        contentPage: contentPage.slug,
-      },
+      category: contentPage.category?.data?.attributes?.slug,
+      contentPage: contentPage.slug,
     }))
 }
 
