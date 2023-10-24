@@ -9,31 +9,21 @@ import Link from 'next/link'
 import { CalendarEvent } from '@lib/google/calendar'
 
 type InteractiveCalendarProps = {
-  initialEvents: CalendarEvent[]
-  initialDate: Date
   fetchEvents: (date: Date) => Promise<CalendarEvent[]>
 }
 
-const InteractiveCalendar = ({
-  initialEvents,
-  initialDate,
-  fetchEvents,
-}: InteractiveCalendarProps) => {
-  const [events, setEvents] = useState(initialEvents)
-  const [date, setDate] = useState(initialDate)
+const InteractiveCalendar = ({ fetchEvents }: InteractiveCalendarProps) => {
+  const [events, setEvents] = useState<CalendarEvent[]>([])
+  const [date, setDate] = useState(new Date())
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    if (date.getTime() === initialDate.getTime()) {
-      return
-    }
-
     setIsLoading(true)
     fetchEvents(date).then((data) => {
       setEvents(data)
       setIsLoading(false)
     })
-  }, [initialDate, date, fetchEvents])
+  }, [date, fetchEvents])
 
   const isActive = (item: CalendarEvent, date: Date) => {
     const start = new Date(item.start?.split('T')[0] + 'T00:00:00')
