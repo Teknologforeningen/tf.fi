@@ -1,10 +1,8 @@
 import { Metadata } from 'next'
 import React from 'react'
-import { getServerSession } from 'next-auth'
 import localFont from 'next/font/local'
 
 import classNames from 'classnames'
-import SessionProvider from '@components/SessionProvider'
 import Header from '@components/header'
 import getNavbar from '@lib/strapi/navbar'
 import Footer from '@components/footer'
@@ -41,7 +39,6 @@ export const metadata: Metadata = {
 }
 
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {
-  const session = await getServerSession()
   const navbarLinks = await getNavbar()
   const footer = await fetchFooter()
 
@@ -54,10 +51,8 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
           'h-screen font-body'
         )}
       >
-        <SessionProvider session={session}>
-          <Header navbarLinks={navbarLinks} />
-          <main>{children}</main>
-        </SessionProvider>
+        <Header navbarLinks={navbarLinks} />
+        <main>{children}</main>
         <Footer nationlogos={footer?.nationlogos} />
       </body>
     </html>

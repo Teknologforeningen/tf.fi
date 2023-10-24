@@ -10,7 +10,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "prettier -c app components lib models utils && next lint",
-    "export": "next export"
+    "export": "next export",
+    "build-start": "next build && cp -r .next/static/ .next/standalone/.next && node .next/standalone/server.js"
   },
   "dependencies": {
     "@fullcalendar/core": "^6.1.8",

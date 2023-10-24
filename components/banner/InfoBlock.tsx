@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { useSession } from 'next-auth/react'
+import { getSession } from 'next-auth/react'
 import classNames from 'classnames'
 import Link from 'next/link'
 import links from '@utils/links'
@@ -10,12 +10,10 @@ import TaffaABLogo from '@components/header/navbar/TaffaABLogo'
 import DagsenLogo from '@components/header/navbar/DagsenLogo'
 
 const InfoBlock = () => {
-  const { status: authStatus } = useSession()
-  const [infoVisible, setInfoVisible] = useState(
-    authStatus === 'unauthenticated'
-  )
+  const [infoVisible, setInfoVisible] = useState(false)
 
   useEffect(() => {
+    getSession().then((session) => setInfoVisible(session === null))
     const timeout = setTimeout(() => setInfoVisible(false), 15000)
     return () => clearTimeout(timeout)
   }, [])
