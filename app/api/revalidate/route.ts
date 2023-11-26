@@ -72,8 +72,13 @@ export async function POST(request: NextRequest) {
           break
         }
         case 'post': {
-          const post = body?.entry?.slug
-          revalidatePath(`/nyheter/${post}`)
+          // For some unexplained reason, revalidating the specific post page does not work properly.
+          // const post = body?.entry?.slug
+          // revalidatePath(`/nyheter/${post}`)
+
+          // Revalidating all posts with revalidatePath('/nyheter/[slug]') works for the time being,
+          // with the downside of causing some unnecessary revalidates.
+          revalidatePath('/nyheter/[slug]', 'page')
           revalidatePath('/')
           break
         }
