@@ -79,7 +79,8 @@ export async function POST(request: NextRequest) {
           // Revalidating all posts with revalidatePath('/nyheter/[slug]') works for the time being,
           // with the downside of causing some unnecessary revalidates.
           revalidatePath('/nyheter/[slug]', 'page')
-          revalidatePath('/')
+          revalidatePath('/nyheter', 'page')
+          revalidatePath('/', 'page')
           break
         }
         case 'navbar': {
