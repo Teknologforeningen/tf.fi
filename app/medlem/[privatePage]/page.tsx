@@ -1,7 +1,7 @@
 import { getServerSession } from 'next-auth'
 import { fetchPrivatePage } from '@lib/strapi/privatepage'
 import Page from '@components/Page'
-import { authOptions } from '../../api/auth/[...nextauth]/route'
+import { authOptions } from '@lib/nextauth'
 import Unauthorized from '@components/Unauthorized'
 
 const PrivatePage = async ({ params }: { params: { privatePage: string } }) => {
