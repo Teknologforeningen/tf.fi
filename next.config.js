@@ -2,10 +2,12 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ['tf.fi', 'cms.tf.fi', 'localhost', 'test.tf.fi'],
+    remotePatterns: [
+      { protocol: 'https', hostname: 'tf.fi' },
+      { protocol: 'https', hostname: 'cms.tf.fi' },
+      { protocol: 'https', hostname: 'test.tf.fi' },
+      { protocol: 'http', hostname: 'localhost' },
+    ],
   },
   output: 'standalone',
-  experimental: {
-    serverActions: true,
-  },
 }
