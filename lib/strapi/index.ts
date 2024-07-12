@@ -95,8 +95,33 @@ export async function fetchCollectionSingle<T>(
     },
   })
 
+  const categoryQuery = qs.stringify({
+    filters: {
+      $or: [
+        {
+          category: {
+            slug: {
+              $contains: 'cat1',
+            },
+          },
+        },
+        {
+          slug: {
+            $eq: slug,
+          },
+        },
+      ],
+    },
+  })
+
   const res = await fetchFromStrapi<T, CollectionResponse<T>>({
     url: `${url}${path}?${query}&${slugQuery}`,
+    headers: options?.headers,
+    tags: options?.tags,
+  })
+
+  const catRes = await fetchFromStrapi<T, CollectionResponse<T>>({
+    url: `${url}${path}?${query}&${categoryQuery}`,
     headers: options?.headers,
     tags: options?.tags,
   })
@@ -104,7 +129,6 @@ export async function fetchCollectionSingle<T>(
   if (!res?.data?.[0]) {
     return null
   }
-
   return {
     ...res,
     data: res.data[0],
