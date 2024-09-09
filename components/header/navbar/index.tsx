@@ -93,9 +93,9 @@ const Navbar = ({
             </>
           )}
         </div>
-        <Row>
-          <SearchBar />
-          <LoginButton className={position === 'side' ? 'mt-6' : ''} />
+        <Row className={position === 'side' ? 'mt-6' : ''}>
+          <SearchBar setSideMenuOpen={setSideMenuOpen} />
+          <LoginButton />
         </Row>
       </div>
     </nav>

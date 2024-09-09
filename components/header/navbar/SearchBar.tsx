@@ -7,20 +7,27 @@ import { MdSearch } from 'react-icons/md'
 interface ListCardProps {
   title: string
   path: string
+  setSideMenuOpen: (state: boolean) => void
 }
 
-const ListCard: React.FC<ListCardProps> = ({ title, path }) => {
+interface SearchBarProps {
+  setSideMenuOpen: (state: boolean) => void
+}
+
+const ListCard = ({ title, path, setSideMenuOpen }: ListCardProps) => {
   const router = useRouter()
 
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault()
     router.push(path)
+    setSideMenuOpen(false)
   }
 
   return (
-    <div className="p-2 border-b border-gray-700">
+    <div className="p-2 link link-text block">
       <a
         onClick={handleClick}
-        className="text-white no-underline hover:underline cursor-pointer"
+        className="text-white no-underline"
       >
         {title}
       </a>
@@ -28,7 +35,7 @@ const ListCard: React.FC<ListCardProps> = ({ title, path }) => {
   )
 }
 
-const SearchBar = () => {
+const SearchBar = ({ setSideMenuOpen }: SearchBarProps) => {
   const [query, setQuery] = useState('')
   const [results, setResults] = useState<SearchData>({
     sectionData: [],
@@ -59,7 +66,6 @@ const SearchBar = () => {
       console.error(error)
     }
   }
-  console.log(results)
   return (
     <div
       className="flex justify-center items-center"
@@ -80,11 +86,12 @@ const SearchBar = () => {
 
         {(isFocused || isHovered) &&
           (results.pageData.length > 0 || results.sectionData.length > 0) && (
-            <div className="absolute top-full left-0 right-0 bg-black bg-opacity-80 z-50 max-h-72 overflow-y-auto rounded-md p-2 w-full">
+            <div className="absolute left-0 mt-2 right-0 bg-darkgray ring-black bg-opacity-90 z-50 max-h-96 overflow-y-auto overflow-x-hidden rounded-md p-2">
               {results.pageData.map((page) => (
                 <ListCard
                   key={page.attributes.title}
                   title={page.attributes.title}
+                  setSideMenuOpen={setSideMenuOpen}
                   path={`/${page.attributes.category?.data.attributes.slug}/${page.attributes.slug}`}
                 />
               ))}
@@ -94,6 +101,7 @@ const SearchBar = () => {
                     <ListCard
                       key={section.id}
                       title={section.attributes.title}
+                      setSideMenuOpen={setSideMenuOpen}
                       path={`/${section.attributes.content_page?.data.attributes.category?.data.attributes.slug}/${section.attributes.content_page?.data.attributes.slug}#${titleToAnchor(section.attributes.title ?? '')}`}
                     />
                   )
