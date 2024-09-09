@@ -4,6 +4,7 @@ import Row from '@components/Row'
 import TFLogoSmall from './TFLogoSmall'
 import TaffaABLogo from './TaffaABLogo'
 import DagsenLogo from './DagsenLogo'
+import SearchBar from './SearchBar'
 import links from '@utils/links'
 import classNames from 'classnames'
 import { NavbarLink, NavbarMultipleLink } from '@lib/strapi/navbar'
@@ -92,7 +93,10 @@ const Navbar = ({
             </>
           )}
         </div>
-        <LoginButton className={position === 'side' ? 'mt-6' : ''} />
+        <Row>
+          <SearchBar />
+          <LoginButton className={position === 'side' ? 'mt-6' : ''} />
+        </Row>
       </div>
     </nav>
   )
