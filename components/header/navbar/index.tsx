@@ -4,13 +4,14 @@ import Row from '@components/Row'
 import TFLogoSmall from './TFLogoSmall'
 import TaffaABLogo from './TaffaABLogo'
 import DagsenLogo from './DagsenLogo'
-import SearchBar from './searchbar/SearchBar'
 import links from '@utils/links'
 import classNames from 'classnames'
 import { NavbarLink, NavbarMultipleLink } from '@lib/strapi/navbar'
 import { usePathname } from 'next/navigation'
 import LoginButton from './LoginButton'
 import HeaderLink from '@components/header/navbar/HeaderLink'
+import { MdSearch } from 'react-icons/md'
+import SearchOverlay from './searchpage/SearchOverlay'
 
 type NavbarProps = {
   navbarLinks: NavbarLink[]
@@ -38,11 +39,7 @@ const Navbar = ({
             : 'hidden flex-row md:flex'
         )}
       >
-        <div
-          className={`flex-start flex flex-col md:flex-row md:items-center w-full lg:min-w-max ${
-            searchOpen ? 'hidden lg:flex' : ''
-          }`}
-        >
+        <div className="flex-start flex flex-col justify-between md:flex-row md:items-center">
           <div className="mx-3 hidden md:block">
             <TFLogoSmall highlight={path === '/'} />
           </div>
@@ -100,20 +97,21 @@ const Navbar = ({
             </>
           )}
         </div>
-        <div
-          className={`relative w-full max-w-md transition-all duration-300 ${searchOpen ? 'max-w-xl' : 'max-w-md'} `}
-        >
-          <SearchBar
-            setSideMenuOpen={setSideMenuOpen}
-            sessionToken={sessionToken}
-            setIsFocused={setSearchOpen}
-            isFocused={searchOpen}
-          />
-        </div>
+
         <Row className={position === 'side' ? 'mt-6' : ''}>
+          <button onClick={() => setSearchOpen(!searchOpen)}>
+            <MdSearch color="white" size={32} />
+          </button>
           <LoginButton />
         </Row>
       </div>
+      {searchOpen && (
+        <SearchOverlay
+          sessionToken={sessionToken}
+          setSideMenuOpen={setSideMenuOpen}
+          onClose={() => setSearchOpen(false)}
+        />
+      )}
     </nav>
   )
 }

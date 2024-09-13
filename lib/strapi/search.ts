@@ -38,7 +38,7 @@ export async function searchPublic(
     },
     pagination: {
       page: 1,
-      pageSize: 20,
+      pageSize: 25,
     },
   })
 
@@ -67,7 +67,7 @@ export async function searchPublic(
     },
     pagination: {
       page: 1,
-      pageSize: 20,
+      pageSize: 25,
     },
   })
 
