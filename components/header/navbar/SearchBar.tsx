@@ -12,6 +12,7 @@ interface ListCardProps {
 
 interface SearchBarProps {
   setSideMenuOpen: (state: boolean) => void
+  sessionToken?: string
 }
 
 const ListCard = ({ title, path, setSideMenuOpen }: ListCardProps) => {
@@ -25,24 +26,23 @@ const ListCard = ({ title, path, setSideMenuOpen }: ListCardProps) => {
 
   return (
     <div className="p-2 link link-text block">
-      <a
-        onClick={handleClick}
-        className="text-white no-underline"
-      >
+      <a onClick={handleClick} className="text-white no-underline">
         {title}
       </a>
     </div>
   )
 }
 
-const SearchBar = ({ setSideMenuOpen }: SearchBarProps) => {
+const SearchBar = ({ setSideMenuOpen, sessionToken }: SearchBarProps) => {
   const [query, setQuery] = useState('')
+  const [isFocused, setIsFocused] = useState(false)
+  const [isHovered, setIsHovered] = useState(false)
   const [results, setResults] = useState<SearchData>({
     sectionData: [],
     pageData: [],
+    privateSectionData: [],
+    privatePageData: [],
   })
-  const [isFocused, setIsFocused] = useState(false)
-  const [isHovered, setIsHovered] = useState(false)
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
@@ -56,16 +56,19 @@ const SearchBar = ({ setSideMenuOpen }: SearchBarProps) => {
 
   const handleSearch = async () => {
     try {
-      const res = await searchPublic(query)
-
+      const res = await searchPublic(query, sessionToken)
+      console.log(res)
       setResults({
         sectionData: res.sectionData,
         pageData: res.pageData,
+        privateSectionData: res.privateSectionData,
+        privatePageData: res.privatePageData,
       })
     } catch (error) {
       console.error(error)
     }
   }
+
   return (
     <div
       className="flex justify-center items-center"
@@ -85,7 +88,10 @@ const SearchBar = ({ setSideMenuOpen }: SearchBarProps) => {
         <MdSearch className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
 
         {(isFocused || isHovered) &&
-          (results.pageData.length > 0 || results.sectionData.length > 0) && (
+          (results.pageData.length > 0 ||
+            results.sectionData.length > 0 ||
+            results.privatePageData.length > 0 ||
+            results.privateSectionData.length > 0) && (
             <div className="absolute left-0 mt-2 right-0 bg-darkgray ring-black bg-opacity-90 z-50 max-h-96 overflow-y-auto overflow-x-hidden rounded-md p-2">
               {results.pageData.map((page) => (
                 <ListCard
@@ -103,6 +109,25 @@ const SearchBar = ({ setSideMenuOpen }: SearchBarProps) => {
                       title={section.attributes.title}
                       setSideMenuOpen={setSideMenuOpen}
                       path={`/${section.attributes.content_page?.data.attributes.category?.data.attributes.slug}/${section.attributes.content_page?.data.attributes.slug}#${titleToAnchor(section.attributes.title ?? '')}`}
+                    />
+                  )
+              )}
+              {results.privatePageData.map((page) => (
+                <ListCard
+                  key={page.attributes.title}
+                  title={page.attributes.title}
+                  setSideMenuOpen={setSideMenuOpen}
+                  path={`/medlem/${page.attributes.slug}`}
+                />
+              ))}
+              {results.privateSectionData.map(
+                (section) =>
+                  section.attributes.title && (
+                    <ListCard
+                      key={section.id}
+                      title={section.attributes.title}
+                      setSideMenuOpen={setSideMenuOpen}
+                      path={`/medlem/${section.attributes.private_page?.data.attributes.slug}#${titleToAnchor(section.attributes.title ?? '')}`}
                     />
                   )
               )}

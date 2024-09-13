@@ -5,9 +5,14 @@ import { PageType, Section } from '@models/page'
 export type SearchData = {
   sectionData: Section[]
   pageData: SingleResponse<PageType>[]
+  privateSectionData: Section[]
+  privatePageData: SingleResponse<PageType>[]
 }
 
-export async function searchPublic(searchParam: string): Promise<SearchData> {
+export async function searchPublic(
+  searchParam: string,
+  sessionToken?: string
+): Promise<SearchData> {
   const categoryQuery = qs.stringify({
     populate: {
       category: {
@@ -36,14 +41,62 @@ export async function searchPublic(searchParam: string): Promise<SearchData> {
       pageSize: 20,
     },
   })
-  const sectionRes = await fetchCollection<Section>('/content-sections', {
-    query: categoryQuery,
+
+  const privateCategoryQuery = qs.stringify({
+    populate: {
+      category: {
+        populate: ['slug'],
+      },
+      private_page: {
+        populate: ['category'],
+      },
+    },
+    filters: {
+      $or: [
+        {
+          title: {
+            $containsi: searchParam,
+          },
+        },
+        {
+          content: {
+            $containsi: searchParam,
+          },
+        },
+      ],
+    },
+    pagination: {
+      page: 1,
+      pageSize: 20,
+    },
   })
 
-  const pageRes = await fetchCollection<PageType>('/content-pages', {
-    query: categoryQuery,
-  })
+  // Fetch public data
+  const [publicSectionRes, publicPageRes] = await Promise.all([
+    fetchCollection<Section>('/content-sections', {
+      query: categoryQuery,
+    }),
+    fetchCollection<PageType>('/content-pages', {
+      query: categoryQuery,
+    }),
+  ])
 
+  let privateSectionRes = null
+  let privatePageRes = null
+
+  // Conditionally fetch private data if sessionToken is available
+  if (sessionToken) {
+    ;[privateSectionRes, privatePageRes] = await Promise.all([
+      fetchCollection<Section>('/private-sections', {
+        query: privateCategoryQuery,
+        headers: { Authorization: `Bearer ${sessionToken}` },
+      }),
+      fetchCollection<PageType>('/private-pages', {
+        query: privateCategoryQuery,
+        headers: { Authorization: `Bearer ${sessionToken}` },
+      }),
+    ])
+  }
   // Type guards to ensure the data is of the expected type
   const isSectionArray = (data: unknown): data is Section[] =>
     Array.isArray(data) &&
@@ -55,7 +108,15 @@ export async function searchPublic(searchParam: string): Promise<SearchData> {
     )
 
   return {
-    sectionData: isSectionArray(sectionRes?.data) ? sectionRes.data : [],
-    pageData: isPageArray(pageRes?.data) ? pageRes.data : [],
+    sectionData: isSectionArray(publicSectionRes?.data)
+      ? publicSectionRes.data
+      : [],
+    pageData: isPageArray(publicPageRes?.data) ? publicPageRes.data : [],
+    privateSectionData: isSectionArray(privateSectionRes?.data)
+      ? privateSectionRes.data
+      : [],
+    privatePageData: isPageArray(privatePageRes?.data)
+      ? privatePageRes.data
+      : [],
   }
 }
