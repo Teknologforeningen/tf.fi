@@ -1,42 +1,44 @@
+import React, { useState, useEffect } from 'react'
 import { SearchData, searchPublic } from '@lib/strapi/search'
 import { titleToAnchor } from '@utils/helpers'
-import { useRouter } from 'next/navigation'
-import React, { useState, useEffect } from 'react'
 import { MdSearch } from 'react-icons/md'
-
-interface ListCardProps {
-  title: string
-  path: string
-  setSideMenuOpen: (state: boolean) => void
-}
+import ListCard from './ListCard'
 
 interface SearchBarProps {
   setSideMenuOpen: (state: boolean) => void
   sessionToken?: string
+  isFocused: boolean
+  setIsFocused: (state: boolean) => void
 }
 
-const ListCard = ({ title, path, setSideMenuOpen }: ListCardProps) => {
-  const router = useRouter()
-
-  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault()
-    router.push(path)
-    setSideMenuOpen(false)
-  }
-
-  return (
-    <div className="p-2 link link-text block">
-      <a onClick={handleClick} className="text-white no-underline">
-        {title}
-      </a>
-    </div>
+const extractSnippet = (
+  text: string | undefined,
+  searchParam: string,
+  snippetLength = 250
+) => {
+  if (!text) return ''
+  const index = text.toLowerCase().indexOf(searchParam.toLowerCase())
+  if (index === -1) return ''
+  const start = Math.max(index - snippetLength / 2, 0)
+  const end = Math.min(
+    index + searchParam.length + snippetLength / 2,
+    text.length
   )
+  const snippet = text.slice(start, end)
+  const highlightedSnippet = snippet.replace(
+    new RegExp(`(${searchParam})`, 'gi'),
+    '<strong>$1</strong>'
+  )
+  return `${start > 0 ? '...' : ''}${highlightedSnippet}${end < text.length ? '...' : ''}`
 }
 
-const SearchBar = ({ setSideMenuOpen, sessionToken }: SearchBarProps) => {
+const SearchBar = ({
+  setSideMenuOpen,
+  sessionToken,
+  isFocused,
+  setIsFocused,
+}: SearchBarProps) => {
   const [query, setQuery] = useState('')
-  const [isFocused, setIsFocused] = useState(false)
-  const [isHovered, setIsHovered] = useState(false)
   const [results, setResults] = useState<SearchData>({
     sectionData: [],
     pageData: [],
@@ -70,12 +72,8 @@ const SearchBar = ({ setSideMenuOpen, sessionToken }: SearchBarProps) => {
   }
 
   return (
-    <div
-      className="flex justify-center items-center"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <div className="relative w-full max-w-md">
+    <div className="flex justify-center items-end w-full content-end">
+      <div className="relative w-full">
         <input
           type="text"
           value={query}
@@ -87,28 +85,34 @@ const SearchBar = ({ setSideMenuOpen, sessionToken }: SearchBarProps) => {
         />
         <MdSearch className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
 
-        {(isFocused || isHovered) &&
+        {isFocused &&
           (results.pageData.length > 0 ||
             results.sectionData.length > 0 ||
             results.privatePageData.length > 0 ||
             results.privateSectionData.length > 0) && (
-            <div className="absolute left-0 mt-2 right-0 bg-darkgray ring-black bg-opacity-90 z-50 max-h-96 overflow-y-auto overflow-x-hidden rounded-md p-2">
+            <div className="absolute left-0 mt-2 right-0 bg-darkgray ring-black bg-opacity-90 z-50 max-h-[700px] overflow-y-auto overflow-x-hidden rounded-md p-2">
               {results.pageData.map((page) => (
                 <ListCard
                   key={page.attributes.title}
                   title={page.attributes.title}
                   setSideMenuOpen={setSideMenuOpen}
                   path={`/${page.attributes.category?.data.attributes.slug}/${page.attributes.slug}`}
+                  snippet={extractSnippet(page.attributes.content, query)}
                 />
               ))}
               {results.sectionData.map(
                 (section) =>
-                  section.attributes.title && (
+                  section.attributes?.title &&
+                  section.attributes?.content_page?.data && (
                     <ListCard
                       key={section.id}
                       title={section.attributes.title}
                       setSideMenuOpen={setSideMenuOpen}
-                      path={`/${section.attributes.content_page?.data.attributes.category?.data.attributes.slug}/${section.attributes.content_page?.data.attributes.slug}#${titleToAnchor(section.attributes.title ?? '')}`}
+                      path={`/${section.attributes.content_page?.data?.attributes.category?.data.attributes.slug}/${section.attributes.content_page?.data.attributes.slug}#${titleToAnchor(section.attributes.title ?? '')}`}
+                      snippet={extractSnippet(
+                        section.attributes.content,
+                        query
+                      )}
                     />
                   )
               )}
@@ -118,16 +122,22 @@ const SearchBar = ({ setSideMenuOpen, sessionToken }: SearchBarProps) => {
                   title={page.attributes.title}
                   setSideMenuOpen={setSideMenuOpen}
                   path={`/medlem/${page.attributes.slug}`}
+                  snippet={extractSnippet(page.attributes.content, query)}
                 />
               ))}
               {results.privateSectionData.map(
                 (section) =>
-                  section.attributes.title && (
+                  section.attributes.title &&
+                  section.attributes?.private_page?.data && (
                     <ListCard
                       key={section.id}
                       title={section.attributes.title}
                       setSideMenuOpen={setSideMenuOpen}
                       path={`/medlem/${section.attributes.private_page?.data.attributes.slug}#${titleToAnchor(section.attributes.title ?? '')}`}
+                      snippet={extractSnippet(
+                        section.attributes.content,
+                        query
+                      )}
                     />
                   )
               )}
