@@ -5,6 +5,7 @@ import Navbar from './navbar'
 import SideMenu from './navbar/SideMenu'
 import { NavbarLink } from '@lib/strapi/navbar'
 import ExpandableNavbar from './navbar/ExpandableNavbar'
+import SearchOverlay from './navbar/searchpage'
 
 const Header = ({
   navbarLinks,
@@ -14,6 +15,7 @@ const Header = ({
   sessionToken?: string
 }) => {
   const [sideMenuOpen, setSideMenuOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
 
   return (
     <header className="sticky top-0 z-10">
@@ -25,17 +27,24 @@ const Header = ({
         <Navbar
           navbarLinks={navbarLinks}
           setSideMenuOpen={setSideMenuOpen}
-          sessionToken={sessionToken}
+          setSearchOpen={() => setSearchOpen(true)}
         />
         <SideMenu open={sideMenuOpen}>
           <Navbar
             navbarLinks={navbarLinks}
             position="side"
             setSideMenuOpen={setSideMenuOpen}
-            sessionToken={sessionToken}
+            setSearchOpen={() => setSearchOpen(true)}
           />
         </SideMenu>
       </div>
+      {searchOpen && (
+        <SearchOverlay
+          sessionToken={sessionToken}
+          setSideMenuOpen={setSideMenuOpen}
+          onClose={() => setSearchOpen(false)}
+        />
+      )}
     </header>
   )
 }

@@ -1,21 +1,22 @@
+import ActivityIndicator from '@components/ActivityIndicator'
 import React, { useEffect } from 'react'
-import { SearchData, searchPublic } from '@lib/strapi/search'
 import { MdCancel, MdSearch } from 'react-icons/md'
 
 type SearchBarProps = {
   query: string
-  setResults: (results: SearchData) => void
+  handleSearch: () => void
   setQuery: (query: string) => void
   clearResults: () => void
   sessionToken?: string
+  searching: boolean
 }
 
 const SearchBar = ({
   query,
-  setResults,
+  handleSearch,
   setQuery,
-  sessionToken,
   clearResults,
+  searching,
 }: SearchBarProps) => {
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
@@ -23,23 +24,8 @@ const SearchBar = ({
         handleSearch()
       }
     }, 500) // 500ms delay
-
     return () => clearTimeout(delayDebounceFn)
   }, [query])
-  const handleSearch = async () => {
-    try {
-      const res = await searchPublic(query, sessionToken)
-      console.log(res)
-      setResults({
-        sectionData: res.sectionData,
-        pageData: res.pageData,
-        privateSectionData: res.privateSectionData,
-        privatePageData: res.privatePageData,
-      })
-    } catch (error) {
-      console.error(error)
-    }
-  }
 
   return (
     <div className="flex justify-center items-end w-full content-end">
@@ -50,8 +36,6 @@ const SearchBar = ({
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Sök..."
           className="w-full pl-10 pr-6 py-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2"
-          //onFocus={() => setIsFocused(true)}
-          //onBlur={() => setIsFocused(false)}
         />
         <MdSearch
           size={30}
@@ -67,6 +51,11 @@ const SearchBar = ({
             size={30}
             className="absolute right-3 top-4 h-5 w-5 text-gray-400"
           />
+          {searching && (
+            <div className="absolute right-9 top-3.5">
+              <ActivityIndicator width={25} height={25} stroke="black" />
+            </div>
+          )}
         </button>
       </div>
     </div>

@@ -1,6 +1,5 @@
 import React from 'react'
 import { useRouter } from 'next/navigation'
-import { truncateString } from '@utils/helpers'
 
 interface ListCardProps {
   title: string
@@ -27,7 +26,7 @@ const ListCard = ({
   }
 
   return (
-    <div className="p-4 bg-lightGray rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 mb-4 max-h-36 overflow-hidden">
+    <div className="p-4 bg-lightGray rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 mb-4 max-h-36 overflow-hidden max-w-full">
       <a
         href="#"
         onClick={handleClick}
@@ -36,7 +35,9 @@ const ListCard = ({
         <div className="font-semibold text-lg mb-2 text-ellipsis overflow-hidden whitespace-nowrap">
           {title}
         </div>
-        {content && truncateString(content, 500)}
+        <div className=" max-h-20 overflow-hidden truncate-multiline">
+          {content}
+        </div>
       </a>
     </div>
   )

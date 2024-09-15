@@ -30,6 +30,18 @@ export default class Drive {
     }
     return response.data
   }
+
+  async searchFiles(searchParam: string) {
+    const searchResults = await this.drive.files.list({
+      q: `(name contains '${searchParam}' or fullText contains '${searchParam}') and mimeType != 'application/vnd.google-apps.folder'`,
+      fields: 'files(id, name, thumbnailLink)',
+      supportsAllDrives: true,
+      includeItemsFromAllDrives: true,
+      driveId: process.env.SHARED_GOOGLE_DRIVE_ID,
+      corpora: 'drive',
+    })
+    return searchResults.data.files ?? []
+  }
 }
 
 function createDrive(
@@ -48,7 +60,6 @@ function createDrive(
     credentials.private_key,
     ['https://www.googleapis.com/auth/drive']
   )
-
   return new Drive(google.drive({ version: 'v3', auth }))
 }
 

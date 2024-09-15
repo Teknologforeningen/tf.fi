@@ -32,6 +32,9 @@ export interface Section {
     content_page?: {
       data: SingleResponse<PageType>
     }
+    private_page?: {
+      data: SingleResponse<PageType>
+    }
   }
 }
 

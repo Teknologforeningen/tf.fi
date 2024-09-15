@@ -1,6 +1,11 @@
+'use server'
 import qs from 'qs'
 import { fetchCollection, SingleResponse } from '.'
 import { PageType, Section } from '@models/page'
+import { publicDrive, privateDrive } from '@lib/google/drive'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@lib/nextauth'
+import { drive_v3 } from 'googleapis'
 
 export type SearchData = {
   sectionData: Section[]
@@ -97,15 +102,14 @@ export async function searchPublic(
       }),
     ])
   }
+
   // Type guards to ensure the data is of the expected type
   const isSectionArray = (data: unknown): data is Section[] =>
     Array.isArray(data) &&
     data.every((item) => 'id' in item && 'attributes' in item)
   const isPageArray = (data: unknown): data is SingleResponse<PageType>[] =>
     Array.isArray(data) &&
-    data.every(
-      (item) => 'data' in item && 'id' in item.data && 'attributes' in item.data
-    )
+    data.every((item) => 'id' in item && 'attributes' in item)
 
   return {
     sectionData: isSectionArray(publicSectionRes?.data)
@@ -118,5 +122,25 @@ export async function searchPublic(
     privatePageData: isPageArray(privatePageRes?.data)
       ? privatePageRes.data
       : [],
+  }
+}
+
+export const searchDrive = async (
+  searchParam: string
+): Promise<drive_v3.Schema$File[] | null> => {
+  try {
+    const session = await getServerSession(authOptions)
+    const drive = session && session.user ? privateDrive : publicDrive
+
+    if (!drive) {
+      throw new Error('Drive instance is not available')
+    }
+
+    const files = await drive.searchFiles(searchParam)
+
+    return files
+  } catch (err) {
+    console.error('Error searching files:', err)
+    return null
   }
 }

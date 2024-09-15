@@ -11,23 +11,21 @@ import { usePathname } from 'next/navigation'
 import LoginButton from './LoginButton'
 import HeaderLink from '@components/header/navbar/HeaderLink'
 import { MdSearch } from 'react-icons/md'
-import SearchOverlay from './searchpage/SearchOverlay'
 
 type NavbarProps = {
   navbarLinks: NavbarLink[]
   position?: 'top' | 'side'
   setSideMenuOpen: (state: boolean) => void
-  sessionToken?: string
+  setSearchOpen: () => void
 }
 
 const Navbar = ({
   navbarLinks,
   setSideMenuOpen,
   position = 'top',
-  sessionToken,
+  setSearchOpen,
 }: NavbarProps) => {
   const path = usePathname()
-  const [searchOpen, setSearchOpen] = useState(false)
 
   return (
     <nav>
@@ -99,19 +97,12 @@ const Navbar = ({
         </div>
 
         <Row className={position === 'side' ? 'mt-6' : ''}>
-          <button onClick={() => setSearchOpen(!searchOpen)}>
+          <button onClick={setSearchOpen}>
             <MdSearch color="white" size={32} />
           </button>
           <LoginButton />
         </Row>
       </div>
-      {searchOpen && (
-        <SearchOverlay
-          sessionToken={sessionToken}
-          setSideMenuOpen={setSideMenuOpen}
-          onClose={() => setSearchOpen(false)}
-        />
-      )}
     </nav>
   )
 }
@@ -143,7 +134,7 @@ const NavbarDropdown = ({
       <div
         className={classNames(
           isTop ? 'peer' : '!m-0',
-          pathWithoutAnchor?.startsWith(`/${link.basePath}` ?? '') &&
+          pathWithoutAnchor?.startsWith(`/${link.basePath}`) &&
             link.links.find((l) => l.link === pathWithoutAnchor) &&
             '!text-teknologröd',
           'link-text text-link'
