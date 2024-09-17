@@ -31,16 +31,18 @@ export default class Drive {
     return response.data
   }
 
-  async searchFiles(searchParam: string) {
+  async searchFiles(searchParam: string, pageToken?: string, pageSize = 10) {
     const searchResults = await this.drive.files.list({
-      q: `(name contains '${searchParam}' or fullText contains '${searchParam}') and mimeType != 'application/vnd.google-apps.folder'`,
-      fields: 'files(id, name, thumbnailLink)',
+      q: `(name contains '${searchParam}' or fullText contains '${searchParam}') and mimeType != 'application/vnd.google-apps.folder' and trashed = false`,
+      fields: 'nextPageToken, files(id, name, thumbnailLink)',
       supportsAllDrives: true,
       includeItemsFromAllDrives: true,
       driveId: process.env.SHARED_GOOGLE_DRIVE_ID,
       corpora: 'drive',
+      pageToken: pageToken,
+      pageSize: pageSize,
     })
-    return searchResults.data.files ?? []
+    return searchResults.data ?? { files: [] }
   }
 }
 

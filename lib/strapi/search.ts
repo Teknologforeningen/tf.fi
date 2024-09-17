@@ -14,7 +14,7 @@ export type SearchData = {
   privatePageData: SingleResponse<PageType>[]
 }
 
-export async function searchPublic(
+export async function searchSiteContent(
   searchParam: string,
   sessionToken?: string
 ): Promise<SearchData> {
@@ -126,8 +126,10 @@ export async function searchPublic(
 }
 
 export const searchDrive = async (
-  searchParam: string
-): Promise<drive_v3.Schema$File[] | null> => {
+  searchParam: string,
+  pageToken?: string,
+  pageSize?: number
+): Promise<drive_v3.Schema$FileList | null> => {
   try {
     const session = await getServerSession(authOptions)
     const drive = session && session.user ? privateDrive : publicDrive
@@ -136,7 +138,7 @@ export const searchDrive = async (
       throw new Error('Drive instance is not available')
     }
 
-    const files = await drive.searchFiles(searchParam)
+    const files = await drive.searchFiles(searchParam, pageToken, pageSize)
 
     return files
   } catch (err) {

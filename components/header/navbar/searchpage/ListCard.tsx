@@ -1,5 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/navigation'
+import { processMarkdownSnippet } from '@utils/helpers'
 
 interface ListCardProps {
   title: string
@@ -35,9 +36,12 @@ const ListCard = ({
         <div className="font-semibold text-lg mb-2 text-ellipsis overflow-hidden whitespace-nowrap">
           {title}
         </div>
-        <div className=" max-h-20 overflow-hidden truncate-multiline">
-          {content}
-        </div>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: processMarkdownSnippet(content ?? ''),
+          }}
+          className=" max-h-20 overflow-hidden truncate-multiline"
+        />
       </a>
     </div>
   )

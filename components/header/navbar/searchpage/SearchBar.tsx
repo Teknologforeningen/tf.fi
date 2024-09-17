@@ -7,8 +7,8 @@ type SearchBarProps = {
   handleSearch: () => void
   setQuery: (query: string) => void
   clearResults: () => void
-  sessionToken?: string
   searching: boolean
+  setIsFetched: (isFetched: boolean) => void
 }
 
 const SearchBar = ({
@@ -17,8 +17,10 @@ const SearchBar = ({
   setQuery,
   clearResults,
   searching,
+  setIsFetched,
 }: SearchBarProps) => {
   useEffect(() => {
+    setIsFetched(false)
     const delayDebounceFn = setTimeout(() => {
       if (query) {
         handleSearch()
