@@ -128,61 +128,77 @@ const SearchOverlay = ({
             <div className="flex text-white mt-4">
               <button
                 className={`px-4 py-2 rounded-md ${!fileSearch ? 'bg-teknologröd' : 'bg-gray-500'}`}
-                onClick={() => setFileSearch(false)}
+                onClick={() => {
+                  setIsFetched(false)
+                  setFileSearch(false)
+                }}
               >
                 Sök nätsidan
               </button>
               <button
                 className={`px-4 py-2 rounded-md ${fileSearch ? 'bg-teknologröd' : 'bg-gray-500'}`}
-                onClick={() => setFileSearch(true)}
+                onClick={() => {
+                  setIsFetched(false)
+                  setFileSearch(true)
+                }}
               >
                 Sök filer
               </button>
             </div>
           )}
-          {query.length < 2 &&
-            ((!contentReturned && !fileSearch) ||
-              (!filesReturned && fileSearch)) &&
-            !searching && (
-              <p className="text-white mt-4 left-0 text-opacity-70">
-                Sök med minst två tecken...
-              </p>
-            )}
-          {isFetched &&
-            query.length >= 2 &&
-            ((!contentReturned && !fileSearch) ||
-              (!filesReturned && fileSearch)) && (
-              <>
-                {!fileSearch ? (
-                  sessionToken ? (
-                    <p className="text-white mt-4 left-0 text-opacity-70">
-                      Vill du söka filer?{' '}
-                      <span
-                        onClick={() => {
-                          setIsFetched(false)
-                          setFileSearch(true)
-                        }}
-                        style={{
-                          cursor: 'pointer',
-                          textDecoration: 'underline',
-                        }}
-                      >
-                        Klicka här för att söka filer med {query}.
-                      </span>
-                      .
-                    </p>
-                  ) : (
-                    <p className="text-white mt-4 left-0 text-opacity-70">
-                      Hitta inte vad du sökte? Logga in för att söka filer.
-                    </p>
-                  )
-                ) : (
-                  <p className="text-white mt-4 left-0 text-opacity-70">
-                    Inga resultat hittades för {query}.
-                  </p>
-                )}
-              </>
-            )}
+          {
+            //if query is less than 2 characters and no content or files are returned for the selected search type
+            query.length < 2 &&
+              ((!contentReturned && !fileSearch) ||
+                (!filesReturned && fileSearch)) &&
+              !searching && (
+                <p className="text-white mt-4 left-0 text-opacity-70">
+                  Sök med minst två tecken...
+                </p>
+              )
+          }
+          {
+            //if query is valid and no content or files are returned for the selected search type
+            isFetched &&
+              query.length >= 2 &&
+              ((!contentReturned && !fileSearch) ||
+                (!filesReturned && fileSearch)) && (
+                <>
+                  {
+                    //if searching for content
+                    !fileSearch ? (
+                      //if logged in show redirect link to file search
+                      sessionToken ? (
+                        <p className="text-white mt-4 left-0 text-opacity-70">
+                          Vill du söka filer?{' '}
+                          <span
+                            onClick={() => {
+                              setIsFetched(false)
+                              setFileSearch(true)
+                            }}
+                            style={{
+                              cursor: 'pointer',
+                              textDecoration: 'underline',
+                            }}
+                          >
+                            Klicka här för att söka filer med {query}.
+                          </span>
+                          .
+                        </p>
+                      ) : (
+                        <p className="text-white mt-4 left-0 text-opacity-70">
+                          Hitta inte vad du sökte? Logga in för att söka filer.
+                        </p>
+                      )
+                    ) : (
+                      <p className="text-white mt-4 left-0 text-opacity-70">
+                        Inga resultat hittades för {query}.
+                      </p>
+                    )
+                  }
+                </>
+              )
+          }
         </div>
 
         <div className="mt-5 h-full w-full">
