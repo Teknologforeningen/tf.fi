@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { marked } from 'marked'
 
 export const getDateLong = (date: Date | string): string =>
@@ -43,4 +44,20 @@ export const processMarkdownSnippet = (markdown: string) => {
   renderer.table = () => ' '
   renderer.link = (href, title, text) => text
   return marked(markdown, { renderer })
+}
+
+export const debounce = (
+  func: (...args: any[]) => any,
+  delay: number,
+  debounceTimeout: React.MutableRefObject<ReturnType<typeof setTimeout> | null>
+) => {
+  return function (args: any[]) {
+    if (debounceTimeout.current) {
+      clearTimeout(debounceTimeout.current)
+    }
+    debounceTimeout.current = setTimeout(() => {
+      func(...args)
+      debounceTimeout.current = null
+    }, delay)
+  }
 }

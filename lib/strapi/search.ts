@@ -18,90 +18,10 @@ export async function searchSiteContent(
   searchParam: string,
   sessionToken?: string
 ): Promise<SearchData> {
-  const categoryQuery = qs.stringify({
-    populate: {
-      category: {
-        populate: ['slug'],
-      },
-      content_page: {
-        populate: ['category'],
-      },
-    },
-    filters: {
-      $or: [
-        {
-          title: {
-            $containsi: searchParam,
-          },
-        },
-        {
-          content: {
-            $containsi: searchParam,
-          },
-        },
-      ],
-    },
-    pagination: {
-      page: 1,
-      pageSize: 25,
-    },
-  })
-
-  const privateCategoryQuery = qs.stringify({
-    populate: {
-      category: {
-        populate: ['slug'],
-      },
-      private_page: {
-        populate: ['category'],
-      },
-    },
-    filters: {
-      $or: [
-        {
-          title: {
-            $containsi: searchParam,
-          },
-        },
-        {
-          content: {
-            $containsi: searchParam,
-          },
-        },
-      ],
-    },
-    pagination: {
-      page: 1,
-      pageSize: 25,
-    },
-  })
-
-  // Fetch public data
-  const [publicSectionRes, publicPageRes] = await Promise.all([
-    fetchCollection<Section>('/content-sections', {
-      query: categoryQuery,
-    }),
-    fetchCollection<PageType>('/content-pages', {
-      query: categoryQuery,
-    }),
-  ])
-
-  let privateSectionRes = null
-  let privatePageRes = null
-
-  // Conditionally fetch private data if sessionToken is available
-  if (sessionToken) {
-    ;[privateSectionRes, privatePageRes] = await Promise.all([
-      fetchCollection<Section>('/private-sections', {
-        query: privateCategoryQuery,
-        headers: { Authorization: `Bearer ${sessionToken}` },
-      }),
-      fetchCollection<PageType>('/private-pages', {
-        query: privateCategoryQuery,
-        headers: { Authorization: `Bearer ${sessionToken}` },
-      }),
-    ])
-  }
+  const [publicSectionRes, publicPageRes] = await fetchPublicData(searchParam)
+  const [privateSectionRes, privatePageRes] = sessionToken
+    ? await fetchPrivateData(searchParam, sessionToken)
+    : [null, null]
 
   // Type guards to ensure the data is of the expected type
   const isSectionArray = (data: unknown): data is Section[] =>
@@ -138,11 +58,89 @@ export const searchDrive = async (
       throw new Error('Drive instance is not available')
     }
 
-    const files = await drive.searchFiles(searchParam, pageToken, pageSize)
-
-    return files
+    return drive.searchFiles(searchParam, pageToken, pageSize)
   } catch (err) {
     console.error('Error searching files:', err)
     return null
   }
+}
+
+const fetchPublicData = async (searchParam: string) => {
+  const query = qs.stringify({
+    populate: {
+      category: {
+        populate: ['slug'],
+      },
+      content_page: {
+        populate: ['category'],
+      },
+    },
+    filters: {
+      $or: [
+        {
+          title: {
+            $containsi: searchParam,
+          },
+        },
+        {
+          content: {
+            $containsi: searchParam,
+          },
+        },
+      ],
+    },
+    pagination: {
+      page: 1,
+      pageSize: 25,
+    },
+  })
+  return Promise.all([
+    fetchCollection<Section>('/content-sections', {
+      query,
+    }),
+    fetchCollection<PageType>('/content-pages', {
+      query,
+    }),
+  ])
+}
+
+const fetchPrivateData = async (searchParam: string, sessionToken?: string) => {
+  const query = qs.stringify({
+    populate: {
+      category: {
+        populate: ['slug'],
+      },
+      private_page: {
+        populate: ['category'],
+      },
+    },
+    filters: {
+      $or: [
+        {
+          title: {
+            $containsi: searchParam,
+          },
+        },
+        {
+          content: {
+            $containsi: searchParam,
+          },
+        },
+      ],
+    },
+    pagination: {
+      page: 1,
+      pageSize: 25,
+    },
+  })
+  return Promise.all([
+    fetchCollection<Section>('/private-sections', {
+      query,
+      headers: { Authorization: `Bearer ${sessionToken}` },
+    }),
+    fetchCollection<PageType>('/private-pages', {
+      query,
+      headers: { Authorization: `Bearer ${sessionToken}` },
+    }),
+  ])
 }

@@ -16,7 +16,7 @@ type NavbarProps = {
   navbarLinks: NavbarLink[]
   position?: 'top' | 'side'
   setSideMenuOpen: (state: boolean) => void
-  setSearchOpen: () => void
+  openSearch: () => void
   sessionToken?: string
 }
 
@@ -24,7 +24,7 @@ const Navbar = ({
   navbarLinks,
   setSideMenuOpen,
   position = 'top',
-  setSearchOpen,
+  openSearch,
   sessionToken,
 }: NavbarProps) => {
   const path = usePathname()
@@ -99,7 +99,10 @@ const Navbar = ({
         </div>
 
         <Row className={position === 'side' ? 'mt-6' : ''}>
-          <button onClick={setSearchOpen} className={position === 'side' ? 'mr-10 mt-1' : ''}>
+          <button
+            onClick={openSearch}
+            className={position === 'side' ? 'mr-10 mt-1' : ''}
+          >
             <MdSearch color="white" size={32} />
           </button>
           <LoginButton sessionToken={sessionToken} />

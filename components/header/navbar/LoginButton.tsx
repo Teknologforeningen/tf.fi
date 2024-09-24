@@ -11,7 +11,6 @@ const LoginButton = ({
   className?: string
   sessionToken?: string
 }) => {
-
   return !sessionToken ? (
     <button
       onClick={(e) => {

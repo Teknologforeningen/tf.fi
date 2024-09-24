@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useRef, useReducer } from 'react'
 import Column from '@components/Column'
-import { SearchData, searchDrive, searchSiteContent } from '@lib/strapi/search'
-import { titleToAnchor } from '@utils/helpers'
+import { searchDrive, searchSiteContent } from '@lib/strapi/search'
+import { titleToAnchor, debounce } from '@utils/helpers'
 import ListCard from './ListCard'
 import SearchBar from './SearchBar'
 import { MdCancel } from 'react-icons/md'
-import { drive_v3 } from 'googleapis'
 import FileCard from './FileCard'
+import { searchReducer, initialState } from './reducer'
 
 type SearchOverlayProps = {
   onClose: () => void
@@ -19,72 +19,90 @@ const SearchOverlay = ({
   sessionToken,
   setSideMenuOpen,
 }: SearchOverlayProps) => {
-  const [query, setQuery] = useState('')
-  const [fileSearch, setFileSearch] = useState(false)
-  const [searching, setSearching] = useState(false)
-  const [isFetched, setIsFetched] = useState(false)
-  const [fileResults, setFileResults] = useState<drive_v3.Schema$FileList>({
-    files: [],
-  })
-  const [results, setResults] = useState<SearchData>({
-    sectionData: [],
-    pageData: [],
-    privateSectionData: [],
-    privatePageData: [],
-  })
+  const [state, dispatch] = useReducer(searchReducer, initialState)
+  const { query, fileSearch, searching, isFetched, fileResults, results } =
+    state
 
   const clearResults = () => {
-    setResults({
-      sectionData: [],
-      pageData: [],
-      privateSectionData: [],
-      privatePageData: [],
-    })
-    setFileResults({ files: [] })
-    setIsFetched(false)
+    dispatch({ type: 'CLEAR_RESULTS' })
   }
 
   //search function for content or files depending on fileSearch state
   //append is used to load more files with same query
-  const handleSearch = async (append = false) => {
-    //do not search if query is less than 2 characters
-    if (query.length < 2) return
+  const handleSearch = async (
+    queryInput: string,
+    searchFiles = false,
+    append = false
+  ) => {
+    if (queryInput.length < 2) return
     try {
-      setSearching(true)
-      if (fileSearch) {
+      dispatch({ type: 'SET_SEARCHING', payload: true })
+      if (searchFiles) {
         const resDrive = await searchDrive(
-          query,
+          queryInput,
           //only nextPage if append is true
           append ? fileResults.nextPageToken ?? undefined : undefined
         )
         //if append then add to existing files else reset
         if (append) {
+          //filter away duplicates
+          const filteredFiles = resDrive?.files?.filter(
+            (file) => !fileResults.files?.find((f) => f.id === file.id)
+          )
           resDrive &&
-            append &&
-            setFileResults({
-              files: [...(fileResults.files ?? []), ...(resDrive.files || [])],
-              nextPageToken: resDrive.nextPageToken,
+            dispatch({
+              type: 'SET_FILE_RESULTS',
+              payload: {
+                files: [...(fileResults.files ?? []), ...(filteredFiles || [])],
+                nextPageToken: resDrive.nextPageToken,
+              },
             })
         } else {
-          setFileResults(resDrive ?? { files: [] })
+          dispatch({
+            type: 'SET_FILE_RESULTS',
+            payload: resDrive ?? { files: [] },
+          })
         }
-        setSearching(false)
+        dispatch({ type: 'SET_SEARCHING', payload: false })
       } else {
-        const res = await searchSiteContent(query, sessionToken)
-        setResults({
-          sectionData: res.sectionData,
-          pageData: res.pageData,
-          privateSectionData: res.privateSectionData,
-          privatePageData: res.privatePageData,
+        const res = await searchSiteContent(queryInput, sessionToken)
+        dispatch({
+          type: 'SET_RESULTS',
+          payload: {
+            sectionData: res.sectionData,
+            pageData: res.pageData,
+            privateSectionData: res.privateSectionData,
+            privatePageData: res.privatePageData,
+          },
         })
-        setSearching(false)
+        dispatch({ type: 'SET_SEARCHING', payload: false })
       }
-      setIsFetched(true)
+      dispatch({ type: 'SET_IS_FETCHED', payload: true })
     } catch (error) {
-      setSearching(false)
+      dispatch({ type: 'SET_SEARCHING', payload: false })
       console.error(error)
     }
   }
+
+  const debounceTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const debouncedHandleSearch = debounce(handleSearch, 500, debounceTimeout)
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target
+    dispatch({ type: 'SET_IS_FETCHED', payload: false })
+    dispatch({ type: 'SET_QUERY', payload: value })
+    if (value && value.length >= 2) {
+      dispatch({ type: 'SET_SEARCHING', payload: true })
+      debouncedHandleSearch([value, fileSearch])
+    }
+  }
+
+  const toggleSearchType = () => {
+    dispatch({ type: 'SET_IS_FETCHED', payload: false })
+    dispatch({ type: 'SET_FILE_SEARCH', payload: !fileSearch })
+    handleSearch(query, !fileSearch)
+  }
+
   // Add class to body to disable interaction with main page
   useEffect(() => {
     document.body.classList.add('overflow-hidden')
@@ -94,11 +112,6 @@ const SearchOverlay = ({
       document.body.style.pointerEvents = 'auto'
     }
   }, [])
-
-  //search with new param when search content changes
-  useEffect(() => {
-    handleSearch()
-  }, [fileSearch])
 
   const contentReturned =
     results?.pageData.length > 0 ||
@@ -117,30 +130,22 @@ const SearchOverlay = ({
         </button>
         <div className="w-full items-start">
           <SearchBar
-            setQuery={setQuery}
-            handleSearch={handleSearch}
+            handleSearch={handleInputChange}
             query={query}
             clearResults={clearResults}
             searching={searching}
-            setIsFetched={setIsFetched}
           />
           {sessionToken && (
             <div className="flex text-white mt-4">
               <button
                 className={`px-4 py-2 rounded-md ${!fileSearch ? 'bg-teknologröd' : 'bg-gray-500'}`}
-                onClick={() => {
-                  setIsFetched(false)
-                  setFileSearch(false)
-                }}
+                onClick={toggleSearchType}
               >
                 Sök nätsidan
               </button>
               <button
                 className={`px-4 py-2 rounded-md ${fileSearch ? 'bg-teknologröd' : 'bg-gray-500'}`}
-                onClick={() => {
-                  setIsFetched(false)
-                  setFileSearch(true)
-                }}
+                onClick={toggleSearchType}
               >
                 Sök filer
               </button>
@@ -173,8 +178,15 @@ const SearchOverlay = ({
                           Vill du söka filer?{' '}
                           <span
                             onClick={() => {
-                              setIsFetched(false)
-                              setFileSearch(true)
+                              dispatch({
+                                type: 'SET_IS_FETCHED',
+                                payload: false,
+                              })
+                              dispatch({
+                                type: 'SET_FILE_SEARCH',
+                                payload: true,
+                              })
+                              handleSearch(query, true)
                             }}
                             style={{
                               cursor: 'pointer',
@@ -201,7 +213,7 @@ const SearchOverlay = ({
           }
         </div>
 
-        <div className="mt-5 h-full w-full">
+        <div className="mt-5 w-full pb-12">
           {!fileSearch && (
             <>
               {results.pageData.map((page) => (
@@ -257,11 +269,11 @@ const SearchOverlay = ({
           {fileSearch && (
             <>
               {fileResults.files?.map(
-                (file, idx) =>
+                (file) =>
                   file.id &&
                   file.name && (
                     <FileCard
-                      key={file.id + idx}
+                      key={file.id}
                       id={file.id}
                       name={file.name}
                       thumbnailLink={file.thumbnailLink}
@@ -269,10 +281,9 @@ const SearchOverlay = ({
                   )
               )}
               {fileResults.nextPageToken && (
-                //center button
                 <div className="flex justify-center">
                   <button
-                    onClick={() => handleSearch(true)}
+                    onClick={() => handleSearch(query, true, true)}
                     disabled={searching}
                     className="mt-4 p-2 bg-teknologröd text-white rounded"
                   >
@@ -282,7 +293,6 @@ const SearchOverlay = ({
               )}
             </>
           )}
-          <div className="h-16" />
         </div>
       </Column>
     </div>

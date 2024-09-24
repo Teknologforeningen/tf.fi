@@ -27,7 +27,7 @@ const Header = ({
         <Navbar
           navbarLinks={navbarLinks}
           setSideMenuOpen={setSideMenuOpen}
-          setSearchOpen={() => setSearchOpen(true)}
+          openSearch={() => setSearchOpen(true)}
           sessionToken={sessionToken}
         />
         <SideMenu open={sideMenuOpen}>
@@ -35,7 +35,7 @@ const Header = ({
             navbarLinks={navbarLinks}
             position="side"
             setSideMenuOpen={setSideMenuOpen}
-            setSearchOpen={() => setSearchOpen(true)}
+            openSearch={() => setSearchOpen(true)}
             sessionToken={sessionToken}
           />
         </SideMenu>
