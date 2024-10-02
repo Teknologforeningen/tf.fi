@@ -11,17 +11,14 @@ type State = {
 }
 
 type Action =
-  | { type: 'SET_QUERY'; payload: string }
-  | { type: 'SET_FILE_SEARCH'; payload: boolean }
+  | { type: 'SET_FILE_SEARCH' }
   | { type: 'SET_SEARCHING'; payload: boolean }
   | { type: 'SET_IS_FETCHED'; payload: boolean }
   | { type: 'SET_FILE_RESULTS'; payload: drive_v3.Schema$FileList }
   | { type: 'SET_RESULTS'; payload: SearchData }
   | { type: 'CLEAR_RESULTS' }
-  | {
-      type: 'APPEND_FILE_RESULTS'
-      payload: { filteredFiles: drive_v3.Schema$File[]; nextPageToken: string }
-    }
+  | { type: 'TOGGLE_SEARCH_TYPE' }
+  | { type: 'INPUT_CHANGED'; payload: string }
 
 export const initialState: State = {
   query: '',
@@ -39,10 +36,8 @@ export const initialState: State = {
 
 export const searchReducer = (state: State, action: Action): State => {
   switch (action.type) {
-    case 'SET_QUERY':
-      return { ...state, query: action.payload }
     case 'SET_FILE_SEARCH':
-      return { ...state, fileSearch: action.payload }
+      return { ...state, fileSearch: true, isFetched: false }
     case 'SET_SEARCHING':
       return { ...state, searching: action.payload }
     case 'SET_IS_FETCHED':
@@ -51,16 +46,14 @@ export const searchReducer = (state: State, action: Action): State => {
       return { ...state, fileResults: action.payload }
     case 'SET_RESULTS':
       return { ...state, results: action.payload }
-    case 'APPEND_FILE_RESULTS':
+    case 'TOGGLE_SEARCH_TYPE':
+      return { ...state, fileSearch: !state.fileSearch, isFetched: false }
+    case 'INPUT_CHANGED':
       return {
         ...state,
-        fileResults: {
-          files: [
-            ...(state.fileResults.files ?? []),
-            ...(action.payload.filteredFiles || []),
-          ],
-          nextPageToken: action.payload.nextPageToken,
-        },
+        query: action.payload,
+        isFetched: false,
+        searching: action.payload.length >= 2,
       }
     case 'CLEAR_RESULTS':
       return { ...initialState, fileSearch: state.fileSearch }

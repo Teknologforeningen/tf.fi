@@ -98,10 +98,10 @@ const Navbar = ({
           )}
         </div>
 
-        <Row className={position === 'side' ? 'mt-6' : ''}>
+        <Row className={classNames({ 'mr-10 mt-1': position === 'side' })}>
           <button
             onClick={openSearch}
-            className={position === 'side' ? 'mr-10 mt-1' : ''}
+            className={classNames({ 'mr-10 mt-1': position === 'side' })}
           >
             <MdSearch color="white" size={32} />
           </button>

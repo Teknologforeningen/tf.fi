@@ -89,17 +89,14 @@ const SearchOverlay = ({
   const debouncedHandleSearch = debounce(handleSearch, 500, debounceTimeout)
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
-    dispatch({ type: 'SET_IS_FETCHED', payload: false })
-    dispatch({ type: 'SET_QUERY', payload: value })
+    dispatch({ type: 'INPUT_CHANGED', payload: value })
     if (value && value.length >= 2) {
-      dispatch({ type: 'SET_SEARCHING', payload: true })
       debouncedHandleSearch([value, fileSearch])
     }
   }
 
   const toggleSearchType = () => {
-    dispatch({ type: 'SET_IS_FETCHED', payload: false })
-    dispatch({ type: 'SET_FILE_SEARCH', payload: !fileSearch })
+    dispatch({ type: 'TOGGLE_SEARCH_TYPE' })
     handleSearch(query, !fileSearch)
   }
 
@@ -179,12 +176,7 @@ const SearchOverlay = ({
                           <span
                             onClick={() => {
                               dispatch({
-                                type: 'SET_IS_FETCHED',
-                                payload: false,
-                              })
-                              dispatch({
                                 type: 'SET_FILE_SEARCH',
-                                payload: true,
                               })
                               handleSearch(query, true)
                             }}
