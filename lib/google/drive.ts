@@ -30,6 +30,21 @@ export default class Drive {
     }
     return response.data
   }
+
+  //note duplicates can occur, seems to be if query is present in name and fullText (content)
+  async searchFiles(searchParam: string, pageToken?: string, pageSize = 10) {
+    const searchResults = await this.drive.files.list({
+      q: `(name contains '${searchParam}' or fullText contains '${searchParam}') and mimeType != 'application/vnd.google-apps.folder' and trashed = false`,
+      fields: 'nextPageToken, files(id, name, thumbnailLink)',
+      supportsAllDrives: true,
+      includeItemsFromAllDrives: true,
+      driveId: process.env.SHARED_GOOGLE_DRIVE_ID,
+      corpora: 'drive',
+      pageToken: pageToken,
+      pageSize: pageSize,
+    })
+    return searchResults.data ?? { files: [] }
+  }
 }
 
 function createDrive(
@@ -48,7 +63,6 @@ function createDrive(
     credentials.private_key,
     ['https://www.googleapis.com/auth/drive']
   )
-
   return new Drive(google.drive({ version: 'v3', auth }))
 }
 

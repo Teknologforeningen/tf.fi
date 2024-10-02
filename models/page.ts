@@ -29,6 +29,12 @@ export interface Section {
     file_folders: {
       data: FileFolder[]
     }
+    content_page?: {
+      data: SingleResponse<PageType>
+    }
+    private_page?: {
+      data: SingleResponse<PageType>
+    }
   }
 }
 

@@ -104,7 +104,6 @@ export async function fetchCollectionSingle<T>(
   if (!res?.data?.[0]) {
     return null
   }
-
   return {
     ...res,
     data: res.data[0],

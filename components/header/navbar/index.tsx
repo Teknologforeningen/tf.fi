@@ -10,17 +10,22 @@ import { NavbarLink, NavbarMultipleLink } from '@lib/strapi/navbar'
 import { usePathname } from 'next/navigation'
 import LoginButton from './LoginButton'
 import HeaderLink from '@components/header/navbar/HeaderLink'
+import { MdSearch } from 'react-icons/md'
 
 type NavbarProps = {
   navbarLinks: NavbarLink[]
   position?: 'top' | 'side'
   setSideMenuOpen: (state: boolean) => void
+  openSearch: () => void
+  sessionToken?: string
 }
 
 const Navbar = ({
   navbarLinks,
   setSideMenuOpen,
   position = 'top',
+  openSearch,
+  sessionToken,
 }: NavbarProps) => {
   const path = usePathname()
 
@@ -92,7 +97,16 @@ const Navbar = ({
             </>
           )}
         </div>
-        <LoginButton className={position === 'side' ? 'mt-6' : ''} />
+
+        <Row className={classNames({ 'mr-10 mt-1': position === 'side' })}>
+          <button
+            onClick={openSearch}
+            className={classNames({ 'mr-10 mt-1': position === 'side' })}
+          >
+            <MdSearch color="white" size={32} />
+          </button>
+          <LoginButton sessionToken={sessionToken} />
+        </Row>
       </div>
     </nav>
   )
@@ -125,7 +139,7 @@ const NavbarDropdown = ({
       <div
         className={classNames(
           isTop ? 'peer' : '!m-0',
-          pathWithoutAnchor?.startsWith(`/${link.basePath}` ?? '') &&
+          pathWithoutAnchor?.startsWith(`/${link.basePath}`) &&
             link.links.find((l) => l.link === pathWithoutAnchor) &&
             '!text-teknologröd',
           'link-text text-link'
