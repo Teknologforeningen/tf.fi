@@ -35,13 +35,29 @@ export default class Drive {
   async searchFiles(searchParam: string, pageToken?: string, pageSize = 10) {
     const searchResults = await this.drive.files.list({
       q: `(name contains '${searchParam}' or fullText contains '${searchParam}') and mimeType != 'application/vnd.google-apps.folder' and trashed = false`,
-      fields: 'nextPageToken, files(id, name, thumbnailLink)',
+      fields: 'nextPageToken, files(id, name, thumbnailLink, parents)',
       supportsAllDrives: true,
       includeItemsFromAllDrives: true,
       driveId: process.env.SHARED_GOOGLE_DRIVE_ID,
       corpora: 'drive',
       pageToken: pageToken,
       pageSize: pageSize,
+    })
+    return searchResults.data ?? { files: [] }
+  }
+
+  //search all folders from shared drive
+  async getAllDirectories() {
+    //needs to be remade if total folders exceed 1000
+    //current folder amount is 429 (4.10.2024)
+    const searchResults = await this.drive.files.list({
+      q: `mimeType = 'application/vnd.google-apps.folder' and trashed = false and name != 'Public' and name != 'Private'`,
+      fields: 'files(id, name, parents)',
+      supportsAllDrives: true,
+      includeItemsFromAllDrives: true,
+      driveId: process.env.SHARED_GOOGLE_DRIVE_ID,
+      corpora: 'drive',
+      pageSize: 1000,
     })
     return searchResults.data ?? { files: [] }
   }

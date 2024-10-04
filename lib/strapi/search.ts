@@ -65,6 +65,22 @@ export const searchDrive = async (
   }
 }
 
+export const getDriveDirectories =
+  async (): Promise<drive_v3.Schema$FileList | null> => {
+    try {
+      const session = await getServerSession(authOptions)
+      const drive = session && session.user ? privateDrive : publicDrive
+
+      if (!drive) {
+        throw new Error('Drive instance is not available')
+      }
+      return drive.getAllDirectories()
+    } catch (err) {
+      console.error('Error searching files:', err)
+      return null
+    }
+  }
+
 const fetchPublicData = async (searchParam: string) => {
   const query = qs.stringify({
     populate: {
