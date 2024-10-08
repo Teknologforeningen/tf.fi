@@ -8,6 +8,7 @@ type State = {
   isFetched: boolean
   fileResults: drive_v3.Schema$FileList
   results: SearchData
+  folderPaths: Map<string, string>
 }
 
 type Action =
@@ -19,6 +20,7 @@ type Action =
   | { type: 'CLEAR_RESULTS' }
   | { type: 'TOGGLE_SEARCH_TYPE' }
   | { type: 'INPUT_CHANGED'; payload: string }
+  | { type: 'SET_FOLDER_PATHS'; payload: Map<string, string> }
 
 export const initialState: State = {
   query: '',
@@ -32,6 +34,7 @@ export const initialState: State = {
     privateSectionData: [],
     privatePageData: [],
   },
+  folderPaths: new Map(),
 }
 
 export const searchReducer = (state: State, action: Action): State => {
@@ -48,6 +51,8 @@ export const searchReducer = (state: State, action: Action): State => {
       return { ...state, results: action.payload }
     case 'TOGGLE_SEARCH_TYPE':
       return { ...state, fileSearch: !state.fileSearch, isFetched: false }
+    case 'SET_FOLDER_PATHS':
+      return { ...state, folderPaths: action.payload }
     case 'INPUT_CHANGED':
       return {
         ...state,
@@ -56,7 +61,11 @@ export const searchReducer = (state: State, action: Action): State => {
         searching: action.payload.length >= 2,
       }
     case 'CLEAR_RESULTS':
-      return { ...initialState, fileSearch: state.fileSearch }
+      return {
+        ...initialState,
+        fileSearch: state.fileSearch,
+        folderPaths: state.folderPaths,
+      }
     default:
       return state
   }
