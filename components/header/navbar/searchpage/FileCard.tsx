@@ -11,7 +11,7 @@ type FileCardProps = {
 const FileCard = ({ id, name, thumbnailLink, folderPath }: FileCardProps) => {
   return (
     <a
-      className="flex items-center p-2 border-b border-lightGray border-opacity-50 hover:bg-lightGray hover:bg-opacity-10"
+      className="flex items-center p-2 border-b border-lightGray border-opacity-50 hover:bg-lightGray hover:bg-opacity-10 no-underline"
       href={`/api/drive/private/download?fileId=${id}&fileName=${name}`}
     >
       {thumbnailLink && (

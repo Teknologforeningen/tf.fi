@@ -39,7 +39,7 @@ const SearchOverlay = ({
     document.body.classList.add('overflow-hidden')
     document.body.style.pointerEvents = 'none'
 
-    //search folder directories on mount
+    //search folder directories on mount and map folder id to path
     const getDirectories = async () => {
       try {
         const res = await getDriveDirectories()
