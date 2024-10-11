@@ -1,5 +1,5 @@
 import { drive_v3, google } from 'googleapis'
-
+import { GaxiosResponse } from 'gaxios'
 export default class Drive {
   private drive: drive_v3.Drive
 
@@ -35,7 +35,7 @@ export default class Drive {
   async searchFiles(searchParam: string, pageToken?: string, pageSize = 10) {
     const searchResults = await this.drive.files.list({
       q: `(name contains '${searchParam}' or fullText contains '${searchParam}') and mimeType != 'application/vnd.google-apps.folder' and trashed = false`,
-      fields: 'nextPageToken, files(id, name, thumbnailLink)',
+      fields: 'nextPageToken, files(id, name, thumbnailLink, parents)',
       supportsAllDrives: true,
       includeItemsFromAllDrives: true,
       driveId: process.env.SHARED_GOOGLE_DRIVE_ID,
@@ -44,6 +44,36 @@ export default class Drive {
       pageSize: pageSize,
     })
     return searchResults.data ?? { files: [] }
+  }
+
+  //search all folders from shared drive
+  async getAllDirectories(): Promise<{ files: drive_v3.Schema$File[] }> {
+    const allFiles: drive_v3.Schema$File[] = []
+    let pageToken: string | undefined = undefined
+    try {
+      do {
+        const response: GaxiosResponse<drive_v3.Schema$FileList> =
+          await this.drive.files.list({
+            q: `mimeType = 'application/vnd.google-apps.folder' and trashed = false and name != 'Public' and name != 'Private'`,
+            fields: 'nextPageToken, files(id, name, parents)',
+            supportsAllDrives: true,
+            includeItemsFromAllDrives: true,
+            driveId: process.env.SHARED_GOOGLE_DRIVE_ID,
+            corpora: 'drive',
+            pageSize: 1000,
+            pageToken: pageToken,
+          })
+        const searchResults = response.data
+
+        allFiles.push(...(searchResults.files || []))
+        pageToken = searchResults.nextPageToken || undefined
+      } while (pageToken)
+
+      return { files: allFiles }
+    } catch (error) {
+      console.error('Error fetching directories:', error)
+      throw error
+    }
   }
 }
 

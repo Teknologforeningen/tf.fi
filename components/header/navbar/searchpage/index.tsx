@@ -1,7 +1,11 @@
 import React, { useEffect, useRef, useReducer } from 'react'
 import Column from '@components/Column'
-import { searchDrive, searchSiteContent } from '@lib/strapi/search'
-import { titleToAnchor, debounce } from '@utils/helpers'
+import {
+  getDriveDirectories,
+  searchDrive,
+  searchSiteContent,
+} from '@lib/strapi/search'
+import { titleToAnchor, debounce, buildFolderPaths } from '@utils/helpers'
 import ListCard from './ListCard'
 import SearchBar from './SearchBar'
 import { MdCancel } from 'react-icons/md'
@@ -20,8 +24,52 @@ const SearchOverlay = ({
   setSideMenuOpen,
 }: SearchOverlayProps) => {
   const [state, dispatch] = useReducer(searchReducer, initialState)
-  const { query, fileSearch, searching, isFetched, fileResults, results } =
-    state
+  const {
+    query,
+    fileSearch,
+    searching,
+    isFetched,
+    fileResults,
+    results,
+    folderPaths,
+  } = state
+
+  useEffect(() => {
+    // Add class to body to disable interaction with main page
+    document.body.classList.add('overflow-hidden')
+    document.body.style.pointerEvents = 'none'
+
+    //search folder directories on mount and map folder id to path
+    const getDirectories = async () => {
+      try {
+        const res = await getDriveDirectories()
+        if (res?.files) {
+          const folderPaths = buildFolderPaths(res.files)
+          dispatch({
+            type: 'SET_FOLDER_PATHS',
+            payload: folderPaths,
+          })
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    getDirectories()
+
+    return () => {
+      document.body.classList.remove('overflow-hidden')
+      document.body.style.pointerEvents = 'auto'
+    }
+  }, [])
+
+  const contentReturned =
+    results?.pageData.length > 0 ||
+    results?.sectionData.length > 0 ||
+    results?.privatePageData.length > 0 ||
+    results?.privateSectionData.length > 0
+
+  const filesReturned =
+    fileResults.files?.length && fileResults.files.length > 0
 
   const clearResults = () => {
     dispatch({ type: 'CLEAR_RESULTS' })
@@ -99,25 +147,6 @@ const SearchOverlay = ({
     dispatch({ type: 'TOGGLE_SEARCH_TYPE' })
     handleSearch(query, !fileSearch)
   }
-
-  // Add class to body to disable interaction with main page
-  useEffect(() => {
-    document.body.classList.add('overflow-hidden')
-    document.body.style.pointerEvents = 'none'
-    return () => {
-      document.body.classList.remove('overflow-hidden')
-      document.body.style.pointerEvents = 'auto'
-    }
-  }, [])
-
-  const contentReturned =
-    results?.pageData.length > 0 ||
-    results?.sectionData.length > 0 ||
-    results?.privatePageData.length > 0 ||
-    results?.privateSectionData.length > 0
-
-  const filesReturned =
-    fileResults.files?.length && fileResults.files.length > 0
 
   return (
     <div className="z-50 fixed inset-0 bg-gray-800 bg-opacity-90 flex items-center justify-center bg-darkgray md:p-10 p-5 pt-12 pointer-events-auto overflow-y-auto">
@@ -269,6 +298,7 @@ const SearchOverlay = ({
                       id={file.id}
                       name={file.name}
                       thumbnailLink={file.thumbnailLink}
+                      folderPath={folderPaths.get(file.parents?.[0] ?? '')}
                     />
                   )
               )}
