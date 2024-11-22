@@ -89,7 +89,7 @@ const SearchOverlay = ({
         const resDrive = await searchDrive(
           queryInput,
           //only nextPage if append is true
-          append ? fileResults.nextPageToken ?? undefined : undefined
+          append ? (fileResults.nextPageToken ?? undefined) : undefined
         )
         //if append then add to existing files else reset
         if (append) {
