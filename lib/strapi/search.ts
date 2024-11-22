@@ -69,12 +69,14 @@ export const getDriveDirectories =
   async (): Promise<drive_v3.Schema$FileList | null> => {
     try {
       const session = await getServerSession(authOptions)
-      const drive = session && session.user ? privateDrive : publicDrive
+      if (!session?.user) {
+        return null
+      }
 
-      if (!drive) {
+      if (!privateDrive) {
         throw new Error('Drive instance is not available')
       }
-      return drive.getAllDirectories()
+      return privateDrive.getAllDirectories()
     } catch (err) {
       console.error('Error searching files:', err)
       return null
