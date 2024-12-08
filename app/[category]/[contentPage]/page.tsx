@@ -14,7 +14,10 @@ export const generateStaticParams = async () => {
     }))
 }
 
-const ContentPage = async ({ params }: { params: { contentPage: string } }) => {
+const ContentPage = async (props: {
+  params: Promise<{ contentPage: string }>
+}) => {
+  const params = await props.params
   const page = await fetchContentPage(params.contentPage)
   return <Page page={page} />
 }

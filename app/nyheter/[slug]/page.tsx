@@ -19,7 +19,8 @@ export async function generateStaticParams() {
 }
 
 /** Page for a single Post */
-const Page = async ({ params }: { params: { slug: string } }) => {
+const Page = async (props: { params: Promise<{ slug: string }> }) => {
+  const params = await props.params
   const post = await fetchPost(params.slug)
 
   return (
