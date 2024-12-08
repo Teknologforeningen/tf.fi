@@ -24,7 +24,6 @@
 .link-text {
   cursor: pointer;
   color: #fff;
-  font-family: var(--font-montserrat), sans-serif;
 }
 
 .link-text::before {
