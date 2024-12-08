@@ -13,7 +13,7 @@ const Posts = ({ posts }: { posts: PostType[] }) => {
       ))}
       <Link
         href="/nyheter"
-        className="duration-50 mt-4 rounded-md p-2 text-center text-sm text-teknologröd transition-colors ease-in-out hover:bg-lightGray"
+        className="duration-50 mt-4 rounded-md p-2 text-center font-medium text-teknologröd transition-colors ease-in-out hover:bg-lightGray"
       >
         Mera nyheter
       </Link>
