@@ -21,6 +21,7 @@ export const Carousel = ({ urls }: { urls: string[] }) => {
     <motion.div
       animate={{ x: `-${index * 100}%` }}
       transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
+      // @ts-expect-error https://github.com/motiondivision/motion/issues/2929
       className="flex h-full max-h-full"
     >
       {urls.map((url, i) => (

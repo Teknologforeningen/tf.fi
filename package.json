@@ -6,7 +6,7 @@
   },
   "private": true,
   "scripts": {
-    "dev": "NODE_OPTIONS='--dns-result-order=ipv4first' next dev",
+    "dev": "NODE_OPTIONS='--dns-result-order=ipv4first' next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "prettier -c app components lib models utils && next lint",
@@ -22,12 +22,12 @@
     "framer-motion": "^11.2.0",
     "googleapis": "^137.1.0",
     "marked": "^12.0.2",
-    "next": "^14.2.3",
+    "next": "15.0.4",
     "next-auth": "^4.24.7",
     "qs": "^6.12.1",
-    "react": "^18.3.1",
+    "react": "19.0.0",
     "react-calendar": "^5.0.0",
-    "react-dom": "^18.3.1",
+    "react-dom": "19.0.0",
     "react-google-drive-picker": "^1.2.2",
     "react-icons": "^5.2.1",
     "sharp": "^0.32.6"
@@ -39,7 +39,7 @@
     "@types/marked": "^6.0.0",
     "@types/node": "20.12.12",
     "@types/qs": "^6.9.7",
-    "@types/react": "18.3.2",
+    "@types/react": "19.0.1",
     "@types/react-textfit": "^1.1.0",
     "@types/react-window": "^1.8.5",
     "@typescript-eslint/eslint-plugin": "^7.9.0",
@@ -47,7 +47,7 @@
     "autoprefixer": "^10.4.8",
     "encoding": "^0.1.13",
     "eslint": "8",
-    "eslint-config-next": "^14.2.3",
+    "eslint-config-next": "15.0.4",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
@@ -56,5 +56,8 @@
     "prettier-plugin-tailwindcss": "^0.5.4",
     "tailwindcss": "^3.1.8",
     "typescript": "5.4.5"
+  },
+  "resolutions": {
+    "@types/react": "19.0.1"
   }
 }
