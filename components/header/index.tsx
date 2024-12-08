@@ -18,7 +18,7 @@ const Header = ({
   const [searchOpen, setSearchOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-10">
+    <header className="fixed w-full top-0 z-10">
       <div className="bg-darkgray">
         <ExpandableNavbar
           sideMenuOpen={sideMenuOpen}
