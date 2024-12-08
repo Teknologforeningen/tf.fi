@@ -7,7 +7,7 @@ const renderer: RendererObject = {
     return `<img class='event-page-image' src=${href} alt='bild' />`
   },
   link(href, _, text) {
-    return `<a class="text-blue-600 underline visited:text-purple-600 hover:text-blue-800" href=${href}>${text}</a>`
+    return `<a class="text-blue-600 underline visited:text-purple-600 hover:text-blue-800 break-all" href=${href}>${text}</a>`
   },
 }
 
