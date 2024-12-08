@@ -22,7 +22,7 @@ type PageProps = {
 const Page = async ({ page, isPrivate = false }: PageProps) => {
   return (
     <>
-      <h1>{page?.title}</h1>
+      <h1 className="break-words">{page?.title}</h1>
       {page?.content && (
         <div
           dangerouslySetInnerHTML={{
