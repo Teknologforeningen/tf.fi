@@ -23,25 +23,11 @@ export async function searchSiteContent(
     ? await fetchPrivateData(searchParam, sessionToken)
     : [null, null]
 
-  // Type guards to ensure the data is of the expected type
-  const isSectionArray = (data: unknown): data is Section[] =>
-    Array.isArray(data) &&
-    data.every((item) => 'id' in item && 'attributes' in item)
-  const isPageArray = (data: unknown): data is SingleResponse<PageType>[] =>
-    Array.isArray(data) &&
-    data.every((item) => 'id' in item && 'attributes' in item)
-
   return {
-    sectionData: isSectionArray(publicSectionRes?.data)
-      ? publicSectionRes.data
-      : [],
-    pageData: isPageArray(publicPageRes?.data) ? publicPageRes.data : [],
-    privateSectionData: isSectionArray(privateSectionRes?.data)
-      ? privateSectionRes.data
-      : [],
-    privatePageData: isPageArray(privatePageRes?.data)
-      ? privatePageRes.data
-      : [],
+    sectionData: publicSectionRes?.data ?? [],
+    pageData: publicPageRes?.data ?? [],
+    privateSectionData: privateSectionRes?.data ?? [],
+    privatePageData: privatePageRes?.data ?? [],
   }
 }
 
@@ -84,15 +70,7 @@ export const getDriveDirectories =
   }
 
 const fetchPublicData = async (searchParam: string) => {
-  const query = qs.stringify({
-    populate: {
-      category: {
-        populate: ['slug'],
-      },
-      content_page: {
-        populate: ['category'],
-      },
-    },
+  const commonQuery = {
     filters: {
       $or: [
         {
@@ -111,14 +89,32 @@ const fetchPublicData = async (searchParam: string) => {
       page: 1,
       pageSize: 25,
     },
+  }
+
+  const sectionQuery = qs.stringify({
+    ...commonQuery,
+    populate: {
+      content_page: {
+        populate: {
+          category: {
+            fields: ['slug'],
+          },
+        },
+      },
+    },
   })
+  const pageQuery = qs.stringify({
+    ...commonQuery,
+    populate: {
+      category: {
+        fields: ['slug'],
+      },
+    },
+  })
+
   return Promise.all([
-    fetchCollection<Section>('/content-sections', {
-      query,
-    }),
-    fetchCollection<PageType>('/content-pages', {
-      query,
-    }),
+    fetchCollection<Section>('/content-sections', { query: sectionQuery }),
+    fetchCollection<PageType>('/content-pages', { query: pageQuery }),
   ])
 }
 
@@ -126,10 +122,10 @@ const fetchPrivateData = async (searchParam: string, sessionToken?: string) => {
   const query = qs.stringify({
     populate: {
       category: {
-        populate: ['slug'],
+        fields: ['slug'],
       },
       private_page: {
-        populate: ['category'],
+        fields: ['category'],
       },
     },
     filters: {
