@@ -19,7 +19,7 @@ module.exports = {
         lightGray: '#f5f5f5',
       },
       fontFamily: {
-        body: ['var(--font-raleway)'],
+        body: ['var(--font-montserrat)'],
         display: ['var(--font-montserrat)'],
       },
       screens: {
@@ -28,7 +28,19 @@ module.exports = {
       typography: {
         DEFAULT: {
           css: {
-            maxWidth: '100ch',
+            fontSize: '1rem',
+            h1: {
+              fontSize: '2.5rem',
+            },
+            h2: {
+              fontSize: '2rem',
+            },
+            h3: {
+              fontSize: '1.5rem',
+            },
+            h4: {
+              fontSize: '1.25rem',
+            },
           },
         },
       },
