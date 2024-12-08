@@ -50,9 +50,9 @@ export async function POST(request: NextRequest) {
         }
         case 'category': {
           const category = body?.entry?.slug
-          for (const page of body?.entry?.content_pages) {
+          body?.entry?.content_pages?.forEach((page: PageType | undefined) =>
             revalidatePath(`/${category}/${page?.slug}`)
-          }
+          )
           revalidateTag('navbar')
           break
         }

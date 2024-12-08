@@ -97,7 +97,7 @@ const SearchOverlay = ({
           const filteredFiles = resDrive?.files?.filter(
             (file) => !fileResults.files?.find((f) => f.id === file.id)
           )
-          resDrive &&
+          if (resDrive) {
             dispatch({
               type: 'SET_FILE_RESULTS',
               payload: {
@@ -105,6 +105,7 @@ const SearchOverlay = ({
                 nextPageToken: resDrive.nextPageToken,
               },
             })
+          }
         } else {
           dispatch({
             type: 'SET_FILE_RESULTS',
