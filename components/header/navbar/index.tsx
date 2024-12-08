@@ -135,14 +135,14 @@ const NavbarDropdown = ({
   const pathWithoutAnchor = path?.split('#')[0]
 
   return (
-    <div className="relative mx-3">
+    <div className="relative mx-3 text-xl font-semibold">
       <div
         className={classNames(
           isTop ? 'peer' : '!m-0',
           pathWithoutAnchor?.startsWith(`/${link.basePath}`) &&
             link.links.find((l) => l.link === pathWithoutAnchor) &&
             '!text-teknologröd',
-          'link-text text-link'
+          'link-text'
         )}
         onClick={onClick}
       >

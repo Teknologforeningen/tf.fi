@@ -22,7 +22,7 @@ type PageProps = {
 const Page = async ({ page, isPrivate = false }: PageProps) => {
   return (
     <>
-      <h1>{page?.title}</h1>
+      <h1 className="break-words">{page?.title}</h1>
       {page?.content && (
         <div
           dangerouslySetInnerHTML={{
@@ -33,9 +33,9 @@ const Page = async ({ page, isPrivate = false }: PageProps) => {
       {page?.showTableOfContents && (
         <TableOfContents sections={page.sections} />
       )}
-      {page?.sections?.map((section, i) => (
+      {page?.sections?.map((section) => (
         <PageSection
-          key={i}
+          key={section.documentId}
           title={section.title}
           content={section.content}
           fileFolders={section.file_folders}
