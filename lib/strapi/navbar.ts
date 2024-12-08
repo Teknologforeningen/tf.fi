@@ -25,23 +25,16 @@ export type NavbarLink = NavbarSingleLink | NavbarMultipleLink
 export interface Navbar {
   id: number
   links: NavbarLink[]
-  categories: {
-    data: CollectionResponse<NavbarCategory>
-  }
-  private_pages: {
-    data: CollectionResponse<SanitizedPage>
-  }
+  categories: CollectionResponse<NavbarCategory>
+  private_pages: CollectionResponse<SanitizedPage>
 }
 
 export default async function fetchNavbar(): Promise<NavbarLink[]> {
   const query = qs.stringify(
     {
       populate: {
-        logo: {
-          populate: ['url'],
-        },
         links: {
-          populate: ['links'],
+          populate: '*',
         },
         categories: {
           populate: {
@@ -51,7 +44,7 @@ export default async function fetchNavbar(): Promise<NavbarLink[]> {
           },
         },
         private_pages: {
-          populate: ['title', 'slug'],
+          fields: ['title', 'slug'],
         },
       },
     },
@@ -64,14 +57,14 @@ export default async function fetchNavbar(): Promise<NavbarLink[]> {
 
   if (res === null || res?.data === null) return []
 
-  const categories = categoriesToLinks(res.data.attributes.categories.data)
+  const categories = categoriesToLinks(res.data.categories)
 
   const privatePages = toNavbarMultipleLink(
     'För medlemmar',
     'medlem',
-    res.data.attributes.private_pages
+    res.data.private_pages
   )
-  return [...categories, ...res.data.attributes.links, privatePages]
+  return [...categories, ...res.data.links, privatePages]
 }
 
 function toLink(
@@ -79,19 +72,17 @@ function toLink(
   baseUrl: string
 ): NavbarSingleLink {
   return {
-    title: page.attributes.title,
-    link: `/${baseUrl}/${page.attributes.slug}`,
+    title: page.title,
+    link: `/${baseUrl}/${page.slug}`,
   }
 }
 
 function toNavbarMultipleLink(
   title: string,
   basePath: string,
-  pages: { data: CollectionResponse<PageType | SanitizedPage> }
+  pages: CollectionResponse<PageType | SanitizedPage>
 ): NavbarMultipleLink {
-  const links = pages.data.map((page) => {
-    return toLink(page, basePath)
-  })
+  const links = pages.map((page) => toLink(page, basePath))
   return {
     title,
     links,
@@ -104,9 +95,9 @@ function categoriesToLinks(
 ): NavbarMultipleLink[] {
   return categories.map((category) => {
     return toNavbarMultipleLink(
-      category.attributes.title,
-      category.attributes.slug,
-      category.attributes.content_pages
+      category.title,
+      category.slug,
+      category.content_pages
     )
   })
 }

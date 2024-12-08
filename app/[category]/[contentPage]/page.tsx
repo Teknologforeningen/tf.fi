@@ -9,7 +9,7 @@ export const generateStaticParams = async () => {
   return contentPages
     .filter((category) => category)
     .map((contentPage) => ({
-      category: contentPage.category?.data?.attributes?.slug,
+      category: contentPage.category?.slug,
       contentPage: contentPage.slug,
     }))
 }

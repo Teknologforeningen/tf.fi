@@ -10,42 +10,28 @@ export type PageType = {
   publishedAt: Date
   locale: string
   showTableOfContents: boolean
-  sections: {
-    data: Section[]
-  }
-  category?: {
-    data: SingleResponse<Category>
-  }
+  sections: Section[]
+  category?: SingleResponse<Category>
 }
 
 export interface Section {
-  id: number
-  attributes: {
-    title?: string
-    content?: string
-    createdAt: Date
-    updatedAt: Date
-    publishedAt: Date
-    file_folders: {
-      data: FileFolder[]
-    }
-    content_page?: {
-      data: SingleResponse<PageType>
-    }
-    private_page?: {
-      data: SingleResponse<PageType>
-    }
-  }
+  documentId: string
+  title?: string
+  content?: string
+  createdAt: Date
+  updatedAt: Date
+  publishedAt: Date
+  file_folders: FileFolder[]
+  content_page?: SingleResponse<PageType>
+  private_page?: SingleResponse<PageType>
 }
 
 export interface FileFolder {
-  id: number
-  attributes: {
-    title?: string
-    folderId: string
-    description?: string
-    createdAt: Date
-    updatedAt: Date
-    publishedAt: Date
-  }
+  documentId: string
+  title?: string
+  folderId: string
+  description?: string
+  createdAt: Date
+  updatedAt: Date
+  publishedAt: Date
 }

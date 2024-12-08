@@ -31,14 +31,14 @@ const Page = async ({ page, isPrivate = false }: PageProps) => {
         />
       )}
       {page?.showTableOfContents && (
-        <TableOfContents sections={page.sections.data} />
+        <TableOfContents sections={page.sections} />
       )}
-      {page?.sections?.data.map((section, i) => (
+      {page?.sections?.map((section, i) => (
         <PageSection
           key={i}
-          title={section.attributes.title}
-          content={section.attributes.content}
-          fileFolders={section.attributes.file_folders.data}
+          title={section.title}
+          content={section.content}
+          fileFolders={section.file_folders}
           isPrivate={isPrivate}
         />
       ))}

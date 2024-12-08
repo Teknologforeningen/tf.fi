@@ -3,15 +3,14 @@ import Column from '@components/Column'
 import Item from '@components/Item'
 import Calendar from '@components/calendar/Calendar'
 import { PostType } from '@models/post'
-import MainBanner, { BannerImage } from '@components/banner/Banner'
+import MainBanner from '@components/banner/Banner'
 import TFInfo from '@components/TFInfo'
 import Posts from '@components/posts'
+import { StrapiImage } from '@models/image'
 
 export type Homepage = {
   banner?: {
-    bannerImages?: {
-      data: BannerImage[]
-    }
+    bannerImages?: StrapiImage[]
   }
 }
 

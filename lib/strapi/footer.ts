@@ -13,5 +13,5 @@ export async function fetchFooter(): Promise<FooterType | null> {
     query,
     tags: ['footer'],
   })
-  return res?.data?.attributes ?? null
+  return res?.data ?? null
 }

@@ -18,7 +18,7 @@ const NationImage = ({ logo }: NationImageProps) => (
   <div className="relative h-[50px] w-[100px]">
     <Link href={logo.url} passHref>
       <Image
-        src={`${process.env.NEXT_PUBLIC_BASE_URL}${logo.image.data.attributes.url}`}
+        src={`${process.env.NEXT_PUBLIC_BASE_URL}${logo.image.url}`}
         alt={logo.name}
         className="object-contain"
         fill

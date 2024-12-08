@@ -239,49 +239,49 @@ const SearchOverlay = ({
             <>
               {results.pageData.map((page) => (
                 <ListCard
-                  key={page.attributes.title}
-                  title={page.attributes.title}
+                  key={page.title}
+                  title={page.title}
                   setSideMenuOpen={setSideMenuOpen}
-                  path={`/${page.attributes.category?.data.attributes.slug}/${page.attributes.slug}`}
+                  path={`/${page.category?.slug}/${page.slug}`}
                   onClick={onClose}
-                  content={page.attributes.content}
+                  content={page.content}
                 />
               ))}
               {results.sectionData.map(
                 (section) =>
-                  section.attributes?.title &&
-                  section.attributes?.content_page?.data && (
+                  section.title &&
+                  section.content_page && (
                     <ListCard
-                      key={section.id}
-                      title={section.attributes.title}
+                      key={section.documentId}
+                      title={section.title}
                       setSideMenuOpen={setSideMenuOpen}
                       onClick={onClose}
-                      path={`/${section.attributes.content_page?.data?.attributes.category?.data.attributes.slug}/${section.attributes.content_page?.data.attributes.slug}#${titleToAnchor(section.attributes.title ?? '')}`}
-                      content={section.attributes.content}
+                      path={`/${section.content_page?.category?.slug}/${section.content_page?.slug}#${titleToAnchor(section.title ?? '')}`}
+                      content={section.content}
                     />
                   )
               )}
               {results.privatePageData.map((page) => (
                 <ListCard
-                  key={page.attributes.title}
-                  title={page.attributes.title}
+                  key={page.title}
+                  title={page.title}
                   setSideMenuOpen={setSideMenuOpen}
-                  path={`/medlem/${page.attributes.slug}`}
+                  path={`/medlem/${page.slug}`}
                   onClick={onClose}
-                  content={page.attributes.content}
+                  content={page.content}
                 />
               ))}
               {results.privateSectionData.map(
                 (section) =>
-                  section.attributes.title &&
-                  section.attributes?.private_page?.data && (
+                  section.title &&
+                  section.private_page && (
                     <ListCard
-                      key={section.id}
-                      title={section.attributes.title}
+                      key={section.documentId}
+                      title={section.title}
                       setSideMenuOpen={setSideMenuOpen}
                       onClick={onClose}
-                      path={`/medlem/${section.attributes.private_page?.data.attributes.slug}#${titleToAnchor(section.attributes.title ?? '')}`}
-                      content={section.attributes.content}
+                      path={`/medlem/${section.private_page?.slug}#${titleToAnchor(section.title ?? '')}`}
+                      content={section.content}
                     />
                   )
               )}

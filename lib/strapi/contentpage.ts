@@ -9,10 +9,11 @@ export async function fetchContentPage(
   const query = qs.stringify({
     populate: {
       sections: {
-        populate: ['title', 'content', 'file_folders'],
+        fields: ['title', 'content'],
+        populate: ['file_folders'],
       },
       category: {
-        populate: ['slug'],
+        fields: ['slug'],
       },
     },
   })
@@ -20,7 +21,7 @@ export async function fetchContentPage(
   const res = await fetchCollectionSingle<PageType>('/content-pages', slug, {
     query,
   })
-  return res?.data?.attributes ?? null
+  return res?.data ?? null
 }
 
 export async function fetchContentPages(): Promise<PageType[]> {
@@ -28,15 +29,13 @@ export async function fetchContentPages(): Promise<PageType[]> {
     {
       populate: {
         category: {
-          populate: ['slug'],
+          fields: ['slug'],
         },
       },
     },
     { encodeValuesOnly: true }
   )
 
-  const res = await fetchCollection<PageType>('/content-pages', {
-    query,
-  })
-  return res?.data?.map((c) => c.attributes) ?? []
+  const res = await fetchCollection<PageType>('/content-pages', { query })
+  return res?.data ?? []
 }

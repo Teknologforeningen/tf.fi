@@ -1,17 +1,12 @@
 import React from 'react'
-import { StrapiImage } from '@models/image'
 import { fetchHomepage } from '@lib/strapi/homepage'
 import { Carousel, SingleBannerImage } from '@components/banner/BannerImages'
 import InfoBlock from '@components/banner/InfoBlock'
 import Column from '@components/Column'
 
-export type BannerImage = StrapiImage['data']
-
 const MainBanner = async () => {
   const homepage = await fetchHomepage()
-  const urls = homepage?.banner?.bannerImages?.data?.map(
-    (img) => img.attributes.url
-  )
+  const urls = homepage?.banner?.bannerImages?.map((img) => img.url)
   return (
     <>
       <div className="relative h-[500px] w-full overflow-x-hidden bg-black">

@@ -11,7 +11,7 @@ export const POSTS_PAGE_SIZE = 10
 export async function fetchPost(slug?: string): Promise<PostType | null> {
   if (slug === undefined) return null
   const res = await fetchCollectionSingle<PostType>(`/posts`, slug)
-  return res?.data?.attributes ?? null
+  return res?.data ?? null
 }
 
 type PostsResponse = {
@@ -34,7 +34,7 @@ export async function fetchPosts(page?: number): Promise<PostsResponse | null> {
   })
 
   return {
-    data: res?.data?.map((e) => ({ id: e.id, ...e.attributes })) ?? [],
+    data: res?.data ?? [],
     totalPages: res?.meta?.pagination.total ?? 0,
   }
 }

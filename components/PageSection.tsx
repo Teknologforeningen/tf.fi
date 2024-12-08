@@ -28,11 +28,11 @@ const PageSection = ({
         __html: marked.parse(content ?? ''),
       }}
     />
-    {fileFolders.map(({ attributes }) => (
-      <div key={attributes.title}>
-        <h3>{attributes.title}</h3>
-        <p>{attributes.description}</p>
-        <DriveExplorer folderId={attributes.folderId} isPrivate={isPrivate} />
+    {fileFolders.map(({ title, description, folderId }) => (
+      <div key={title}>
+        <h3>{title}</h3>
+        <p>{description}</p>
+        <DriveExplorer folderId={folderId} isPrivate={isPrivate} />
       </div>
     ))}
   </div>

@@ -11,10 +11,7 @@ export type StrapiFetchOptions = {
   tags?: string[]
 }
 
-export type SingleResponse<T> = {
-  id: number
-  attributes: Omit<T, 'id'>
-}
+export type SingleResponse<T> = { documentId: string } & T
 
 export type CollectionResponse<T> = SingleResponse<T>[]
 

@@ -7,16 +7,20 @@ import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 import { revalidatePath, revalidateTag } from 'next/cache'
 
-const API_KEY = process.env.API_KEY
+const apiKeyBuf = Buffer.from(process.env.API_KEY ?? '')
 
 export async function POST(request: NextRequest) {
   const bearer = request.headers
     .get('authorization')
     ?.split('Bearer:')[1]
     ?.trim()
+  const bearerBuf = Buffer.from(bearer ?? '')
+
   if (
-    bearer &&
-    API_KEY &&
+    bearerBuf.length > 0 &&
+    apiKeyBuf.length > 0 &&
+    apiKeyBuf.length === bearerBuf.length && // timingSafeEqual throws if the lengths aren't the same.
+    // @ts-expect-error the types are wrong on this function: a `Buffer` is accepted.
     crypto.timingSafeEqual(Buffer.from(bearer), Buffer.from(API_KEY))
   ) {
     return NextResponse.json({ error: 'Invalid token' }, { status: 401 })
@@ -55,19 +59,19 @@ export async function POST(request: NextRequest) {
         case 'content-section': {
           const page = body?.entry?.content_page?.slug
           const pageData = await fetchContentPage(page)
-          const category = pageData?.category?.data?.attributes?.slug
+          const category = pageData?.category?.slug
           revalidatePath(`/${category}/${page}`)
           break
         }
         case 'file-folder': {
           const section = await fetchSection(body?.entry?.content_section?.id)
 
-          const pageData = section?.attributes?.content_page?.data as
+          const pageData = section?.content_page as
             | SingleResponse<PageType>
             | undefined
 
-          const page = pageData?.attributes.slug
-          const category = pageData?.attributes.category?.data?.attributes?.slug
+          const page = pageData?.slug
+          const category = pageData?.category?.slug
           revalidatePath(`/${category}/${page}`)
           break
         }

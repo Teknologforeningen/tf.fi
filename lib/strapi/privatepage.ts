@@ -19,7 +19,8 @@ export async function fetchPrivatePage(
     query,
     headers: { Authorization: `Bearer ${sessionToken}` },
   })
-  return res?.data?.attributes ?? null
+
+  return res?.data ?? null
 }
 
 export async function fetchPrivatePages(
@@ -28,5 +29,5 @@ export async function fetchPrivatePages(
   const res = await fetchCollection<PageType>('/private-pages', {
     headers: { Authorization: `Bearer ${sessionToken}` },
   })
-  return res?.data?.map((c) => c.attributes) ?? []
+  return res?.data ?? []
 }

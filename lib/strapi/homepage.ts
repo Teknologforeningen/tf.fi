@@ -10,5 +10,5 @@ export async function fetchHomepage(): Promise<Homepage | null> {
     { encodeValuesOnly: true }
   )
   const res = await fetchSingle<Homepage>('/homepage', { query })
-  return res?.data?.attributes ?? null
+  return res?.data ?? null
 }
