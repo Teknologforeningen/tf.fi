@@ -31,7 +31,16 @@ const raleway = localFont({
 })
 
 const montserrat = localFont({
-  src: '../public/fonts/montserrat/Montserrat-Bold.woff2',
+  src: [
+    {
+      style: 'normal',
+      path: '../public/fonts/montserrat/Montserrat-VariableFont_wght.ttf',
+    },
+    {
+      style: 'italic',
+      path: '../public/fonts/montserrat/Montserrat-Italic-VariableFont_wght.ttf',
+    },
+  ],
   variable: '--font-montserrat',
 })
 
