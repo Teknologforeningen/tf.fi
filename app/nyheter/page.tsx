@@ -12,7 +12,7 @@ const Page = async () => {
 
   return (
     <Column className="z-10 mx-auto my-6 min-h-[92vh] max-w-7xl p-4">
-      <h1 className="pb-5 text-4xl font-bold">Nyheter</h1>
+      <h1 className="py-16 text-4xl font-bold">Nyheter</h1>
       <Posts initialPosts={posts} totalPages={totalPages} />
     </Column>
   )
