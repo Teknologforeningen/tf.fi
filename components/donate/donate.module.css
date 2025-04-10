@@ -1,0 +1,28 @@
+.container {
+    width: var(--max-content-width);
+    max-width: 100%;
+    padding: 0 var(--margin-small);
+}
+
+.error {
+    border-color: var(--teknologrod);
+    background-color: var(--teknologrod);
+}
+
+.error > p {
+    margin: 0;
+    color: var(--vit);
+    font-weight: normal;
+}
+
+.container legend > button {
+    font-size: 14px;
+    font-weight: normal;
+    font-style: italic;
+    border: none;
+    background-color: var(--dark-gray);
+    padding: 0px var(--margin-small);
+    color: var(--vit);
+    border-radius: var(--margin-medium);
+    margin-right: var(--margin-small);
+}

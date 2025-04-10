@@ -1,0 +1,64 @@
+.groupassociator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.groupassociator h3 {
+    margin-bottom: var(--margin-tiny);
+}
+
+.groupassociator p {
+    font-size: 80%;
+    margin-bottom: 0;
+}
+
+.groupassociator hr {
+    margin-top: var(--margin-small);
+    margin-bottom: var(--margin-small);
+}
+
+.groupassociator a {
+    font-weight: 400;
+}
+
+.groupAndHr {
+    width: 100%;
+}
+
+.group {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.group input {
+    width: 100%;
+    flex: 1;
+    border: 1px solid var(--dark-gray);
+    margin: 0;
+    padding: 0 var(--margin-tiny);
+    font-style: italic;
+}
+
+.groupassociator button {
+    font-weight: 400;
+    margin-left: var(--margin-small);
+    align-self: center;
+    line-height: 0;
+    color: var(--vit);
+    background-color: var(--teknologrod);
+    border: none;
+    border-radius: 32px;
+    padding: 10px;
+}
+
+.groupassociator button img {
+    margin: 0;
+    max-width: 24px;
+    max-height: 24px;
+}
+
+.secondary {
+    background-color: var(--dark-gray) !important;
+}

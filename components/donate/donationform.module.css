@@ -1,0 +1,71 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: var(--max-content-width);
+  margin-bottom: var(--margin-small);
+}
+
+.flash {
+    font-weight: normal;
+    color: var(--teknologrod);
+    margin-bottom: vaR(--margin-medium);
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputGroup > label {
+    font-style: italic;
+    margin-bottom: var(--margin-small);
+}
+
+.inputGroup > input {
+    color: var(--dark-gray);
+    margin-bottom: var(--margin-medium);
+}
+
+.inputGroup > input {
+    margin-bottom: var(--margin-medium);
+    border: 1px solid var(--dark-gray);
+    padding: var(--margin-tiny);
+}
+
+.container > button {
+    border: none;
+    border-radius: var(--margin-medium);
+    margin: 0;
+    padding: var(--margin-tiny);
+    font-weight: normal;
+    background-color: var(--dark-gray);
+    color: white;
+    border: none;
+    margin: 0 0 var(--margin-medium) 0;
+}
+
+.container > p:last-child {
+    margin: 0;
+}
+
+.visibility > div {
+    display: flex;
+    align-items: center;
+    padding: var(--margin-small);
+    border: 1px solid var(--dark-gray);
+    color: var(--dark-gray);
+    text-transform: none;
+    margin-bottom: var(--margin-small);
+}
+
+.visibility > div > input[type="radio"] {
+    margin-right: var(--margin-small);
+}
+
+.visibility > div > input[type="text"] {
+    margin-top: var(--margin-small);
+    width: 100%;
+    border: 1px solid var(--dark-gray);
+    padding: var(--margin-tiny);
+}
+

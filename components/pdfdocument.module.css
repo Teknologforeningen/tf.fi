@@ -1,0 +1,10 @@
+.document {
+  overflow: scroll;
+  margin-bottom: var(--margin-medium);
+}
+
+.document canvas {
+  border: 1px solid var(--teknologrod);
+  margin: 0 0 var(--margin-large) 0;
+  width: 100%;
+}

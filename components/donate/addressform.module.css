@@ -1,0 +1,39 @@
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputGroup > label {
+    font-style: italic;
+    margin-bottom: var(--margin-tiny);
+}
+
+.inputGroup input {
+    width: 100%;
+    border: 1px solid var(--dark-gray);
+    margin: 0;
+    padding: var(--margin-tiny);
+    margin-bottom: var(--margin-small);
+}
+
+.addressForm {
+    margin: 0;
+}
+
+.addressForm button {
+    width: 100%;
+    border: none;
+    background-color: var(--dark-gray);
+    padding: var(--margin-tiny);
+    color: white;
+    border-radius: 32px;
+    margin: var(--margin-small) 0 0 0;
+}
+
+.addressForm p {
+    margin: 0;
+}
+
+.active {
+    background-color: var(--teknologrod) !important;
+}

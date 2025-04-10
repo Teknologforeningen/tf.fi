@@ -1,0 +1,44 @@
+.frame {
+  position: relative;
+  background-size: cover;
+  text-decoration: none;
+  margin-top: var(--margin-small);
+  margin-bottom: var(--margin-large);
+}
+
+.content {
+  transform: translate(
+    calc(var(--margin-small) / 2),
+    calc(-1 * var(--margin-small) / 2)
+  );
+  transition: 0.25s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.frameBottomLeft {
+  position: absolute;
+  bottom: 0;
+  width: 38.19%;
+  height: 38.19%;
+  transition: 0.25s ease-in-out;
+  transform: translate(
+    calc(-1 * var(--margin-small) / 2),
+    calc(var(--margin-small) / 2)
+  );
+  background-color: var(--koppargron);
+}
+
+.frameUpperRight {
+  position: absolute;
+  right: 0;
+  width: 38.19%;
+  height: 38.19%;
+  transition: 0.25s ease-in-out;
+  transform: translate(
+    calc(1.5 * var(--margin-small)),
+    calc(-1.5 * var(--margin-small))
+  );
+  background-color: var(--koppargron);
+}

@@ -1,0 +1,42 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.margin {
+  margin-top: var(--margin-large);
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: var(--margin-large);
+  margin-bottom: calc(3 * var(--margin-large));
+}
+
+.logo {
+  margin-top: var(--margin-large);
+  margin-bottom: var(--margin-large);
+  width: 128px;
+}
+
+.socialMedia {
+  display: flex;
+  justify-content: center;
+}
+
+.socialMedia > a {
+  width: 49px;
+}
+
+.socialMedia > a:not(:last-child) {
+  margin-right: var(--margin-small);
+}
+
+.permission {
+  max-width: var(--max-content-width);
+  text-align: center;
+  line-height: 100%;
+}

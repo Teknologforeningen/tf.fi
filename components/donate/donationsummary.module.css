@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.container p {
+    margin: 0;
+    word-break: break-all;
+}
+
+.container p span {
+    font-style: italic;
+}

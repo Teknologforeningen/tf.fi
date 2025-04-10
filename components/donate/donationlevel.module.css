@@ -1,0 +1,50 @@
+.levels {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 var(--margin-medium) 0;
+    align-items: center;
+}
+
+
+.levels span {
+    flex: 1;
+    height: 4px;
+    background-color: var(--dark-gray);
+    transition: all .1s ease;
+    -webkit-transition: all .1s ease;
+    -moz-transition: all .1s ease;
+}
+
+.levels span::before {
+    width: 4px;
+    height: 4px;
+}
+
+.levels button {
+    border: none;
+    display: inline;
+    width: 48px;
+    height: 48px;
+    background-color: var(--dark-gray);
+    border-radius: 50%;
+    margin: 0;
+    color: var(--vit);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+    user-select: none;
+    cursor: pointer;
+    transition: all .1s ease;
+    -webkit-transition: all .1s ease;
+    -moz-transition: all .1s ease;
+}
+
+.active {
+    background-color: var(--teknologrod) !important;
+}
+
+.donationlevel p {
+    margin-bottom: var(--margin-medium);
+}

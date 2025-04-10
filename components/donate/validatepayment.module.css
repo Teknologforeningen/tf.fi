@@ -1,0 +1,8 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: var(--max-content-width);
+  margin-bottom: calc(var(--margin-large) - var(--margin-small));
+  padding: 0 var(--margin-small) 0 var(--margin-small);
+}

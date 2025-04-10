@@ -1,0 +1,22 @@
+:root {
+  --teknologrod: #b20738;
+  --fundraisingbla: #1a4683;
+  --dark-gray: #242424;
+  --koppargron: #7ecbb3;
+  --ljusrod: #d997c7;
+  --vit: #ffffff;
+  --margin-tiny: 8px;
+  --margin-small: 16px;
+  --margin-medium: 32px;
+  --margin-large: 48px;
+  --margin-huge: 96px;
+  --max-width: 1024px;
+  --max-content-width: 640px;
+  --card-size: 180px;
+}
+
+@media (max-width: 456px) {
+  :root {
+    --card-size: 120px;
+  }
+}
