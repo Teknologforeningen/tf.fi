@@ -8,19 +8,13 @@ interface ExpandableNavbarProps {
   setSideMenuOpen: (state: boolean) => void
 }
 
-const ExpandableNavbar = ({
-  setSideMenuOpen,
-  sideMenuOpen,
-}: ExpandableNavbarProps) => {
+const ExpandableNavbar = ({ setSideMenuOpen, sideMenuOpen }: ExpandableNavbarProps) => {
   return (
     <div className="flex flex-row justify-between">
       <div className="mx-3 my-3 md:hidden">
         <TFLogoSmall highlight={false} />
       </div>
-      <MenuIcon
-        open={sideMenuOpen}
-        onClick={() => setSideMenuOpen(!sideMenuOpen)}
-      />
+      <MenuIcon open={sideMenuOpen} onClick={() => setSideMenuOpen(!sideMenuOpen)} />
     </div>
   )
 }

@@ -1,10 +1,6 @@
 import React, { useEffect, useRef, useReducer } from 'react'
 import Column from '@components/Column'
-import {
-  getDriveDirectories,
-  searchDrive,
-  searchSiteContent,
-} from '@lib/strapi/search'
+import { getDriveDirectories, searchDrive, searchSiteContent } from '@lib/strapi/search'
 import { titleToAnchor, debounce, buildFolderPaths } from '@utils/helpers'
 import ListCard from './ListCard'
 import SearchBar from './SearchBar'
@@ -18,21 +14,9 @@ type SearchOverlayProps = {
   setSideMenuOpen: (state: boolean) => void
 }
 
-const SearchOverlay = ({
-  onClose,
-  sessionToken,
-  setSideMenuOpen,
-}: SearchOverlayProps) => {
+const SearchOverlay = ({ onClose, sessionToken, setSideMenuOpen }: SearchOverlayProps) => {
   const [state, dispatch] = useReducer(searchReducer, initialState)
-  const {
-    query,
-    fileSearch,
-    searching,
-    isFetched,
-    fileResults,
-    results,
-    folderPaths,
-  } = state
+  const { query, fileSearch, searching, isFetched, fileResults, results, folderPaths } = state
 
   useEffect(() => {
     // Add class to body to disable interaction with main page
@@ -68,8 +52,7 @@ const SearchOverlay = ({
     results?.privatePageData.length > 0 ||
     results?.privateSectionData.length > 0
 
-  const filesReturned =
-    fileResults.files?.length && fileResults.files.length > 0
+  const filesReturned = fileResults.files?.length && fileResults.files.length > 0
 
   const clearResults = () => {
     dispatch({ type: 'CLEAR_RESULTS' })
@@ -77,11 +60,7 @@ const SearchOverlay = ({
 
   //search function for content or files depending on fileSearch state
   //append is used to load more files with same query
-  const handleSearch = async (
-    queryInput: string,
-    searchFiles = false,
-    append = false
-  ) => {
+  const handleSearch = async (queryInput: string, searchFiles = false, append = false) => {
     if (queryInput.length < 2) return
     try {
       dispatch({ type: 'SET_SEARCHING', payload: true })
@@ -94,9 +73,7 @@ const SearchOverlay = ({
         //if append then add to existing files else reset
         if (append) {
           //filter away duplicates
-          const filteredFiles = resDrive?.files?.filter(
-            (file) => !fileResults.files?.find((f) => f.id === file.id)
-          )
+          const filteredFiles = resDrive?.files?.filter((file) => !fileResults.files?.find((f) => f.id === file.id))
           if (resDrive) {
             dispatch({
               type: 'SET_FILE_RESULTS',
@@ -156,12 +133,7 @@ const SearchOverlay = ({
           <MdCancel size={30} color="white" />
         </button>
         <div className="w-full items-start">
-          <SearchBar
-            handleSearch={handleInputChange}
-            query={query}
-            clearResults={clearResults}
-            searching={searching}
-          />
+          <SearchBar handleSearch={handleInputChange} query={query} clearResults={clearResults} searching={searching} />
           {sessionToken && (
             <div className="flex text-white mt-4">
               <button
@@ -180,58 +152,48 @@ const SearchOverlay = ({
           )}
           {
             //if query is less than 2 characters and no content or files are returned for the selected search type
-            query.length < 2 &&
-              ((!contentReturned && !fileSearch) ||
-                (!filesReturned && fileSearch)) &&
-              !searching && (
-                <p className="text-white mt-4 left-0 text-opacity-70">
-                  Sök med minst två tecken...
-                </p>
-              )
+            query.length < 2 && ((!contentReturned && !fileSearch) || (!filesReturned && fileSearch)) && !searching && (
+              <p className="text-white mt-4 left-0 text-opacity-70">Sök med minst två tecken...</p>
+            )
           }
           {
             //if query is valid and no content or files are returned for the selected search type
-            isFetched &&
-              query.length >= 2 &&
-              ((!contentReturned && !fileSearch) ||
-                (!filesReturned && fileSearch)) && (
-                <>
-                  {
-                    //if searching for content
-                    !fileSearch ? (
-                      //if logged in show redirect link to file search
-                      sessionToken ? (
-                        <p className="text-white mt-4 left-0 text-opacity-70">
-                          Vill du söka filer?{' '}
-                          <span
-                            onClick={() => {
-                              dispatch({
-                                type: 'SET_FILE_SEARCH',
-                              })
-                              handleSearch(query, true)
-                            }}
-                            style={{
-                              cursor: 'pointer',
-                              textDecoration: 'underline',
-                            }}
-                          >
-                            Klicka här för att söka filer med {query}.
-                          </span>
-                          .
-                        </p>
-                      ) : (
-                        <p className="text-white mt-4 left-0 text-opacity-70">
-                          Hitta inte vad du sökte? Logga in för att söka filer.
-                        </p>
-                      )
+            isFetched && query.length >= 2 && ((!contentReturned && !fileSearch) || (!filesReturned && fileSearch)) && (
+              <>
+                {
+                  //if searching for content
+                  !fileSearch ? (
+                    //if logged in show redirect link to file search
+                    sessionToken ? (
+                      <p className="text-white mt-4 left-0 text-opacity-70">
+                        Vill du söka filer?{' '}
+                        <span
+                          onClick={() => {
+                            dispatch({
+                              type: 'SET_FILE_SEARCH',
+                            })
+                            handleSearch(query, true)
+                          }}
+                          style={{
+                            cursor: 'pointer',
+                            textDecoration: 'underline',
+                          }}
+                        >
+                          Klicka här för att söka filer med {query}.
+                        </span>
+                        .
+                      </p>
                     ) : (
                       <p className="text-white mt-4 left-0 text-opacity-70">
-                        Inga resultat hittades för {query}.
+                        Hitta inte vad du sökte? Logga in för att söka filer.
                       </p>
                     )
-                  }
-                </>
-              )
+                  ) : (
+                    <p className="text-white mt-4 left-0 text-opacity-70">Inga resultat hittades för {query}.</p>
+                  )
+                }
+              </>
+            )
           }
         </div>
 

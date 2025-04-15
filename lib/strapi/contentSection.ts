@@ -6,9 +6,7 @@ type PopulatedSection = Section & {
   content_page: PageType
 }
 
-export async function fetchSection(
-  id: number
-): Promise<PopulatedSection | null> {
+export async function fetchSection(id: number): Promise<PopulatedSection | null> {
   const query = qs.stringify({
     populate: {
       content_page: {

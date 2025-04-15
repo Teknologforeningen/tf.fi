@@ -16,14 +16,7 @@ const ActivityIndicator = (props: SVGProps<SVGSVGElement>) => (
     viewBox="0 0 100 100"
     {...props}
   >
-    <circle
-      cx={50}
-      cy={50}
-      r={35}
-      fill="none"
-      strokeDasharray="164.93361431346415 56.97787143782138"
-      strokeWidth={10}
-    >
+    <circle cx={50} cy={50} r={35} fill="none" strokeDasharray="164.93361431346415 56.97787143782138" strokeWidth={10}>
       <animateTransform
         attributeName="transform"
         dur="1s"

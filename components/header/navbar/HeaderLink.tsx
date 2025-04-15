@@ -11,12 +11,7 @@ type HeaderLinkProps = {
 
 /* Prefetch on hover cannot be disabled for NextJS links that point to pages with static props
    (might be possible with app router), requiring this custom Link component. */
-const HeaderLink = ({
-  title,
-  href,
-  setSideMenuOpen,
-  className,
-}: HeaderLinkProps) => {
+const HeaderLink = ({ title, href, setSideMenuOpen, className }: HeaderLinkProps) => {
   const router = useRouter()
 
   const onClick = (e: React.MouseEvent<HTMLElement>) => {

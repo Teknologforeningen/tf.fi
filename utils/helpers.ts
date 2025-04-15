@@ -74,10 +74,7 @@ export const buildFolderPaths = (folders: drive_v3.Schema$File[]) => {
   const pathMap = new Map<string, string>()
 
   // Step 3: Define a recursive function with memoization
-  function getFullPath(
-    folderId: string,
-    visited: Set<string> = new Set()
-  ): string {
+  function getFullPath(folderId: string, visited: Set<string> = new Set()): string {
     // Check if the path is already computed
     if (pathMap.has(folderId)) {
       return pathMap.get(folderId)!

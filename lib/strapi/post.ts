@@ -1,10 +1,6 @@
 import qs from 'qs'
 import { PostType } from '@models/post'
-import {
-  fetchCollection,
-  fetchCollectionSingle,
-  PagePagination,
-} from '@lib/strapi'
+import { fetchCollection, fetchCollectionSingle, PagePagination } from '@lib/strapi'
 
 export const POSTS_PAGE_SIZE = 10
 

@@ -59,18 +59,11 @@ export default async function fetchNavbar(): Promise<NavbarLink[]> {
 
   const categories = categoriesToLinks(res.data.categories)
 
-  const privatePages = toNavbarMultipleLink(
-    'För medlemmar',
-    'medlem',
-    res.data.private_pages
-  )
+  const privatePages = toNavbarMultipleLink('För medlemmar', 'medlem', res.data.private_pages)
   return [...categories, ...res.data.links, privatePages]
 }
 
-function toLink(
-  page: SingleResponse<PageType | SanitizedPage>,
-  baseUrl: string
-): NavbarSingleLink {
+function toLink(page: SingleResponse<PageType | SanitizedPage>, baseUrl: string): NavbarSingleLink {
   return {
     title: page.title,
     link: `/${baseUrl}/${page.slug}`,
@@ -90,14 +83,8 @@ function toNavbarMultipleLink(
   }
 }
 
-function categoriesToLinks(
-  categories: CollectionResponse<NavbarCategory>
-): NavbarMultipleLink[] {
+function categoriesToLinks(categories: CollectionResponse<NavbarCategory>): NavbarMultipleLink[] {
   return categories.map((category) => {
-    return toNavbarMultipleLink(
-      category.title,
-      category.slug,
-      category.content_pages
-    )
+    return toNavbarMultipleLink(category.title, category.slug, category.content_pages)
   })
 }

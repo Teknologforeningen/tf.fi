@@ -11,12 +11,7 @@ type PageSectionProps = {
   isPrivate: boolean
 }
 
-const PageSection = ({
-  title,
-  content,
-  fileFolders,
-  isPrivate,
-}: PageSectionProps) => (
+const PageSection = ({ title, content, fileFolders, isPrivate }: PageSectionProps) => (
   <div>
     {title && (
       <h2 id={titleToAnchor(title)} className="scroll-mt-24">

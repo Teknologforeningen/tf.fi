@@ -30,9 +30,7 @@ const Page = async ({ page, isPrivate = false }: PageProps) => {
           }}
         />
       )}
-      {page?.showTableOfContents && (
-        <TableOfContents sections={page.sections} />
-      )}
+      {page?.showTableOfContents && <TableOfContents sections={page.sections} />}
       {page?.sections?.map((section) => (
         <PageSection
           key={section.documentId}

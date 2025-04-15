@@ -25,10 +25,7 @@ const Page = async () => {
   return (
     <Column>
       <MainBanner />
-      <Item
-        backgroundColor="white"
-        className="max-w-[1500px] flex-col md:flex-row"
-      >
+      <Item backgroundColor="white" className="max-w-[1500px] flex-col md:flex-row">
         <Posts posts={posts.slice(0, 5)} />
         <Calendar />
       </Item>

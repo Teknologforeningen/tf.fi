@@ -1,7 +1,6 @@
 import qs from 'qs'
 
-export const STRAPI_URL =
-  process.env.NEXT_PUBLIC_BASE_URL ?? 'https://cms.tf.fi'
+export const STRAPI_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://cms.tf.fi'
 export const API_URL = `${STRAPI_URL}/api`
 
 export type StrapiFetchOptions = {
@@ -112,9 +111,7 @@ export async function fetchCollection<T, P extends Pagination = PagePagination>(
   options?: Omit<StrapiFetchOptions, 'slug'> & { pagination?: P }
 ): Promise<StrapiResponse<T> | null> {
   const url = options?.url ?? API_URL
-  const paginationQuery = options?.pagination
-    ? qs.stringify({ pagination: options.pagination })
-    : ''
+  const paginationQuery = options?.pagination ? qs.stringify({ pagination: options.pagination }) : ''
   const query = options?.query ?? ''
   return fetchFromStrapi<T, CollectionResponse<T>>({
     url: `${url}${path}?${query}&${paginationQuery}`,
@@ -129,10 +126,7 @@ interface StrapiFetchProps {
   tags?: string[]
 }
 
-async function fetchFromStrapi<
-  T,
-  S extends CollectionResponse<T> | SingleResponse<T>,
->({
+async function fetchFromStrapi<T, S extends CollectionResponse<T> | SingleResponse<T>>({
   url,
   headers,
   tags,

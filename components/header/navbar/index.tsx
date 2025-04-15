@@ -20,13 +20,7 @@ type NavbarProps = {
   sessionToken?: string
 }
 
-const Navbar = ({
-  navbarLinks,
-  setSideMenuOpen,
-  position = 'top',
-  openSearch,
-  sessionToken,
-}: NavbarProps) => {
+const Navbar = ({ navbarLinks, setSideMenuOpen, position = 'top', openSearch, sessionToken }: NavbarProps) => {
   const path = usePathname()
 
   return (
@@ -34,9 +28,7 @@ const Navbar = ({
       <div
         className={classNames(
           'flex w-full justify-between px-4 py-2 md:items-center',
-          position === 'side'
-            ? 'flex flex-col md:hidden'
-            : 'hidden flex-row md:flex'
+          position === 'side' ? 'flex flex-col md:hidden' : 'hidden flex-row md:flex'
         )}
       >
         <div className="flex-start flex flex-col justify-between md:flex-row md:items-center">
@@ -58,10 +50,7 @@ const Navbar = ({
                 title={link.title}
                 href={link.link}
                 setSideMenuOpen={setSideMenuOpen}
-                className={classNames(
-                  path === link.link && '!text-teknologröd',
-                  'link link-text mx-3'
-                )}
+                className={classNames(path === link.link && '!text-teknologröd', 'link link-text mx-3')}
               />
             )
           )}
@@ -78,17 +67,11 @@ const Navbar = ({
           ) : (
             <>
               <Row className="min-h-[20px] justify-around">
-                <Link
-                  href={links.täffäab}
-                  className="link link-text flex flex-col items-center"
-                >
+                <Link href={links.täffäab} className="link link-text flex flex-col items-center">
                   <TaffaABLogo />
                   Täffä AB
                 </Link>
-                <Link
-                  href={links.lunch}
-                  className="link link-text flex flex-col items-center"
-                >
+                <Link href={links.lunch} className="link link-text flex flex-col items-center">
                   <DagsenLogo />
                   Täffä Lunch
                 </Link>
@@ -99,10 +82,7 @@ const Navbar = ({
         </div>
 
         <Row className={classNames({ 'mr-10 mt-1': position === 'side' })}>
-          <button
-            onClick={openSearch}
-            className={classNames({ 'mr-10 mt-1': position === 'side' })}
-          >
+          <button onClick={openSearch} className={classNames({ 'mr-10 mt-1': position === 'side' })}>
             <MdSearch color="white" size={32} />
           </button>
           <LoginButton sessionToken={sessionToken} />

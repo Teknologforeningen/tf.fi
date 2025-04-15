@@ -25,24 +25,16 @@ const InfoBlock = () => {
         infoVisible ? 'translate-x-0' : 'translate-x-full'
       )}
     >
-      <p className="mb-2 inline-flex items-center border-b-4 border-teknologröd">
-        Tänkte du besöka?
-      </p>
+      <p className="mb-2 inline-flex items-center border-b-4 border-teknologröd">Tänkte du besöka?</p>
       <Row>
         <div className="mr-2 border-r-[1px] border-r-white pr-2">
-          <Link
-            href={links.täffäab}
-            className="link link-text inline-flex items-center"
-          >
+          <Link href={links.täffäab} className="link link-text inline-flex items-center">
             <TaffaABLogo textHidden={false} />
           </Link>
           <div className="mt-2 text-sm">Catering och barverksamhet</div>
         </div>
         <div>
-          <Link
-            href={links.lunch}
-            className="link link-text inline-flex flex-row items-center"
-          >
+          <Link href={links.lunch} className="link link-text inline-flex flex-row items-center">
             <DagsenLogo textHidden={false} />
           </Link>
           <div className="mr-2 mt-2 text-sm">Nationens lunchrestaurang</div>

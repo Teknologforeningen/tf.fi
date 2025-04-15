@@ -12,18 +12,10 @@ const Post = ({ post }: { post: PostType }) => {
       key={post.slug}
     >
       <Column className="items-baseline gap-1">
-        <h3 className="select-none text-xl xxs:text-2xl font-medium">
-          {post.title}
-        </h3>
-        {post.date && (
-          <p className="select-none xxs:text-xl">{getDateLong(post.date)}</p>
-        )}
-        <p className="max-h-[100px] overflow-hidden text-ellipsis text-sm">
-          {post.description}
-        </p>
-        <p className="font-semibold leading-[18px] tracking-wide text-teknologröd">
-          läs mera
-        </p>
+        <h3 className="select-none text-xl xxs:text-2xl font-medium">{post.title}</h3>
+        {post.date && <p className="select-none xxs:text-xl">{getDateLong(post.date)}</p>}
+        <p className="max-h-[100px] overflow-hidden text-ellipsis text-sm">{post.description}</p>
+        <p className="font-semibold leading-[18px] tracking-wide text-teknologröd">läs mera</p>
       </Column>
     </Link>
   )

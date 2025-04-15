@@ -14,10 +14,7 @@ export type SearchData = {
   privatePageData: SingleResponse<PageType>[]
 }
 
-export async function searchSiteContent(
-  searchParam: string,
-  sessionToken?: string
-): Promise<SearchData> {
+export async function searchSiteContent(searchParam: string, sessionToken?: string): Promise<SearchData> {
   const [publicSectionRes, publicPageRes] = await fetchPublicData(searchParam)
   const [privateSectionRes, privatePageRes] = sessionToken
     ? await fetchPrivateData(searchParam, sessionToken)
@@ -51,23 +48,22 @@ export const searchDrive = async (
   }
 }
 
-export const getDriveDirectories =
-  async (): Promise<drive_v3.Schema$FileList | null> => {
-    try {
-      const session = await getServerSession(authOptions)
-      if (!session?.user) {
-        return null
-      }
-
-      if (!privateDrive) {
-        throw new Error('Drive instance is not available')
-      }
-      return privateDrive.getAllDirectories()
-    } catch (err) {
-      console.error('Error searching files:', err)
+export const getDriveDirectories = async (): Promise<drive_v3.Schema$FileList | null> => {
+  try {
+    const session = await getServerSession(authOptions)
+    if (!session?.user) {
       return null
     }
+
+    if (!privateDrive) {
+      throw new Error('Drive instance is not available')
+    }
+    return privateDrive.getAllDirectories()
+  } catch (err) {
+    console.error('Error searching files:', err)
+    return null
   }
+}
 
 const fetchPublicData = async (searchParam: string) => {
   const commonQuery = {

@@ -10,10 +10,7 @@ import { revalidatePath, revalidateTag } from 'next/cache'
 const apiKeyBuf = Buffer.from(process.env.API_KEY ?? '')
 
 export async function POST(request: NextRequest) {
-  const bearer = request.headers
-    .get('authorization')
-    ?.split('Bearer:')[1]
-    ?.trim()
+  const bearer = request.headers.get('authorization')?.split('Bearer:')[1]?.trim()
   const bearerBuf = Buffer.from(bearer ?? '')
 
   if (
@@ -66,9 +63,7 @@ export async function POST(request: NextRequest) {
         case 'file-folder': {
           const section = await fetchSection(body?.entry?.content_section?.id)
 
-          const pageData = section?.content_page as
-            | SingleResponse<PageType>
-            | undefined
+          const pageData = section?.content_page as SingleResponse<PageType> | undefined
 
           const page = pageData?.slug
           const category = pageData?.category?.slug
@@ -112,9 +107,6 @@ export async function POST(request: NextRequest) {
     }
   } catch (err) {
     console.log(err)
-    return NextResponse.json(
-      { revalidated: false, now: Date.now() },
-      { status: 500 }
-    )
+    return NextResponse.json({ revalidated: false, now: Date.now() }, { status: 500 })
   }
 }

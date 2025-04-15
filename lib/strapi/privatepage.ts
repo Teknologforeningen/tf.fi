@@ -2,10 +2,7 @@ import qs from 'qs'
 import { PageType } from '@models/page'
 import { fetchCollection, fetchSingle } from '@lib/strapi/index'
 
-export async function fetchPrivatePage(
-  sessionToken?: string,
-  slug?: string
-): Promise<PageType | null> {
+export async function fetchPrivatePage(sessionToken?: string, slug?: string): Promise<PageType | null> {
   if (slug === undefined || sessionToken === undefined) return null
   const query = qs.stringify({
     populate: {
@@ -23,9 +20,7 @@ export async function fetchPrivatePage(
   return res?.data ?? null
 }
 
-export async function fetchPrivatePages(
-  sessionToken: string
-): Promise<PageType[]> {
+export async function fetchPrivatePages(sessionToken: string): Promise<PageType[]> {
   const res = await fetchCollection<PageType>('/private-pages', {
     headers: { Authorization: `Bearer ${sessionToken}` },
   })

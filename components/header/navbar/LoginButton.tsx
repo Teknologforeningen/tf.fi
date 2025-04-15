@@ -4,13 +4,7 @@ import React from 'react'
 import { signIn, signOut } from 'next-auth/react'
 import classNames from 'classnames'
 
-const LoginButton = ({
-  className,
-  sessionToken,
-}: {
-  className?: string
-  sessionToken?: string
-}) => {
+const LoginButton = ({ className, sessionToken }: { className?: string; sessionToken?: string }) => {
   return !sessionToken ? (
     <button
       onClick={(e) => {

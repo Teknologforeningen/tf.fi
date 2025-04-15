@@ -56,13 +56,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
 
   return (
     <html lang="sv">
-      <body
-        className={classNames(
-          raleway.variable,
-          montserrat.variable,
-          'h-screen font-body'
-        )}
-      >
+      <body className={classNames(raleway.variable, montserrat.variable, 'h-screen font-body')}>
         <Header navbarLinks={navbarLinks} sessionToken={session?.user.token} />
         <main>{children}</main>
         <Footer nationlogos={footer?.nationlogos} />

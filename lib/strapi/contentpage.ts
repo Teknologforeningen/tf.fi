@@ -2,9 +2,7 @@ import qs from 'qs'
 import { PageType } from '@models/page'
 import { fetchCollection, fetchCollectionSingle } from '@lib/strapi/index'
 
-export async function fetchContentPage(
-  slug?: string
-): Promise<PageType | null> {
+export async function fetchContentPage(slug?: string): Promise<PageType | null> {
   if (slug === undefined) return null
   const query = qs.stringify({
     populate: {

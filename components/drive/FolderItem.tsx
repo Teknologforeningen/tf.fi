@@ -2,11 +2,7 @@
 
 import React, { useState } from 'react'
 import ItemWrapper from '@components/drive/ItemWrapper'
-import {
-  MdKeyboardArrowDown,
-  MdKeyboardArrowRight,
-  MdOutlineFolder,
-} from 'react-icons/md'
+import { MdKeyboardArrowDown, MdKeyboardArrowRight, MdOutlineFolder } from 'react-icons/md'
 import { drive_v3 } from 'googleapis'
 
 const FolderItem = ({

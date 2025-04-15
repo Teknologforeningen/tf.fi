@@ -10,11 +10,7 @@ const MainBanner = async () => {
   return (
     <>
       <div className="relative h-[500px] w-full overflow-x-hidden bg-black">
-        {urls && urls.length !== 0 ? (
-          <Carousel urls={urls} />
-        ) : (
-          <SingleBannerImage />
-        )}
+        {urls && urls.length !== 0 ? <Carousel urls={urls} /> : <SingleBannerImage />}
         <div className="absolute left-0 right-0 top-[180px] flex flex-col xl:left-40 xl:right-auto xl:flex-row">
           <svg
             className="xl:block"
@@ -31,9 +27,7 @@ const MainBanner = async () => {
             <p className="font-display text-xl font-bold uppercase text-white xxs:text-2xl md:text-4xl">
               Teknologföreningen
             </p>
-            <p className="text-m text-white md:text-xl">
-              Den svenskspråkiga nationen vid Aalto universitetet
-            </p>
+            <p className="text-m text-white md:text-xl">Den svenskspråkiga nationen vid Aalto universitetet</p>
           </Column>
         </div>
         <InfoBlock />

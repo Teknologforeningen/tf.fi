@@ -7,10 +7,7 @@ export default function downloadHandler(drive: Drive | null) {
   return async (request: NextRequest) => {
     if (!drive) {
       console.error("'drive' instance missing")
-      return NextResponse.json(
-        { error: 'Internal server error' },
-        { status: 500 }
-      )
+      return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
     }
 
     try {
@@ -18,10 +15,7 @@ export default function downloadHandler(drive: Drive | null) {
       const fileName = request.nextUrl.searchParams.get('fileName')
 
       if (!fileId) {
-        return NextResponse.json(
-          { error: 'query param missing: fileId' },
-          { status: 400 }
-        )
+        return NextResponse.json({ error: 'query param missing: fileId' }, { status: 400 })
       }
 
       const stream = await drive.getFile(fileId)
@@ -32,10 +26,7 @@ export default function downloadHandler(drive: Drive | null) {
       })
     } catch (error) {
       console.error('Error downloading file', error)
-      return NextResponse.json(
-        { error: 'Failed to download file' },
-        { status: 500 }
-      )
+      return NextResponse.json({ error: 'Failed to download file' }, { status: 500 })
     }
   }
 }

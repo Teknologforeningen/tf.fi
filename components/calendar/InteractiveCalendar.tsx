@@ -45,20 +45,13 @@ const InteractiveCalendar = ({ fetchEvents }: InteractiveCalendarProps) => {
           locale="sv"
           next2Label={null}
           prev2Label={null}
-          onActiveStartDateChange={({ activeStartDate }) =>
-            activeStartDate && setDate(activeStartDate)
-          }
+          onActiveStartDateChange={({ activeStartDate }) => activeStartDate && setDate(activeStartDate)}
           onClickDay={(value) => setDate(value)}
         />
       </div>
       <CalendarEventsList
         events={events
-          ?.filter(
-            (e) =>
-              e.start &&
-              e.end &&
-              (new Date(e.start) >= date || new Date(e.end) >= date)
-          )
+          ?.filter((e) => e.start && e.end && (new Date(e.start) >= date || new Date(e.end) >= date))
           .slice(0, 5)}
         isLoading={isLoading}
       />
@@ -66,13 +59,7 @@ const InteractiveCalendar = ({ fetchEvents }: InteractiveCalendarProps) => {
   )
 }
 
-const CalendarEventsList = ({
-  events,
-  isLoading,
-}: {
-  events: CalendarEvent[]
-  isLoading: boolean
-}) => (
+const CalendarEventsList = ({ events, isLoading }: { events: CalendarEvent[]; isLoading: boolean }) => (
   <Column className="mt-2 flex min-h-[380px] w-full">
     {isLoading && events.length < 1 ? (
       <ActivityIndicator width={25} height={25} stroke="black" />

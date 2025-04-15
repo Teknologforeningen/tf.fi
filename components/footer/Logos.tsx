@@ -34,9 +34,7 @@ type NationsLogosProps = {
 const NationsLogos = async ({ nationLogos }: NationsLogosProps) => {
   return (
     <Row className="mx-0 my-4 w-4/5 flex-wrap justify-around">
-      {nationLogos?.map((logo, index) => (
-        <NationImage logo={logo} key={index} />
-      ))}
+      {nationLogos?.map((logo, index) => <NationImage logo={logo} key={index} />)}
     </Row>
   )
 }

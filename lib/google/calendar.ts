@@ -19,12 +19,7 @@ if (!keysEnvVar) {
   console.error('The GOOGLE_CREDS environment variable was not found!')
 } else {
   const credentials = JSON.parse(keysEnvVar)
-  const auth = new google.auth.JWT(
-    credentials.client_email,
-    undefined,
-    credentials.private_key,
-    SCOPES
-  )
+  const auth = new google.auth.JWT(credentials.client_email, undefined, credentials.private_key, SCOPES)
   calendar = google.calendar({ version: 'v3', auth })
 }
 
@@ -38,12 +33,8 @@ export default async function listEvents(date: Date): Promise<CalendarEvent[]> {
     const res = await calendar.events.list({
       calendarId: CALENDAR_ID,
       // load dates two months back and three in the future
-      timeMin: new Date(
-        date.getTime() - 2 * 30 * 24 * 60 * 60 * 1000
-      ).toISOString(),
-      timeMax: new Date(
-        date.getTime() + 3 * 30 * 24 * 60 * 60 * 1000
-      ).toISOString(),
+      timeMin: new Date(date.getTime() - 2 * 30 * 24 * 60 * 60 * 1000).toISOString(),
+      timeMax: new Date(date.getTime() + 3 * 30 * 24 * 60 * 60 * 1000).toISOString(),
       maxResults: 100,
       singleEvents: true,
       orderBy: 'startTime',

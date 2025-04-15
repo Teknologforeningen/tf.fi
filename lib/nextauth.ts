@@ -23,9 +23,7 @@ export const authOptions: NextAuthOptions = {
     },
     async jwt({ token, user, account }) {
       if (user) {
-        const response = await fetch(
-          `${API_URL}/auth/keycloak/callback?access_token=${account?.access_token}`
-        )
+        const response = await fetch(`${API_URL}/auth/keycloak/callback?access_token=${account?.access_token}`)
         if (response.ok) {
           const data = await response.json()
           token.jwt = data.jwt

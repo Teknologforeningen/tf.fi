@@ -6,13 +6,7 @@ import { fetchPosts, POSTS_PAGE_SIZE } from '@lib/strapi/post'
 import Post from '@components/posts/Post'
 import PageNavigation from '@components/PageNavigation'
 
-const Posts = ({
-  initialPosts,
-  totalPages,
-}: {
-  initialPosts: PostType[]
-  totalPages: number
-}) => {
+const Posts = ({ initialPosts, totalPages }: { initialPosts: PostType[]; totalPages: number }) => {
   const [posts, setPosts] = useState(initialPosts)
   const [page, setPage] = useState(1)
 
@@ -32,11 +26,7 @@ const Posts = ({
         <Post post={post} key={post.slug} />
       ))}
       {totalPages / POSTS_PAGE_SIZE > 1 && (
-        <PageNavigation
-          currentPage={page}
-          totalPages={Math.ceil(totalPages / POSTS_PAGE_SIZE)}
-          setPage={setPage}
-        />
+        <PageNavigation currentPage={page} totalPages={Math.ceil(totalPages / POSTS_PAGE_SIZE)} setPage={setPage} />
       )}
     </>
   )

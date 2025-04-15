@@ -10,13 +10,7 @@ interface ListCardProps {
   content?: string
 }
 
-const ListCard = ({
-  title,
-  path,
-  setSideMenuOpen,
-  onClick,
-  content,
-}: ListCardProps) => {
+const ListCard = ({ title, path, setSideMenuOpen, onClick, content }: ListCardProps) => {
   const router = useRouter()
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
@@ -28,14 +22,8 @@ const ListCard = ({
 
   return (
     <div className="p-4 bg-lightGray rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 mb-4 max-h-36 overflow-hidden max-w-full">
-      <a
-        href="#"
-        onClick={handleClick}
-        className="text-black no-underline hover:underline cursor-pointer"
-      >
-        <div className="font-semibold text-lg mb-2 text-ellipsis overflow-hidden whitespace-nowrap">
-          {title}
-        </div>
+      <a href="#" onClick={handleClick} className="text-black no-underline hover:underline cursor-pointer">
+        <div className="font-semibold text-lg mb-2 text-ellipsis overflow-hidden whitespace-nowrap">{title}</div>
         <div
           dangerouslySetInnerHTML={{
             __html: processMarkdownSnippet(content ?? ''),
