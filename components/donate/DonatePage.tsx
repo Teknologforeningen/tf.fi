@@ -17,7 +17,7 @@ const DonatePage = async ({ donate }: { donate: DonatePage }) => (
         __html: marked.parse(donate?.summary ?? ''),
       }}
     />
-    <DonateForm />
+    <DonateForm info={donate.donation_form_info} levels={donate.donation_levels} />
     {donate.quotes?.map((q) => <Quote key={q.author} quote={q} />)}
     {donate.faqs?.map((f) => <FAQ key={f.question} faq={f} />)}
     <DonorList />

@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import TextInput from './TextInput'
 import React, { ChangeEventHandler, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
+import { type DonationLevel } from '@models/donate'
 
 const Line = ({ value, threshold }: { value: number; threshold: number }) => {
   const backgroundColor = threshold < value ? '#b20738' : '#222'
@@ -38,31 +39,28 @@ const Button = ({
   )
 }
 
-const DonationLevel = ({ value, setValue }: { value: number; setValue: (n: string) => void }) => (
+const DonationLevels = ({
+  value,
+  setValue,
+  levels,
+}: {
+  value: number
+  setValue: (n: string) => void
+  levels?: DonationLevel[]
+}) => (
   <div className="flex items-center pt-6">
-    <Line value={value} threshold={0} />
-    <Button value={value} setValue={setValue} threshold={1000} text="1k" />
-    <Line value={value} threshold={1000} />
-    <Button value={value} setValue={setValue} threshold={5000} text="5k" />
-    <Line value={value} threshold={5000} />
-    <Button value={value} setValue={setValue} threshold={10000} text="10k" />
-    <Line value={value} threshold={10000} />
+    {levels?.map((level) => (
+      <React.Fragment key={level.threshold}>
+        {level.threshold > 0 && (
+          <Button value={value} setValue={setValue} threshold={level.threshold} text={level.text} />
+        )}
+        <Line value={value} threshold={level.threshold} />
+      </React.Fragment>
+    ))}
   </div>
 )
 
-function donationLevelText(value: number): string {
-  if (value < 1000) {
-    return 'En plats i det nya nationshuset väntar dig med och uppdateringar från nationen. Alla som gjort en kontribution till det nya nationshuset bjuds in för öppningsceremonierna. Ett donationsmärke tillges alla som bidragit med över ett studiestöd (268,23€).'
-  } else if (value < 5000) {
-    return 'Du får en personlig plakett i det nya huset. Därtill får du en inbjudan till de första festligheterna i samband med öppningsceremonierna.'
-  } else if (value < 10000) {
-    return 'Förutom det tidigare nämnda får du ett listigt tack i det nya huset och en VIP-service på första festligheterna kopplat till öppningsceremonierna. Listiga tack kan vara garderobslister, dansgolvslister, playlist i baren, klister, eller något helt annat.'
-  } else {
-    return 'Tillträde till ett särskilt sällskap med exklusiva TF-evenemang och VIP-kontakt till nationen. Ju större bidrag, desto personligare koncept bygger vi upp.'
-  }
-}
-
-const Amount = ({ defaultValue }: { defaultValue?: number }) => {
+const Amount = ({ defaultValue, levels }: { defaultValue?: number; levels?: DonationLevel[] }) => {
   const [amount, setAmount] = useState(defaultValue?.toString() ?? '')
   // Separate the string input from the number value to be able to have empty values.
   // It makes the user experience nicer.
@@ -73,7 +71,8 @@ const Amount = ({ defaultValue }: { defaultValue?: number }) => {
     setAmount(e.target.value)
   }
 
-  const description = donationLevelText(amountNumber)
+  const sortedLevels = levels?.toSorted((a, b) => a.threshold - b.threshold)
+  const description = sortedLevels?.findLast((level) => level.threshold <= amountNumber)?.description ?? ''
 
   return (
     <div className="flex flex-col">
@@ -88,7 +87,7 @@ const Amount = ({ defaultValue }: { defaultValue?: number }) => {
         value={amount}
         onChange={handleInputChange}
       />
-      <DonationLevel value={amountNumber} setValue={setAmount} />
+      <DonationLevels value={amountNumber} setValue={setAmount} levels={levels} />
       <AnimatePresence initial={false} mode="wait">
         <motion.p
           className="pt-4"

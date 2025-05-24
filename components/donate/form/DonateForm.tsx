@@ -5,10 +5,19 @@ import Amount from './Sum'
 import TextInput from './TextInput'
 import VisibilitySelection from './Visibility'
 import Payment from './Payment'
-import { Donation } from '@models/donate'
+import { Donation, DonationLevel } from '@models/donate'
 import { createPaymentAction, type PaymentResponse } from '@lib/barsborsen/payment'
 import { DonationPreview } from '@components/donate/form/DonationPreview'
 import ErrorDialog from '@components/donate/ErrorDialog'
+import { marked, RendererObject } from 'marked'
+
+const renderer: RendererObject = {
+  link(href, _, text) {
+    return `<a class="text-blue-600 underline visited:text-purple-600 hover:text-blue-800 break-all" href=${href}>${text}</a>`
+  },
+}
+
+marked.use({ renderer })
 
 export const FailedToFetchProvidersError = () => (
   <ErrorDialog>
@@ -20,7 +29,17 @@ export const FailedToFetchProvidersError = () => (
   </ErrorDialog>
 )
 
-const EditDonation = ({ donation, action }: { donation?: Donation; action: (fd: FormData) => void }) => {
+const EditDonation = ({
+  donation,
+  action,
+  info,
+  levels,
+}: {
+  donation?: Donation
+  action: (fd: FormData) => void
+  info?: string
+  levels?: DonationLevel[]
+}) => {
   return (
     <form action={action}>
       <fieldset className="border border-darkgray not-prose p-4 pb-8 flex flex-col">
@@ -45,43 +64,29 @@ const EditDonation = ({ donation, action }: { donation?: Donation; action: (fd: 
           required
         />
         <VisibilitySelection visibility={donation?.visibility} />
-        <Amount defaultValue={donation?.amount as number | undefined} />
+        <Amount defaultValue={donation?.amount as number | undefined} levels={levels} />
         <button className="text-white bg-darkgray hover:bg-teknologröd transition-colors rounded-2xl mt-8 py-1.5">
           Välj betalningsmetod
         </button>
-        <div className="flex flex-col text-sm pt-8 gap-4">
-          <p>
-            Läs mer om hantering av personuppgifter{' '}
-            <a className="link" href="https://vision.tf.fi/registerbeskrivning">
-              här
-            </a>
-            .
-          </p>
-          <p>
-            Du kan efter din inbetalning ansluta dig till en grupp, eller skapa en ny grupp, för din inbetalning. Då är
-            du synlig med gruppen t.ex. på denna hemsida. Du associeras också till gruppen i samband med möjlig
-            synlighet i det nya nationshuset.
-          </p>
-          <p>
-            Ifall du önskar donera som organisation eller företag, eller är intresserad av att bidra med värdepapper
-            eller annan egendom, var vänlig och ta kontakt med fundraisingchefen Emil Kauppi:{' '}
-            <a className="link" href="mailto:funchef@tf.fi">
-              funchef@tf.fi
-            </a>
-            .
-          </p>
-        </div>
+        {info && (
+          <div
+            className="flex flex-col text-sm pt-8 gap-4"
+            dangerouslySetInnerHTML={{
+              __html: marked.parse(info),
+            }}
+          />
+        )}
       </fieldset>
     </form>
   )
 }
 
-const DonateForm = ({ step }: { step?: DonateStep }) => {
+const DonateForm = ({ step, info, levels }: { step?: DonateStep; info?: string; levels?: DonationLevel[] }) => {
   const defaultStep: DonateStep = step ?? { type: 'edit' }
   const [donateStep, formAction] = useActionState(createPaymentAction, defaultStep)
 
   return donateStep.type === 'edit' ? (
-    <EditDonation donation={donateStep.donation} action={formAction} />
+    <EditDonation donation={donateStep.donation} action={formAction} info={info} levels={levels} />
   ) : (
     <div className="flex flex-col gap-8">
       <DonationPreview donation={donateStep.donation} action={formAction} />
