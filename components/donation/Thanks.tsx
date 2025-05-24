@@ -1,7 +1,7 @@
 import type { Contribution } from '@lib/barsborsen/payment'
 import AddressForm, { Address } from '@components/donation/AddressForm'
 
-const MINIMUM_SUM_FOR_ADDRESS = 253.69
+const MINIMUM_SUM_FOR_ADDRESS = 279.38
 
 const Thanks = ({
   transactionId,
