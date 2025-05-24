@@ -3,7 +3,7 @@ import { PageType } from '@models/page'
 import { Category } from '@models/category'
 import { CollectionResponse, fetchSingle, SingleResponse } from '@lib/strapi'
 
-type NavbarCategory = Pick<Category, 'content_pages' | 'slug' | 'title'>
+type NavbarCategory = Pick<Category, 'content_pages' | 'slug' | 'title' | 'donation_page'>
 
 interface BaseNavbarLink {
   title: string
@@ -41,6 +41,9 @@ export default async function fetchNavbar(): Promise<NavbarLink[]> {
             content_pages: {
               fields: ['slug', 'title'],
             },
+            donation_page: {
+              fields: ['title'],
+            },
           },
         },
         private_pages: {
@@ -73,18 +76,25 @@ function toLink(page: SingleResponse<PageType | SanitizedPage>, baseUrl: string)
 function toNavbarMultipleLink(
   title: string,
   basePath: string,
-  pages: CollectionResponse<PageType | SanitizedPage>
+  pages: CollectionResponse<PageType | SanitizedPage>,
+  donationPageTitle?: string
 ): NavbarMultipleLink {
   const links = pages.map((page) => toLink(page, basePath))
+  const donationLink: NavbarSingleLink[] = donationPageTitle
+    ? [{ title: donationPageTitle, link: `/${basePath}/stod-projektet` }]
+    : []
+
+  const allLinks = links.concat(donationLink)
+
   return {
     title,
-    links,
+    links: allLinks,
     basePath,
   }
 }
 
 function categoriesToLinks(categories: CollectionResponse<NavbarCategory>): NavbarMultipleLink[] {
-  return categories.map((category) => {
-    return toNavbarMultipleLink(category.title, category.slug, category.content_pages)
-  })
+  return categories.map((category) =>
+    toNavbarMultipleLink(category.title, category.slug, category.content_pages, category.donation_page?.title)
+  )
 }
