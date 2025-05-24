@@ -106,3 +106,87 @@ export async function fetchProviders(donation: Donation): Promise<PaymentRespons
   const res = await fetch(`${barsborsenUrl}/payments/providers`, { method: 'POST', body: JSON.stringify(body) })
   return res.json()
 }
+
+interface Donor {
+  name?: string
+  pseudonym?: string
+  email?: string
+  address?: string
+  zip_code?: string
+  city?: string
+  country?: string
+}
+
+export interface Contribution {
+  donor?: Donor
+  visibility?: string
+  sum?: string
+  greeting?: string
+  group_name?: string
+}
+
+export interface Payment {
+  checkout_transaction_id?: string
+  status?: string
+  contribution?: Contribution
+}
+
+export async function fetchPayment(checkoutTransactionId: string): Promise<Payment> {
+  const res = await fetch(`${barsborsenUrl}/payments/transaction/${checkoutTransactionId}`)
+  return res.json()
+}
+
+interface SumResponse {
+  total_sum?: string
+}
+
+export async function fetchSum(): Promise<string | undefined> {
+  const res = await fetch(`${barsborsenUrl}/donations/sum`)
+  const body: SumResponse = await res.json()
+  return body.total_sum
+}
+
+export async function setGroup(transactionId: string, group: string): Promise<void> {
+  console.log(`Setting ${transactionId} group to "${group}"`)
+  const res = await fetch(`${barsborsenUrl}/payments/transaction/${transactionId}/group`, {
+    method: 'PUT',
+    body: group,
+  }).then((r) => r.text())
+  console.log(`Set group response for ${transactionId}:`, res)
+}
+
+export async function setAddress(transactionId: string, prevState: string, formData: FormData): Promise<string> {
+  const extract = (field: string): string | null => {
+    const value = formData.get(field)
+    if (!value || typeof value !== 'string' || value === '') return null
+    return value
+  }
+
+  const street = extract('address-street')
+  const zipCode = extract('address-zip-code')
+  const city = extract('address-city')
+  const country = extract('address-country')
+
+  if (!street || !zipCode || !city || !country) return 'Vänligen fyll i alla fält'
+
+  const body = {
+    street,
+    zipCode,
+    city,
+    country,
+  }
+
+  try {
+    console.log(`Saving address for ${transactionId}`)
+    await fetch(`${barsborsenUrl}/payments/transaction/${transactionId}/address`, {
+      method: 'POST',
+      body: JSON.stringify(body),
+    })
+    console.log(`Successfully saved address for ${transactionId}`)
+  } catch (e) {
+    console.error(`Failed to post new address for ${transactionId}`, e)
+    return 'Addressen gick inte att spara. Försök vänligen på nytt.'
+  }
+
+  return 'Addressen sparad!'
+}

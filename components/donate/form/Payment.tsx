@@ -40,7 +40,9 @@ const PaymentGroup = ({ name, providers }: { name: string; providers: PaymentPro
 const PaymentProvider = ({ provider }: { provider: PaymentProvider }) => {
   return (
     <form key={provider.name} action={provider.url} method="POST" className="border h-full">
-      {provider.parameters?.map((param) => <input type="hidden" name={param.name} value={param.value} />)}
+      {provider.parameters?.map((param) => (
+        <input type="hidden" key={param.name} name={param.name} value={param.value} />
+      ))}
       <button className="h-full p-1">
         <img className="m-0 h-full" src={provider.svg} alt={provider.name} width={140} />
       </button>

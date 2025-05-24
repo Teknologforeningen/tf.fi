@@ -1,10 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    './app/**/*.{js,jsx,ts,tsx}',
-    './pages/**/*.{js,jsx,ts,tsx}',
-    './components/**/*.{js,jsx,ts,tsx}',
-  ],
+  content: ['./app/**/*.{js,jsx,ts,tsx}', './pages/**/*.{js,jsx,ts,tsx}', './components/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
       colors: {
@@ -12,6 +8,7 @@ module.exports = {
         darkblue: '#001627',
         creamwhite: '#ffffe8',
         teknologröd: '#b20738',
+        koppargron: '#7ecbb3',
         eventblue: '#8ad7d7',
         blogpink: '#d79ad1',
         darkgray: '#242424',
