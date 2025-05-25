@@ -41,6 +41,7 @@
     "@types/node": "20.12.12",
     "@types/qs": "^6.9.18",
     "@types/react": "19.1.0",
+    "@types/react-dom": "19.1.0",
     "@types/react-textfit": "^1.1.0",
     "@types/react-window": "^1.8.5",
     "autoprefixer": "^10.4.21",
