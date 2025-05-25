@@ -12,23 +12,21 @@ import { Visibility, VisibilityType } from '@components/donate/form/Visibility'
 import ErrorDialog from '@components/donate/ErrorDialog'
 import { DonationPreview } from '@components/donate/form/DonationPreview'
 
-const LandingImage = () => {
-  return (
-    <>
-      <div className="relative w-full h-96">
-        <div className="absolute w-1/3 h-1/3 bg-koppargron bottom-0 -translate-x-4 translate-y-10" />
-        <div className="absolute w-1/3 h-1/3 bg-koppargron right-0 translate-x-4 translate-y-5" />
-        <Image
-          src="/images/vera-michelangelo-56.jpg"
-          alt="Vera Michelangelo"
-          fill
-          className="object-contain"
-          quality={100}
-        />
-      </div>
-    </>
-  )
-}
+const LandingImage = () => (
+  <div className="relative">
+    <div className="absolute w-1/3 h-1/3 bg-koppargron bottom-0 -translate-x-3 -translate-y-6" />
+    <div className="absolute w-1/3 h-1/3 bg-koppargron right-0 translate-x-3 translate-y-6" />
+    <Image
+      src="/images/vera-michelangelo-56.jpg"
+      alt="Vera Michelangelo"
+      width={0}
+      height={0}
+      sizes="100vw"
+      quality={100}
+      className="relative w-full h-auto"
+    />
+  </div>
+)
 
 const ErrorPage = async ({ donation }: { payment: Payment; donation: Donation }) => {
   const providers = await fetchProviders(donation)
