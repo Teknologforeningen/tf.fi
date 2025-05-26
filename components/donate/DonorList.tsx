@@ -2,8 +2,8 @@ import React from 'react'
 import { type Donors, fetchDonors, type Group } from '@lib/barsborsen/donors'
 
 const DonorGroup = ({ name, members }: Group) => (
-  <div className="grid grid-cols-3 text-center not-prose text-lg gap-4">
-    <h4 className="col-span-3 italic">{name}</h4>
+  <div className="grid grid-cols-1 md:grid-cols-3 text-center not-prose text-lg gap-4">
+    <h4 className="font-bold md:col-span-3 md:font-normal md:italic">{name}</h4>
     {members.map((m) => (
       <ul key={m} className="list-none m-0 p-0">
         <li className="m-0 p-0">{m}</li>
@@ -19,8 +19,8 @@ const DonorList = async () => {
   const groupedDonors = groupDonors(donors)
 
   return (
-    <section>
-      <h2>Vi är med och bygger TF:s nya nationshus!</h2>
+    <section className="flex flex-col">
+      <h2 className="text-center">Vi är med och bygger TF:s nya nationshus!</h2>
       <div className="mx-[calc(50%-40vw)] border pt-4">
         {groupedDonors.map((d) => (
           <React.Fragment key={d.members.join()}>
