@@ -20,8 +20,8 @@ const VisibilitySelection = ({ visibility }: { visibility?: Visibility }) => {
 
   return (
     <>
-      <label className="pt-6 italic">Synlighet</label>
-      <p className="pt-4">
+      <label className="text-lg pt-6 italic">Synlighet</label>
+      <p className="pt-3">
         Samtycker du till att ditt namn som donator kommer vara synlig på denna hemsida och i det nya nationshuset?
       </p>
       <RadioInput

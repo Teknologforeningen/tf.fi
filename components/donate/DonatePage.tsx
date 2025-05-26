@@ -8,10 +8,16 @@ import type { DonatePage } from '@models/donate'
 
 const DonatePage = async ({ donate }: { donate: DonatePage }) => (
   <>
-    <h1>{donate.title}</h1>
-    <div className="relative w-full h-96">
-      <Image src="/images/donate.jpg" alt="donate" fill className="object-contain" quality={100} />
-    </div>
+    <h1 className="text-center">{donate.title}</h1>
+    <Image
+      src="/images/donate.jpg"
+      alt="donate"
+      width={0}
+      height={0}
+      sizes="100vw"
+      quality={100}
+      className="w-full h-auto"
+    />
     <div
       dangerouslySetInnerHTML={{
         __html: marked.parse(donate?.summary ?? ''),
