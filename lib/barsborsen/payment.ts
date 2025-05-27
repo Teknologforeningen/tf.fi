@@ -12,8 +12,13 @@ function extractDonation(formData: FormData): Donation {
   }
 
   const email = formData.get('donate-email')
-  if (!email) {
+  if (typeof email !== 'string') {
     throw new Error('Missing email')
+  }
+
+  const phone = formData.get('donate-phone')
+  if (!phone) {
+    throw new Error('Missing phone')
   }
 
   const visibilityType = formData.get('donate-visibility')
@@ -38,6 +43,7 @@ function extractDonation(formData: FormData): Donation {
   return {
     name: name as string,
     email: email as string,
+    phone: phone as string,
     amount: amount as string,
     visibility,
   }
@@ -98,6 +104,7 @@ export async function fetchProviders(donation: Donation): Promise<PaymentRespons
   const body = {
     name: donation.name,
     email: donation.email,
+    phone: donation.phone,
     visibility: donation.visibility.type,
     pseudonym: donation.visibility.type === VisibilityType.pseudonym ? donation.visibility.value : '',
     sum: donation.amount,
@@ -107,10 +114,8 @@ export async function fetchProviders(donation: Donation): Promise<PaymentRespons
   return res.json()
 }
 
-interface Donor {
-  name?: string
+interface Donor extends Omit<Donation, 'visibility' | 'amount'> {
   pseudonym?: string
-  email?: string
   address?: string
   zip_code?: string
   city?: string

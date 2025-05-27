@@ -3,7 +3,7 @@ import { InputHTMLAttributes } from 'react'
 
 interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string
-  type?: 'text' | 'email' | 'number'
+  type?: 'text' | 'email' | 'tel' | 'number'
 }
 
 const TextInput = ({ label, type = 'text', ...props }: TextInputProps) => (

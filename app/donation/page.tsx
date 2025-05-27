@@ -42,7 +42,7 @@ const ErrorPage = async ({ donation }: { payment: Payment; donation: Donation })
   )
 }
 
-const Page = async ({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) => {
+const Page = async ({ searchParams }: { searchParams: Promise<{ [_key: string]: string | string[] | undefined }> }) => {
   const params = await searchParams
   const paymentStatusOk = params['betalning'] === 'ok'
   const checkoutTransactionId = params['checkout-transaction-id']
@@ -98,8 +98,8 @@ function paymentToDonation(payment: Payment): Donation | null {
   const donor = contribution.donor
   if (!donor) return null
 
-  const { name, email, pseudonym } = donor
-  if (!name || !email) return null
+  const { name, email, phone, pseudonym } = donor
+  if (!name || !email || !phone) return null
 
   const visibilityType = payment.contribution?.visibility
   if (!visibilityType) return null
@@ -116,6 +116,7 @@ function paymentToDonation(payment: Payment): Donation | null {
   return {
     name,
     email,
+    phone,
     visibility,
     amount,
   }

@@ -31,6 +31,7 @@ export interface FAQ {
 export interface Donation {
   name: string
   email: string
+  phone?: string
   visibility: Visibility
   amount: string
 }

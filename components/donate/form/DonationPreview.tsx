@@ -36,6 +36,11 @@ export const DonationPreview = ({ donation, action }: { donation: Donation; acti
           <p>
             E-post: <i>{donation.email}</i>
           </p>
+          {donation.phone && (
+            <p>
+              Telefonnummer: <i>{donation.phone}</i>
+            </p>
+          )}
           <p>
             Summa: <i>{donation.amount}</i> €
           </p>
