@@ -16,6 +16,11 @@ function extractDonation(formData: FormData): Donation {
     throw new Error('Missing email')
   }
 
+  const phone = formData.get('donate-phone')
+  if (!phone) {
+    throw new Error('Missing phone')
+  }
+
   const visibilityType = formData.get('donate-visibility')
   const pseudonym = formData.get('donate-pseudonym')
   if (!visibilityType) {

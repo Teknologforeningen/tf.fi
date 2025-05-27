@@ -63,6 +63,15 @@ const EditDonation = ({
           defaultValue={donation?.email}
           required
         />
+        <TextInput
+          label="Telefonnummer"
+          id="donate-phone"
+          name="donate-phone"
+          type="tel"
+          placeholder="+358401234567"
+          defaultValue={donation?.phone}
+          required
+        />
         <VisibilitySelection visibility={donation?.visibility} />
         <Amount defaultValue={donation?.amount as number | undefined} levels={levels} />
         <button className="text-white bg-darkgray hover:bg-teknologröd transition-colors rounded-2xl mt-8 py-1.5">
