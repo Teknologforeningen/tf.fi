@@ -18,9 +18,11 @@
       "@components/*": ["./components/*"],
       "@lib/*": ["./lib/*"],
       "@models/*": ["./models/*"],
+      "@public/*": ["./public/*"],
       "@styles/*": ["./styles/*"],
       "@utils/*": ["./utils/*"],
-      "@middleware/*": ["./middleware/*"]
+      "@middleware/*": ["./middleware/*"],
+      "@payload-config": ["./payload.config.ts"]
     },
     "plugins": [
       {
