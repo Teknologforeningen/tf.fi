@@ -1,4 +1,4 @@
-import { Homepage } from '../../app/page'
+import { Homepage } from '../../app/(frontend)/page'
 import qs from 'qs'
 import { fetchSingle } from '@lib/strapi/index'
 
