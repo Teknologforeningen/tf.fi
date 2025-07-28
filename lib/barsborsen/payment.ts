@@ -141,16 +141,6 @@ export async function fetchPayment(checkoutTransactionId: string): Promise<Payme
   return res.json()
 }
 
-interface SumResponse {
-  total_sum?: string
-}
-
-export async function fetchSum(): Promise<string | undefined> {
-  const res = await fetch(`${barsborsenUrl}/donations/sum`)
-  const body: SumResponse = await res.json()
-  return body.total_sum
-}
-
 export async function setGroup(transactionId: string, group: string): Promise<void> {
   console.log(`Setting ${transactionId} group to "${group}"`)
   const res = await fetch(`${barsborsenUrl}/payments/transaction/${transactionId}/group`, {

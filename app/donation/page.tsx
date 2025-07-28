@@ -5,7 +5,7 @@ import Thanks from '@components/donation/Thanks'
 import GroupDonation from '@components/donation/GroupDonation'
 import { fetchDonors } from '@lib/barsborsen/donors'
 import { redirect, RedirectType } from 'next/navigation'
-import { fetchPayment, fetchProviders, fetchSum, Payment, setGroup } from '@lib/barsborsen/payment'
+import { fetchPayment, fetchProviders, Payment, setGroup } from '@lib/barsborsen/payment'
 import DonateForm, { DonateStep } from '@components/donate/form/DonateForm'
 import { Donation } from '@models/donate'
 import { Visibility, VisibilityType } from '@components/donate/form/Visibility'
@@ -50,7 +50,7 @@ const Page = async ({ searchParams }: { searchParams: Promise<{ [_key: string]: 
     redirect('/donera', RedirectType.replace)
   }
 
-  const [donors, payment, sum] = await Promise.all([fetchDonors(), fetchPayment(checkoutTransactionId), fetchSum()])
+  const [donors, payment] = await Promise.all([fetchDonors(), fetchPayment(checkoutTransactionId)])
 
   const donation = paymentToDonation(payment)
 
@@ -72,9 +72,9 @@ const Page = async ({ searchParams }: { searchParams: Promise<{ [_key: string]: 
   return (
     <>
       <LandingImage />
-      {paymentStatusOk && payment.contribution && sum && (
+      {paymentStatusOk && payment.contribution && (
         <>
-          <Thanks transactionId={checkoutTransactionId} contribution={payment.contribution} sum={sum} />
+          <Thanks transactionId={checkoutTransactionId} contribution={payment.contribution} />
           {donors?.groups && <GroupDonation groups={donors.groups} selectGroup={selectGroup} />}
           <p>
             En länk till denna bekräftelsesida har skickats till din e-postadress (kolla skräpposten) med en kopia av
