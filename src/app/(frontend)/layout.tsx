@@ -19,12 +19,12 @@ const raleway = localFont({
     {
       style: 'normal',
       weight: '400',
-      path: '../../public/fonts/raleway/Raleway-VariableFont_wght.woff2',
+      path: '../../../public/fonts/raleway/Raleway-VariableFont_wght.woff2',
     },
     {
       style: 'italic',
       weight: '400',
-      path: '../../public/fonts/raleway/Raleway-Italic-VariableFont_wght.woff2',
+      path: '../../../public/fonts/raleway/Raleway-Italic-VariableFont_wght.woff2',
     },
   ],
   variable: '--font-raleway',
@@ -34,11 +34,11 @@ const montserrat = localFont({
   src: [
     {
       style: 'normal',
-      path: '../../public/fonts/montserrat/Montserrat-VariableFont_wght.ttf',
+      path: '../../../public/fonts/montserrat/Montserrat-VariableFont_wght.ttf',
     },
     {
       style: 'italic',
-      path: '../../public/fonts/montserrat/Montserrat-Italic-VariableFont_wght.ttf',
+      path: '../../../public/fonts/montserrat/Montserrat-Italic-VariableFont_wght.ttf',
     },
   ],
   variable: '--font-montserrat',

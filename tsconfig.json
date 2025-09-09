@@ -15,6 +15,7 @@
     "incremental": true,
     "lib": ["dom", "dom.iterable", "esnext"],
     "paths": {
+      "@cms/*": ["./src/cms/*"],
       "@components/*": ["./src/components/*"],
       "@lib/*": ["./src/lib/*"],
       "@models/*": ["./src/models/*"],

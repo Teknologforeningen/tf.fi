@@ -10,6 +10,7 @@ export enum VisibilityType {
   pseudonym = 'pseudonym',
   anonymous = 'anonymous',
 }
+
 export type Visibility =
   | { type: VisibilityType.visible }
   | { type: VisibilityType.pseudonym; value: string }

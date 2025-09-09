@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import TextInput from './TextInput'
 import React, { ChangeEventHandler, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { type DonationLevel } from '@models/donate'
+import { DonationLevels as Levels } from '../../../../payload-types'
 
 const Line = ({ value, threshold }: { value: number; threshold: number }) => {
   const backgroundColor = threshold < value ? '#b20738' : '#222'
@@ -39,6 +39,11 @@ const Button = ({
   )
 }
 
+const donationFormatter = new Intl.NumberFormat('en', { notation: 'compact' })
+function formatDonationLevel(level: number) {
+  return donationFormatter.format(level).toLowerCase()
+}
+
 const DonationLevels = ({
   value,
   setValue,
@@ -46,13 +51,18 @@ const DonationLevels = ({
 }: {
   value: number
   setValue: (n: string) => void
-  levels?: DonationLevel[]
+  levels?: Levels
 }) => (
   <div className="flex items-center pt-6">
     {levels?.map((level) => (
       <React.Fragment key={level.threshold}>
         {level.threshold > 0 && (
-          <Button value={value} setValue={setValue} threshold={level.threshold} text={level.text} />
+          <Button
+            value={value}
+            setValue={setValue}
+            threshold={level.threshold}
+            text={formatDonationLevel(level.threshold)}
+          />
         )}
         <Line value={value} threshold={level.threshold} />
       </React.Fragment>
@@ -60,7 +70,7 @@ const DonationLevels = ({
   </div>
 )
 
-const Amount = ({ defaultValue, levels }: { defaultValue?: number; levels?: DonationLevel[] }) => {
+const Amount = ({ defaultValue, levels }: { defaultValue?: number; levels?: Levels }) => {
   const [amount, setAmount] = useState(defaultValue?.toString() ?? '')
   // Separate the string input from the number value to be able to have empty values.
   // It makes the user experience nicer.
