@@ -3,7 +3,7 @@ import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
-import { Pages } from './collections/pages'
+import { Pages } from './src/collections/pages'
 
 // Hacky solution to avoid having a PostgreSQL connection while building. We could also consider simply using SQLite in
 // production. The reason for using PostgreSQL is that we have a server ready so why not use it.

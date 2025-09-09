@@ -15,13 +15,13 @@
     "incremental": true,
     "lib": ["dom", "dom.iterable", "esnext"],
     "paths": {
-      "@components/*": ["./components/*"],
-      "@lib/*": ["./lib/*"],
-      "@models/*": ["./models/*"],
-      "@public/*": ["./public/*"],
-      "@styles/*": ["./styles/*"],
-      "@utils/*": ["./utils/*"],
-      "@middleware/*": ["./middleware/*"],
+      "@components/*": ["./src/components/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@models/*": ["./src/models/*"],
+      "@public/*": ["./src/public/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@middleware/*": ["./src/middleware/*"],
       "@payload-config": ["./payload.config.ts"]
     },
     "plugins": [
