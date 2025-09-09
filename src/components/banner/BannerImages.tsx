@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { motion } from 'motion/react'
 import Image from 'next/image'
 import { STRAPI_URL } from '@lib/strapi'
-import defaultBannerPic from '../../public/images/banner/banner.jpg'
+import defaultBannerPic from '../../../public/images/banner/banner.jpg'
 
 export const Carousel = ({ urls }: { urls: string[] }) => {
   const [index, setIndex] = useState(0)
