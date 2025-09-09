@@ -19,7 +19,7 @@ export const titleToAnchor = (title: string) => {
   return title
     .trim()
     .replace(/ /g, '-')
-    .replace(/[\/\\^$*+?.()|\[\]{}<>:;"'~,=@`#!%&]/g, '')
+    .replace(/[/\\^$*+?.()|[\]{}<>:;"'~,=@`#!%&]/g, '')
     .toLowerCase()
 }
 
@@ -67,7 +67,7 @@ export const buildFolderPaths = (folders: drive_v3.Schema$File[]) => {
   // Step 1: Create a map of folderId to folder object for quick lookup
   const folderMap = new Map<string, drive_v3.Schema$File>()
   for (const folder of folders ?? []) {
-    folder.id && folderMap.set(folder.id, folder)
+    if (folder.id != undefined) folderMap.set(folder.id, folder)
   }
 
   // Step 2: Initialize a path cache
@@ -113,7 +113,7 @@ export const buildFolderPaths = (folders: drive_v3.Schema$File[]) => {
 
   // Step 5: Iterate over all folders to compute full paths
   for (const folder of folders ?? []) {
-    folder.id && getFullPath(folder.id)
+    if (folder.id != undefined) getFullPath(folder.id)
   }
 
   // Step 6: Return the map of folderId to full path string
