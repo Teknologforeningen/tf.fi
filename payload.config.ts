@@ -3,7 +3,8 @@ import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
-import { Pages } from './src/collections/pages'
+import { Donate } from './src/cms/globals/donate'
+import { Media } from './src/cms/collections/media'
 
 // Hacky solution to avoid having a PostgreSQL connection while building. We could also consider simply using SQLite in
 // production. The reason for using PostgreSQL is that we have a server ready so why not use it.
@@ -26,7 +27,8 @@ const db = isBuilding
 export default buildConfig({
   telemetry: false,
   editor: lexicalEditor(),
-  collections: [Pages],
+  collections: [Media],
+  globals: [Donate],
   secret: process.env.PAYLOAD_SECRET ?? '',
   db,
   sharp,

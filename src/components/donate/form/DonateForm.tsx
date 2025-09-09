@@ -5,19 +5,30 @@ import Amount from './Sum'
 import TextInput from './TextInput'
 import VisibilitySelection from './Visibility'
 import Payment from './Payment'
-import { Donation, DonationLevel } from '@models/donate'
+import { Donation } from '@models/donate'
 import { createPaymentAction, type PaymentResponse } from '@lib/barsborsen/payment'
 import { DonationPreview } from '@components/donate/form/DonationPreview'
 import ErrorDialog from '@components/donate/ErrorDialog'
-import { marked, RendererObject } from 'marked'
+import { DonationLevels, StodProjektet } from '../../../../payload-types'
+import { JSXConvertersFunction, RichText } from '@payloadcms/richtext-lexical/react'
+import { DefaultNodeTypes, SerializedLinkNode } from '@payloadcms/richtext-lexical'
 
-const renderer: RendererObject = {
-  link(href, _, text) {
-    return `<a class="text-blue-600 underline visited:text-purple-600 hover:text-blue-800 break-all" href=${href}>${text}</a>`
-  },
+// TODO: Move to some better place. The best solution would be to have custom components in one place.
+export const CustomLinkComponent = ({ node }: { node: SerializedLinkNode }) => {
+  const child = node.children[0]
+  const text = 'text' in child ? child.text : ''
+  const stringText = typeof text === 'string' ? text : ''
+  return (
+    <a className="text-blue-600 underline visited:text-purple-600 hover:text-blue-800" href={node.fields.url}>
+      {stringText}
+    </a>
+  )
 }
 
-marked.use({ renderer })
+const jsxConverters: JSXConvertersFunction<DefaultNodeTypes> = ({ defaultConverters }) => ({
+  ...defaultConverters,
+  link: ({ node }) => <CustomLinkComponent node={node} />,
+})
 
 export const FailedToFetchProvidersError = () => (
   <ErrorDialog>
@@ -37,8 +48,8 @@ const EditDonation = ({
 }: {
   donation?: Donation
   action: (fd: FormData) => void
-  info?: string
-  levels?: DonationLevel[]
+  info?: Form['extraInfo']
+  levels?: DonationLevels
 }) => {
   return (
     <form action={action}>
@@ -73,29 +84,29 @@ const EditDonation = ({
           required
         />
         <VisibilitySelection visibility={donation?.visibility} />
-        <Amount defaultValue={donation?.amount as number | undefined} levels={levels} />
-        <button className="text-white bg-darkgray hover:bg-teknologröd transition-colors rounded-2xl mt-8 py-1.5">
+        <Amount defaultValue={donation?.amount as number | undefined} levels={levels ?? []} />
+        <button className="text-white bg-darkgray hover:bg-teknologröd transition-all rounded-2xl mt-8 py-1.5 active:scale-95">
           Välj betalningsmetod
         </button>
-        {info && (
-          <div
-            className="flex flex-col text-sm pt-8 gap-4"
-            dangerouslySetInnerHTML={{
-              __html: marked.parse(info),
-            }}
-          />
-        )}
+        {info && <RichText converters={jsxConverters} data={info} className="flex flex-col text-sm pt-8 gap-4" />}
       </fieldset>
     </form>
   )
 }
 
-const DonateForm = ({ step, info, levels }: { step?: DonateStep; info?: string; levels?: DonationLevel[] }) => {
+type Form = NonNullable<StodProjektet['form']>
+
+const DonateForm = ({ step, form }: { step?: DonateStep; form?: Form }) => {
   const defaultStep: DonateStep = step ?? { type: 'edit' }
   const [donateStep, formAction] = useActionState(createPaymentAction, defaultStep)
 
   return donateStep.type === 'edit' ? (
-    <EditDonation donation={donateStep.donation} action={formAction} info={info} levels={levels} />
+    <EditDonation
+      donation={donateStep.donation}
+      action={formAction}
+      info={form?.extraInfo}
+      levels={form?.donationLevels ?? []}
+    />
   ) : (
     <div className="flex flex-col gap-8">
       <DonationPreview donation={donateStep.donation} action={formAction} />

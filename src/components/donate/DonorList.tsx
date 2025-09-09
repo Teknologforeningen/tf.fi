@@ -12,7 +12,7 @@ const DonorGroup = ({ name, members }: Group) => (
   </div>
 )
 
-const DonorList = async () => {
+const DonorList = async ({ heading }: { heading: string }) => {
   const donors = await fetchDonors()
   if (donors === null) return null
 
@@ -20,7 +20,7 @@ const DonorList = async () => {
 
   return (
     <section className="flex flex-col">
-      <h2 className="text-center">Vi är med och bygger TF:s nya nationshus!</h2>
+      <h2 className="text-center">{heading}</h2>
       <div className="mx-[calc(50%-40vw)] border pt-4">
         {groupedDonors.map((d) => (
           <React.Fragment key={d.members.join()}>
