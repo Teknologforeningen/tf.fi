@@ -45,11 +45,13 @@ const EditDonation = ({
   action,
   info,
   levels,
+  visibilityText,
 }: {
   donation?: Donation
   action: (fd: FormData) => void
   info?: Form['extraInfo']
   levels?: DonationLevels
+  visibilityText?: string
 }) => {
   return (
     <form action={action}>
@@ -83,7 +85,7 @@ const EditDonation = ({
           defaultValue={donation?.phone}
           required
         />
-        <VisibilitySelection visibility={donation?.visibility} />
+        <VisibilitySelection visibility={donation?.visibility} visibilityText={visibilityText} />
         <Amount defaultValue={donation?.amount as number | undefined} levels={levels ?? []} />
         <button className="text-white bg-darkgray hover:bg-teknologröd transition-all rounded-2xl mt-8 py-1.5 active:scale-95">
           Välj betalningsmetod
@@ -106,6 +108,7 @@ const DonateForm = ({ step, form }: { step?: DonateStep; form?: Form }) => {
       action={formAction}
       info={form?.extraInfo}
       levels={form?.donationLevels ?? []}
+      visibilityText={form?.visibility}
     />
   ) : (
     <div className="flex flex-col gap-8">

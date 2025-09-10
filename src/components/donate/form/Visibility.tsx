@@ -16,15 +16,13 @@ export type Visibility =
   | { type: VisibilityType.pseudonym; value: string }
   | { type: VisibilityType.anonymous }
 
-const VisibilitySelection = ({ visibility }: { visibility?: Visibility }) => {
+const VisibilitySelection = ({ visibility, visibilityText }: { visibility?: Visibility; visibilityText?: string }) => {
   const [showPseudonymInput, setShowPseudonymInput] = useState(visibility?.type === VisibilityType.pseudonym)
 
   return (
     <>
       <label className="text-lg pt-6 italic">Synlighet</label>
-      <p className="pt-3">
-        Samtycker du till att ditt namn som donator kommer vara synlig på denna hemsida och i det nya nationshuset?
-      </p>
+      <p className="pt-3">{visibilityText}</p>
       <RadioInput
         id="visibility-visible"
         name="donate-visibility"
