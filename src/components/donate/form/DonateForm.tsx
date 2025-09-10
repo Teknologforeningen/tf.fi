@@ -9,7 +9,7 @@ import { Donation } from '@models/donate'
 import { createPaymentAction, type PaymentResponse } from '@lib/barsborsen/payment'
 import { DonationPreview } from '@components/donate/form/DonationPreview'
 import ErrorDialog from '@components/donate/ErrorDialog'
-import { DonationLevels, StodProjektet } from '../../../../payload-types'
+import { DonationLevels, StodProjektet } from '@payload-types'
 import { JSXConvertersFunction, RichText } from '@payloadcms/richtext-lexical/react'
 import { DefaultNodeTypes, SerializedLinkNode } from '@payloadcms/richtext-lexical'
 

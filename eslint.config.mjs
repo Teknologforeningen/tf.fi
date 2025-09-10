@@ -1,8 +1,9 @@
-import url from 'node:url'
 import { FlatCompat } from '@eslint/eslintrc'
 import eslint from '@eslint/js'
-import tseslint from 'typescript-eslint'
 import eslintConfigPrettier from 'eslint-config-prettier'
+import { globalIgnores } from 'eslint/config'
+import url from 'node:url'
+import tseslint from 'typescript-eslint'
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 const compat = new FlatCompat({ baseDirectory: __dirname })
@@ -12,6 +13,7 @@ export default tseslint.config(
   ...tseslint.configs.recommended,
   ...compat.extends('next/core-web-vitals'),
   eslintConfigPrettier,
+  globalIgnores(['./src/migrations/*']),
   {
     rules: {
       '@typescript-eslint/no-unused-vars': 'error',

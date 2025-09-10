@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import TextInput from './TextInput'
 import React, { ChangeEventHandler, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { DonationLevels as Levels } from '../../../../payload-types'
+import { DonationLevels as Levels } from '@payload-types'
 
 const Line = ({ value, threshold }: { value: number; threshold: number }) => {
   const backgroundColor = threshold < value ? '#b20738' : '#222'

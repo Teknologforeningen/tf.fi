@@ -1,4 +1,4 @@
-import { DonationLevels } from '../../payload-types'
+import { DonationLevels } from '@payload-types'
 import { StrapiImage } from './image'
 import type { Visibility } from '@components/donate/form/Visibility'
 

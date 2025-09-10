@@ -5,6 +5,7 @@
     "node": ">=18"
   },
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "NODE_OPTIONS='--dns-result-order=ipv4first' next dev --turbopack",
     "build": "next build",
@@ -12,7 +13,7 @@
     "lint": "prettier -c src *.json *.js *.mjs *.ts && next lint",
     "export": "next export",
     "build-start": "next build && cp -r .next/static/ .next/standalone/.next && node .next/standalone/server.js",
-    "generate-types": "payload generate:types"
+    "payload": "PAYLOAD_CONFIG_PATH=src/payload.config.ts payload"
   },
   "dependencies": {
     "@fullcalendar/core": "^6.1.17",

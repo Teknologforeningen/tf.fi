@@ -23,7 +23,8 @@
       "@styles/*": ["./src/styles/*"],
       "@utils/*": ["./src/utils/*"],
       "@middleware/*": ["./src/middleware/*"],
-      "@payload-config": ["./payload.config.ts"]
+      "@payload-config": ["./src/payload.config.ts"],
+      "@payload-types": ["./src/payload-types.ts"]
     },
     "plugins": [
       {

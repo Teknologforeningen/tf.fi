@@ -1,4 +1,4 @@
-import { FAQs } from '../../../payload-types'
+import { FAQs } from '@payload-types'
 import { JSXConvertersFunction, RichText } from '@payloadcms/richtext-lexical/react'
 import { CustomLinkComponent } from './form/DonateForm'
 import { DefaultNodeTypes } from '@payloadcms/richtext-lexical'

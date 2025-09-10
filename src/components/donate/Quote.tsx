@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Quotes } from '../../../payload-types'
+import { Quotes } from '@payload-types'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 
 type Quote = NonNullable<Quotes>[number]

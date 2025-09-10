@@ -1,7 +1,8 @@
+// @ts-check
 import { withPayload } from '@payloadcms/next/withPayload'
-import type { NextConfig } from 'next'
 
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   reactStrictMode: true,
   images: {
     remotePatterns: [

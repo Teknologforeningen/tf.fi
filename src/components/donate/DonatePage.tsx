@@ -6,7 +6,7 @@ import Image from 'next/image'
 import type { DonatePage } from '@models/donate'
 import { JSXConvertersFunction, RichText } from '@payloadcms/richtext-lexical/react'
 import { DefaultNodeTypes, SerializedUploadNode } from '@payloadcms/richtext-lexical'
-import { StodProjektet } from '../../../payload-types'
+import { StodProjektet } from '@payload-types'
 
 const CustomUploadComponent = ({ node }: { node: SerializedUploadNode }) => {
   if (node.relationTo !== 'media') return null
