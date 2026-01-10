@@ -1,8 +1,7 @@
 'use server'
 
-import type { Donation } from '@models/donate'
+import { Visibility, VisibilityType, type Donation } from '@models/donate'
 import { barsborsenUrl } from '@lib/barsborsen/index'
-import { type Visibility, VisibilityType } from '@components/donate/form/Visibility'
 import { DonateStep } from '@components/donate/form/DonateForm'
 
 function extractDonation(formData: FormData): Donation {

@@ -1,5 +1,4 @@
-import { Donation } from '@models/donate'
-import { VisibilityType } from './Visibility'
+import { Donation, VisibilityType } from '@models/donate'
 
 export const DonationPreview = ({ donation, action }: { donation: Donation; action?: (fd: FormData) => void }) => {
   let visibilityText: string

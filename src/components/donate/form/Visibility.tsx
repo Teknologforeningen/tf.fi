@@ -4,17 +4,7 @@ import { useState } from 'react'
 import RadioInput from './RadioInput'
 import classNames from 'classnames'
 import TextInput from './TextInput'
-
-export enum VisibilityType {
-  visible = 'visible',
-  pseudonym = 'pseudonym',
-  anonymous = 'anonymous',
-}
-
-export type Visibility =
-  | { type: VisibilityType.visible }
-  | { type: VisibilityType.pseudonym; value: string }
-  | { type: VisibilityType.anonymous }
+import { Visibility, VisibilityType } from '@models/donate'
 
 const VisibilitySelection = ({ visibility, visibilityText }: { visibility?: Visibility; visibilityText?: string }) => {
   const [showPseudonymInput, setShowPseudonymInput] = useState(visibility?.type === VisibilityType.pseudonym)

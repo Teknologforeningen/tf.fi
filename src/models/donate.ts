@@ -1,6 +1,5 @@
 import { DonationLevels } from '@payload-types'
 import { StrapiImage } from './image'
-import type { Visibility } from '@components/donate/form/Visibility'
 
 export interface DonatePage {
   title: string
@@ -30,3 +29,14 @@ export interface Donation {
   visibility: Visibility
   amount: string
 }
+
+export enum VisibilityType {
+  visible = 'visible',
+  pseudonym = 'pseudonym',
+  anonymous = 'anonymous',
+}
+
+export type Visibility =
+  | { type: VisibilityType.visible }
+  | { type: VisibilityType.pseudonym; value: string }
+  | { type: VisibilityType.anonymous }
