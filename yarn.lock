@@ -111,20 +111,20 @@
   resolved "https://registry.yarnpkg.com/@date-fns/tz/-/tz-1.2.0.tgz#81cb3211693830babaf3b96aff51607e143030a6"
   integrity sha512-LBrd7MiJZ9McsOgxqWX7AaxrDjcFVjWH/tIKJd7pnR7McaslGYOP1QmmiBXdJH/H/yLCT+rcQ7FaPBUxRGUtrg==
 
-"@dnd-kit/accessibility@^3.0.0":
+"@dnd-kit/accessibility@^3.1.1":
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/@dnd-kit/accessibility/-/accessibility-3.1.1.tgz#3b4202bd6bb370a0730f6734867785919beac6af"
   integrity sha512-2P+YgaXF+gRsIihwwY1gCsQSYnu9Zyj2py8kY5fFvUM1qm2WA2u639R6YNVfU4GWr+ZM5mqEsfHZZLoRONbemw==
   dependencies:
     tslib "^2.0.0"
 
-"@dnd-kit/core@6.0.8":
-  version "6.0.8"
-  resolved "https://registry.yarnpkg.com/@dnd-kit/core/-/core-6.0.8.tgz#040ae13fea9787ee078e5f0361f3b49b07f3f005"
-  integrity sha512-lYaoP8yHTQSLlZe6Rr9qogouGUz9oRUj4AHhDQGQzq/hqaJRpFo65X+JKsdHf8oUFBzx5A+SJPUvxAwTF2OabA==
+"@dnd-kit/core@6.3.1":
+  version "6.3.1"
+  resolved "https://registry.yarnpkg.com/@dnd-kit/core/-/core-6.3.1.tgz#4c36406a62c7baac499726f899935f93f0e6d003"
+  integrity sha512-xkGBRQQab4RLwgXxoqETICr6S5JlogafbhNsidmrkVv2YRs5MLwpjoF2qpiGjQt8S9AoxtIV603s0GIUpY5eYQ==
   dependencies:
-    "@dnd-kit/accessibility" "^3.0.0"
-    "@dnd-kit/utilities" "^3.2.1"
+    "@dnd-kit/accessibility" "^3.1.1"
+    "@dnd-kit/utilities" "^3.2.2"
     tslib "^2.0.0"
 
 "@dnd-kit/modifiers@9.0.0":
@@ -135,15 +135,15 @@
     "@dnd-kit/utilities" "^3.2.2"
     tslib "^2.0.0"
 
-"@dnd-kit/sortable@7.0.2":
-  version "7.0.2"
-  resolved "https://registry.yarnpkg.com/@dnd-kit/sortable/-/sortable-7.0.2.tgz#791d550872457f3f3c843e00d159b640f982011c"
-  integrity sha512-wDkBHHf9iCi1veM834Gbk1429bd4lHX4RpAwT0y2cHLf246GAvU2sVw/oxWNpPKQNQRQaeGXhAVgrOl1IT+iyA==
+"@dnd-kit/sortable@10.0.0":
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/@dnd-kit/sortable/-/sortable-10.0.0.tgz#1f9382b90d835cd5c65d92824fa9dafb78c4c3e8"
+  integrity sha512-+xqhmIIzvAYMGfBYYnbKuNicfSsk4RksY2XdmJhT+HAC01nix6fHCztU68jooFiMUB01Ky3F0FyOvhG/BZrWkg==
   dependencies:
-    "@dnd-kit/utilities" "^3.2.0"
+    "@dnd-kit/utilities" "^3.2.2"
     tslib "^2.0.0"
 
-"@dnd-kit/utilities@3.2.2", "@dnd-kit/utilities@^3.2.0", "@dnd-kit/utilities@^3.2.1", "@dnd-kit/utilities@^3.2.2":
+"@dnd-kit/utilities@3.2.2", "@dnd-kit/utilities@^3.2.2":
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/@dnd-kit/utilities/-/utilities-3.2.2.tgz#5a32b6af356dc5f74d61b37d6f7129a4040ced7b"
   integrity sha512-+MKAJEOfaBe5SmV6t34p80MMKhjvUz0vRrvVJbPT0WElzaOJ/1xs+D+KDv+tD/NE5ujfrChEcshd4fLn0wpiqg==
@@ -1151,12 +1151,12 @@
   resolved "https://registry.yarnpkg.com/@panva/hkdf/-/hkdf-1.2.1.tgz#cb0d111ef700136f4580349ff0226bf25c853f23"
   integrity sha512-6oclG6Y3PiDFcoyk8srjLfVKyMfVCKJ27JwNPViuXziFpmdz+MZnZN/aKY0JGXgYuO/VghU0jcOAZgWXZ1Dmrw==
 
-"@payloadcms/db-postgres@^3.69.0":
-  version "3.69.0"
-  resolved "https://registry.yarnpkg.com/@payloadcms/db-postgres/-/db-postgres-3.69.0.tgz#2e9a57374f1cc62d1fd6e1e6a8c8b66134f404cc"
-  integrity sha512-Fz/hjP0z88zrsYz1UzaqnoM3L+yHymH+yWUIJnIf7jMCtnfi/ws5XBX/0DHILvxoVsCNc5XSx3fTjcBCJoYylw==
+"@payloadcms/db-postgres@3.70.0":
+  version "3.70.0"
+  resolved "https://registry.yarnpkg.com/@payloadcms/db-postgres/-/db-postgres-3.70.0.tgz#58b46242ebb0b16e96902911692021736e990ec7"
+  integrity sha512-y1f4/ncW4E1dKwsf5Ihspht+ujxIuUBxKgiV87cZtop1BrBAwwSgoRcKHH4kb8do57A+wb9zy8L4LX1U3g8l3g==
   dependencies:
-    "@payloadcms/drizzle" "3.69.0"
+    "@payloadcms/drizzle" "3.70.0"
     "@types/pg" "8.10.2"
     console-table-printer "2.12.1"
     drizzle-kit "0.31.7"
@@ -1166,13 +1166,13 @@
     to-snake-case "1.0.0"
     uuid "10.0.0"
 
-"@payloadcms/db-sqlite@^3.69.0":
-  version "3.69.0"
-  resolved "https://registry.yarnpkg.com/@payloadcms/db-sqlite/-/db-sqlite-3.69.0.tgz#546a382e0d75aa75af6f87c4cd8e21e72bf6fa2a"
-  integrity sha512-JVsuGNAoI/zTgIlF7ZPOmWgQrUaLFvzNO3KBMoUpJAoX+vNDxmEaLPBE2+xJfuf/Y1SJm2f908LxKKQLHjR5Nw==
+"@payloadcms/db-sqlite@3.70.0":
+  version "3.70.0"
+  resolved "https://registry.yarnpkg.com/@payloadcms/db-sqlite/-/db-sqlite-3.70.0.tgz#b260f53e279188263658f5436ca7ddcaa4730b01"
+  integrity sha512-LKNM1oWTKXT677rNPIBbRo311sI2E2eSZEZFH0qEwHdh9CSM/OzpXnSdzENjTTaei4Aas3nA9oYc/MHkOh2Rhw==
   dependencies:
     "@libsql/client" "0.14.0"
-    "@payloadcms/drizzle" "3.69.0"
+    "@payloadcms/drizzle" "3.70.0"
     console-table-printer "2.12.1"
     drizzle-kit "0.31.7"
     drizzle-orm "0.44.7"
@@ -1180,10 +1180,10 @@
     to-snake-case "1.0.0"
     uuid "9.0.0"
 
-"@payloadcms/drizzle@3.69.0":
-  version "3.69.0"
-  resolved "https://registry.yarnpkg.com/@payloadcms/drizzle/-/drizzle-3.69.0.tgz#24e5157c8dc89edbeaa66ae9b2c4169e717f5674"
-  integrity sha512-Fsvij6ruoN7S7q1OfGYs/SSLy3s7wFd4E/efXHmRLjw53xtlRiGXIejmhiUEdNK4d5RHi0yjIblQsbTKnBvirw==
+"@payloadcms/drizzle@3.70.0":
+  version "3.70.0"
+  resolved "https://registry.yarnpkg.com/@payloadcms/drizzle/-/drizzle-3.70.0.tgz#0c1afb64ec147014e03077d99122f8d3b7cfdf46"
+  integrity sha512-r6b7kyjY8TGMJRNrCLxGwPf2fZzFK4c2LyFvuc7hOigu7KMExQm7Apt5ywPF0p7SR9QoJYv2WHpf5O7pvMlLZw==
   dependencies:
     console-table-printer "2.12.1"
     dequal "2.0.3"
@@ -1192,27 +1192,27 @@
     to-snake-case "1.0.0"
     uuid "9.0.0"
 
-"@payloadcms/graphql@3.69.0":
-  version "3.69.0"
-  resolved "https://registry.yarnpkg.com/@payloadcms/graphql/-/graphql-3.69.0.tgz#5b8a2e519241c18719664c4c9000300d932acb92"
-  integrity sha512-VRFacg4EneV7U9jqerQfNVL/O788WlZbdnMGSwds0mVwC5qPW3sktZhHxJCAksvAFJ+XXtx4GCMv/YK8DgEfxw==
+"@payloadcms/graphql@3.70.0":
+  version "3.70.0"
+  resolved "https://registry.yarnpkg.com/@payloadcms/graphql/-/graphql-3.70.0.tgz#0b7606eca19d986c24f546087c745195b9e3d96c"
+  integrity sha512-awT25IHRqNWZvTlFfx8m9YvRyQ4x8u2YEahULkiQ6jcaxEiFKoWe9j9Shb2j3AHf/IzexdU1k5XV/8p92cFKog==
   dependencies:
     graphql-scalars "1.22.2"
     pluralize "8.0.0"
     ts-essentials "10.0.3"
     tsx "4.20.6"
 
-"@payloadcms/next@^3.69.0":
-  version "3.69.0"
-  resolved "https://registry.yarnpkg.com/@payloadcms/next/-/next-3.69.0.tgz#d872aa8107659d0d03282a168e8f249a7c539540"
-  integrity sha512-rkj/wvTDcbOkb8+v4jkZVdoJm2tvPUQL62CWoGnysy/ST+ZUwMr/70veLB7Ztr3uj6HKi6dU+31H+gG94UaMZg==
+"@payloadcms/next@3.70.0":
+  version "3.70.0"
+  resolved "https://registry.yarnpkg.com/@payloadcms/next/-/next-3.70.0.tgz#b0919f1f1e966e1503e77f6b64dbcfa1522d24dc"
+  integrity sha512-/PivHLH3FJWKc7rQhO2JQsx7lqdR6LaCUPkUa83D6lZjZmAnhCl66u9YHoZTVAMjWtjsTXHQSZEvGFNRsmZVhw==
   dependencies:
-    "@dnd-kit/core" "6.0.8"
+    "@dnd-kit/core" "6.3.1"
     "@dnd-kit/modifiers" "9.0.0"
-    "@dnd-kit/sortable" "7.0.2"
-    "@payloadcms/graphql" "3.69.0"
-    "@payloadcms/translations" "3.69.0"
-    "@payloadcms/ui" "3.69.0"
+    "@dnd-kit/sortable" "10.0.0"
+    "@payloadcms/graphql" "3.70.0"
+    "@payloadcms/translations" "3.70.0"
+    "@payloadcms/ui" "3.70.0"
     busboy "^1.6.0"
     dequal "2.0.3"
     file-type "19.3.0"
@@ -1224,10 +1224,10 @@
     sass "1.77.4"
     uuid "10.0.0"
 
-"@payloadcms/richtext-lexical@^3.69.0":
-  version "3.69.0"
-  resolved "https://registry.yarnpkg.com/@payloadcms/richtext-lexical/-/richtext-lexical-3.69.0.tgz#9e7f0916d362227997d42fd27ab4e854a626541c"
-  integrity sha512-NwyTN3GY1FOFTP0V3gm+M0FxK4GDWL2R0p2DrirIi7nZOH2rw6P+FfvMvzobT/nxUsQYntBnjoGDWhqN+uq3lg==
+"@payloadcms/richtext-lexical@3.70.0":
+  version "3.70.0"
+  resolved "https://registry.yarnpkg.com/@payloadcms/richtext-lexical/-/richtext-lexical-3.70.0.tgz#27115235e5c44d5acbe5c39939a9524524dd5f53"
+  integrity sha512-2f6toXSqpsVnMcf5AO9EcNztN0aUoQLmWe0onLXXNHyGDB32rPgWnxxOjrRxKjAUVZKt+x+5S9zPMqVg4X415g==
   dependencies:
     "@lexical/clipboard" "0.35.0"
     "@lexical/headless" "0.35.0"
@@ -1240,8 +1240,8 @@
     "@lexical/selection" "0.35.0"
     "@lexical/table" "0.35.0"
     "@lexical/utils" "0.35.0"
-    "@payloadcms/translations" "3.69.0"
-    "@payloadcms/ui" "3.69.0"
+    "@payloadcms/translations" "3.70.0"
+    "@payloadcms/ui" "3.70.0"
     "@types/uuid" "10.0.0"
     acorn "8.12.1"
     bson-objectid "2.0.4"
@@ -1265,20 +1265,27 @@
   dependencies:
     date-fns "4.1.0"
 
-"@payloadcms/ui@3.69.0":
-  version "3.69.0"
-  resolved "https://registry.yarnpkg.com/@payloadcms/ui/-/ui-3.69.0.tgz#0134f43ad457bc9661391c8ae415b3a347afe63c"
-  integrity sha512-R/CFV9IF3LTHwBm+gFESpSYYqLejJgRijJarGFot5I1Kxa18mwNp+xUYHVUcJgGZ1xQ1iYzGuElEJwy1cJhMxg==
+"@payloadcms/translations@3.70.0":
+  version "3.70.0"
+  resolved "https://registry.yarnpkg.com/@payloadcms/translations/-/translations-3.70.0.tgz#c0aa4faa13277c814aadb77a93b6ddf32a39cd48"
+  integrity sha512-b8C1Wg7zknUpfe6T2C13/bjrx8i4oRLCaHEJ6LuuVRMxeDyH4hPrxivyjZFlEIajzb7+HjwpdeWfa8IoiqvEpg==
+  dependencies:
+    date-fns "4.1.0"
+
+"@payloadcms/ui@3.70.0":
+  version "3.70.0"
+  resolved "https://registry.yarnpkg.com/@payloadcms/ui/-/ui-3.70.0.tgz#23f714df4391859014ee11d0fcb517f758790fe7"
+  integrity sha512-DWtsMY79JS5QhXVMRo9ZqdeDrVpk4f+zMtQo0A/fwGsb9aYM8AvKadqVb8mvrHmCGcVPtJHFQPHvqQMXDj0egw==
   dependencies:
     "@date-fns/tz" "1.2.0"
-    "@dnd-kit/core" "6.0.8"
-    "@dnd-kit/sortable" "7.0.2"
+    "@dnd-kit/core" "6.3.1"
+    "@dnd-kit/sortable" "10.0.0"
     "@dnd-kit/utilities" "3.2.2"
     "@faceless-ui/modal" "3.0.0"
     "@faceless-ui/scroll-info" "2.0.0"
     "@faceless-ui/window-info" "3.0.1"
     "@monaco-editor/react" "4.7.0"
-    "@payloadcms/translations" "3.69.0"
+    "@payloadcms/translations" "3.70.0"
     bson-objectid "2.0.4"
     date-fns "4.1.0"
     dequal "2.0.3"
