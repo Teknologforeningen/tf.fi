@@ -1,17 +1,13 @@
-import { FlatCompat } from '@eslint/eslintrc'
 import eslint from '@eslint/js'
 import eslintConfigPrettier from 'eslint-config-prettier'
-import { globalIgnores } from 'eslint/config'
-import url from 'node:url'
+import { defineConfig, globalIgnores } from 'eslint/config'
 import tseslint from 'typescript-eslint'
+import nextVitals from 'eslint-config-next/core-web-vitals'
 
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
-const compat = new FlatCompat({ baseDirectory: __dirname })
-
-export default tseslint.config(
+export default defineConfig(
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
-  ...compat.extends('next/core-web-vitals'),
+  ...nextVitals,
   eslintConfigPrettier,
   globalIgnores(['./src/migrations/*']),
   {
