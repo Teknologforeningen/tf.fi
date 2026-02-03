@@ -1,4 +1,3 @@
-import React from 'react'
 import Subtitle from '@components/Subtitle'
 import listEvents, { CalendarEvent } from '@lib/google/calendar'
 import InteractiveCalendar from '@components/calendar/InteractiveCalendar'
