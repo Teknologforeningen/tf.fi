@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { drive_v3 } from 'googleapis'
 import { marked } from 'marked'
 
@@ -45,22 +44,6 @@ export const processMarkdownSnippet = (markdown: string) => {
   renderer.table = () => ' '
   renderer.link = (href, title, text) => text
   return marked(markdown, { renderer })
-}
-
-export const debounce = (
-  func: (...args: any[]) => any,
-  delay: number,
-  debounceTimeout: React.MutableRefObject<ReturnType<typeof setTimeout> | null>
-) => {
-  return function (args: any[]) {
-    if (debounceTimeout.current) {
-      clearTimeout(debounceTimeout.current)
-    }
-    debounceTimeout.current = setTimeout(() => {
-      func(...args)
-      debounceTimeout.current = null
-    }, delay)
-  }
 }
 
 export const buildFolderPaths = (folders: drive_v3.Schema$File[]) => {

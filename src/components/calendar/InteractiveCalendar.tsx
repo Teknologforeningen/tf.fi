@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Calendar from 'react-calendar'
 import Column from '@components/Column'
 import ActivityIndicator from '@components/ActivityIndicator'
@@ -13,15 +13,13 @@ type InteractiveCalendarProps = {
 }
 
 const InteractiveCalendar = ({ fetchEvents }: InteractiveCalendarProps) => {
-  const [events, setEvents] = useState<CalendarEvent[]>([])
+  /** `fetchEvents` always returns an empty array, so we can use `undefined` to represent a loading state. */
+  const [events, setEvents] = useState<CalendarEvent[] | undefined>(undefined)
   const [date, setDate] = useState(new Date())
-  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    setIsLoading(true)
     fetchEvents(date).then((data) => {
       setEvents(data)
-      setIsLoading(false)
     })
   }, [date, fetchEvents])
 
@@ -50,10 +48,12 @@ const InteractiveCalendar = ({ fetchEvents }: InteractiveCalendarProps) => {
         />
       </div>
       <CalendarEventsList
-        events={events
-          ?.filter((e) => e.start && e.end && (new Date(e.start) >= date || new Date(e.end) >= date))
-          .slice(0, 5)}
-        isLoading={isLoading}
+        events={
+          events
+            ?.filter((e) => e.start && e.end && (new Date(e.start) >= date || new Date(e.end) >= date))
+            .slice(0, 5) ?? []
+        }
+        isLoading={events === undefined}
       />
     </>
   )

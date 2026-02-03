@@ -19,4 +19,4 @@ jobs:
         run: yarn lint
 
       - name: Build
-        run: yarn build --no-lint
+        run: yarn build

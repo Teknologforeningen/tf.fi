@@ -1,12 +1,13 @@
-import React, { useEffect, useRef, useReducer } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import Column from '@components/Column'
 import { getDriveDirectories, searchDrive, searchSiteContent } from '@lib/strapi/search'
-import { titleToAnchor, debounce, buildFolderPaths } from '@utils/helpers'
+import { titleToAnchor, buildFolderPaths } from '@utils/helpers'
 import ListCard from './ListCard'
 import SearchBar from './SearchBar'
 import { MdCancel } from 'react-icons/md'
 import FileCard from './FileCard'
 import { searchReducer, initialState } from './reducer'
+import { useDebounce } from '../../../../hooks/useDebounce'
 
 type SearchOverlayProps = {
   onClose: () => void
@@ -110,14 +111,12 @@ const SearchOverlay = ({ onClose, sessionToken, setSideMenuOpen }: SearchOverlay
     }
   }
 
-  const debounceTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
-
-  const debouncedHandleSearch = debounce(handleSearch, 500, debounceTimeout)
+  const debouncedSearch = useDebounce(handleSearch, 500)
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
     dispatch({ type: 'INPUT_CHANGED', payload: value })
     if (value && value.length >= 2) {
-      debouncedHandleSearch([value, fileSearch])
+      debouncedSearch([value, fileSearch])
     }
   }
 

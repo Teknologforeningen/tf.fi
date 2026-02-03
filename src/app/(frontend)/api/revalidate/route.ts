@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
     const tag = request.nextUrl.searchParams.get('tag')
     if (tag) {
       // Manual API call
-      revalidateTag(tag)
+      revalidateTag(tag, 'max')
       return NextResponse.json({ revalidated: true, now: Date.now() })
     } else {
       const body = await request.json()
@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: 'Missing slug' }, { status: 400 })
           }
           revalidatePath(`/${category}/${page}`)
-          revalidateTag('navbar')
+          revalidateTag('navbar', 'max')
           break
         }
         case 'category': {
@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
           body?.entry?.content_pages?.forEach((page: PageType | undefined) =>
             revalidatePath(`/${category}/${page?.slug}`)
           )
-          revalidateTag('navbar')
+          revalidateTag('navbar', 'max')
           break
         }
         case 'content-section': {
@@ -83,11 +83,11 @@ export async function POST(request: NextRequest) {
           break
         }
         case 'navbar': {
-          revalidateTag('navbar')
+          revalidateTag('navbar', 'max')
           break
         }
         case 'private-page': {
-          revalidateTag('navbar')
+          revalidateTag('navbar', 'max')
           break
         }
         case 'homepage': {
@@ -95,7 +95,7 @@ export async function POST(request: NextRequest) {
           break
         }
         case 'footer': {
-          revalidateTag('footer')
+          revalidateTag('footer', 'max')
           break
         }
 
