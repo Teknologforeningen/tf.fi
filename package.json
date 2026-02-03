@@ -23,6 +23,7 @@
     "@payloadcms/db-sqlite": "3.74.0",
     "@payloadcms/next": "3.74.0",
     "@payloadcms/richtext-lexical": "3.74.0",
+    "babel-plugin-react-compiler": "^1.0.0",
     "classnames": "^2.5.1",
     "content-disposition": "^1.0.1",
     "googleapis": "^171.1.0",
