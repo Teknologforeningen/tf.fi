@@ -26,7 +26,7 @@
     "babel-plugin-react-compiler": "^1.0.0",
     "classnames": "^2.5.1",
     "content-disposition": "^1.0.1",
-    "googleapis": "^171.1.0",
+    "googleapis": "^148.0.0",
     "graphql": "^16.12.0",
     "marked": "^12.0.2",
     "motion": "^12.30.1",
