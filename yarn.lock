@@ -1443,6 +1443,13 @@
   dependencies:
     date-fns "4.1.0"
 
+"@payloadcms/translations@3.75.0":
+  version "3.75.0"
+  resolved "https://registry.yarnpkg.com/@payloadcms/translations/-/translations-3.75.0.tgz#90061fdc3837922dd72a1a8f070cd56fd9ce284b"
+  integrity sha512-WbSf105UVAeanl7zPUcemhIgVM9mR8wF92nmNmic4I5+rDChC99btfvlnQrUEOt/+Y7THSiaQTgL4ytun8xd0w==
+  dependencies:
+    date-fns "4.1.0"
+
 "@payloadcms/ui@3.74.0":
   version "3.74.0"
   resolved "https://registry.yarnpkg.com/@payloadcms/ui/-/ui-3.74.0.tgz#380cf2b1fb7dd9e6b903a1f7e97ab233decfd8a6"
@@ -4863,13 +4870,13 @@ path-type@^4.0.0:
   resolved "https://registry.yarnpkg.com/path-type/-/path-type-4.0.0.tgz#84ed01c0a7ba380afe09d90a8c180dcd9d03043b"
   integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
 
-payload@^3.74.0:
-  version "3.74.0"
-  resolved "https://registry.yarnpkg.com/payload/-/payload-3.74.0.tgz#f889fb4501837cd911ed9aeda605eb3729bf225f"
-  integrity sha512-8K8w5+/JehKgRl/xXtmAI1uMHJc9542x/TCdw1n7WbE+E1+j/oAwa/cV2FvF0zVA5ASTvGqOhVpb8bd9wApTUA==
+payload@^3.75.0:
+  version "3.75.0"
+  resolved "https://registry.yarnpkg.com/payload/-/payload-3.75.0.tgz#d54ee639d0d5eccd29ca26f55fac706ff121f458"
+  integrity sha512-JYJ545zu6URTMlhst1SBXW8WOAMeSfaIXffKluPUgzNfwWB/NcyzXjea+H7AGnL4nZiWJQhfbaRxvGherByXew==
   dependencies:
     "@next/env" "^15.1.5"
-    "@payloadcms/translations" "3.74.0"
+    "@payloadcms/translations" "3.75.0"
     "@types/busboy" "1.5.4"
     ajv "8.17.1"
     bson-objectid "2.0.4"
