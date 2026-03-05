@@ -1443,6 +1443,13 @@
   dependencies:
     date-fns "4.1.0"
 
+"@payloadcms/translations@3.75.0":
+  version "3.75.0"
+  resolved "https://registry.yarnpkg.com/@payloadcms/translations/-/translations-3.75.0.tgz#90061fdc3837922dd72a1a8f070cd56fd9ce284b"
+  integrity sha512-WbSf105UVAeanl7zPUcemhIgVM9mR8wF92nmNmic4I5+rDChC99btfvlnQrUEOt/+Y7THSiaQTgL4ytun8xd0w==
+  dependencies:
+    date-fns "4.1.0"
+
 "@payloadcms/ui@3.74.0":
   version "3.74.0"
   resolved "https://registry.yarnpkg.com/@payloadcms/ui/-/ui-3.74.0.tgz#380cf2b1fb7dd9e6b903a1f7e97ab233decfd8a6"
@@ -3597,9 +3604,9 @@ image-size@2.0.2:
   integrity sha512-IRqXKlaXwgSMAMtpNzZa1ZAe8m+Sa1770Dhk8VkSsP9LS+iHD62Zd8FQKs8fbPiagBE7BzoFX23cxFnwshpV6w==
 
 immutable@^4.0.0:
-  version "4.3.7"
-  resolved "https://registry.yarnpkg.com/immutable/-/immutable-4.3.7.tgz#c70145fc90d89fb02021e65c84eb0226e4e5a381"
-  integrity sha512-1hqclzwYwjRDFLjcFxOM5AYkkG0rpFPpr1RLPMEuGczoS7YA8gLhy8SWXYRAA/XwfEHpfo3cw5JGioS32fnMRw==
+  version "4.3.8"
+  resolved "https://registry.yarnpkg.com/immutable/-/immutable-4.3.8.tgz#02d183c7727fb2bb1d5d0380da0d779dce9296a7"
+  integrity sha512-d/Ld9aLbKpNwyl0KiM2CT1WYvkitQ1TSvmRtkcV8FKStiDoA7Slzgjmb/1G2yhKM1p0XeNOieaTbFZmU1d3Xuw==
 
 import-fresh@^3.2.1:
   version "3.3.1"
@@ -4107,9 +4114,9 @@ lodash.merge@^4.6.2:
   integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
 
 lodash@^4.17.21:
-  version "4.17.21"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
-  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
+  version "4.17.23"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.23.tgz#f113b0378386103be4f6893388c73d0bde7f2c5a"
+  integrity sha512-LgVTMpQtIopCi79SJeDiP0TfWi5CNEc/L/aRdTh3yIvmZXTnheWpKjSZhnvMl8iXbC1tFg9gdHHDMLoV7CnG+w==
 
 longest-streak@^3.0.0:
   version "3.1.0"
@@ -4863,13 +4870,13 @@ path-type@^4.0.0:
   resolved "https://registry.yarnpkg.com/path-type/-/path-type-4.0.0.tgz#84ed01c0a7ba380afe09d90a8c180dcd9d03043b"
   integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
 
-payload@^3.74.0:
-  version "3.74.0"
-  resolved "https://registry.yarnpkg.com/payload/-/payload-3.74.0.tgz#f889fb4501837cd911ed9aeda605eb3729bf225f"
-  integrity sha512-8K8w5+/JehKgRl/xXtmAI1uMHJc9542x/TCdw1n7WbE+E1+j/oAwa/cV2FvF0zVA5ASTvGqOhVpb8bd9wApTUA==
+payload@^3.75.0:
+  version "3.75.0"
+  resolved "https://registry.yarnpkg.com/payload/-/payload-3.75.0.tgz#d54ee639d0d5eccd29ca26f55fac706ff121f458"
+  integrity sha512-JYJ545zu6URTMlhst1SBXW8WOAMeSfaIXffKluPUgzNfwWB/NcyzXjea+H7AGnL4nZiWJQhfbaRxvGherByXew==
   dependencies:
     "@next/env" "^15.1.5"
-    "@payloadcms/translations" "3.74.0"
+    "@payloadcms/translations" "3.75.0"
     "@types/busboy" "1.5.4"
     ajv "8.17.1"
     bson-objectid "2.0.4"
@@ -5272,10 +5279,10 @@ qs-esm@7.0.2:
   resolved "https://registry.yarnpkg.com/qs-esm/-/qs-esm-7.0.2.tgz#cdd52c8ddba8270258e0808423e8f28d8a7195c9"
   integrity sha512-D8NAthKSD7SGn748v+GLaaO6k08Mvpoqroa35PqIQC4gtUa8/Pb/k+r0m0NnGBVbHDP1gKZ2nVywqfMisRhV5A==
 
-qs@^6.14.1, qs@^6.7.0:
-  version "6.14.1"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.14.1.tgz#a41d85b9d3902f31d27861790506294881871159"
-  integrity sha512-4EK3+xJl8Ts67nLYNwqw/dsFVnCf+qR7RgXSK9jEEm9unao3njwMDdmsdvoKBKHzxd7tCYz5e5M+SnMjdtXGQQ==
+qs@^6.14.2, qs@^6.7.0:
+  version "6.14.2"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.14.2.tgz#b5634cf9d9ad9898e31fba3504e866e8efb6798c"
+  integrity sha512-V/yCWTTF7VJ9hIh18Ugr2zhJMP01MY7c5kh4J870L7imm6/DIzBsNLTXzMwUA3yZ5b/KBqLx8Kp3uRvd7xSe3Q==
   dependencies:
     side-channel "^1.1.0"
 
