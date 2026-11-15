@@ -1,9 +1,10 @@
 {
-  "name": "tf-150",
+  "name": "tf.fi",
   "version": "0.1.0",
   "engines": {
     "node": ">=18"
   },
+  "packageManager": "pnpm@12.21.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -26,6 +27,7 @@
     "babel-plugin-react-compiler": "^1.0.0",
     "classnames": "^2.5.1",
     "content-disposition": "^1.0.1",
+    "gaxios": "^8.3.3",
     "googleapis": "^148.0.0",
     "graphql": "^16.12.0",
     "marked": "^12.0.2",
@@ -52,7 +54,6 @@
     "@types/react": "^19.2.10",
     "@types/react-dom": "^19.2.3",
     "@types/react-textfit": "^1.1.0",
-    "@types/react-window": "^2.0.0",
     "autoprefixer": "^10.4.24",
     "encoding": "^0.1.13",
     "eslint": "^9.39.2",

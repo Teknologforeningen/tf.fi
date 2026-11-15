@@ -49,6 +49,7 @@ export default class Drive {
     let pageToken: string | undefined = undefined
     try {
       do {
+        // @ts-expect-error FIXME
         const response: GaxiosResponse<drive_v3.Schema$FileList> = await this.drive.files.list({
           q: `mimeType = 'application/vnd.google-apps.folder' and trashed = false and name != 'Public' and name != 'Private'`,
           fields: 'nextPageToken, files(id, name, parents)',

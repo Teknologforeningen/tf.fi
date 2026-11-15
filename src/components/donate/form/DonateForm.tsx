@@ -119,7 +119,6 @@ const DonateForm = ({ step, form }: { step?: DonateStep; form?: Form }) => {
 }
 
 export type DonateStep =
-  | { type: 'edit'; donation?: Donation }
-  | { type: 'payment'; donation: Donation; payment: PaymentResponse | null }
+  { type: 'edit'; donation?: Donation } | { type: 'payment'; donation: Donation; payment: PaymentResponse | null }
 
 export default DonateForm
