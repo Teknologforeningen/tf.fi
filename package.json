@@ -48,7 +48,7 @@
     "@types/content-disposition": "^0.5.6",
     "@types/gapi": "^0.0.47",
     "@types/marked": "^6.0.0",
-    "@types/node": "25.2.0",
+    "@types/node": "26.6.6",
     "@types/qs": "^6.9.18",
     "@types/react": "^19.2.10",
     "@types/react-dom": "^19.2.3",
