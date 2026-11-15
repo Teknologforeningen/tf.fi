@@ -1,4 +1,4 @@
-import contentDisposition from 'content-disposition'
+import { create } from 'content-disposition'
 import Drive from '@lib/google/drive'
 import { NextRequest, NextResponse } from 'next/server'
 import { Readable } from 'stream'
