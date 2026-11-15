@@ -209,8 +209,8 @@ importers:
         specifier: ^190.0.0
         version: 190.0.0(supports-color@7.2.0)
       marked:
-        specifier: ^12.0.2
-        version: 12.0.2
+        specifier: ^18.2.0
+        version: 18.2.0
       motion:
         specifier: ^12.30.1
         version: 12.43.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -3381,14 +3381,14 @@ packages:
     resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
     engines: {node: '>=10'}
 
-  marked@12.0.2:
-    resolution: {integrity: sha512-qXUm7e/YKFoqFPYPa3Ukg9xlI5cyAtGmyEIzMfW//m6kXwCy2Ps9DYf5ioijFKQ8qyuscrHoY04iJGctu2Kg0Q==}
-    engines: {node: '>= 18'}
-    hasBin: true
-
   marked@14.0.0:
     resolution: {integrity: sha512-uIj4+faQ+MgHgwUW1l2PsPglZLOLOT1uErt06dAPtx2kjteLAkbsd/0FiYg/MGS+i7ZKLb7w2WClxHkzOOuryQ==}
     engines: {node: '>= 18'}
+    hasBin: true
+
+  marked@18.2.0:
+    resolution: {integrity: sha512-KaeL+tAbtvI930q7HE2PN5lYXYdT8EiSmxHlN6F3rsfb57wd5mp5W5TLazpdj4inTQBJdgjYwbs40W/0VUGU+Q==}
+    engines: {node: '>= 20'}
     hasBin: true
 
   math-intrinsics@1.1.0:
@@ -6076,7 +6076,7 @@ snapshots:
 
   '@types/marked@6.0.0':
     dependencies:
-      marked: 12.0.2
+      marked: 18.2.0
 
   '@types/mdast@4.0.4':
     dependencies:
@@ -7747,9 +7747,9 @@ snapshots:
     dependencies:
       yallist: 4.0.0
 
-  marked@12.0.2: {}
-
   marked@14.0.0: {}
+
+  marked@18.2.0: {}
 
   math-intrinsics@1.1.0: {}
 

@@ -28,7 +28,7 @@
     "content-disposition": "^3.0.0",
     "gaxios": "^8.3.3",
     "googleapis": "^190.0.0",
-    "marked": "^12.0.2",
+    "marked": "^18.2.0",
     "motion": "^12.30.1",
     "next": "^16.2.2",
     "next-auth": "^4.24.13",
