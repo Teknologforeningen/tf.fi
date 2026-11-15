@@ -25,7 +25,7 @@ const Page = async (props: { params: Promise<{ slug: string }> }) => {
 
   return (
     <>
-      <h1 className="break-words">
+      <h1 className="wrap-break-word">
         {post?.title}
         {post?.date && <p className="text-lg">{getDateLong(post?.date)}</p>}
       </h1>

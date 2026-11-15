@@ -36,7 +36,7 @@ const InteractiveCalendar = ({ fetchEvents }: InteractiveCalendarProps) => {
 
   return (
     <>
-      <div className="mt-4 flex max-w-[400px] items-center self-center rounded-md border-[1px] border-teknologröd bg-white p-5 pb-5 shadow-md">
+      <div className="mt-4 flex max-w-[400px] items-center self-center rounded-md border border-teknologröd bg-white p-5 pb-5 shadow-md">
         <Calendar
           tileClassName={({ date }) => setClass(date)}
           minDetail="month"
@@ -70,7 +70,7 @@ const CalendarEventsList = ({ events, isLoading }: { events: CalendarEvent[]; is
         return (
           <Link
             key={e.id}
-            className="highlight border-1 duration-50 my-1.5 w-full max-w-[390px] rounded-md bg-white p-2 shadow transition-colors ease-in-out hover:bg-lightGray"
+            className="highlight border duration-50 my-1.5 w-full max-w-[390px] rounded-md bg-white p-2 shadow transition-colors ease-in-out hover:bg-lightGray"
             href={e.htmlLink}
           >
             <p className="text-bold text-teknologröd">{e.title}</p>
