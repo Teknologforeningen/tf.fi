@@ -17,9 +17,8 @@
     "payload": "PAYLOAD_CONFIG_PATH=src/payload.config.ts payload"
   },
   "dependencies": {
-    "@fullcalendar/core": "^ 6.1.20",
     "@fullcalendar/daygrid": "^6.1.20",
-    "@fullcalendar/react": "^6.1.20",
+    "@fullcalendar/react": "^7.1.5",
     "@payloadcms/db-postgres": "3.81.0",
     "@payloadcms/db-sqlite": "3.81.0",
     "@payloadcms/next": "3.81.0",
@@ -41,7 +40,8 @@
     "react-dom": "^19.2.4",
     "react-google-drive-picker": "^1.2.2",
     "react-icons": "^5.5.0",
-    "sharp": "^0.34.5"
+    "sharp": "^0.34.5",
+    "temporal-polyfill": "^1.0.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
