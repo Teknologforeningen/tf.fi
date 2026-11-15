@@ -27,7 +27,7 @@ const InfoBlock = () => {
     >
       <p className="mb-2 inline-flex items-center border-b-4 border-teknologröd">Tänkte du besöka?</p>
       <Row>
-        <div className="mr-2 border-r-[1px] border-r-white pr-2">
+        <div className="mr-2 border-r border-r-white pr-2">
           <Link href={links.täffäab} className="link link-text inline-flex items-center">
             <TaffaABLogo textHidden={false} />
           </Link>

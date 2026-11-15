@@ -1,4 +1,4 @@
-import contentDisposition from 'content-disposition'
+import { create } from 'content-disposition'
 import Drive from '@lib/google/drive'
 import { NextRequest, NextResponse } from 'next/server'
 import { Readable } from 'stream'
@@ -21,7 +21,7 @@ export default function downloadHandler(drive: Drive | null) {
       const stream = await drive.getFile(fileId)
       return new Response(Readable.toWeb(stream) as ReadableStream, {
         headers: {
-          'Content-Disposition': contentDisposition(fileName || fileId),
+          'Content-Disposition': create(fileName || fileId),
         },
       })
     } catch (error) {

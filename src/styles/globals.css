@@ -1,17 +1,18 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@config "../../tailwind.config.mjs";
 
-:root {
-  --gold: #f1e792;
-  --darkblue: #001627;
-  --creamwhite: #ffffe8;
-  --teknologröd: #b20738;
-  --eventblue: #9ad7d7;
-  --blogpink: #d79ad1;
-  --darkGray: #222222;
-  --gray: #38404b;
-  --lightGray: #f5f5f5;
+@layer utilities {
+  :root {
+    --gold: #f1e792;
+    --darkblue: #001627;
+    --creamwhite: #ffffe8;
+    --teknologröd: #b20738;
+    --eventblue: #9ad7d7;
+    --blogpink: #d79ad1;
+    --darkGray: #222222;
+    --gray: #38404b;
+    --lightGray: #f5f5f5;
+  }
 }
 
 @layer base {

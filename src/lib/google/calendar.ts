@@ -19,7 +19,11 @@ if (!keysEnvVar) {
   console.error('The GOOGLE_CREDS environment variable was not found!')
 } else {
   const credentials = JSON.parse(keysEnvVar)
-  const auth = new google.auth.JWT(credentials.client_email, undefined, credentials.private_key, SCOPES)
+  const auth = new google.auth.JWT({
+    client_id: credentials.client_email,
+    client_secret: credentials.private_key,
+    scopes: SCOPES,
+  })
   calendar = google.calendar({ version: 'v3', auth })
 }
 

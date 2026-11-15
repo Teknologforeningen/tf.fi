@@ -1,5 +1,5 @@
 import { drive_v3 } from 'googleapis'
-import { marked } from 'marked'
+import { marked, Tokens } from 'marked'
 
 export const getDateLong = (date: Date | string): string =>
   new Date(date).toLocaleDateString('sv-SE', {
@@ -24,12 +24,12 @@ export const titleToAnchor = (title: string) => {
 
 //only way I found to remove (almost) all br tags and iframes from markdown
 class TextSnippetRenderer extends marked.Renderer {
-  html(html: string) {
+  html({ raw }: Tokens.HTML | Tokens.Tag) {
     // Remove iframes
-    if (html.includes('<iframe')) {
+    if (raw.includes('<iframe')) {
       return ' '
     }
-    return html.replace(/(<br\s*\/?>)+/gi, ' ')
+    return raw.replace(/(<br\s*\/?>)+/gi, ' ')
   }
 }
 
@@ -39,11 +39,14 @@ export const processMarkdownSnippet = (markdown: string) => {
   renderer.image = () => ' '
   renderer.heading = () => ' '
   renderer.br = () => ' '
-  renderer.paragraph = (text) => ` ${text.trim()} `
+  renderer.paragraph = ({ text }) => ` ${text.trim()} `
   renderer.list = () => ' '
   renderer.table = () => ' '
-  renderer.link = (href, title, text) => text
-  return marked(markdown, { renderer })
+  renderer.link = ({ text }) => text
+
+  marked.use({ renderer })
+
+  return marked(markdown)
 }
 
 export const buildFolderPaths = (folders: drive_v3.Schema$File[]) => {

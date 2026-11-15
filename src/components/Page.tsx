@@ -4,10 +4,10 @@ import TableOfContents from '@components/TableOfContents'
 import PageSection from '@components/PageSection'
 
 const renderer: RendererObject = {
-  image(href: string | null): string {
+  image({ href }): string {
     return `<img class='event-page-image' src=${href} alt='bild' />`
   },
-  link(href, _, text) {
+  link({ href, text }) {
     return `<a class="text-blue-600 underline visited:text-purple-600 hover:text-blue-800" href=${href}>${text}</a>`
   },
 }
@@ -22,7 +22,7 @@ type PageProps = {
 const Page = async ({ page, isPrivate = false }: PageProps) => {
   return (
     <>
-      <h1 className="break-words self-center">{page?.title}</h1>
+      <h1 className="wrap-break-word self-center">{page?.title}</h1>
       {page?.content && (
         <div
           dangerouslySetInnerHTML={{

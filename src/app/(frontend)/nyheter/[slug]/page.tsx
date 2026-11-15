@@ -3,10 +3,10 @@ import { fetchPost, fetchPosts } from '@lib/strapi/post'
 import { getDateLong } from '@utils/helpers'
 
 const renderer: RendererObject = {
-  image(href: string | null): string {
+  image({ href }): string {
     return `<img class='event-page-image' src=${href} alt='bild' />`
   },
-  link(href, _, text) {
+  link({ href, text }) {
     return `<a class="text-blue-600 underline visited:text-purple-600 hover:text-blue-800 break-all" href=${href}>${text}</a>`
   },
 }
@@ -25,7 +25,7 @@ const Page = async (props: { params: Promise<{ slug: string }> }) => {
 
   return (
     <>
-      <h1 className="break-words">
+      <h1 className="wrap-break-word">
         {post?.title}
         {post?.date && <p className="text-lg">{getDateLong(post?.date)}</p>}
       </h1>
