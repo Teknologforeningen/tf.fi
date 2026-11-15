@@ -1,7 +1,7 @@
 import { DonationLevels } from '@payload-types'
 import { StrapiImage } from './image'
 
-export interface DonatePage {
+export interface DonateData {
   title: string
   summary?: string
   quotes: Quote[]

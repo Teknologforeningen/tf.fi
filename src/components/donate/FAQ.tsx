@@ -10,11 +10,11 @@ const jsxConverters: JSXConvertersFunction<DefaultNodeTypes> = ({ defaultConvert
 
 type FAQ = NonNullable<FAQs>[number]
 
-const FAQ = ({ faq }: { faq: FAQ }) => (
+const FAQPage = ({ faq }: { faq: FAQ }) => (
   <div>
     <h2>{faq.question}</h2>
     <RichText converters={jsxConverters} data={faq.answer} />
   </div>
 )
 
-export default FAQ
+export default FAQPage

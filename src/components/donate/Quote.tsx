@@ -4,7 +4,7 @@ import { RichText } from '@payloadcms/richtext-lexical/react'
 
 type Quote = NonNullable<Quotes>[number]
 
-const Quote = ({ quote }: { quote: Quote }) => {
+const QuotePage = ({ quote }: { quote: Quote }) => {
   const image = typeof quote.image !== 'number' ? quote.image : undefined
   return (
     <div className="bg-darkgray prose-blockquote:text-white text-white mx-[calc(50%-50vw)] w-screen px-2 lg:px-48 xl:px-96 my-10 flex items-center gap-4 md:gap-10 lg:gap-16">
@@ -25,4 +25,4 @@ const Quote = ({ quote }: { quote: Quote }) => {
   )
 }
 
-export default Quote
+export default QuotePage

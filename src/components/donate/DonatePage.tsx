@@ -1,9 +1,9 @@
 import DonateForm from '@components/donate/form/DonateForm'
 import DonorList from '@components/donate/DonorList'
 import FAQ from '@components/donate/FAQ'
-import Quote from '@components/donate/Quote'
+import QuotePage from '@components/donate/Quote'
 import Image from 'next/image'
-import type { DonatePage } from '@models/donate'
+import type { DonateData } from '@models/donate'
 import { JSXConvertersFunction, RichText } from '@payloadcms/richtext-lexical/react'
 import { DefaultNodeTypes, SerializedUploadNode } from '@payloadcms/richtext-lexical'
 import { StodProjektet } from '@payload-types'
@@ -36,7 +36,7 @@ const DonatePage = async ({ donate }: { donate: StodProjektet }) => (
     {donate.introduction && <RichText converters={jsxConverters} data={donate.introduction} />}
     <DonateForm form={donate.form} />
     {donate.quotes?.map((q) => (
-      <Quote key={q.author} quote={q} />
+      <QuotePage key={q.author} quote={q} />
     ))}
     {donate.faqs?.map((f) => (
       <FAQ key={f.question} faq={f} />

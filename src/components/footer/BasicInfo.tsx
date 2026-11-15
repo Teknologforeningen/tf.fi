@@ -1,5 +1,6 @@
-import React from 'react'
 import Column from '../Column'
+
+const year = new Date().getFullYear()
 
 const BasicInfo = () => (
   <Column className="text-white">
@@ -9,7 +10,7 @@ const BasicInfo = () => (
       <p>Styrelsen: tfs@tf.fi</p>
       <p>Kansli: kansli@tf.fi</p>
     </Column>
-    <p>&#169; {new Date().getFullYear()}</p>
+    <p>&#169; {year}</p>
   </Column>
 )
 

@@ -1,6 +1,6 @@
 'use client'
 
-import type { PaymentGroup, PaymentProvider, PaymentResponse } from '@lib/barsborsen/payment'
+import type { PaymentProvider, PaymentResponse } from '@lib/barsborsen/payment'
 
 const Payment = ({ payment }: { payment: PaymentResponse }) => {
   const providers = payment.providers
@@ -14,7 +14,7 @@ const Payment = ({ payment }: { payment: PaymentResponse }) => {
         <span className="px-2 text-lg font-bold uppercase">Betalningsmetod</span>
       </legend>
       {groups.map((group) => (
-        <PaymentGroup
+        <Group
           key={group.id}
           name={group.name!}
           providers={providers.filter((provider) => provider.group === group.id)}
@@ -24,20 +24,20 @@ const Payment = ({ payment }: { payment: PaymentResponse }) => {
   )
 }
 
-const PaymentGroup = ({ name, providers }: { name: string; providers: PaymentProvider[] }) => {
+const Group = ({ name, providers }: { name: string; providers: PaymentProvider[] }) => {
   return (
     <>
       <h3 className="italic text-lg">{name}</h3>
       <div className="grid grid-cols-4 justify-center items-end gap-5">
         {providers.map((provider) => (
-          <PaymentProvider key={provider.name} provider={provider} />
+          <Provider key={provider.name} provider={provider} />
         ))}
       </div>
     </>
   )
 }
 
-const PaymentProvider = ({ provider }: { provider: PaymentProvider }) => {
+const Provider = ({ provider }: { provider: PaymentProvider }) => {
   return (
     <form key={provider.name} action={provider.url} method="POST" className="border h-full">
       {provider.parameters?.map((param) => (

@@ -9,7 +9,8 @@
     "start": "next start",
     "format": "oxfmt --check src *.json *.mjs *.ts",
     "format:fix": "oxfmt src *.json *.mjs *.ts",
-    "lint": "eslint",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
     "export": "next export",
     "build-start": "next build && cp -r .next/static/ .next/standalone/.next && node .next/standalone/server.js",
     "payload": "PAYLOAD_CONFIG_PATH=src/payload.config.ts payload"
@@ -54,16 +55,11 @@
     "@types/react-textfit": "^1.1.0",
     "autoprefixer": "^10.4.24",
     "encoding": "^0.1.13",
-    "eslint": "^10.15.0",
-    "eslint-config-next": "^16.1.6",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^7.0.1",
     "oxfmt": "^0.78.0",
+    "oxlint": "^1.93.0",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.3.5",
-    "typescript": "^7.0.2",
-    "typescript-eslint": "^8.54.0"
+    "typescript": "^7.0.2"
   },
   "resolutions": {
     "esbuild": "^0.25.0",

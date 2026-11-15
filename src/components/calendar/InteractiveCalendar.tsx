@@ -15,7 +15,7 @@ type InteractiveCalendarProps = {
 const InteractiveCalendar = ({ fetchEvents }: InteractiveCalendarProps) => {
   /** `fetchEvents` always returns an empty array, so we can use `undefined` to represent a loading state. */
   const [events, setEvents] = useState<CalendarEvent[] | undefined>(undefined)
-  const [date, setDate] = useState(new Date())
+  const [date, setDate] = useState(() => new Date())
 
   useEffect(() => {
     fetchEvents(date).then((data) => {
