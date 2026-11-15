@@ -81,10 +81,11 @@ function createDrive(keys: string | undefined = process.env.GOOGLE_CREDS): Drive
   }
 
   const credentials = JSON.parse(keys)
-
-  const auth = new google.auth.JWT(credentials.client_email, undefined, credentials.private_key, [
-    'https://www.googleapis.com/auth/drive',
-  ])
+  const auth = new google.auth.JWT({
+    client_id: credentials.client_email,
+    client_secret: credentials.private_key,
+    scopes: ['https://www.googleapis.com/auth/drive'],
+  })
   return new Drive(google.drive({ version: 'v3', auth }))
 }
 

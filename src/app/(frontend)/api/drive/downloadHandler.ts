@@ -21,7 +21,7 @@ export default function downloadHandler(drive: Drive | null) {
       const stream = await drive.getFile(fileId)
       return new Response(Readable.toWeb(stream) as ReadableStream, {
         headers: {
-          'Content-Disposition': contentDisposition(fileName || fileId),
+          'Content-Disposition': create(fileName || fileId),
         },
       })
     } catch (error) {

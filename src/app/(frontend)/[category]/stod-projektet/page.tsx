@@ -1,6 +1,6 @@
 import { fetchCategory } from '@lib/strapi/category'
 import { notFound } from 'next/navigation'
-import DonatePage from '@components/donate/DonatePage'
+import DonateData from '@components/donate/DonatePage'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 
@@ -11,7 +11,7 @@ const DoneraPage = async (props: { params: Promise<{ category: string }> }) => {
   if (category && category.donation_page) {
     const payload = await getPayload({ config })
     const donate = await payload.findGlobal({ slug: 'stod-projektet' })
-    return <DonatePage donate={donate} />
+    return <DonateData donate={donate} />
   }
 
   notFound()
