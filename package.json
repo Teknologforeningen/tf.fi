@@ -1,17 +1,15 @@
 {
   "name": "tf.fi",
   "version": "0.1.0",
-  "engines": {
-    "node": ">=18"
-  },
-  "packageManager": "pnpm@12.21.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "NODE_OPTIONS='--dns-result-order=ipv4first' next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "prettier -c src *.json *.mjs *.ts && eslint",
+    "format": "oxfmt --check src *.json *.mjs *.ts",
+    "format:fix": "oxfmt src *.json *.mjs *.ts",
+    "lint": "eslint",
     "export": "next export",
     "build-start": "next build && cp -r .next/static/ .next/standalone/.next && node .next/standalone/server.js",
     "payload": "PAYLOAD_CONFIG_PATH=src/payload.config.ts payload"
@@ -61,9 +59,8 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
+    "oxfmt": "^0.78.0",
     "postcss": "^8.5.3",
-    "prettier": "^3.8.1",
-    "prettier-plugin-tailwindcss": "^0.8.1",
     "tailwindcss": "^4.3.5",
     "typescript": "^7.0.2",
     "typescript-eslint": "^8.54.0"
@@ -71,5 +68,9 @@
   "resolutions": {
     "esbuild": "^0.25.0",
     "js-yaml": "^4.1.1"
-  }
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "pnpm@12.21.0"
 }
