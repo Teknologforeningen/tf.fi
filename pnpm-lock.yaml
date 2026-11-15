@@ -208,9 +208,6 @@ importers:
       googleapis:
         specifier: ^190.0.0
         version: 190.0.0(supports-color@7.2.0)
-      graphql:
-        specifier: ^16.12.0
-        version: 16.15.0
       marked:
         specifier: ^12.0.2
         version: 12.0.2
