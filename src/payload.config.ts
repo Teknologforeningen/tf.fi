@@ -33,6 +33,9 @@ export default buildConfig({
   collections: [Media],
   globals: [Donate],
   secret: process.env.PAYLOAD_SECRET ?? '',
+  typescript: {
+    outputFile: 'src/payload-types.ts',
+  },
   db,
   sharp,
 })
